@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Jakob\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Jakob\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Information Flow Game Mechanic.-34863491.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Jakob\Documents\Repositories\Story-generation-with-mutli-agent-systems\Project\Information Flow Game Mechanic" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Models" t="Include">
+          <e p="KayKit" t="Include">
+            <e p="KayKit Character Animations" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="KayKit Dungeon Pack" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+          </e>
+          <e p="Kenney" t="Include">
+            <e p="castle-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="fantasy-town-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="food-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="furniture-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="graveyard-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="medieval-town-base-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="nature-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="tower-defense-kit" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+          </e>
+          <e p="Quaternius" t="Include">
+            <e p="Cute Animated Monsters" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="Medieval Village Pack" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="Modular Medieval Pack" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="Nature Crops Pack" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="Ultimate Nature Pack" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="Ultimate RPG Items Pack" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="BatchRename.cs" t="Include" />
+        </e>
+        <e p="Sounds" t="Include">
+          <e p="Kenney" t="Include">
+            <e p="kenney_impactsounds" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="kenney_interfacesounds" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="kenney_musicjingles" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="kenney_rpgaudio" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="kenney_uiaudio" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="UI" t="Include">
+          <e p="Kenney" t="Include">
+            <e p="onscreencontrols" t="Include">
+              <e p="License.txt" t="Include" />
+            </e>
+            <e p="uipack-rpg" t="Include">
+              <e p="License.txt" t="Include" />
+              <e p="Spritesheet" t="Include">
+                <e p="uipack_rpg_sheet.xml" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Information Flow Game Mechanic.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\Bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
