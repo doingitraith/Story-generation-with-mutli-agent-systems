@@ -1,757 +1,780 @@
 Using pre-set license
-Built from '2020.3/staging' branch; Version is '2020.3.8f1 (507919d4fff5) revision 5273881'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 Pro; OS build 19041.867; Version 2004; 64bit' Language: 'en' Physical Memory: 8113 MB
+Built from '2020.3/staging' branch; Version is '2020.3.10f1 (297d780c91bc) revision 2719096'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19041.985; Version 2004; 64bit' Language: 'en' Physical Memory: 16324 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity\Hub\Editor\2020.3.8f1\Editor\Unity.exe
+P:\Software\Unity\Editor\2020.3.10f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/Jakob/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic
+P:/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-60890
-Successfully changed project path to: C:/Users/Jakob/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic
-C:/Users/Jakob/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic
+56714
+Successfully changed project path to: P:/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic
+P:/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 64.28 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 61.62 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Initialize engine version: 2020.3.8f1 (507919d4fff5)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.8f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/Jakob/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic/Assets
+Initialize engine version: 2020.3.10f1 (297d780c91bc)
+[Subsystems] Discovering subsystems at path P:/Software/Unity/Editor/2020.3.10f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path P:/Documents/Repositories/Story-generation-with-mutli-agent-systems/Project/Information Flow Game Mechanic/Assets
 GfxDevice: creating device client; threaded=0
 Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GPU (ID=0x134b)
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 Ti (ID=0x1b82)
     Vendor:   
-    VRAM:     987 MB
-    Driver:   27.21.14.5167
+    VRAM:     8079 MB
+    Driver:   27.21.14.6611
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.8f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
-Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.8f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56880
+Mono path[0] = 'P:/Software/Unity/Editor/2020.3.10f1/Editor/Data/Managed'
+Mono path[1] = 'P:/Software/Unity/Editor/2020.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'P:/Software/Unity/Editor/2020.3.10f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56556
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002803 seconds.
+Register platform support module: P:/Software/Unity/Editor/2020.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001588 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 63.79 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 66.20 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.839 seconds
+- Completed reload, in  1.097 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.001426 seconds.
+Registered in 0.003755 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.50 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 62.71 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.833 seconds
+- Completed reload, in  1.270 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.20 seconds
-Refreshing native plugins compatible for Editor in 1.72 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.86 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1116 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 59.1 MB.
-System memory in use after: 59.2 MB.
-
-Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 1558.
-Total: 8.108000 ms (FindLiveObjects: 1.118000 ms CreateObjectMapping: 0.590200 ms MarkObjects: 6.175700 ms  DeleteObjects: 0.221200 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_002.ogg
-  artifactKey: Guid(7a1328929ecd84a4fb298288605769b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_002.ogg using Guid(7a1328929ecd84a4fb298288605769b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da03826b93d87da4693c5ce6b3224d75') in 0.650954 seconds
-  Import took 0.661492 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000336 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_004.ogg
-  artifactKey: Guid(623e481621cfc6840a04cd647424acf5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_004.ogg using Guid(623e481621cfc6840a04cd647424acf5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b76d6ccd23f8380d0b3e192a3b2fe299') in 0.036858 seconds
-  Import took 0.042768 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000340 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_002.ogg
-  artifactKey: Guid(48e12b6b6ba3f8b48bab28c3a4819dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_002.ogg using Guid(48e12b6b6ba3f8b48bab28c3a4819dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '608554eeb22c52ca1a9520e4d86ad195') in 0.049075 seconds
-  Import took 0.053302 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000108 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_003.ogg
-  artifactKey: Guid(73c92a5a8d37c664dad4a5c82aefc78d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_003.ogg using Guid(73c92a5a8d37c664dad4a5c82aefc78d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '947f45f60b775198965084d2ce096bbf') in 0.047656 seconds
-  Import took 0.052103 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000344 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_003.ogg
-  artifactKey: Guid(eaf5127627248dd4ab147c5dbbed5729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_003.ogg using Guid(eaf5127627248dd4ab147c5dbbed5729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70d0b7d7f1a5d7e87364a60bd3bedbde') in 0.029471 seconds
-  Import took 0.034480 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000092 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_003.ogg
-  artifactKey: Guid(e7f1e7b8db150004ab9a229202a8a2f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_003.ogg using Guid(e7f1e7b8db150004ab9a229202a8a2f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd23b299f77433ba635ba53d16599d1b5') in 0.032507 seconds
-  Import took 0.038216 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000276 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_004.ogg
-  artifactKey: Guid(38a586e1fe835df40b65a1b19ef80a06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_004.ogg using Guid(38a586e1fe835df40b65a1b19ef80a06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8466b893e9e6b2994fa020e461afba08') in 0.039300 seconds
-  Import took 0.043332 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000112 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_004.ogg
-  artifactKey: Guid(46b5f1c1713abe34abf53cef12a37b21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_004.ogg using Guid(46b5f1c1713abe34abf53cef12a37b21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a781326766a38c9a1147d7e47d69f9a4') in 0.024993 seconds
-  Import took 0.032097 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000403 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_003.ogg
-  artifactKey: Guid(47328d0f8c0aca6408f236e2e4a25033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_003.ogg using Guid(47328d0f8c0aca6408f236e2e4a25033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0b020f4f502d8db44ee8c9f73f32d12') in 0.031433 seconds
-  Import took 0.037539 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001987 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_002.ogg
-  artifactKey: Guid(389ef62813dbdc842a6daa4638feea53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_002.ogg using Guid(389ef62813dbdc842a6daa4638feea53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8aa48778452932a87307c981230e846') in 0.034565 seconds
-  Import took 0.040637 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000730 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_002.ogg
-  artifactKey: Guid(32d5c98d0448f2c4b9bdeb748070d43e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_002.ogg using Guid(32d5c98d0448f2c4b9bdeb748070d43e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a273909cd280f04bafe0a7caf01e8abe') in 0.028176 seconds
-  Import took 0.034729 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000098 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_002.ogg
-  artifactKey: Guid(18e9f060ecd4011468f4f70b848ad065) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_002.ogg using Guid(18e9f060ecd4011468f4f70b848ad065) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '961e5c3701d27fb6fc128451e33e56ed') in 0.030675 seconds
-  Import took 0.034827 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000319 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_003.ogg
-  artifactKey: Guid(f65384bde1936e04381dd5db33d5e0be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_003.ogg using Guid(f65384bde1936e04381dd5db33d5e0be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e32f64003db80521ca66ab5e85cfa36') in 0.039479 seconds
-  Import took 0.046041 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000344 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_001.ogg
-  artifactKey: Guid(e3fdd9cb667a9104eb8c79e68dae7e7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_001.ogg using Guid(e3fdd9cb667a9104eb8c79e68dae7e7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1ce1a611033ee6f1fc1633e0cc35f75') in 0.033497 seconds
-  Import took 0.041068 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000101 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_002.ogg
-  artifactKey: Guid(09d890e9d01efda41b68ee40a0a61810) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_002.ogg using Guid(09d890e9d01efda41b68ee40a0a61810) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7aba1d9a51618d8d62c20eb972d28ffc') in 0.035096 seconds
-  Import took 0.042397 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000749 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_000.ogg
-  artifactKey: Guid(1b38bc8855acfd8419b8bfad6b66b0d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_000.ogg using Guid(1b38bc8855acfd8419b8bfad6b66b0d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a02316fe879b9677a8bbc7220a639011') in 0.027334 seconds
-  Import took 0.034324 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000344 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_000.ogg
-  artifactKey: Guid(895cc3fa7e26a76478b1d6b2862365ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_000.ogg using Guid(895cc3fa7e26a76478b1d6b2862365ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f918ce9784ca6cfa620b09b68bcfb7b5') in 0.042094 seconds
-  Import took 0.047916 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000102 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_002.ogg
-  artifactKey: Guid(a43593b913a2bff4f9df66bc581f70db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_002.ogg using Guid(a43593b913a2bff4f9df66bc581f70db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3051d8018425cedcbeead0a9034224b') in 0.044450 seconds
-  Import took 0.052881 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000755 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_004.ogg
-  artifactKey: Guid(cf35ce6804d692d4599a9290f8128ea4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_004.ogg using Guid(cf35ce6804d692d4599a9290f8128ea4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87e2d358510353069777c6859cf1ba66') in 0.035634 seconds
-  Import took 0.041430 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000269 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_004.ogg
-  artifactKey: Guid(14ad7c2dd07207a4eb004dc63907c37f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_004.ogg using Guid(14ad7c2dd07207a4eb004dc63907c37f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8362d6a6e1431b31dff8de1372218087') in 0.038074 seconds
-  Import took 0.042898 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000281 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_001.ogg
-  artifactKey: Guid(da54919e5f4cc3f44bcd27db61b7b6a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_001.ogg using Guid(da54919e5f4cc3f44bcd27db61b7b6a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd31ad47c37141fe6b7ccf6af3695f4df') in 0.028842 seconds
-  Import took 0.032852 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000648 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_004.ogg
-  artifactKey: Guid(47d646abdf4b0a74dacaf1b25db4dd53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_004.ogg using Guid(47d646abdf4b0a74dacaf1b25db4dd53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '108dd97a1fd01c836aa04d2e26c49e9e') in 0.039322 seconds
-  Import took 0.046628 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000873 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_004.ogg
-  artifactKey: Guid(8516e64ed8a716647a38ebf481523761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_004.ogg using Guid(8516e64ed8a716647a38ebf481523761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a09b19c64a6d7832cdb5d15c1ea915b') in 0.054184 seconds
-  Import took 0.059771 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000095 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_002.ogg
-  artifactKey: Guid(26e97974db49be94682379e79a0ba2d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_002.ogg using Guid(26e97974db49be94682379e79a0ba2d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf0dab5837a7216c6dada62ec8cb9e9f') in 0.043871 seconds
-  Import took 0.051420 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000363 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_000.ogg
-  artifactKey: Guid(762f475faee1fcb4fa9887e35aac3390) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_000.ogg using Guid(762f475faee1fcb4fa9887e35aac3390) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4c4837e846d0e411e233632060ac0f3') in 0.044203 seconds
-  Import took 0.053295 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000273 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_002.ogg
-  artifactKey: Guid(284f978e0db963b47bda3e29d3b92485) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_002.ogg using Guid(284f978e0db963b47bda3e29d3b92485) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f223925546685d82a0926d964f2971e') in 0.048846 seconds
-  Import took 0.053528 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000309 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_001.ogg
-  artifactKey: Guid(0ad578c601168da44a47a2b6c864bd68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_001.ogg using Guid(0ad578c601168da44a47a2b6c864bd68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea2ca32309fb73d3923fade5b15f5be9') in 0.041093 seconds
-  Import took 0.046898 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000289 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_001.ogg
-  artifactKey: Guid(dfca3afa7989188449b23af320aa4452) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_001.ogg using Guid(dfca3afa7989188449b23af320aa4452) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4678cb31917d63fbdc409736d6cf5362') in 0.035410 seconds
-  Import took 0.040179 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000344 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_001.ogg
-  artifactKey: Guid(729524375a580c143ab5612eae47b95f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_001.ogg using Guid(729524375a580c143ab5612eae47b95f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab82e6b20b425ae80c91e3b248f3971f') in 0.035404 seconds
-  Import took 0.041179 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000993 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_002.ogg
-  artifactKey: Guid(c36f39f7682300a40a1191d2c2eef066) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_002.ogg using Guid(c36f39f7682300a40a1191d2c2eef066) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3aac2c4a5f1893951f966a45dfeb82ca') in 0.030719 seconds
-  Import took 0.035433 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000100 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_004.ogg
-  artifactKey: Guid(7f10e0813e064e14692a7b92a707dc5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_004.ogg using Guid(7f10e0813e064e14692a7b92a707dc5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9456b68e2432899cb81a2707230799a7') in 0.020698 seconds
-  Import took 0.027153 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000342 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_001.ogg
-  artifactKey: Guid(78f2245a932d3bd4286e665bf50c1187) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_001.ogg using Guid(78f2245a932d3bd4286e665bf50c1187) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5dbdee70c3d56c3f4780e8f96f631da3') in 0.034626 seconds
-  Import took 0.038931 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000766 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_001.ogg
-  artifactKey: Guid(6b4b32b988e128a4f946b763abaacd49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_001.ogg using Guid(6b4b32b988e128a4f946b763abaacd49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01b249a562da48640944e860bd3d174a') in 0.027735 seconds
-  Import took 0.034166 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000351 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_002.ogg
-  artifactKey: Guid(02286616b3ad8ca479fd8d21faba23af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_002.ogg using Guid(02286616b3ad8ca479fd8d21faba23af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '048212a37482ea16dd46702e2e0c254a') in 0.065495 seconds
-  Import took 0.075137 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.002369 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_000.ogg
-  artifactKey: Guid(9d090a64195a2274bba09ec1ae53649e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_light_000.ogg using Guid(9d090a64195a2274bba09ec1ae53649e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1ed55f45b66a03a1c36e6bac63a7d4b') in 0.333283 seconds
-  Import took 0.338847 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000127 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_001.ogg
-  artifactKey: Guid(8da8f7a2509891840a2c75c2a81c238e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_001.ogg using Guid(8da8f7a2509891840a2c75c2a81c238e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6dca7682cfc610a9b930cb734c16a75d') in 0.192801 seconds
-  Import took 0.215408 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.002784 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_003.ogg
-  artifactKey: Guid(170cfc5df702a4d4d848b54485f2639b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_003.ogg using Guid(170cfc5df702a4d4d848b54485f2639b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fe027627239f3a0187b2fc5b63c705a') in 0.028833 seconds
-  Import took 0.040701 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.002811 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_003.ogg
-  artifactKey: Guid(4233769d4e4821843933eb141c264225) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_003.ogg using Guid(4233769d4e4821843933eb141c264225) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e08e212b9032f82e83f13380405b0eb0') in 0.035753 seconds
-  Import took 0.058581 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000543 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_003.ogg
-  artifactKey: Guid(38d38eca9c0be464cad1e29dee82aafd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_003.ogg using Guid(38d38eca9c0be464cad1e29dee82aafd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8194a7909a57c169cc91663642c6d94') in 0.028444 seconds
-  Import took 0.039661 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000323 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_003.ogg
-  artifactKey: Guid(01090209baff1e840a205ab309b564b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_003.ogg using Guid(01090209baff1e840a205ab309b564b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df9970b9351446710bdf77d198e71a03') in 0.039296 seconds
-  Import took 0.043909 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000300 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_003.ogg
-  artifactKey: Guid(d6ed23496c49afd4cbc32d6efac8094d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_003.ogg using Guid(d6ed23496c49afd4cbc32d6efac8094d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cdb597984271868ceb473da09b53f99a') in 0.043491 seconds
-  Import took 0.049875 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000739 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_004.ogg
-  artifactKey: Guid(60dd07de64045be43b2c9d97cece25b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_medium_004.ogg using Guid(60dd07de64045be43b2c9d97cece25b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd56d2b0f852ec8e9adb620ee44692d1') in 0.033619 seconds
-  Import took 0.037748 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000400 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_000.ogg
-  artifactKey: Guid(044127ac58df280488c365a63b736461) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_000.ogg using Guid(044127ac58df280488c365a63b736461) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c6eed32026b9a801786737f5c1be1db') in 0.032984 seconds
-  Import took 0.038221 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000805 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_004.ogg
-  artifactKey: Guid(b3757c2f37face742bfc6249c4a6750c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_heavy_004.ogg using Guid(b3757c2f37face742bfc6249c4a6750c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08ba589b92745bb85d4751870b49d23a') in 0.032145 seconds
-  Import took 0.038350 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000270 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_000.ogg
-  artifactKey: Guid(301e01d01b2effe479e53479f008689e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_light_000.ogg using Guid(301e01d01b2effe479e53479f008689e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8c41e405afedfd36e7eb62c8a0f43ec') in 0.024720 seconds
-  Import took 0.030091 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001193 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_001.ogg
-  artifactKey: Guid(d34cdc2c9f5c6c84e987ac08e50cd02c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPlate_medium_001.ogg using Guid(d34cdc2c9f5c6c84e987ac08e50cd02c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '324600a9bd4d1664613234b32e8705a8') in 0.024413 seconds
-  Import took 0.031337 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000256 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_000.ogg
-  artifactKey: Guid(4977de5b848740444ad05af5087b919c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_heavy_000.ogg using Guid(4977de5b848740444ad05af5087b919c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e79ae8c82f351e5e5d1b26198f29f664') in 0.030466 seconds
-  Import took 0.034866 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000307 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_004.ogg
-  artifactKey: Guid(4885d3d17a02c124591e485f2b0e99a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_004.ogg using Guid(4885d3d17a02c124591e485f2b0e99a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '798abfb4dd0243dcd17db451ff8cf44f') in 0.035336 seconds
-  Import took 0.038976 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000327 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_000.ogg
-  artifactKey: Guid(480c2f2fc20a3f54593bddbf05bb095e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactTin_medium_000.ogg using Guid(480c2f2fc20a3f54593bddbf05bb095e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33d1ebcbb3bb43b8254652bbc9a7ef3c') in 0.025967 seconds
-  Import took 0.034612 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000361 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_000.ogg
-  artifactKey: Guid(6a3f3af4bd3f659429d17661875edf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_000.ogg using Guid(6a3f3af4bd3f659429d17661875edf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ec8bd3893baf2a3e3848d9541c809a6') in 0.024418 seconds
-  Import took 0.031459 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000345 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_001.ogg
-  artifactKey: Guid(e3054b83ad6a5884395a923a6d786395) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_medium_001.ogg using Guid(e3054b83ad6a5884395a923a6d786395) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c65ef3e4813fb3c55b9bfd4d86997ace') in 0.031741 seconds
-  Import took 0.038782 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000700 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_000.ogg
-  artifactKey: Guid(c6d9122b558821a47be5d5d8438b8fde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactPunch_medium_000.ogg using Guid(c6d9122b558821a47be5d5d8438b8fde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd03b118e99e8915c32aad0a1525d0b96') in 0.031661 seconds
-  Import took 0.034952 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000256 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_001.ogg
-  artifactKey: Guid(b053819e99b8c2444970ff53a34d22ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactSoft_heavy_001.ogg using Guid(b053819e99b8c2444970ff53a34d22ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea49ad4de64a78a1a2b1e11b8a002694') in 0.024262 seconds
-  Import took 0.033927 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001667 seconds.
-  path: Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_003.ogg
-  artifactKey: Guid(5a9b209c328ec774aa3fec3bb49bc2ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_impactsounds/Audio/impactWood_heavy_003.ogg using Guid(5a9b209c328ec774aa3fec3bb49bc2ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40afc930856e36d1404516d89bffadba') in 0.030706 seconds
-  Import took 0.035146 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 756.396980 seconds.
-  path: Assets/Models/KayKit/KayKit Character Animations/Animations/Single Animations/Basepose.fbx
-  artifactKey: Guid(5aabb3a0685272142aa130ee6a2038f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/KayKit/KayKit Character Animations/Animations/Single Animations/Basepose.fbx using Guid(5aabb3a0685272142aa130ee6a2038f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f99fd83d1d1ee9c35db479fa6d39c71') in 0.598597 seconds
-  Import took 0.622887 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000175 seconds.
-  path: Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookFlip1.ogg
-  artifactKey: Guid(88d4130e629f07945a179d8ea1cf9f9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookFlip1.ogg using Guid(88d4130e629f07945a179d8ea1cf9f9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44b7662948dc0af4fd85656006a41729') in 0.024255 seconds
-  Import took 0.028423 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.003574 seconds.
-  path: Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookFlip2.ogg
-  artifactKey: Guid(f8b2c50b82e150045aecfd7e091828a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookFlip2.ogg using Guid(f8b2c50b82e150045aecfd7e091828a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00e1f190be8e5ced1154e617faf4f9e3') in 0.158834 seconds
-  Import took 0.164346 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000278 seconds.
-  path: Assets/Models/Kenney/food-kit/Models/FBX format/burgerCheese.fbx
-  artifactKey: Guid(f304b7acd96206541a0b4aa9df8584db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/food-kit/Models/FBX format/burgerCheese.fbx using Guid(f304b7acd96206541a0b4aa9df8584db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9ee2c104c4ecb6b697161ce807a70e8') in 0.232893 seconds
-  Import took 0.236376 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000281 seconds.
-  path: Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookOpen.ogg
-  artifactKey: Guid(ad26054c6d7b4c948bfaf1a4b6a32c60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookOpen.ogg using Guid(ad26054c6d7b4c948bfaf1a4b6a32c60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87898270b8869ccb0c444047216aa8b5') in 0.020948 seconds
-  Import took 0.023882 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000256 seconds.
-  path: Assets/Models/Quaternius/Modular Dungeon Pack/FBX/Bones.fbx
-  artifactKey: Guid(d7ee3abb7daf32b46a6bc640cbd07c7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Quaternius/Modular Dungeon Pack/FBX/Bones.fbx using Guid(d7ee3abb7daf32b46a6bc640cbd07c7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10340de66baf1afece9db7d71bccc2d5') in 0.063419 seconds
-  Import took 0.066634 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000253 seconds.
-  path: Assets/Models/Quaternius/Nature Crops Pack/FBX/Cactus_Crop.fbx
-  artifactKey: Guid(fc6b9440ba16eed49bedf5ecb67e1ec0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Quaternius/Nature Crops Pack/FBX/Cactus_Crop.fbx using Guid(fc6b9440ba16eed49bedf5ecb67e1ec0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad16be6860328f6cc8b5db10ecbee04e') in 0.056858 seconds
-  Import took 0.060638 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000309 seconds.
-  path: Assets/Models/Kenney/furniture-kit/Models/FBX format/bookcaseOpenLow.fbx
-  artifactKey: Guid(7f3daeabc369f714fa3965e3e0ff4526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/furniture-kit/Models/FBX format/bookcaseOpenLow.fbx using Guid(7f3daeabc369f714fa3965e3e0ff4526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04b2f204690f479eca3b195069b9f04e') in 0.041768 seconds
-  Import took 0.046483 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000839 seconds.
-  path: Assets/Models/Quaternius/Nature Crops Pack/FBX/BushBerries_Crop.fbx
-  artifactKey: Guid(98e6cc33dcf582140b73a55a8bdf9947) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Quaternius/Nature Crops Pack/FBX/BushBerries_Crop.fbx using Guid(98e6cc33dcf582140b73a55a8bdf9947) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd024a3d4cbd35ce076015e56e0711388') in 0.054004 seconds
-  Import took 0.059217 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000314 seconds.
-  path: Assets/Models/Kenney/furniture-kit/Models/FBX format/kitchenBlender.fbx
-  artifactKey: Guid(e7a9c1e846713604c955af00750f6db4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/furniture-kit/Models/FBX format/kitchenBlender.fbx using Guid(e7a9c1e846713604c955af00750f6db4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a8bcc283357fa203366a94d7f9ec731') in 0.527111 seconds
-  Import took 0.531256 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000372 seconds.
-  path: Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookPlace2.ogg
-  artifactKey: Guid(19eebe0b7b122ed468d805674b02877d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookPlace2.ogg using Guid(19eebe0b7b122ed468d805674b02877d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '242ca1db1880f0120aa1be53fb81775c') in 0.015377 seconds
-  Import took 0.018306 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000354 seconds.
-  path: Assets/Models/Kenney/food-kit/Models/FBX format/burgerCheeseDouble.fbx
-  artifactKey: Guid(72cd8b8ed91b7004696412de3686888a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/food-kit/Models/FBX format/burgerCheeseDouble.fbx using Guid(72cd8b8ed91b7004696412de3686888a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd4a9bc35da267ccecf6454658058ac3') in 0.285998 seconds
-  Import took 0.288655 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000288 seconds.
-  path: Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookPlace3.ogg
-  artifactKey: Guid(8677f56ba6750954996376104aa1a7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookPlace3.ogg using Guid(8677f56ba6750954996376104aa1a7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e51d63942b18e1a72c76d86d6b5c8ad2') in 0.014524 seconds
-  Import took 0.017416 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000296 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_blue_pressed.png
-  artifactKey: Guid(280b6181233ad764ab5eacec42c33f6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_blue_pressed.png using Guid(280b6181233ad764ab5eacec42c33f6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c6a07109f14d282bac861d51ee78be8') in 0.106823 seconds
-  Import took 0.117875 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000114 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_blue_pressed.png
-  artifactKey: Guid(87899a4af466fb749a2f1e2f968c5ec6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_blue_pressed.png using Guid(87899a4af466fb749a2f1e2f968c5ec6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fca7bbea3d31c855e22a534d3123160') in 0.021092 seconds
-  Import took 0.025487 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000583 seconds.
-  path: Assets/Models/Kenney/food-kit/Models/FBX format/bowlSoup.fbx
-  artifactKey: Guid(6d947045702e2c644a45c0727b50cf32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/food-kit/Models/FBX format/bowlSoup.fbx using Guid(6d947045702e2c644a45c0727b50cf32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41ed4eb9e6a0bfdbdb55ac7e519c6dae') in 0.083168 seconds
-  Import took 0.086971 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000249 seconds.
-  path: Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookPlace1.ogg
-  artifactKey: Guid(611de3c30377a964b865c239fd2e1dcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookPlace1.ogg using Guid(611de3c30377a964b865c239fd2e1dcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c25eb9e3140bb5e07d0ae7140b32a58') in 0.045147 seconds
-  Import took 0.048547 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000297 seconds.
-  path: Assets/Models/Kenney/food-kit/Models/FBX format/burgerDouble.fbx
-  artifactKey: Guid(e32ab453b4e77984da71630dbac3fdf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/food-kit/Models/FBX format/burgerDouble.fbx using Guid(e32ab453b4e77984da71630dbac3fdf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b15a66fde59568744cb1539881d3ba0') in 0.213950 seconds
-  Import took 0.219511 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000286 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_grey_pressed.png
-  artifactKey: Guid(bfcf691daad435c4c871cb2831dd6942) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_grey_pressed.png using Guid(bfcf691daad435c4c871cb2831dd6942) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9129986b1f2a7caec1a245f491a81d5c') in 0.013784 seconds
-  Import took 0.017366 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000244 seconds.
-  path: Assets/Models/Quaternius/Nature Crops Pack/FBX/Beet_Crop.fbx
-  artifactKey: Guid(d0d9c42089a216a48aa626ef8537b443) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Quaternius/Nature Crops Pack/FBX/Beet_Crop.fbx using Guid(d0d9c42089a216a48aa626ef8537b443) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad51417a3c23c6e60e850a5f2333277e') in 0.063478 seconds
-  Import took 0.066784 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000280 seconds.
-  path: Assets/Models/Kenney/food-kit/Models/FBX format/bottleKetchup.fbx
-  artifactKey: Guid(367b2763cc7376249a9744e4dc228773) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/food-kit/Models/FBX format/bottleKetchup.fbx using Guid(367b2763cc7376249a9744e4dc228773) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e91a5916f62e1988a59125a10afca21') in 0.057296 seconds
-  Import took 0.062597 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000275 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_brown_pressed.png
-  artifactKey: Guid(915ec0a731df6604e9b5272a3ade7c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_brown_pressed.png using Guid(915ec0a731df6604e9b5272a3ade7c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42ee9d8a0316e007a4b55a4b2c7115b7') in 0.018400 seconds
-  Import took 0.022316 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000334 seconds.
-  path: Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookFlip3.ogg
-  artifactKey: Guid(412101eee9322e646a095d49b77b5262) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds/Kenney/kenney_rpgaudio/Audio/bookFlip3.ogg using Guid(412101eee9322e646a095d49b77b5262) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28b438f28c328e81a365872d7b935015') in 0.050086 seconds
-  Import took 0.053905 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000670 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_brown_pressed.png
-  artifactKey: Guid(5ac4471595f992d45838285d9bb69536) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_brown_pressed.png using Guid(5ac4471595f992d45838285d9bb69536) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14b0358e0972790f73a0f813b8e831cf') in 0.026866 seconds
-  Import took 0.035812 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000270 seconds.
-  path: Assets/Models/Quaternius/Modular Dungeon Pack/FBX/Book_Open.fbx
-  artifactKey: Guid(9651a4d3c3fa6214c9537bb2dd3a36de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Quaternius/Modular Dungeon Pack/FBX/Book_Open.fbx using Guid(9651a4d3c3fa6214c9537bb2dd3a36de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e308ae193001b9c1a0979c83c79ad970') in 0.118719 seconds
-  Import took 0.122419 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000300 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_grey_pressed.png
-  artifactKey: Guid(452a24471e1c8d640bfd48783278d15c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_grey_pressed.png using Guid(452a24471e1c8d640bfd48783278d15c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33f98aa4430e610c6b3da13fb99c5727') in 0.023803 seconds
-  Import took 0.033579 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000172 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_beige_pressed.png
-  artifactKey: Guid(4a76cf07bd6766e4981b02caae32f36e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonSquare_beige_pressed.png using Guid(4a76cf07bd6766e4981b02caae32f36e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7c0b39139730acf3a67358825483303') in 0.036510 seconds
-  Import took 0.039660 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000267 seconds.
-  path: Assets/Models/Kenney/graveyard-kit/Models/FBX format/borderPillar.fbx
-  artifactKey: Guid(60ef84661bf863f4db74033b3cd7f695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/graveyard-kit/Models/FBX format/borderPillar.fbx using Guid(60ef84661bf863f4db74033b3cd7f695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c46283938cdf7ea38eddee0d9d0757f9') in 0.060120 seconds
-  Import took 0.066634 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000813 seconds.
-  path: Assets/Models/Kenney/furniture-kit/Models/FBX format/bookcaseOpen.fbx
-  artifactKey: Guid(af526225e9b8d464fa8bbc72b887c7eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/furniture-kit/Models/FBX format/bookcaseOpen.fbx using Guid(af526225e9b8d464fa8bbc72b887c7eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e3e41e8c7ac25743bef6401c1d976f7') in 0.067143 seconds
-  Import took 0.071530 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000273 seconds.
-  path: Assets/Models/Quaternius/Modular Dungeon Pack/FBX/Bones2.fbx
-  artifactKey: Guid(3fa8161a17574664d88c1e40a1b60571) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Quaternius/Modular Dungeon Pack/FBX/Bones2.fbx using Guid(3fa8161a17574664d88c1e40a1b60571) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e945c2726c8be727aaa052deef711a29') in 0.059531 seconds
-  Import took 0.063636 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000332 seconds.
-  path: Assets/Models/Kenney/food-kit/Models/FBX format/burger.fbx
-  artifactKey: Guid(e189f207c505bac4791090cc8091b667) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Kenney/food-kit/Models/FBX format/burger.fbx using Guid(e189f207c505bac4791090cc8091b667) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a2a271d64a01152ad671d513cd415c1') in 0.195149 seconds
-  Import took 0.199276 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000222 seconds.
-  path: Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_beige_pressed.png
-  artifactKey: Guid(b3db37897e0721041a2f5c682d48546f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/Kenney/uipack-rpg/PNG/buttonLong_beige_pressed.png using Guid(b3db37897e0721041a2f5c682d48546f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac22bd015acbba2ec91533d425f8c9ed') in 0.014732 seconds
-  Import took 0.017700 seconds .
+Unloading 1682 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.2 MB.
+System memory in use after: 79.3 MB.
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 2117.
+Total: 2.505300 ms (FindLiveObjects: 0.162200 ms CreateObjectMapping: 0.060700 ms MarkObjects: 2.186300 ms  DeleteObjects: 0.094900 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Information Flow Game Mechanic.inputactions
+  artifactKey: Guid(45778ae40f1bfdf4ca740ada8f70ded1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Information Flow Game Mechanic.inputactions using Guid(45778ae40f1bfdf4ca740ada8f70ded1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f23cb8d17aa7f23b7f68767ae656fa67') in 0.058050 seconds
+  Import took 0.061764 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.447480 seconds.
+  path: Assets/InputActions.inputactions
+  artifactKey: Guid(45778ae40f1bfdf4ca740ada8f70ded1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/InputActions.inputactions using Guid(45778ae40f1bfdf4ca740ada8f70ded1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1db87d6f061c4559f945b77c98bfd6d') in 0.014364 seconds
+  Import took 0.018339 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 684.833805 seconds.
+  path: Assets/Scripts/Player
+  artifactKey: Guid(d33b1ed6753333e41ab150db328f358c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Player using Guid(d33b1ed6753333e41ab150db328f358c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6fbd4090b95009f7ae0183c5f2d925c') in 0.008687 seconds
+  Import took 0.013364 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.574942 seconds.
+  path: Assets/Scripts/Player/PlayerInput.cs
+  artifactKey: Guid(cbd701a6fa9cd7b4ca0f73643c11a094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Player/PlayerInput.cs using Guid(cbd701a6fa9cd7b4ca0f73643c11a094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f7165c3e673c81d993fc6d1f39d22b5') in 0.089605 seconds
+  Import took 0.093798 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003265 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.79 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.262 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.71 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.3 MB.
+System memory in use after: 79.4 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2121.
+Total: 2.696100 ms (FindLiveObjects: 0.231300 ms CreateObjectMapping: 0.081400 ms MarkObjects: 2.281100 ms  DeleteObjects: 0.101300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003513 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.73 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.129 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.83 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.4 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2124.
+Total: 2.234700 ms (FindLiveObjects: 0.177700 ms CreateObjectMapping: 0.062500 ms MarkObjects: 1.911900 ms  DeleteObjects: 0.081500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005186 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.383 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.78 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2127.
+Total: 2.056700 ms (FindLiveObjects: 0.151000 ms CreateObjectMapping: 0.060300 ms MarkObjects: 1.764800 ms  DeleteObjects: 0.079700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004034 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.332 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2130.
+Total: 2.511400 ms (FindLiveObjects: 0.161800 ms CreateObjectMapping: 0.080500 ms MarkObjects: 2.181000 ms  DeleteObjects: 0.087000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 919.152571 seconds.
+  path: Assets/Scripts/Player/PlayerInput.cs
+  artifactKey: Guid(cbd701a6fa9cd7b4ca0f73643c11a094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Player/PlayerInput.cs using Guid(cbd701a6fa9cd7b4ca0f73643c11a094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '885f36907e74e041eca6a803ed35fa87') in 0.011920 seconds
+  Import took 0.015270 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006064 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.84 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.266 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.75 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2133.
+Total: 1.973700 ms (FindLiveObjects: 0.157600 ms CreateObjectMapping: 0.058000 ms MarkObjects: 1.669900 ms  DeleteObjects: 0.087300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003495 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.76 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.235 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2136.
+Total: 2.121900 ms (FindLiveObjects: 0.210200 ms CreateObjectMapping: 0.061100 ms MarkObjects: 1.778300 ms  DeleteObjects: 0.071200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005077 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.284 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.09 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2139.
+Total: 1.970900 ms (FindLiveObjects: 0.163200 ms CreateObjectMapping: 0.062100 ms MarkObjects: 1.687600 ms  DeleteObjects: 0.057000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005243 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.69 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.245 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.06 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2142.
+Total: 2.351100 ms (FindLiveObjects: 0.235100 ms CreateObjectMapping: 0.066500 ms MarkObjects: 1.989800 ms  DeleteObjects: 0.058000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003565 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.65 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.230 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.84 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2145.
+Total: 2.685600 ms (FindLiveObjects: 0.279100 ms CreateObjectMapping: 0.175100 ms MarkObjects: 2.164100 ms  DeleteObjects: 0.066100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005773 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.176 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.4 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2148.
+Total: 2.583400 ms (FindLiveObjects: 0.241500 ms CreateObjectMapping: 0.067700 ms MarkObjects: 2.202800 ms  DeleteObjects: 0.070300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004664 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.10 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.442 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.08 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.5 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2151.
+Total: 2.333300 ms (FindLiveObjects: 0.171000 ms CreateObjectMapping: 0.063100 ms MarkObjects: 2.034700 ms  DeleteObjects: 0.063400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005054 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.67 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.254 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.64 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.5 MB.
+System memory in use after: 79.5 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2154.
+Total: 3.171000 ms (FindLiveObjects: 0.205900 ms CreateObjectMapping: 0.113200 ms MarkObjects: 2.766900 ms  DeleteObjects: 0.084000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007182 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.85 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.383 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.38 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.5 MB.
+System memory in use after: 79.6 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2157.
+Total: 3.100800 ms (FindLiveObjects: 0.275600 ms CreateObjectMapping: 0.083500 ms MarkObjects: 2.660700 ms  DeleteObjects: 0.079300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003614 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.19 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.377 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.12 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.5 MB.
+System memory in use after: 79.6 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2160.
+Total: 3.408400 ms (FindLiveObjects: 0.259900 ms CreateObjectMapping: 0.075200 ms MarkObjects: 2.980200 ms  DeleteObjects: 0.091200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003395 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.78 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.218 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.5 MB.
+System memory in use after: 79.6 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2163.
+Total: 3.231300 ms (FindLiveObjects: 0.268200 ms CreateObjectMapping: 0.069300 ms MarkObjects: 2.821100 ms  DeleteObjects: 0.070600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005050 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.00 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.359 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 79.5 MB.
+System memory in use after: 79.6 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2166.
+Total: 2.167000 ms (FindLiveObjects: 0.157400 ms CreateObjectMapping: 0.060700 ms MarkObjects: 1.889700 ms  DeleteObjects: 0.057900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004634 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.74 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invalid AssetDatabase path: /Editor/EditorResources/cm_logo_sm.png. Use path relative to the project folder.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.AssetDatabase:LoadAssetAtPath<UnityEngine.Texture2D> (string)
+Cinemachine.Editor.CinemachineSettings:get_CinemachineLogoTexture () (at Library/PackageCache/com.unity.cinemachine@2.6.5/Editor/Windows/CinemachineSettings.cs:205)
+Cinemachine.Editor.CinemachineSettings:.cctor () (at Library/PackageCache/com.unity.cinemachine@2.6.5/Editor/Windows/CinemachineSettings.cs:237)
+Cinemachine.CinemachineColliderPrefs:.cctor () (at Library/PackageCache/com.unity.cinemachine@2.6.5/Editor/Windows/CinemachineColliderPrefs.cs:61)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Library/PackageCache/com.unity.cinemachine@2.6.5/Editor/Windows/CinemachineSettings.cs line 205]
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.243 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.75 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.4 MB.
+System memory in use after: 84.5 MB.
+
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 2314.
+Total: 2.761500 ms (FindLiveObjects: 0.277200 ms CreateObjectMapping: 0.067800 ms MarkObjects: 2.278000 ms  DeleteObjects: 0.137600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008835 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.16 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.703 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.87 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1825 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.6 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2318.
+Total: 5.158300 ms (FindLiveObjects: 0.413600 ms CreateObjectMapping: 0.145100 ms MarkObjects: 4.439600 ms  DeleteObjects: 0.157600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005053 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.70 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.279 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.76 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.5 MB.
+System memory in use after: 84.6 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2321.
+Total: 2.286400 ms (FindLiveObjects: 0.188700 ms CreateObjectMapping: 0.065500 ms MarkObjects: 1.936000 ms  DeleteObjects: 0.095300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004062 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.260 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.95 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.6 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2324.
+Total: 2.904700 ms (FindLiveObjects: 0.259000 ms CreateObjectMapping: 0.134900 ms MarkObjects: 2.411000 ms  DeleteObjects: 0.098500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004880 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.76 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.617 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.12 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2327.
+Total: 3.285400 ms (FindLiveObjects: 0.231400 ms CreateObjectMapping: 0.141800 ms MarkObjects: 2.818900 ms  DeleteObjects: 0.092100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003734 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.71 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.415 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2330.
+Total: 2.331600 ms (FindLiveObjects: 0.230800 ms CreateObjectMapping: 0.069700 ms MarkObjects: 1.966600 ms  DeleteObjects: 0.063600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003658 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.96 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.527 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.80 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2333.
+Total: 3.722600 ms (FindLiveObjects: 0.305300 ms CreateObjectMapping: 0.091000 ms MarkObjects: 3.216000 ms  DeleteObjects: 0.108800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003835 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.69 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.229 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.74 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2336.
+Total: 2.468400 ms (FindLiveObjects: 0.233900 ms CreateObjectMapping: 0.083400 ms MarkObjects: 2.079100 ms  DeleteObjects: 0.070900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003822 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.17 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.269 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.16 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2339.
+Total: 2.555500 ms (FindLiveObjects: 0.222400 ms CreateObjectMapping: 0.129900 ms MarkObjects: 2.134700 ms  DeleteObjects: 0.067700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003375 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.69 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.174 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.92 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2342.
+Total: 2.890300 ms (FindLiveObjects: 0.372500 ms CreateObjectMapping: 0.079100 ms MarkObjects: 2.342200 ms  DeleteObjects: 0.095200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006048 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.359 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.54 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2345.
+Total: 6.748900 ms (FindLiveObjects: 0.512300 ms CreateObjectMapping: 0.115100 ms MarkObjects: 6.016800 ms  DeleteObjects: 0.103000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003773 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.44 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.335 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.05 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.6 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2348.
+Total: 3.043300 ms (FindLiveObjects: 0.418300 ms CreateObjectMapping: 0.194900 ms MarkObjects: 2.356500 ms  DeleteObjects: 0.072200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006543 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.85 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.455 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.75 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.7 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2351.
+Total: 2.908200 ms (FindLiveObjects: 0.205100 ms CreateObjectMapping: 0.102100 ms MarkObjects: 2.508900 ms  DeleteObjects: 0.090800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004236 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.89 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.471 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.67 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.7 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2354.
+Total: 2.262400 ms (FindLiveObjects: 0.184700 ms CreateObjectMapping: 0.069400 ms MarkObjects: 1.937900 ms  DeleteObjects: 0.069300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007400 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.71 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.486 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.03 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.7 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2357.
+Total: 2.755400 ms (FindLiveObjects: 0.258300 ms CreateObjectMapping: 0.163100 ms MarkObjects: 2.255300 ms  DeleteObjects: 0.077500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003610 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.25 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.186 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.32 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.7 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2360.
+Total: 3.179900 ms (FindLiveObjects: 0.324100 ms CreateObjectMapping: 0.165600 ms MarkObjects: 2.599900 ms  DeleteObjects: 0.088400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007017 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.81 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.244 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.91 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.7 MB.
+System memory in use after: 84.7 MB.
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2363.
+Total: 2.611600 ms (FindLiveObjects: 0.242400 ms CreateObjectMapping: 0.139400 ms MarkObjects: 2.132800 ms  DeleteObjects: 0.095900 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
