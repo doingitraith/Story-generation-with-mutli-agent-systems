@@ -1,13 +1,15 @@
 // BatchRename.cs
 // Unity Editor extension that allows batch renaming for GameObjects in Hierarchy
 // Via Alan Thorn (TW: @thorn_alan)
+// Roman Luks - added sorting by sibling index
 
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-public class BatchRename : ScriptableWizard
-{
+public class BatchRename : ScriptableWizard {
+
 	/// <summary>
 	/// Base name
 	/// </summary>
@@ -66,10 +68,12 @@ public class BatchRename : ScriptableWizard
 		// Current Increment
 		int PostFix = StartNumber;
 
-		// Cycle and rename
-		foreach(Object O in Selection.objects) {
-			O.name = BaseName + PostFix;
-			PostFix += Increment;
-		}
-	}
+        List<GameObject> mySelection = new List<GameObject>(Selection.gameObjects);
+        mySelection.Sort((go1, go2) => go1.transform.GetSiblingIndex().CompareTo(go2.transform.GetSiblingIndex()));
+
+        foreach (var O in mySelection) {
+            O.name = BaseName + PostFix;
+            PostFix += Increment;
+        }
+    }
 }
