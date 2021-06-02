@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,12 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     private Vector2 _currentMove;
+    private CharacterController _characterController;
+
+    private void Start()
+    {
+        _characterController = GetComponent<CharacterController>();
+    }
 
     private void Update()
     {
@@ -16,7 +23,7 @@ public class PlayerInput : MonoBehaviour
         );
         
         Vector3 moveThisFrame = Time.deltaTime * moveVelocity;
-        transform.position += moveThisFrame;
+        _characterController.Move(moveThisFrame);
         
         if (moveThisFrame != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(moveVelocity);
