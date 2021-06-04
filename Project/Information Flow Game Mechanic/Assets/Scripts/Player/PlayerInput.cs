@@ -8,11 +8,11 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     private Vector2 _currentMove;
-    private CharacterController _characterController;
+    private Animator _animator;
 
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -21,9 +21,9 @@ public class PlayerInput : MonoBehaviour
             _currentMove.x * Vector3.right +
             _currentMove.y * Vector3.forward
         );
-        
+
         Vector3 moveThisFrame = Time.deltaTime * moveVelocity;
-        _characterController.Move(moveThisFrame);
+        transform.Translate(moveThisFrame, Space.World);
         
         if (moveThisFrame != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(moveVelocity);
@@ -33,11 +33,18 @@ public class PlayerInput : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _currentMove = context.ReadValue<Vector2>();
+        
+        _animator.SetFloat("RunningSpeed", _currentMove.magnitude);
+        if (context.canceled)
+            _animator.SetTrigger("DoStop");
+
+
     }
 
     public void Interact(InputAction.CallbackContext context)
     {
-        Debug.Log("Interaction pressed");
+        if (context.started)
+            Debug.Log("Interaction pressed");    
     }
     
 }
