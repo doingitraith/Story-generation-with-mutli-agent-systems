@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 5978433716428359812}
   - component: {fileID: 7302712550190303009}
   - component: {fileID: 4808864834092381163}
-  - component: {fileID: 3254380307766559856}
+  - component: {fileID: 7114041606921155088}
   m_Layer: 0
   m_Name: watermill
   m_TagString: Untagged
@@ -415,19 +415,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3254380307766559856
-BoxCollider:
+--- !u!114 &7114041606921155088
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6466176646781997630}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7099999, y: 1.7320507, z: 1.9999999}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7d8a3fb9ea8814b8c9b286a63ae900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6544432003791077050
 GameObject:
   m_ObjectHideFlags: 0
