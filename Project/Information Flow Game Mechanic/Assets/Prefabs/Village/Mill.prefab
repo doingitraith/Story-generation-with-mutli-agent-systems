@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7573545174602960001}
   - component: {fileID: 248959852230692847}
   - component: {fileID: 7338028663788838408}
+  - component: {fileID: 2317513484805158409}
   m_Layer: 0
   m_Name: Mill
   m_TagString: Untagged
@@ -90,6 +91,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2317513484805158409
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844365892792865442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3324608818864385758, guid: f9b305af0ac306c418ab6e40ef8fb4a1, type: 3}
 --- !u!1 &1988102609479631025
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +116,7 @@ GameObject:
   - component: {fileID: 5038363603341752529}
   - component: {fileID: 6369486008960070662}
   - component: {fileID: 7879852310105334001}
+  - component: {fileID: 8341521548015682060}
   m_Layer: 0
   m_Name: Mill_Blades
   m_TagString: Untagged
@@ -174,6 +190,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8341521548015682060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988102609479631025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7d8a3fb9ea8814b8c9b286a63ae900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedAroundX: 0
+  _speedAroundY: 0
+  _speedAroundZ: 0
 --- !u!1 &4946000986428569149
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +214,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5757967699896315015}
-  - component: {fileID: 3332420212585316505}
   m_Layer: 0
   m_Name: Mill
   m_TagString: Untagged
@@ -207,17 +237,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!64 &3332420212585316505
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946000986428569149}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
