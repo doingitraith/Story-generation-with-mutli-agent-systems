@@ -8,7 +8,7 @@ public class NPC : MonoBehaviour
 {
     public string _NPCName;
     private AgentBehaviour _currentBehaviour;
-    private LinkedList<AgentBehaviour> _routine;
+    private Routine _routine;
     
     // Start is called before the first frame update
     void Start()
