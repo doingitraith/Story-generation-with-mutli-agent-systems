@@ -4,44 +4,41 @@ using UnityEngine.AI;
 
 public class WalkBehaviour : AgentBehaviour
 {
-    public Transform _destination;
+    public Transform Destination;
+    
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
 
     public WalkBehaviour(NPC agent, Transform destination) : base(agent)
     {
-        _destination = destination;
+        Destination = destination;
         base.Init();
         
-        _navMeshAgent = _agent.GetComponentInChildren<NavMeshAgent>();
+        _navMeshAgent = Agent.GetComponentInChildren<NavMeshAgent>();
         if(_navMeshAgent == null)
-            throw new NullReferenceException("Agent "+_agent._NPCName+" does not have a NavMeshAgent component.");
+            throw new NullReferenceException("Agent "+Agent.NPCName+" does not have a NavMeshAgent component.");
         _navMeshAgent.updateRotation = false;
         
-        _animator = _agent.GetComponentInChildren<Animator>();
+        _animator = Agent.GetComponentInChildren<Animator>();
         if(_animator == null)
-            throw new NullReferenceException("Agent "+_agent._NPCName+" does not have a Animator component.");
+            throw new NullReferenceException("Agent "+Agent.NPCName+" does not have a Animator component.");
     }
 
     public override void DoBehaviour()
     {
-        _navMeshAgent.destination = _destination.position;
+        _navMeshAgent.destination = Destination.position;
         _animator.SetFloat("RunningSpeed", .5f);
     }
 
     public override void InterruptBehaviour()
     {
-        _navMeshAgent.destination = _agent.transform.position;
+        _navMeshAgent.destination = Agent.transform.position;
         _animator.SetTrigger("DoStop");
     }
 
     public override void ResumeBehaviour()
-    {
-        DoBehaviour();
-    }
+        => DoBehaviour();
 
     public override bool IsBehaviourFinished()
-    {
-        return _agent.transform.position.Equals(_destination.position);
-    }
+        => Agent.transform.position.Equals(Destination.position);
 }

@@ -5,16 +5,16 @@ using UnityEngine;
 
 public abstract class AgentBehaviour
 {
-    public NPC _agent;
-    public bool _isFinished;
+    public NPC Agent;
+    public bool IsFinished;
 
-    public AgentBehaviour(NPC agent) => (_agent, _isFinished) = (agent, false);
+    public AgentBehaviour(NPC agent) => (Agent, IsFinished) = (agent, false);
 
     protected void Init()
     {
-        _isFinished = false;
+        IsFinished = false;
         
-        if (_agent == null)
+        if (Agent == null)
             throw new NullReferenceException("Agent field is null for "+this);
     }
 
