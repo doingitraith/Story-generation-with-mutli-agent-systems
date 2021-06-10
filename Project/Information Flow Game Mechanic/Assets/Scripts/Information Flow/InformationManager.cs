@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class InformationManager
 {
-    private FixedSizedQueue _memory;
+    private ConcurrentQueue<InformationSet> _memory;
     // TODO Mapping for information;
 
+    public InformationManager()
+    {
+        _memory = new ConcurrentQueue<InformationSet>();
+    }
+    
     public InformationManager(int memorySize)
     {
         _memory = new FixedSizedQueue(memorySize);

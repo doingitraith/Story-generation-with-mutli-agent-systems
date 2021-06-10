@@ -5,27 +5,26 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 
-public class NPC : MonoBehaviour
+public class NPC : Character
 {
-    public string NPCName;
     public Routine Routine;
-    public InformationManager Memory;
-
+    
     private const int MEMORY_SIZE = 5;
     private AgentBehaviour _currentBehaviour;
 
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
+        Memory = new InformationManager(MEMORY_SIZE);
         _currentBehaviour = new WalkBehaviour(this, GameObject.Find("Stable").transform);
         _currentBehaviour.DoBehaviour();
-        Memory = new InformationManager(MEMORY_SIZE);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        base.Update();
     }
 
     private void LateUpdate()

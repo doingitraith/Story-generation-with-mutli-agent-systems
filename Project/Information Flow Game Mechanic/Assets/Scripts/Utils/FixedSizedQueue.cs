@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedSizedQueue : ConcurrentQueue<Information>
+public class FixedSizedQueue : ConcurrentQueue<InformationSet>
 {
-    private readonly Information syncObject = new Information();
+    private readonly InformationSet syncObject = new InformationSet();
 
     public int Size { get; private set; }
 
@@ -14,14 +14,14 @@ public class FixedSizedQueue : ConcurrentQueue<Information>
         Size = size;
     }
 
-    public new void Enqueue(Information obj)
+    public new void Enqueue(InformationSet obj)
     {
         base.Enqueue(obj);
         lock (syncObject)
         {
             while (base.Count > Size)
             {
-                Information outObj;
+                InformationSet outObj;
                 base.TryDequeue(out outObj);
             }
         }

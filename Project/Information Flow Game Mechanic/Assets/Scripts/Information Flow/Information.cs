@@ -2,53 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InformationObject
-{
-    NULL = -1,
-    AGENT = 0,
-    ITEM
-}
-
 public enum InformationVerb
 {
     NULL = -1,
     IS = 0,
-    HAS
-}
-
-public enum InformationProperty
-{
-    NULL = -1,
-    ALIVE = 0,
-    DEAD
+    HAS,
+    AT
 }
 
 public class Information
 {
-    private InformationObject _subject;
-    private InformationVerb _verb;
-    private InformationObject _object;
-    private InformationProperty _adjective;
+    public Character Character { get; }
+    public InformationVerb Verb { get; }
+    public Character Object { get; }
+    public InformationAdjective Adjective { get; }
+    public InformationLocation Location { get; }
 
     public Information()
-        => (_subject, _verb, _object, _adjective) =
-            (InformationObject.NULL, InformationVerb.NULL, InformationObject.NULL, InformationProperty.NULL);
+        => (Character, Verb, Object, Adjective) =
+            (null, InformationVerb.NULL, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject HAS Object" 
     /// </summary>
-    /// <param name="informationSubject">Subject of the information</param>
-    /// <param name="informationObject">Object of the information</param>
-    public Information(InformationObject informationSubject, InformationObject informationObject)
-        => (_subject, _verb, _object, _adjective) =
-            (informationSubject, InformationVerb.HAS, informationObject, InformationProperty.NULL);
+    /// <param name="character">Subject of the information</param>
+    /// <param name="object">Object of the information</param>
+    public Information(Character character, Character @object)
+        => (Character, Verb, Object, Adjective) =
+            (character, InformationVerb.HAS, @object, null);
 
     /// <summary>
-    /// Creates an Information of the form "Subject IS Object" 
+    /// Creates an Information of the form "Subject IS Adjective" 
     /// </summary>
-    /// <param name="informationSubject">Subject of the information</param>
-    /// <param name="informationProperty">Property of the subject</param>
-    public Information(InformationObject informationSubject, InformationProperty informationProperty)
-        => (_subject, _verb, _object, _adjective) =
-            (informationSubject, InformationVerb.IS, InformationObject.NULL, informationProperty);
+    /// <param name="character">Subject of the information</param>
+    /// <param name="informationAdjective">Property of the subject</param>
+    public Information(Character character, InformationAdjective informationAdjective)
+        => (Character, Verb, Object, Adjective) =
+            (character, InformationVerb.IS, null, informationAdjective);
+
+    /// <summary>
+    /// Creates an Information of the form "Subject is AT Location" 
+    /// </summary>
+    /// <param name="character">Subject of the information</param>
+    /// <param name="informationLocation">Location of the subject</param>
+    public Information(Character character, InformationLocation informationLocation)
+        => (Character, Verb, Object, Adjective, Location) =
+            (character, InformationVerb.AT, null, null, informationLocation);
 }

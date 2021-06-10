@@ -16,12 +16,12 @@ public class WalkBehaviour : AgentBehaviour
         
         _navMeshAgent = Agent.GetComponentInChildren<NavMeshAgent>();
         if(_navMeshAgent == null)
-            throw new NullReferenceException("Agent "+Agent.NPCName+" does not have a NavMeshAgent component.");
+            throw new NullReferenceException("Agent "+Agent.Name+" does not have a NavMeshAgent component.");
         _navMeshAgent.updateRotation = false;
         
         _animator = Agent.GetComponentInChildren<Animator>();
         if(_animator == null)
-            throw new NullReferenceException("Agent "+Agent.NPCName+" does not have a Animator component.");
+            throw new NullReferenceException("Agent "+Agent.Name+" does not have a Animator component.");
     }
 
     public override void DoBehaviour()
