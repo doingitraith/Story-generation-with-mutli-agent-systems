@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldObject : MonoBehaviour
+public abstract class WorldObject : MonoBehaviour
 {
+    public string Name;
+    
     // Start is called before the first frame update
     public void Start()
     {

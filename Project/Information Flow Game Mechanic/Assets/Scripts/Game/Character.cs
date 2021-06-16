@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Character : WorldObject
 {
-    public string Name;
     public InformationManager Memory;
     public List<Item> Inventory;
     public List<NPC> Acquaintances;

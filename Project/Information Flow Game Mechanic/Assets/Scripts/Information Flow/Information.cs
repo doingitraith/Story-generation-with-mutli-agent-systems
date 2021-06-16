@@ -12,40 +12,40 @@ public enum InformationVerb
 
 public class Information
 {
-    public Character Character { get; }
+    public WorldObject Subject { get; }
     public InformationVerb Verb { get; }
-    public Character Object { get; }
+    public Item Object { get; }
     public InformationAdjective Adjective { get; }
     public InformationLocation Location { get; }
 
     public Information()
-        => (Character, Verb, Object, Adjective) =
-            (null, InformationVerb.NULL, null, null);
+        => (Subject, Verb, Object, Adjective, Location) =
+            (null, InformationVerb.NULL, null, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject HAS Object" 
     /// </summary>
     /// <param name="character">Subject of the information</param>
     /// <param name="object">Object of the information</param>
-    public Information(Character character, Character @object)
-        => (Character, Verb, Object, Adjective) =
-            (character, InformationVerb.HAS, @object, null);
+    public Information(Character character, Item @object)
+        => (Subject, Verb, Object, Adjective, Location) =
+            (character, InformationVerb.HAS, @object, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject IS Adjective" 
     /// </summary>
     /// <param name="character">Subject of the information</param>
     /// <param name="informationAdjective">Property of the subject</param>
-    public Information(Character character, InformationAdjective informationAdjective)
-        => (Character, Verb, Object, Adjective) =
-            (character, InformationVerb.IS, null, informationAdjective);
+    public Information(WorldObject subject, InformationAdjective informationAdjective)
+        => (Subject, Verb, Object, Adjective, Location) =
+            (subject, InformationVerb.IS, null, informationAdjective, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject is AT Location" 
     /// </summary>
     /// <param name="character">Subject of the information</param>
     /// <param name="informationLocation">Location of the subject</param>
-    public Information(Character character, InformationLocation informationLocation)
-        => (Character, Verb, Object, Adjective, Location) =
-            (character, InformationVerb.AT, null, null, informationLocation);
+    public Information(WorldObject subject, InformationLocation informationLocation)
+        => (Subject, Verb, Object, Adjective, Location) =
+            (subject, InformationVerb.AT, null, null, informationLocation);
 }
