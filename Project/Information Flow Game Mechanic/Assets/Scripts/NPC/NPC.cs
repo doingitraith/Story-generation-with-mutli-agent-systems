@@ -16,7 +16,7 @@ public class NPC : Character
     void Start()
     {
         base.Start();
-        Memory = new InformationManager(MEMORY_SIZE);
+        Memory = new InformationManager(this, MEMORY_SIZE);
         _currentBehaviour = new WalkBehaviour(this, GameObject.Find("Stable").transform);
         _currentBehaviour.DoBehaviour();
     }

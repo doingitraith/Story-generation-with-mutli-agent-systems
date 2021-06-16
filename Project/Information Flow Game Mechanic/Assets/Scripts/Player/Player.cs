@@ -8,7 +8,7 @@ public class Player : Character
     void Start()
     {
         base.Start();
-        Memory = new InformationManager();
+        Memory = new InformationManager(this);
     }
 
     // Update is called once per frame
