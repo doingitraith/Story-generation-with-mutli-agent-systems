@@ -25,11 +25,11 @@ public class Information
     /// <summary>
     /// Creates an Information of the form "Subject HAS Object" 
     /// </summary>
-    /// <param name="character">Subject of the information</param>
+    /// <param name="agent">Subject of the information</param>
     /// <param name="object">Object of the information</param>
-    public Information(Character character, Item @object)
+    public Information(Agent agent, Item @object)
         => (Subject, Verb, Object, Adjective, Location) =
-            (character, InformationVerb.HAS, @object, null, null);
+            (agent, InformationVerb.HAS, @object, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject IS Adjective" 

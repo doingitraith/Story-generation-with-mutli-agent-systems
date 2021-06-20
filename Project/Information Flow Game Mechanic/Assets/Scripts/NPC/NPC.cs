@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 
-public class NPC : Character
+public class NPC : Agent
 {
     public Routine Routine;
     

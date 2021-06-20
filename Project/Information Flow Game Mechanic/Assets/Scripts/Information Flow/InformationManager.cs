@@ -8,15 +8,15 @@ using UnityEngine;
 public class InformationManager
 {
     private Queue<InformationSet> _memory;
-    private Character _owner;
+    private Agent _owner;
 
-    public InformationManager(Character owner)
+    public InformationManager(Agent owner)
     {
         _owner = owner;
         _memory = new Queue<InformationSet>();
     }
     
-    public InformationManager(Character owner, int memorySize)
+    public InformationManager(Agent owner, int memorySize)
     {
         _owner = owner;
         _memory = new FixedSizedQueue(memorySize);
@@ -40,25 +40,56 @@ public class InformationManager
 
     public bool TryAddNewInformation(Information information)
     {
-        // TODO If subject is owner, add both character and item
         if (Contains(information))
             return false;
 
         InformationSet infoSet = GetInformationSet(information.Subject);
+
+        bool isPosession = information.Verb == InformationVerb.HAS;
+        
         if (infoSet != null)
         {
             infoSet.UpdateInformationSet(information);
+            if (isPosession)
+            {
+                ItemInformationSet itemInfoSet = (ItemInformationSet)GetInformationSet(information.Object);
+                if (itemInfoSet != null)
+                {
+                    itemInfoSet.UpdateInformationSet(information);
+                }
+                else
+                {
+                    _memory.Enqueue(new ItemInformationSet(information));
+                }
+            }
             return true;
+        }
+
+        if (information.Subject is Agent)
+        {
+            _memory.Enqueue(new CharacterInformationSet(information));
+            if (isPosession)
+            {
+                ItemInformationSet itemInfoSet = (ItemInformationSet)GetInformationSet(information.Object);
+                if (itemInfoSet != null)
+                {
+                    itemInfoSet.UpdateInformationSet(information);
+                }
+                else
+                {
+                    _memory.Enqueue(new ItemInformationSet(information));
+                }
+            }
         }
         else
-        {
-            if(information.Subject is Character)
-                _memory.Enqueue(new CharacterInformationSet(information));
-            else
-                _memory.Enqueue(new ItemInformationSet(information));
+            _memory.Enqueue(new ItemInformationSet(information));
             
-            return true;
-        }
-            
+        return true;
+
+    }
+
+    public Information GetInformationToExchange()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : WorldObject
+public class Agent : WorldObject
 {
     public InformationManager Memory;
     public List<Item> Inventory;

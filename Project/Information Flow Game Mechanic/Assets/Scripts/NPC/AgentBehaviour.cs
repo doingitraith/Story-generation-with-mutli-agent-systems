@@ -5,10 +5,10 @@ using UnityEngine;
 
 public abstract class AgentBehaviour
 {
-    public NPC Agent;
+    public Agent Agent;
     public bool IsFinished;
 
-    public AgentBehaviour(NPC agent) => (Agent, IsFinished) = (agent, false);
+    public AgentBehaviour(Agent agent) => (Agent, IsFinished) = (agent, false);
 
     protected void Init()
     {
@@ -18,11 +18,11 @@ public abstract class AgentBehaviour
             throw new NullReferenceException("Agent field is null for "+this);
     }
 
-    public abstract void DoBehaviour();
+    public abstract IEnumerator DoBehaviour();
 
-    public abstract void InterruptBehaviour();
+    public abstract IEnumerator InterruptBehaviour();
 
-    public abstract void ResumeBehaviour();
+    public abstract IEnumerator ResumeBehaviour();
 
     public abstract bool IsBehaviourFinished();
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ItemInformationSet : InformationSet
 {
-    public Character Owner { get; set; }
+    public Agent Owner { get; set; }
 
     public ItemInformationSet(Information information)
     {
@@ -26,7 +26,12 @@ public class ItemInformationSet : InformationSet
         {
             case InformationVerb.IS: {UpdateProperties(information);}
                 break;
-            case InformationVerb.HAS: { Owner = (Character)information.Subject;}
+            case InformationVerb.HAS:
+            {
+                throw new Exception(
+                    "Should not be reached. A HAS information should only be created through a CharacterInformationSet");
+                //Owner = (Agent)information.Subject;
+            }
                 break;
             case InformationVerb.AT: { Location = information.Location;}
                 break;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,19 +25,21 @@ public class WalkBehaviour : AgentBehaviour
             throw new NullReferenceException("Agent "+Agent.Name+" does not have a Animator component.");
     }
 
-    public override void DoBehaviour()
+    public override IEnumerator DoBehaviour()
     {
         _navMeshAgent.destination = Destination.position;
         _animator.SetFloat("RunningSpeed", .5f);
+        return null;
     }
 
-    public override void InterruptBehaviour()
+    public override IEnumerator InterruptBehaviour()
     {
         _navMeshAgent.destination = Agent.transform.position;
         _animator.SetTrigger("DoStop");
+        return null;
     }
 
-    public override void ResumeBehaviour()
+    public override IEnumerator ResumeBehaviour()
         => DoBehaviour();
 
     public override bool IsBehaviourFinished()
