@@ -27,6 +27,7 @@ public class ExchangeInformationBehaviour : AgentBehaviour
         if (_isPaused)
             yield return null;
         
+        // TODO: Change to CreateNewInformationPrefab
         _reciever.Memory.TryAddNewInformation(Agent.Memory.GetInformationToExchange());
         IsFinished = true;
     }

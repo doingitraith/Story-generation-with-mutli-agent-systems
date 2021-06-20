@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InformationManager
 {
@@ -90,6 +91,12 @@ public class InformationManager
 
     public Information GetInformationToExchange()
     {
-        throw new NotImplementedException();
+        return DistillInformation();
+    }
+
+    private Information DistillInformation()
+    {
+        // TODO: extract information from memory
+        return null;
     }
 }
