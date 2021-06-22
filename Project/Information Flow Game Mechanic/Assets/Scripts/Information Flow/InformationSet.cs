@@ -8,11 +8,11 @@ public abstract class InformationSet
 {
     public WorldObject Subject { get; set; }
     public InformationLocation Location { get; set; }
-    
     public List<InformationAdjective> Properties { get; set; }
 
     public abstract bool Contains(Information information);
     public abstract void UpdateInformationSet(Information information);
+    public abstract List<Information> GetInformationList();
     
     protected void UpdateProperties(Information information)
     {

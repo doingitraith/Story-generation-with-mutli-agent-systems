@@ -11,10 +11,20 @@ public class ItemInformationSet : InformationSet
     public ItemInformationSet(Information information)
     {
         if (information.Verb.Equals(InformationVerb.HAS))
-            Subject = information.Object;
+        { 
+            throw new Exception(
+                "Should not be reached. A HAS information should only be created through a CharacterInformationSet");
+            //Subject = information.Object;
+        }
         else
-            Subject = information.Subject;
-        
+        {
+            if (information.Subject ! is Item)
+                throw new Exception(
+                    "ItemInformationSet that is not HAS should only be created with an Item as Subject");
+            
+            Subject = (Item) information.Subject;
+        }
+
         Properties = new List<InformationAdjective>();
 
         UpdateInformationSet(information);
@@ -38,6 +48,23 @@ public class ItemInformationSet : InformationSet
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    public override List<Information> GetInformationList()
+    {
+        List<Information> infos = new List<Information>();
+
+        if(Location != null)
+            infos.Add(new Information(Subject, Location));
+        
+        if(Owner != null)
+            infos.Add(new Information(Owner,(Item)Subject));
+
+            if(Properties.Count > 0)
+            foreach (InformationAdjective prop in Properties)
+                infos.Add(new Information(Subject, prop));
+    
+        return infos;
     }
 
     public override bool Contains(Information information)

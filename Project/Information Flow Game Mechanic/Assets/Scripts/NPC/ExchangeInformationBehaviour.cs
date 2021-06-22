@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 
 public class ExchangeInformationBehaviour : AgentBehaviour
 {
+    public GameObject InformationPrefab;
+    
     private const int EXCHANGE_TIME = 5;
 
     private bool _isPaused;
@@ -28,7 +32,18 @@ public class ExchangeInformationBehaviour : AgentBehaviour
             yield return null;
         
         // TODO: Change to CreateNewInformationPrefab
-        _reciever.Memory.TryAddNewInformation(Agent.Memory.GetInformationToExchange());
+
+        Information info = Agent.Memory.GetInformationToExchange();
+        if (info == null)
+        {
+            // TODO: Handle empty information case
+        }
+        else
+        {
+            InformationPrefab.GetComponent<InformationObject>().Information = info;
+            Agent.Instantiate(InformationPrefab,Agent.transform.position, Quaternion.identity);
+        }
+        
         IsFinished = true;
     }
 

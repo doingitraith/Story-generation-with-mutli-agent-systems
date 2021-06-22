@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public enum InformationVerb
@@ -48,4 +49,18 @@ public class Information
     public Information(WorldObject subject, InformationLocation informationLocation)
         => (Subject, Verb, Object, Adjective, Location) =
             (subject, InformationVerb.AT, null, null, informationLocation);
+
+    public bool Equals(Information other)
+    {
+        if (other.Verb != Verb && Subject.Equals(other.Subject))
+            return false;
+
+        switch (Verb)
+        {
+            case InformationVerb.AT: { return Location.Equals(other.Location); }
+            case InformationVerb.IS: { return Adjective.Equals(other.Adjective); }
+            case InformationVerb.HAS: { return Object.Equals(other.Object); }
+            default: { return false; }
+        }
+    }
 }

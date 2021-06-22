@@ -96,7 +96,18 @@ public class InformationManager
 
     private Information DistillInformation()
     {
-        // TODO: extract information from memory
-        return null;
+        if (_memory.Count == 0)
+            return null;
+        
+        List<InformationSet> infoSetList = _memory.ToList();
+
+        InformationSet infoSet = infoSetList[Random.Range(0, infoSetList.Count)];
+
+        List<Information> infoList = infoSet.GetInformationList();
+        
+        if (infoList.Count == 0)
+            return null;
+
+        return infoList[Random.Range(0, infoList.Count)];
     }
 }

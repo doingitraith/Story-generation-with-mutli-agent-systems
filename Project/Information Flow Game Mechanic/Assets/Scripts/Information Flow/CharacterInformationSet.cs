@@ -9,7 +9,10 @@ public class CharacterInformationSet : InformationSet
 
     public CharacterInformationSet(Information information)
     {
-        Subject = information.Subject;
+        if (information.Subject ! is Agent)
+            throw new Exception("CharacterInformationSet should only be created with an Agent as Subject");
+        
+        Subject = (Agent) information.Subject;
         Possessions = new List<Item>();
         Properties = new List<InformationAdjective>();
 
@@ -30,7 +33,25 @@ public class CharacterInformationSet : InformationSet
                 throw new ArgumentOutOfRangeException();
         }
     }
+
+    public override List<Information> GetInformationList()
+    {
+        List<Information> infos = new List<Information>();
+
+        if(Location != null)
+            infos.Add(new Information(Subject, Location));
+        
+        if(Possessions.Count > 0)
+            foreach (Item item in Possessions)
+                infos.Add(new Information((Agent) Subject,item));
+        
+        if(Properties.Count > 0)
+            foreach (InformationAdjective prop in Properties)
+                infos.Add(new Information(Subject, prop));
     
+        return infos;
+    }
+
     public override bool Contains(Information information)
     {
         switch (information.Verb)
