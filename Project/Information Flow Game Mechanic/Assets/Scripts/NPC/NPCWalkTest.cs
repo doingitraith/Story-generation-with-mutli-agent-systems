@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class NPCWalkTest : MonoBehaviour
 {
-    
-    public Transform goal;
+    public Transform Goal;
        
     // Start is called before the first frame update
-    void Start () {
+    void Start ()
+    {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = goal.position; 
+        agent.destination = Goal.position;
     }
 
     // Update is called once per frame
