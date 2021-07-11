@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -61,6 +62,23 @@ public class Information
             case InformationVerb.IS: { return Adjective.Equals(other.Adjective); }
             case InformationVerb.HAS: { return Object.Equals(other.Object); }
             default: { return false; }
+        }
+    }
+
+    public string ToString()
+    {
+        switch (Verb)
+        {
+            case InformationVerb.NULL:
+                return "NULL Information";
+            case InformationVerb.IS:
+                return Subject.Name + " is " + Adjective.Characteristic;
+            case InformationVerb.HAS:
+                return Subject.Name + " has " + Object.Name;
+            case InformationVerb.AT:
+                return Subject.Name + " is at " + Location.Name;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 }
