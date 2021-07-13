@@ -9,7 +9,7 @@ public class CharacterInformationSet : InformationSet
 
     public CharacterInformationSet(Information information)
     {
-        if (information.Subject ! is Agent)
+        if (!(information.Subject is Agent))
             throw new Exception("CharacterInformationSet should only be created with an Agent as Subject");
         
         Subject = (Agent) information.Subject;

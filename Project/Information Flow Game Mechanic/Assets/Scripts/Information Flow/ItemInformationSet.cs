@@ -12,13 +12,14 @@ public class ItemInformationSet : InformationSet
     {
         if (information.Verb.Equals(InformationVerb.HAS))
         { 
-            throw new Exception(
-                "Should not be reached. A HAS information should only be created through a CharacterInformationSet");
-            //Subject = information.Object;
+            //throw new Exception(
+            //    "Should not be reached. A HAS information should only be created through a CharacterInformationSet");
+            Subject = information.Object;
+            Owner = (Agent)information.Subject;
         }
         else
         {
-            if (information.Subject ! is Item)
+            if (!(information.Subject is Item))
                 throw new Exception(
                     "ItemInformationSet that is not HAS should only be created with an Item as Subject");
             
@@ -38,9 +39,9 @@ public class ItemInformationSet : InformationSet
                 break;
             case InformationVerb.HAS:
             {
-                throw new Exception(
-                    "Should not be reached. A HAS information should only be created through a CharacterInformationSet");
-                //Owner = (Agent)information.Subject;
+                //throw new Exception(
+                //    "Should not be reached. A HAS information should only be created through a CharacterInformationSet");
+                Owner = (Agent)information.Subject;
             }
                 break;
             case InformationVerb.AT: { Location = information.Location;}
