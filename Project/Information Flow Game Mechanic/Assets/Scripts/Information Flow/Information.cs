@@ -65,7 +65,7 @@ public class Information
         }
     }
 
-    public string ToString()
+    public override string ToString()
     {
         switch (Verb)
         {

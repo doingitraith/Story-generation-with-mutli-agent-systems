@@ -13,7 +13,7 @@ public class NPC : Agent
     private AgentBehaviour _currentBehaviour;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         base.Start();
         Memory = new InformationManager(this, MEMORY_SIZE);
@@ -22,7 +22,7 @@ public class NPC : Agent
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
     }

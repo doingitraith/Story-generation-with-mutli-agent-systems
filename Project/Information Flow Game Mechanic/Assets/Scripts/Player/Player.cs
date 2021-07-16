@@ -5,14 +5,14 @@ using UnityEngine;
 public class Player : Agent
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         base.Start();
         Memory = new InformationManager(this);
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
     }

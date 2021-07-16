@@ -2,13 +2,24 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 
-namespace Game
-{
+    public enum InformationPropagationType
+    {
+        VISUAL = 0,
+        AUDIO,
+        INSTANT,
+        PERSISTANT,
+        NONE
+    }
+    
     public class InformationObject : MonoBehaviour
     {
+        public InformationPropagationType PropagationType = InformationPropagationType.NONE;
         public WorldObject Subject;
         public InformationVerb Verb;
         public Item Object;
+        
+        public Adjectives SetAdjective;
+
         public InformationAdjective Adjective;
         public InformationLocation Location;
         
@@ -20,7 +31,7 @@ namespace Game
             {
                 case InformationVerb.NULL: { Information = new Information(); }
                     break;
-                case InformationVerb.IS: { Information = new Information(Subject, Adjective); }
+                case InformationVerb.IS: { Information = new Information(Subject, GameManager.WorldAdjectives[SetAdjective]); }
                     break;
                 case InformationVerb.HAS:{ Information = new Information((Agent)Subject, Object); }
                     break;
@@ -36,4 +47,3 @@ namespace Game
             
         }
     }
-}

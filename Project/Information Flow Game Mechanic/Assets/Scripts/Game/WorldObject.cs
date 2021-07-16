@@ -5,15 +5,16 @@ using UnityEngine;
 public abstract class WorldObject : MonoBehaviour
 {
     public string Name;
+    public InformationLocation Location;
     
     // Start is called before the first frame update
-    public void Start()
+    protected virtual void Start()
     {
         
     }
 
     // Update is called once per frame
-    public void Update()
+    protected virtual void Update()
     {
         
     }

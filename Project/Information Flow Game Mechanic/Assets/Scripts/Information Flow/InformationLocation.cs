@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InformationLocation
+public class InformationLocation : MonoBehaviour
 {
-    public string Name { get; }
-    public Transform Position { get; }
+    public string Name;
+    public Vector3 Location { get; private set; }
 
-    public InformationLocation(string name, Transform position)
-        => (Name, Position) = (name, position);
+    void Start()
+    {
+        Location = gameObject.transform.position;
+    }
 }
