@@ -202,8 +202,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
+  Location: {fileID: 0}
   Inventory: []
   Acquaintances: []
+  YarnScript: {fileID: 0}
+  YarnNode: 
+  IsHearing: 1
+  IsSeeing: 1
 --- !u!1001 &7510452027910175039
 PrefabInstance:
   m_ObjectHideFlags: 0

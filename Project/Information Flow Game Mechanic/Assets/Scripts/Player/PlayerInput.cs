@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yarn.Unity;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class PlayerInput : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _currentMove = context.ReadValue<Vector2>();
+        if(FindObjectOfType<DialogueRunner>().IsDialogueRunning)
+            _currentMove = Vector2.zero;
         
         _animator.SetFloat("RunningSpeed", _currentMove.magnitude);
         if (context.canceled)
@@ -44,7 +47,10 @@ public class PlayerInput : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         if (context.started)
-            Debug.Log("Interaction pressed");    
+        {
+            Debug.Log("Interaction pressed");
+            
+        }
     }
     
 }

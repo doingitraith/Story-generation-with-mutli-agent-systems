@@ -7,10 +7,14 @@ public  class GameManager : MonoBehaviour
 {
     public static Dictionary<Adjectives, InformationAdjective> WorldAdjectives;
 
-    public void Start()
+    private void Awake()
     {
         WorldAdjectives = new Dictionary<Adjectives, InformationAdjective>();
         InitAdjectives();
+    }
+
+    public void Start()
+    {
     }
 
     public static void InitAdjectives()

@@ -1,18 +1,26 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class Agent : WorldObject
 {
     public InformationManager Memory;
     public List<Item> Inventory;
     public List<NPC> Acquaintances;
+    public YarnProgram YarnScript;
+    public string YarnNode;
     public bool IsHearing = true;
     public bool IsSeeing = true;
 
     protected override void Start()
     {
         base.Start();
+        if (YarnScript != null)
+        {
+            DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
+            dialogueRunner.Add(YarnScript);
+        }
         Inventory = new List<Item>();
         Acquaintances = new List<NPC>();
     }
