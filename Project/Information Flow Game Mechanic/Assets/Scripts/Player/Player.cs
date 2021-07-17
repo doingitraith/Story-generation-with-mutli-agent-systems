@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class Player : Agent
 {
@@ -15,5 +16,15 @@ public class Player : Agent
     protected override void Update()
     {
         base.Update();
+    }
+
+    public void InteractNPC(NPC interactNPC)
+    {
+        FindObjectOfType<DialogueRunner>().StartDialogue(interactNPC.YarnNode);
+    }
+
+    public void InteractItem(Item interactItem)
+    {
+        throw new System.NotImplementedException();
     }
 }

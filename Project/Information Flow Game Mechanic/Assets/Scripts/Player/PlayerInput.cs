@@ -10,14 +10,19 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     private Vector2 _currentMove;
     private Animator _animator;
+    private DialogueRunner _dialogueRunner;
 
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        _dialogueRunner = FindObjectOfType<DialogueRunner>();
     }
 
     private void Update()
     {
+        while (_dialogueRunner.IsDialogueRunning)
+            return;
+            
         Vector3 moveVelocity = _moveSpeed * (
             _currentMove.x * Vector3.right +
             _currentMove.y * Vector3.forward
@@ -49,7 +54,7 @@ public class PlayerInput : MonoBehaviour
         if (context.started)
         {
             Debug.Log("Interaction pressed");
-            
+            gameObject.GetComponent<Interactor>().Interact();
         }
     }
     
