@@ -17,14 +17,4 @@ public class Player : Agent
     {
         base.Update();
     }
-
-    public void InteractNPC(NPC interactNPC)
-    {
-        FindObjectOfType<DialogueRunner>().StartDialogue(interactNPC.YarnNode);
-    }
-
-    public void InteractItem(Item interactItem)
-    {
-        throw new System.NotImplementedException();
-    }
 }

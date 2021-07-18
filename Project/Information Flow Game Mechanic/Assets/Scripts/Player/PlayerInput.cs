@@ -10,12 +10,10 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     private Vector2 _currentMove;
     private Animator _animator;
-    private DialogueRunner _dialogueRunner;
 
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
-        _dialogueRunner = FindObjectOfType<DialogueRunner>();
     }
 
     private void Update()

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8497780179032936013}
   - component: {fileID: 7035915486964579697}
   - component: {fileID: 7420188939510561151}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InformationPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631258e68e494ae3b181fd481234b700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PropagationType: 4
+  Subject: {fileID: 0}
+  Verb: 0
+  Object: {fileID: 0}
+  SetAdjective: 0
+  Location: {fileID: 0}
 --- !u!135 &7035915486964579697
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -70,4 +76,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052c2dc156e9e864f8e007ee569bd95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PropagationType: 3

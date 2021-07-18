@@ -17,10 +17,7 @@ public class Agent : WorldObject
     {
         base.Start();
         if (YarnScript != null)
-        {
-            DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
-            dialogueRunner.Add(YarnScript);
-        }
+            GameManager.Instance.DialogueRunner.Add(YarnScript);
         Inventory = new List<Item>();
         Acquaintances = new List<NPC>();
     }
@@ -28,6 +25,16 @@ public class Agent : WorldObject
     protected override void Update()
     {
         base.Update();
+    }
+    
+    public void InteractNPC(Agent interactAgent)
+    {
+        GameManager.Instance.StartDialogue(this, interactAgent);
+    }
+
+    public void InteractItem(Item interactItem)
+    {
+        throw new System.NotImplementedException();
     }
 
     void OnTriggerEnter(Collider other)
@@ -71,6 +78,6 @@ public class Agent : WorldObject
         }
 
         if(isInformationAdded)
-            Debug.Log(this.Name + "learned: \""+infoObject.Information.ToString()+"\"");
+            Debug.Log(this.Name + " learned: \""+infoObject.Information.ToString()+"\"");
     }
 }

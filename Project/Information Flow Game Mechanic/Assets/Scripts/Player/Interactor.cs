@@ -26,9 +26,9 @@ public class Interactor : MonoBehaviour
     public void Interact()
     {
         if (_isInteractNPC)
-            gameObject.GetComponent<Player>().InteractNPC(_interactNPC);
+            gameObject.GetComponent<Agent>().InteractNPC(_interactNPC);
         else if(_isInteractItem)
-            gameObject.GetComponent<Player>().InteractItem(_interactItem);
+            gameObject.GetComponent<Agent>().InteractItem(_interactItem);
     }
 
     public void OnTriggerEnter(Collider other)
