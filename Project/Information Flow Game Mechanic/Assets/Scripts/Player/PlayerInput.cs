@@ -20,12 +20,9 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        while (_dialogueRunner.IsDialogueRunning)
-            return;
-            
         Vector3 moveVelocity = _moveSpeed * (
-            _currentMove.x * Vector3.right +
-            _currentMove.y * Vector3.forward
+            _currentMove.x * (Quaternion.AngleAxis(-45.0f, Vector3.up)*Vector3.right) +
+            _currentMove.y * (Quaternion.AngleAxis(-45.0f, Vector3.up)*Vector3.forward)
         );
 
         Vector3 moveThisFrame = Time.deltaTime * moveVelocity;
@@ -39,14 +36,10 @@ public class PlayerInput : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _currentMove = context.ReadValue<Vector2>();
-        if(FindObjectOfType<DialogueRunner>().IsDialogueRunning)
-            _currentMove = Vector2.zero;
-        
+
         _animator.SetFloat("RunningSpeed", _currentMove.magnitude);
         if (context.canceled)
             _animator.SetTrigger("DoStop");
-
-
     }
 
     public void Interact(InputAction.CallbackContext context)
