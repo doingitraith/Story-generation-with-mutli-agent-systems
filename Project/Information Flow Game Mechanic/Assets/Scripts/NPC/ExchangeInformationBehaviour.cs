@@ -31,15 +31,15 @@ public class ExchangeInformationBehaviour : AgentBehaviour
             yield return null;
         
         // TODO: Change to CreateNewInformationPrefab
-
-        Information info = Agent.Memory.GetInformationToExchange();
-        if (info == null)
+        
+        List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
+        if (infos == null)
         {
             // TODO: Handle empty information case
         }
         else
         {
-            InformationPrefab.GetComponent<InformationObject>().Information = info;
+            InformationPrefab.GetComponent<InformationObject>().Information = infos[0];
             Agent.Instantiate(InformationPrefab,Agent.transform.position, Quaternion.identity);
         }
         
