@@ -54,37 +54,63 @@ public  class GameManager : MonoBehaviour
 
     public void StartDialogue(Agent conversationStarter, Agent conversationPartner)
     {
-        NameText.text = conversationStarter is Player ? conversationPartner.Name : conversationStarter.Name;
+        _currentConversationStarter = conversationStarter;
+        _currentConversationPartner = conversationPartner;
+        NameText.text = 
+            _currentConversationStarter is Player ? _currentConversationPartner.Name : _currentConversationStarter.Name;
         DialogueRunner.variableStorage.SetValue("$NPCName", NameText.text);
 
-        List<Information> npcInfos = conversationPartner.Memory.GetInformationsToExchange(1);
+        _currentConversationPartner.CurrentReplies = 
+            _currentConversationPartner.Memory.GetInformationsToExchange(1);
         
-        DialogueRunner.variableStorage.SetValue("$HasNPCReplies", npcInfos!=null);
-        if(npcInfos!=null)
-            DialogueRunner.variableStorage.SetValue("$NPCReplyText", npcInfos[0].ToString());
+        DialogueRunner.variableStorage.SetValue("$HasNPCReplies", 
+            _currentConversationPartner.CurrentReplies.Count!=0);
+        
+        if(_currentConversationPartner.CurrentReplies.Count!=0)
+            DialogueRunner.variableStorage.SetValue("$NPCReplyText",
+                _currentConversationPartner.CurrentReplies[0].ToString());
 
-        int numOfReplies = conversationStarter.Memory.NumberOfMemories;
+        int numOfReplies = _currentConversationStarter.Memory.NumberOfMemories;
         DialogueRunner.variableStorage.SetValue("$NumOfReplies", numOfReplies);
         if (numOfReplies > 0)
         {
-            List<Information> playerInfos =
-                conversationStarter.Memory.GetInformationsToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1); 
+            _currentConversationStarter.CurrentReplies =
+                _currentConversationStarter.Memory.
+                    GetInformationsToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1); 
             
-            DialogueRunner.variableStorage.SetValue("$ReplyText1", playerInfos[0].ToString());
+            DialogueRunner.variableStorage.SetValue("$ReplyText1", 
+                _currentConversationStarter.CurrentReplies[0].ToString());
             if(numOfReplies > 1)
-                DialogueRunner.variableStorage.SetValue("$ReplyText2", playerInfos[1].ToString());
+                DialogueRunner.variableStorage.SetValue("$ReplyText2", 
+                    _currentConversationStarter.CurrentReplies[1].ToString());
             if(numOfReplies > 2)
-                DialogueRunner.variableStorage.SetValue("$ReplyText3", playerInfos[2].ToString());
+                DialogueRunner.variableStorage.SetValue("$ReplyText3", 
+                    _currentConversationStarter.CurrentReplies[2].ToString());
         }
         
-        DialogueRunner.StartDialogue(conversationStarter.YarnNode);
+        DialogueRunner.StartDialogue(_currentConversationStarter.YarnNode);
     }
 
     public void ReceiveReply(string[] parameters)
     {
-        if(parameters[0]=="Player")
-            Debug.Log("Player learns \""+parameters[1]+"\"");
+        var replyIdx = Int32.Parse(parameters[1]);
+
+        Agent player = null;
+        Agent npc = null;
+        if (_currentConversationStarter is Player)
+        {
+            player = _currentConversationStarter;
+            npc = _currentConversationPartner;
+        }
         else
-            Debug.Log(parameters[0]+" learns \""+parameters[1]+"\"");
+        {
+            player = _currentConversationPartner;
+            npc = _currentConversationStarter;
+        }
+        
+        if(parameters[0]=="Player")
+            Debug.Log("Player learns \""+player.CurrentReplies[replyIdx].ToString()+"\"");
+        else
+            Debug.Log(parameters[0]+" learns \""+npc.CurrentReplies[replyIdx].ToString()+"\"");
     }
 }

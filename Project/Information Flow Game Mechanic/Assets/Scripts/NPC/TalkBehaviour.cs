@@ -14,12 +14,14 @@ public class TalkBehaviour : AgentBehaviour
 
     public override IEnumerator DoBehaviour()
     {
+        Agent.IsOccupied = true;
         GameManager.Instance.StartDialogue(Agent, ConversationPartner);
         return null;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
+        Agent.IsOccupied = false;
         GameManager.Instance.DialogueRunner.Stop();
         return null;
     }
@@ -32,6 +34,7 @@ public class TalkBehaviour : AgentBehaviour
 
     public override bool IsBehaviourFinished()
     {
+        Agent.IsOccupied = GameManager.Instance.DialogueRunner.IsDialogueRunning;
         return !GameManager.Instance.DialogueRunner.IsDialogueRunning;
     }
 }

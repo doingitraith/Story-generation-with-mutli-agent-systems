@@ -27,6 +27,7 @@ public class WalkBehaviour : AgentBehaviour
 
     public override IEnumerator DoBehaviour()
     {
+        Agent.IsOccupied = true;
         _navMeshAgent.destination = Destination.position;
         _animator.SetFloat("RunningSpeed", .5f);
         return null;
@@ -36,6 +37,7 @@ public class WalkBehaviour : AgentBehaviour
     {
         _navMeshAgent.destination = Agent.transform.position;
         _animator.SetTrigger("DoStop");
+        Agent.IsOccupied = false;
         return null;
     }
 
@@ -43,5 +45,13 @@ public class WalkBehaviour : AgentBehaviour
         => DoBehaviour();
 
     public override bool IsBehaviourFinished()
-        => Agent.transform.position.Equals(Destination.position);
+    {
+        if (Agent.transform.position.Equals(Destination.position))
+        {
+            Agent.IsOccupied = false;
+            return true;
+        }
+        else
+            return false;
+    }
 }

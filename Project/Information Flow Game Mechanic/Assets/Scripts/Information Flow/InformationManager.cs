@@ -108,7 +108,7 @@ public class InformationManager
         
         List<Information> shuffleList = new List<Information>(GetInformations());
         //Shuffle List
-        shuffleList.OrderBy(x => Guid.NewGuid()).ToList();
+        shuffleList.OrderBy(x => Random.value).ToList();
 
         return shuffleList.Take(numberOfInfos).ToList();
     }

@@ -12,6 +12,8 @@ public class Agent : WorldObject
     public string YarnNode;
     public bool IsHearing = true;
     public bool IsSeeing = true;
+    public List<Information> CurrentReplies;
+    public bool IsOccupied = false;
 
     protected override void Start()
     {
@@ -20,6 +22,7 @@ public class Agent : WorldObject
             GameManager.Instance.DialogueRunner.Add(YarnScript);
         Inventory = new List<Item>();
         Acquaintances = new List<NPC>();
+        CurrentReplies = new List<Information>();
     }
 
     protected override void Update()
@@ -29,11 +32,13 @@ public class Agent : WorldObject
     
     public void InteractNPC(Agent interactAgent)
     {
+        IsOccupied = true;
         GameManager.Instance.StartDialogue(this, interactAgent);
     }
 
     public void InteractItem(Item interactItem)
     {
+        IsOccupied = true;
         throw new System.NotImplementedException();
     }
 

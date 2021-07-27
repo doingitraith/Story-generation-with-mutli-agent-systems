@@ -25,6 +25,7 @@ public class ExchangeInformationBehaviour : AgentBehaviour
 
     public override IEnumerator DoBehaviour()
     {
+        Agent.IsOccupied = true;
         yield return new WaitForSeconds(EXCHANGE_TIME);
         
         if (_isPaused)
@@ -44,16 +45,19 @@ public class ExchangeInformationBehaviour : AgentBehaviour
         }
         
         IsFinished = true;
+        Agent.IsOccupied = false;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
+        Agent.IsOccupied = false;
         _isPaused = true;
         return null;
     }
 
     public override IEnumerator ResumeBehaviour()
     {
+        Agent.IsOccupied = true;
         _isPaused = false;
         return null;
     }
