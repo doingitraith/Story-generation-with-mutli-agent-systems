@@ -107,10 +107,16 @@ public  class GameManager : MonoBehaviour
             player = _currentConversationPartner;
             npc = _currentConversationStarter;
         }
-        
-        if(parameters[0]=="Player")
-            Debug.Log("Player learns \""+player.CurrentReplies[replyIdx].ToString()+"\"");
+
+        if (parameters[0] == "Player")
+        {
+            player.Memory.TryAddNewInformation(player.CurrentReplies[replyIdx]);
+            Debug.Log("Player learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
+        }
         else
-            Debug.Log(parameters[0]+" learns \""+npc.CurrentReplies[replyIdx].ToString()+"\"");
+        {
+            npc.Memory.TryAddNewInformation(npc.CurrentReplies[replyIdx]);
+            Debug.Log(parameters[0] + " learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
+        }
     }
 }
