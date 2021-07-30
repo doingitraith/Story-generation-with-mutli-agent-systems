@@ -17,8 +17,10 @@ public class NPC : Agent
     {
         base.Start();
         Memory = new InformationManager(this, MEMORY_SIZE);
+        /*
         _currentBehaviour = new WalkBehaviour(this, GameObject.Find("Stable").transform);
         _currentBehaviour.DoBehaviour();
+        */
     }
 
     // Update is called once per frame

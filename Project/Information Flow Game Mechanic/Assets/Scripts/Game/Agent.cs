@@ -1,25 +1,45 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class Agent : WorldObject
 {
     public InformationManager Memory;
     public List<Item> Inventory;
     public List<NPC> Acquaintances;
+    public YarnProgram YarnScript;
+    public string YarnNode;
     public bool IsHearing = true;
     public bool IsSeeing = true;
+    public List<Information> CurrentReplies;
+    public bool IsOccupied = false;
 
     protected override void Start()
     {
         base.Start();
+        if (YarnScript != null)
+            GameManager.Instance.DialogueRunner.Add(YarnScript);
         Inventory = new List<Item>();
         Acquaintances = new List<NPC>();
+        CurrentReplies = new List<Information>();
     }
 
     protected override void Update()
     {
         base.Update();
+    }
+    
+    public void InteractNPC(Agent interactAgent)
+    {
+        IsOccupied = true;
+        GameManager.Instance.StartDialogue(this, interactAgent);
+    }
+
+    public void InteractItem(Item interactItem)
+    {
+        IsOccupied = true;
+        throw new System.NotImplementedException();
     }
 
     void OnTriggerEnter(Collider other)
@@ -63,6 +83,6 @@ public class Agent : WorldObject
         }
 
         if(isInformationAdded)
-            Debug.Log(this.Name + "learned: \""+infoObject.Information.ToString()+"\"");
+            Debug.Log(this.Name + " learned: \""+infoObject.Information.ToString()+"\"");
     }
 }

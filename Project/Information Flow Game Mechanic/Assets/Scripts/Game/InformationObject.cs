@@ -31,7 +31,8 @@ using UnityEngine;
             {
                 case InformationVerb.NULL: { Information = new Information(); }
                     break;
-                case InformationVerb.IS: { Information = new Information(Subject, GameManager.WorldAdjectives[SetAdjective]); }
+                case InformationVerb.IS: { Information = 
+                    new Information(Subject, GameManager.Instance.WorldAdjectives[SetAdjective]); }
                     break;
                 case InformationVerb.HAS:{ Information = new Information((Agent)Subject, Object); }
                     break;

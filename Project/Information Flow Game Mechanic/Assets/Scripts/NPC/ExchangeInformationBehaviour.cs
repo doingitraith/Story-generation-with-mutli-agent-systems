@@ -25,35 +25,39 @@ public class ExchangeInformationBehaviour : AgentBehaviour
 
     public override IEnumerator DoBehaviour()
     {
+        Agent.IsOccupied = true;
         yield return new WaitForSeconds(EXCHANGE_TIME);
         
         if (_isPaused)
             yield return null;
         
         // TODO: Change to CreateNewInformationPrefab
-
-        Information info = Agent.Memory.GetInformationToExchange();
-        if (info == null)
+        
+        List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
+        if (infos == null)
         {
             // TODO: Handle empty information case
         }
         else
         {
-            InformationPrefab.GetComponent<InformationObject>().Information = info;
+            InformationPrefab.GetComponent<InformationObject>().Information = infos[0];
             Agent.Instantiate(InformationPrefab,Agent.transform.position, Quaternion.identity);
         }
         
         IsFinished = true;
+        Agent.IsOccupied = false;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
+        Agent.IsOccupied = false;
         _isPaused = true;
         return null;
     }
 
     public override IEnumerator ResumeBehaviour()
     {
+        Agent.IsOccupied = true;
         _isPaused = false;
         return null;
     }
