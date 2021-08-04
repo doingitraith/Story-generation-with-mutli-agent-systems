@@ -13,26 +13,29 @@ public class InformationManager
         get { return GetInformations().Count; }
     }
     
-    private Queue<InformationSet> _memory;
+    // TODO: Convert to List<Information>
+    //private Queue<InformationSet> _memory;
+    private List<Information> _memory;
     private Agent _owner;
 
     public InformationManager(Agent owner)
     {
         _owner = owner;
-        _memory = new Queue<InformationSet>();
+        _memory = new List<Information>();
     }
     
     public InformationManager(Agent owner, int memorySize)
     {
         _owner = owner;
-        _memory = new FixedSizedQueue(memorySize);
+        _memory = new List<Information>(memorySize);
     }
 
     private bool Contains(Information information)
     {
-        return _memory.Any(s => s.Contains(information));
+        return _memory.Contains(information);
     }
 
+    /*
     private InformationSet GetInformationSet(WorldObject subject)
     {
         foreach (InformationSet infoSet in _memory)
@@ -43,16 +46,63 @@ public class InformationManager
 
         return null;
     }
-
+    */
     public bool TryAddNewInformation(Information information)
     {
         if (Contains(information))
             return false;
 
-        InformationSet infoSet = GetInformationSet(information.Subject);
+        //InformationSet infoSet = GetInformationSet(information.Subject);
 
-        bool isPosession = information.Verb == InformationVerb.HAS;
+        //bool isPosession = information.Verb == InformationVerb.HAS;
         
+        List<Information> filteredInfos = _memory.FindAll(i=>i.Verb==information.Verb);
+
+        switch (information.Verb)
+        {
+            case InformationVerb.IS:
+            {
+                filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
+                InformationAdjective adjective = information.Adjective;
+                
+
+            }
+                break;
+            case InformationVerb.HAS:
+            {
+                filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
+                switch (filteredInfos.Count)
+                {
+                    case 0: _memory.Add(new Information(information));
+                        break;
+                    case 1: filteredInfos[0]=new Information(information);
+                        break;
+                    default: throw new Exception("An Item cannot have more than one Owner: "
+                                                 +information.Object.ToString());
+                }
+            }
+                break;
+            case InformationVerb.AT:
+            {
+                filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
+                switch (filteredInfos.Count)
+                {
+                    case 0: _memory.Add(new Information(information));
+                        break;
+                    case 1: filteredInfos[0]=new Information(information);
+                        break;
+                    default: throw new Exception("An Agent cannot be in more than one places: "
+                                                 +information.Subject.ToString());
+                }
+            }
+                break;
+            case InformationVerb.NULL:
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return true;
+        /*
         if (infoSet != null)
         {
             infoSet.UpdateInformationSet(information);
@@ -91,15 +141,9 @@ public class InformationManager
             _memory.Enqueue(new ItemInformationSet(information));
             
         return true;
+        */
 
     }
-
-    /*
-    public Information GetInformationToExchange()
-    {
-        return DistillInformation();
-    }
-    */
 
     public List<Information> GetInformationsToExchange(int numberOfInfos)
     {
@@ -113,6 +157,7 @@ public class InformationManager
         return shuffleList.Take(numberOfInfos).ToList();
     }
 
+    /*
     private Information DistillInformation()
     {
         if (_memory.Count == 0)
@@ -129,9 +174,11 @@ public class InformationManager
 
         return infoList[Random.Range(0, infoList.Count)];
     }
-
+    */
+    
     private List<Information> GetInformations()
     {
+        /*
         if (_memory.Count == 0)
             return new List<Information>();
 
@@ -142,5 +189,7 @@ public class InformationManager
             informations.AddRange(infoSet.GetInformationList());
 
         return informations;
+        */
+        return _memory;
     }
 }

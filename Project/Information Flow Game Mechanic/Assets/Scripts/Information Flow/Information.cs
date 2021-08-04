@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum InformationVerb
 {
@@ -12,7 +13,7 @@ public enum InformationVerb
     AT
 }
 
-public class Information
+public class Information : IMutatable
 {
     public WorldObject Subject { get; }
     public InformationVerb Verb { get; }
@@ -51,6 +52,14 @@ public class Information
         => (Subject, Verb, Object, Adjective, Location) =
             (subject, InformationVerb.AT, null, null, informationLocation);
 
+    /// <summary>
+    /// Creates a copy of an Information
+    /// </summary>
+    /// <param name="information">Information to copy</param>
+    public Information(Information information) =>
+        (Subject, Verb, Object, Adjective, Location) = (information.Subject, information.Verb, information.Object,
+            information.Adjective, information.Location);
+
     public bool Equals(Information other)
     {
         if (other.Verb != Verb && Subject.Equals(other.Subject))
@@ -80,5 +89,27 @@ public class Information
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    public void Mutate()
+    {
+        if (Verb == InformationVerb.AT)
+        {
+            if (Subject is Item)
+            {
+               
+            }
+            else
+            {
+                Location.Name = Location.Mutation.Value;
+                Location.Mutation.Mutate();
+            }
+        }
+        else if(Verb == InformationVerb.HAS)
+        {
+            
+        }
+
+
     }
 }
