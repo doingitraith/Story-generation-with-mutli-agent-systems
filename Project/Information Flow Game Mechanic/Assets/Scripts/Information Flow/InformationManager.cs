@@ -56,7 +56,7 @@ public class InformationManager
 
         //bool isPosession = information.Verb == InformationVerb.HAS;
         
-        List<Information> filteredInfos = _memory.FindAll(i=>i.Verb==information.Verb);
+        List<Information> filteredInfos = _memory.FindAll(i=>i.Verb.Equals(information.Verb));
 
         switch (information.Verb)
         {
@@ -65,7 +65,16 @@ public class InformationManager
                 filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
                 InformationAdjective adjective = information.Adjective;
                 
+                List<Information> infosToRemove = new List<Information>();
 
+                foreach (Information adjInfo in filteredInfos)
+                {
+                    List<InformationAdjective> cons = adjInfo.Adjective.Contradictions;
+                    if (cons.Contains(adjective))
+                        infosToRemove.Add(adjInfo);
+                }
+                _memory = _memory.Except(infosToRemove).ToList();
+                _memory.Add(new Information(information));
             }
                 break;
             case InformationVerb.HAS:

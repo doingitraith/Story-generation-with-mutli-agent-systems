@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CharacterInformationSet : InformationSet
 {
+    /*
     public List<Item> Possessions { get; set; }
 
     public CharacterInformationSet(Information information)
@@ -69,5 +70,5 @@ public class CharacterInformationSet : InformationSet
                 throw new ArgumentOutOfRangeException();
         }
     }
-
+*/
 }

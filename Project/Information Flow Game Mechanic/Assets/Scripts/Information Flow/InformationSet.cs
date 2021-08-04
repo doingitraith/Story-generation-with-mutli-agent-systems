@@ -6,6 +6,7 @@ using UnityEngine;
 
 public abstract class InformationSet
 {
+    /*
     public WorldObject Subject { get; set; }
     public InformationLocation Location { get; set; }
     public List<InformationAdjective> Properties { get; set; }
@@ -52,4 +53,5 @@ public abstract class InformationSet
         if(!isReplaced)
             Properties.Add(information.Adjective);
     }
+    */
 }

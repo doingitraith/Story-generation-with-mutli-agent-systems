@@ -15,9 +15,9 @@ public enum InformationVerb
 
 public class Information : IMutatable
 {
-    public WorldObject Subject { get; }
+    public InformationSubject Subject { get; }
     public InformationVerb Verb { get; }
-    public Item Object { get; }
+    public InformationSubject Object { get; }
     public InformationAdjective Adjective { get; }
     public InformationLocation Location { get; }
 
@@ -32,7 +32,7 @@ public class Information : IMutatable
     /// <param name="object">Object of the information</param>
     public Information(Agent agent, Item @object)
         => (Subject, Verb, Object, Adjective, Location) =
-            (agent, InformationVerb.HAS, @object, null, null);
+            (agent.InformationSubject, InformationVerb.HAS, @object.InformationSubject, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject IS Adjective" 
@@ -41,7 +41,7 @@ public class Information : IMutatable
     /// <param name="informationAdjective">Property of the subject</param>
     public Information(WorldObject subject, InformationAdjective informationAdjective)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject, InformationVerb.IS, null, informationAdjective, null);
+            (subject.InformationSubject, InformationVerb.IS, null, informationAdjective, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject is AT Location" 
@@ -50,7 +50,7 @@ public class Information : IMutatable
     /// <param name="informationLocation">Location of the subject</param>
     public Information(WorldObject subject, InformationLocation informationLocation)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject, InformationVerb.AT, null, null, informationLocation);
+            (subject.InformationSubject, InformationVerb.AT, null, null, informationLocation);
 
     /// <summary>
     /// Creates a copy of an Information

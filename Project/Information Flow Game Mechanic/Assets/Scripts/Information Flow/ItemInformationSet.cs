@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ItemInformationSet : InformationSet
 {
+    /*
     public Agent Owner { get; set; }
 
     public ItemInformationSet(Information information)
@@ -85,4 +86,5 @@ public class ItemInformationSet : InformationSet
                 throw new ArgumentOutOfRangeException();
         }
     }
+    */
 }

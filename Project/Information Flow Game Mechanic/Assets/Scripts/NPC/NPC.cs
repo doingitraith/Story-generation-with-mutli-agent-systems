@@ -12,6 +12,11 @@ public class NPC : Agent
     private const int MEMORY_SIZE = 5;
     private AgentBehaviour _currentBehaviour;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+    
     // Start is called before the first frame update
     protected override void Start()
     {
