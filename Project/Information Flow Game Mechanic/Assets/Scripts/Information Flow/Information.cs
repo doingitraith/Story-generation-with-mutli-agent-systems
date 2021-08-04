@@ -93,23 +93,35 @@ public class Information : IMutatable
 
     public void Mutate()
     {
-        if (Verb == InformationVerb.AT)
+        switch (Verb)
         {
-            if (Subject is Item)
+            case InformationVerb.HAS:
             {
-               
+                if (Random.value > .5f)
+                {
+                    Subject.Name = Subject.Mutation.Value;
+                    Subject.Mutation.Mutate();
+                }
+                else
+                {
+                    Object.Name = Object.Mutation.Value;
+                    Object.Mutation.Mutate();
+                }
             }
-            else
+                break;
+            case InformationVerb.AT:
             {
+                /*
+                Subject.Name = Subject.Mutation.Value;
+                Subject.Mutation.Mutate();
+                */
                 Location.Name = Location.Mutation.Value;
                 Location.Mutation.Mutate();
             }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
-        else if(Verb == InformationVerb.HAS)
-        {
-            
-        }
-
 
     }
 }
