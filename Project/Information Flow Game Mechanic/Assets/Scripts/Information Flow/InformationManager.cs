@@ -34,28 +34,12 @@ public class InformationManager
     {
         return _memory.Contains(information);
     }
-
-    /*
-    private InformationSet GetInformationSet(WorldObject subject)
-    {
-        foreach (InformationSet infoSet in _memory)
-        {
-            if (infoSet.Subject.Equals(subject))
-                return infoSet;
-        }
-
-        return null;
-    }
-    */
+    
     public bool TryAddNewInformation(Information information)
     {
         if (Contains(information))
             return false;
 
-        //InformationSet infoSet = GetInformationSet(information.Subject);
-
-        //bool isPosession = information.Verb == InformationVerb.HAS;
-        
         List<Information> filteredInfos = _memory.FindAll(i=>i.Verb.Equals(information.Verb));
 
         switch (information.Verb)
@@ -111,47 +95,6 @@ public class InformationManager
         }
 
         return true;
-        /*
-        if (infoSet != null)
-        {
-            infoSet.UpdateInformationSet(information);
-            if (isPosession)
-            {
-                ItemInformationSet itemInfoSet = (ItemInformationSet)GetInformationSet(information.Object);
-                if (itemInfoSet != null)
-                {
-                    itemInfoSet.UpdateInformationSet(information);
-                }
-                else
-                {
-                    _memory.Enqueue(new ItemInformationSet(information));
-                }
-            }
-            return true;
-        }
-
-        if (information.Subject is Agent)
-        {
-            _memory.Enqueue(new CharacterInformationSet(information));
-            if (isPosession)
-            {
-                ItemInformationSet itemInfoSet = (ItemInformationSet)GetInformationSet(information.Object);
-                if (itemInfoSet != null)
-                {
-                    itemInfoSet.UpdateInformationSet(information);
-                }
-                else
-                {
-                    _memory.Enqueue(new ItemInformationSet(information));
-                }
-            }
-        }
-        else
-            _memory.Enqueue(new ItemInformationSet(information));
-            
-        return true;
-        */
-
     }
 
     public List<Information> GetInformationsToExchange(int numberOfInfos)
@@ -166,39 +109,8 @@ public class InformationManager
         return shuffleList.Take(numberOfInfos).ToList();
     }
 
-    /*
-    private Information DistillInformation()
+    public List<Information> GetInformations()
     {
-        if (_memory.Count == 0)
-            return null;
-        
-        List<InformationSet> infoSetList = _memory.ToList();
-
-        InformationSet infoSet = infoSetList[Random.Range(0, infoSetList.Count)];
-
-        List<Information> infoList = infoSet.GetInformationList();
-        
-        if (infoList.Count == 0)
-            return null;
-
-        return infoList[Random.Range(0, infoList.Count)];
-    }
-    */
-    
-    private List<Information> GetInformations()
-    {
-        /*
-        if (_memory.Count == 0)
-            return new List<Information>();
-
-        List<Information> informations = new List<Information>();
-        
-        List<InformationSet> infoSetList = _memory.ToList();
-        foreach (InformationSet infoSet in infoSetList)
-            informations.AddRange(infoSet.GetInformationList());
-
-        return informations;
-        */
         return _memory;
     }
 }
