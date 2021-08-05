@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public  class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject InformationPrefab;
     public Dictionary<Adjectives, InformationAdjective> WorldAdjectives;
     public DialogueRunner DialogueRunner;
     public Text NameText;
@@ -118,5 +120,26 @@ public  class GameManager : MonoBehaviour
             npc.Memory.TryAddNewInformation(npc.CurrentReplies[replyIdx]);
             Debug.Log(parameters[0] + " learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
         }
+    }
+
+    public void CreateInformation(Agent agent, InformationLocation location)
+    {
+        InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
+            
+        informationObject.Subject = agent;
+        informationObject.Location = location;
+        informationObject.Verb = InformationVerb.AT;
+        informationObject.PropagationType = InformationPropagationType.VISUAL;
+        
+        Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity);
+    }
+
+    public void CreateInformation(Information information, Vector3 position)
+    {
+        InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
+        informationObject.Information = information;
+        informationObject.PropagationType = InformationPropagationType.AUDIO;
+
+        Instantiate(InformationPrefab, position, Quaternion.identity);
     }
 }

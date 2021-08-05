@@ -15,6 +15,11 @@ public class Agent : WorldObject
     public List<Information> CurrentReplies;
     public bool IsOccupied = false;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+    
     protected override void Start()
     {
         base.Start();
@@ -45,7 +50,7 @@ public class Agent : WorldObject
     void OnTriggerEnter(Collider other)
     {
         InformationObject infoObject = null;
-        InformationLocation infoLocation = null;
+        Location infoLocation = null;
         bool isInformationAdded = false;
         if (other.gameObject.TryGetComponent<InformationObject>(out infoObject))
         {
@@ -76,10 +81,10 @@ public class Agent : WorldObject
             }
         }
 
-        if (other.gameObject.TryGetComponent<InformationLocation>(out infoLocation))
+        if (other.gameObject.TryGetComponent<Location>(out infoLocation))
         {
-            Location = infoLocation;
-            //TODO: GameManager Create Info
+            Location = infoLocation.InformationLocation;
+            GameManager.Instance.CreateInformation(this, Location);
         }
 
         if(isInformationAdded)

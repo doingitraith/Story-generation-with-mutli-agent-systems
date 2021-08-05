@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum InformationVerb
 {
@@ -12,11 +13,11 @@ public enum InformationVerb
     AT
 }
 
-public class Information
+public class Information : IMutatable
 {
-    public WorldObject Subject { get; }
+    public InformationSubject Subject { get; }
     public InformationVerb Verb { get; }
-    public Item Object { get; }
+    public InformationSubject Object { get; }
     public InformationAdjective Adjective { get; }
     public InformationLocation Location { get; }
 
@@ -31,7 +32,7 @@ public class Information
     /// <param name="object">Object of the information</param>
     public Information(Agent agent, Item @object)
         => (Subject, Verb, Object, Adjective, Location) =
-            (agent, InformationVerb.HAS, @object, null, null);
+            (agent.InformationSubject, InformationVerb.HAS, @object.InformationSubject, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject IS Adjective" 
@@ -40,7 +41,7 @@ public class Information
     /// <param name="informationAdjective">Property of the subject</param>
     public Information(WorldObject subject, InformationAdjective informationAdjective)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject, InformationVerb.IS, null, informationAdjective, null);
+            (subject.InformationSubject, InformationVerb.IS, null, informationAdjective, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject is AT Location" 
@@ -49,7 +50,15 @@ public class Information
     /// <param name="informationLocation">Location of the subject</param>
     public Information(WorldObject subject, InformationLocation informationLocation)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject, InformationVerb.AT, null, null, informationLocation);
+            (subject.InformationSubject, InformationVerb.AT, null, null, informationLocation);
+
+    /// <summary>
+    /// Creates a copy of an Information
+    /// </summary>
+    /// <param name="information">Information to copy</param>
+    public Information(Information information) =>
+        (Subject, Verb, Object, Adjective, Location) = (information.Subject, information.Verb, information.Object,
+            information.Adjective, information.Location);
 
     public bool Equals(Information other)
     {
@@ -80,5 +89,39 @@ public class Information
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    public void Mutate()
+    {
+        switch (Verb)
+        {
+            case InformationVerb.HAS:
+            {
+                if (Random.value > .5f)
+                {
+                    Subject.Name = Subject.Mutation.Value;
+                    Subject.Mutation.Mutate();
+                }
+                else
+                {
+                    Object.Name = Object.Mutation.Value;
+                    Object.Mutation.Mutate();
+                }
+            }
+                break;
+            case InformationVerb.AT:
+            {
+                /*
+                Subject.Name = Subject.Mutation.Value;
+                Subject.Mutation.Mutate();
+                */
+                Location.Name = Location.Mutation.Value;
+                Location.Mutation.Mutate();
+            }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
     }
 }

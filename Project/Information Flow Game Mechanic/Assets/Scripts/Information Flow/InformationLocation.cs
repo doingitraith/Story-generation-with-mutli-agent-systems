@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InformationLocation : MonoBehaviour
+public class InformationLocation
 {
     public string Name;
-    public Vector3 Location { get; private set; }
+    public Mutation Mutation;
+    public Transform Location;
 
-    void Start()
-    {
-        Location = gameObject.transform.position;
-    }
+    public InformationLocation(string name, Transform location, Mutation mutation)
+        => (Name, Mutation, Location) = (name, mutation, location);
 }

@@ -27,6 +27,8 @@ using UnityEngine;
 
         public void Start()
         {
+            if (Information != null)
+                return;
             switch (Verb)
             {
                 case InformationVerb.NULL: { Information = new Information(); }
