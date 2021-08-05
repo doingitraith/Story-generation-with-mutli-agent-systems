@@ -38,7 +38,7 @@ public class NPC : Agent
         _currentMutationTime += Time.deltaTime;
         if (_currentMutationTime > MemoryMutationInterval)
         {
-            MutateMemory();
+            Memory.MutateMemory();
             _currentMutationTime = .0f;
         }
     }
@@ -48,9 +48,4 @@ public class NPC : Agent
         transform.rotation = Quaternion.LookRotation(GetComponentInChildren<NavMeshAgent>().velocity.normalized);
     }
 
-    private void MutateMemory()
-    {
-        int idx = Random.Range(0, Memory.NumberOfMemories);
-        Memory.GetInformations()[idx].Mutate();
-    }
 }

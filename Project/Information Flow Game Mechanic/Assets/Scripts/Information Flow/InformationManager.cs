@@ -8,13 +8,8 @@ using Random = UnityEngine.Random;
 
 public class InformationManager
 {
-    public int NumberOfMemories
-    {
-        get { return GetInformations().Count; }
-    }
+    public int NumberOfMemories => _memory.Count;
     
-    // TODO: Convert to List<Information>
-    //private Queue<InformationSet> _memory;
     private List<Information> _memory;
     private Agent _owner;
 
@@ -104,13 +99,20 @@ public class InformationManager
         
         List<Information> shuffleList = new List<Information>(GetInformations());
         //Shuffle List
-        shuffleList.OrderBy(x => Random.value).ToList();
+        shuffleList = shuffleList.OrderBy(x => Random.value).ToList();
 
         return shuffleList.Take(numberOfInfos).ToList();
     }
 
-    public List<Information> GetInformations()
+    private List<Information> GetInformations() 
+        => _memory;
+
+    public void MutateMemory()
     {
-        return _memory;
+        if (NumberOfMemories > 0)
+        {
+            var idx = Random.Range(0, NumberOfMemories);
+            GetInformations()[idx].Mutate();
+        }
     }
 }

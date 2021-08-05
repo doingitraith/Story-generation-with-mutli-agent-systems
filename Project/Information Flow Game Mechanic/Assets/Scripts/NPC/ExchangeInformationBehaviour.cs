@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class ExchangeInformationBehaviour : AgentBehaviour
 {
-    public GameObject InformationPrefab;
-    
     private const int EXCHANGE_TIME = 5;
 
     private bool _isPaused;
@@ -31,7 +29,6 @@ public class ExchangeInformationBehaviour : AgentBehaviour
         if (_isPaused)
             yield return null;
         
-        // TODO: Change to CreateNewInformationPrefab
         
         List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
         if (infos == null)
@@ -39,10 +36,7 @@ public class ExchangeInformationBehaviour : AgentBehaviour
             // TODO: Handle empty information case
         }
         else
-        {
-            InformationPrefab.GetComponent<InformationObject>().Information = infos[0];
-            Agent.Instantiate(InformationPrefab,Agent.transform.position, Quaternion.identity);
-        }
+            GameManager.Instance.CreateInformation(infos[0], Agent.transform.position);
         
         IsFinished = true;
         Agent.IsOccupied = false;
