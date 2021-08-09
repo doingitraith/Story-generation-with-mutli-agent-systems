@@ -8,6 +8,7 @@ public class Agent : WorldObject
     public InformationManager Memory;
     public List<Item> Inventory;
     public List<NPC> Acquaintances;
+    public List<Quest> Quests;
     public YarnProgram YarnScript;
     public string YarnNode;
     public bool IsHearing = true;
@@ -27,6 +28,7 @@ public class Agent : WorldObject
             GameManager.Instance.DialogueRunner.Add(YarnScript);
         Inventory = new List<Item>();
         Acquaintances = new List<NPC>();
+        Quests = new List<Quest>();
         CurrentReplies = new List<Information>();
     }
 

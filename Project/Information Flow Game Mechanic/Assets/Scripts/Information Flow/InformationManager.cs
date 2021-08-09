@@ -14,25 +14,18 @@ public class InformationManager
     private Agent _owner;
 
     public InformationManager(Agent owner)
-    {
-        _owner = owner;
-        _memory = new List<Information>();
-    }
-    
-    public InformationManager(Agent owner, int memorySize)
-    {
-        _owner = owner;
-        _memory = new List<Information>(memorySize);
-    }
+        => (_owner, _memory) = (owner, new List<Information>());
 
-    private bool Contains(Information information)
-    {
-        return _memory.Contains(information);
-    }
-    
+    // Create FixedSizeList
+    public InformationManager(Agent owner, int memorySize)
+        => (_owner, _memory) = (owner, new FixedSizeList<Information>(memorySize));
+
+    public bool ContainsInformation(Information information)
+        =>_memory.Contains(information);
+
     public bool TryAddNewInformation(Information information)
     {
-        if (Contains(information))
+        if (ContainsInformation(information))
             return false;
 
         List<Information> filteredInfos = _memory.FindAll(i=>i.Verb.Equals(information.Verb));
