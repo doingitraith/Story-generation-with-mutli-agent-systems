@@ -19,7 +19,7 @@ public class Quest
     public Quest(Agent owner, Agent questGiver, List<Information> goals, string description)
         => (Owner, QuestGiver, Goals, Description) = (owner, questGiver, goals, description);
 
-    public bool isQuestFinished()
+    public bool IsQuestFinished()
         => Goals.TrueForAll(i => IsGoalTrue(i));
 
     public bool IsGoalTrue(Information information)
