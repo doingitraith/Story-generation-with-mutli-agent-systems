@@ -122,7 +122,7 @@ public  class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateInformation(Agent agent, InformationLocation location)
+    public void CreateInformation(Agent agent, Location location)
     {
         InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
             
@@ -130,7 +130,6 @@ public  class GameManager : MonoBehaviour
         informationObject.Location = location;
         informationObject.Verb = InformationVerb.AT;
         informationObject.PropagationType = InformationPropagationType.VISUAL;
-        
         Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity);
     }
 

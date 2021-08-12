@@ -25,6 +25,7 @@ public class InformationManager
 
     public bool TryAddNewInformation(Information information)
     {
+        // TODO: return false if Subject == owner
         if (ContainsInformation(information))
             return false;
 

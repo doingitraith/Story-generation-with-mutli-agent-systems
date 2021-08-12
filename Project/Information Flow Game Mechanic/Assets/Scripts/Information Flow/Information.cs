@@ -48,9 +48,9 @@ public class Information : IMutatable
     /// </summary>
     /// <param name="character">Subject of the information</param>
     /// <param name="informationLocation">Location of the subject</param>
-    public Information(WorldObject subject, InformationLocation informationLocation)
+    public Information(WorldObject subject, Location informationLocation)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject.InformationSubject, InformationVerb.AT, null, null, informationLocation);
+            (subject.InformationSubject, InformationVerb.AT, null, null, informationLocation.InformationLocation);
 
     /// <summary>
     /// Creates a copy of an Information

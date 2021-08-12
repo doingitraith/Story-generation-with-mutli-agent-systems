@@ -85,8 +85,7 @@ public class Agent : WorldObject
 
         if (other.gameObject.TryGetComponent<Location>(out infoLocation))
         {
-            Location = infoLocation.InformationLocation;
-            GameManager.Instance.CreateInformation(this, Location);
+            GameManager.Instance.CreateInformation(this, infoLocation);
         }
 
         if(isInformationAdded)

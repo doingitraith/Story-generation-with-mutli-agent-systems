@@ -21,7 +21,7 @@ using UnityEngine;
         public Adjectives SetAdjective;
 
         public InformationAdjective Adjective;
-        public InformationLocation Location;
+        public Location Location;
         
         public Information Information { get; set; }
 
