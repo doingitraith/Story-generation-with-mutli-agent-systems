@@ -25,8 +25,7 @@ public class InformationManager
 
     public bool TryAddNewInformation(Information information)
     {
-        // TODO: return false if Subject == owner
-        if (ContainsInformation(information))
+        if (ContainsInformation(information) || _owner.InformationSubject.Equals(information.Subject))
             return false;
 
         List<Information> filteredInfos = _memory.FindAll(i=>i.Verb.Equals(information.Verb));
