@@ -36,12 +36,12 @@ position: 1142,875
 ---
 {$NPCName}: So is there something you can tell me?
 
-<<if $NumOfReplies is 1>>
+<<if $NumOfReplies > 0>>
     [[{$ReplyText1}|Reply1]]
-    <<if $NumOfReplies is 2>>
-        [[{$ReplyText1}|Reply2]]
-        <<if $NumOfReplies is 2>>
-            [[{$ReplyText1}|Reply3]]
+    <<if $NumOfReplies > 1>>
+        [[{$ReplyText2}|Reply2]]
+        <<if $NumOfReplies > 2>>
+            [[{$ReplyText3}|Reply3]]
         <<endif>>
     <<endif>>
 <<endif>>

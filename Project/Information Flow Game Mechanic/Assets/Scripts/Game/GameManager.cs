@@ -112,13 +112,13 @@ public  class GameManager : MonoBehaviour
 
         if (parameters[0] == "Player")
         {
-            player.Memory.TryAddNewInformation(player.CurrentReplies[replyIdx]);
-            Debug.Log("Player learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
+            player.Memory.TryAddNewInformation(npc.CurrentReplies[replyIdx]);
+            Debug.Log("Player learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
         }
         else
         {
-            npc.Memory.TryAddNewInformation(npc.CurrentReplies[replyIdx]);
-            Debug.Log(parameters[0] + " learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
+            npc.Memory.TryAddNewInformation(player.CurrentReplies[replyIdx]);
+            Debug.Log(parameters[0] + " learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
         }
     }
 
