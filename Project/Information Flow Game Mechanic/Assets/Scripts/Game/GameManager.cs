@@ -63,7 +63,7 @@ public  class GameManager : MonoBehaviour
         DialogueRunner.variableStorage.SetValue("$NPCName", NameText.text);
 
         _currentConversationPartner.CurrentReplies = 
-            _currentConversationPartner.Memory.GetInformationsToExchange(1);
+            _currentConversationPartner.LongTermMemory.GetInformationsToExchange(1);
         
         DialogueRunner.variableStorage.SetValue("$HasNPCReplies", 
             _currentConversationPartner.CurrentReplies.Count!=0);
@@ -72,12 +72,12 @@ public  class GameManager : MonoBehaviour
             DialogueRunner.variableStorage.SetValue("$NPCReplyText",
                 _currentConversationPartner.CurrentReplies[0].ToString());
 
-        int numOfReplies = _currentConversationStarter.Memory.NumberOfMemories;
+        int numOfReplies = _currentConversationStarter.LongTermMemory.NumberOfMemories;
         DialogueRunner.variableStorage.SetValue("$NumOfReplies", numOfReplies);
         if (numOfReplies > 0)
         {
             _currentConversationStarter.CurrentReplies =
-                _currentConversationStarter.Memory.
+                _currentConversationStarter.LongTermMemory.
                     GetInformationsToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1); 
             
             DialogueRunner.variableStorage.SetValue("$ReplyText1", 
@@ -112,12 +112,12 @@ public  class GameManager : MonoBehaviour
 
         if (parameters[0] == "Player")
         {
-            player.Memory.TryAddNewInformation(npc.CurrentReplies[replyIdx]);
+            player.LongTermMemory.TryAddNewInformation(npc.CurrentReplies[replyIdx], npc);
             Debug.Log("Player learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
         }
         else
         {
-            npc.Memory.TryAddNewInformation(player.CurrentReplies[replyIdx]);
+            npc.LongTermMemory.TryAddNewInformation(player.CurrentReplies[replyIdx], player);
             Debug.Log(parameters[0] + " learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
         }
     }

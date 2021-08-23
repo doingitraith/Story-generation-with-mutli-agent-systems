@@ -23,8 +23,21 @@ public class InformationManager
     public bool ContainsInformation(Information information)
         =>_memory.Contains(information);
 
-    public bool TryAddNewInformation(Information information)
+    public bool TryAddNewInformation(Information information, Agent sender)
     {
+        if (sender != null)
+        {
+            if (!_owner.Acquaintances.ContainsKey(sender))
+            {
+                if(_owner.Equals(sender))
+                    _owner.Acquaintances.Add(sender, 100.0f);
+                else
+                    _owner.Acquaintances.Add(sender, 1.0f);
+            }
+
+            EvaluateInformation(information, sender);
+        }
+
         if (ContainsInformation(information) || _owner.InformationSubject.Equals(information.Subject))
             return false;
 
@@ -83,6 +96,28 @@ public class InformationManager
         }
 
         return true;
+    }
+
+    private void EvaluateInformation(Information information, Agent sender)
+    {
+        float infoValue = GetInformationHeuristic(information);
+        
+        float trust = _owner.Acquaintances[sender];
+        _owner.Acquaintances[sender] = CalculateNewTrust(infoValue, trust);
+    }
+
+    private float CalculateNewTrust(float infoValue, float trust)
+    {
+        //TODO: Calculate new trust with infoValue 
+        //throw new NotImplementedException();
+        return trust;
+    }
+
+    private float GetInformationHeuristic(Information information)
+    {
+        //TODO: Get Information value based on context
+        //throw new NotImplementedException();
+        return .0f;
     }
 
     public List<Information> GetInformationsToExchange(int numberOfInfos)

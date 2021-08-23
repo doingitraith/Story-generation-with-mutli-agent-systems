@@ -5,9 +5,12 @@ using Yarn.Unity;
 
 public class Agent : WorldObject
 {
-    public InformationManager Memory;
+    public InformationManager LongTermMemory;
+    public SpeculativeInformationManager ShortTermMemory;
     public List<Item> Inventory;
-    public List<NPC> Acquaintances;
+    public Dictionary<Agent, float> Acquaintances;
+    [SerializeField]
+    private List<Agent> ImportantPeople;
     public List<Quest> Quests;
     public YarnProgram YarnScript;
     public string YarnNode;
@@ -27,7 +30,11 @@ public class Agent : WorldObject
         if (YarnScript != null)
             GameManager.Instance.DialogueRunner.Add(YarnScript);
         Inventory = new List<Item>();
-        Acquaintances = new List<NPC>();
+        Acquaintances = new Dictionary<Agent, float>();
+        
+        foreach (Agent agent in ImportantPeople)
+            Acquaintances.Add(agent, 1.0f);
+
         Quests = new List<Quest>();
         CurrentReplies = new List<Information>();
     }
@@ -61,20 +68,20 @@ public class Agent : WorldObject
                 case InformationPropagationType.VISUAL:
                 {
                     if (IsSeeing)
-                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information);
+                        isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, this);
                 }
                     break;
                 case InformationPropagationType.AUDIO:
                 {
                     if (IsHearing)
-                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information);
+                        isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, this);
                 }
                     break;
                 case InformationPropagationType.INSTANT:
-                    isInformationAdded = Memory.TryAddNewInformation(infoObject.Information);
+                    isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, this);
                     break;
                 case InformationPropagationType.PERSISTANT:
-                    isInformationAdded = Memory.TryAddNewInformation(infoObject.Information);
+                    isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, null);
                     break;
                 case InformationPropagationType.NONE:
                     break;

@@ -23,5 +23,5 @@ public class Quest
         => Goals.TrueForAll(i => IsGoalTrue(i));
 
     public bool IsGoalTrue(Information information)
-        => QuestGiver.Memory.ContainsInformation(information);
+        => QuestGiver.LongTermMemory.ContainsInformation(information);
 }
