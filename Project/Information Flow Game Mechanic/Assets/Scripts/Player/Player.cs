@@ -14,7 +14,7 @@ public class Player : Agent
     protected override void Start()
     {
         base.Start();
-        LongTermMemory = new InformationManager(this);
+        Memory = new InformationManager(this);
     }
 
     // Update is called once per frame

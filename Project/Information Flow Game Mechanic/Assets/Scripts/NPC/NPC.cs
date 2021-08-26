@@ -24,7 +24,7 @@ public class NPC : Agent
     protected override void Start()
     {
         base.Start();
-        LongTermMemory = new InformationManager(this, MEMORY_SIZE);
+        Memory = new InformationManager(this, MEMORY_SIZE);
         /*
         _currentBehaviour = new WalkBehaviour(this, GameObject.Find("Stable").transform);
         _currentBehaviour.DoBehaviour();
@@ -38,7 +38,7 @@ public class NPC : Agent
         _currentMutationTime += Time.deltaTime;
         if (_currentMutationTime > MemoryMutationInterval)
         {
-            LongTermMemory.MutateMemory();
+            Memory.MutateMemory();
             _currentMutationTime = .0f;
         }
     }

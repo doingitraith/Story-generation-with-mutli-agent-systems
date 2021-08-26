@@ -30,7 +30,7 @@ public class ExchangeInformationBehaviour : AgentBehaviour
             yield return null;
         
         
-        List<Information> infos = Agent.LongTermMemory.GetInformationsToExchange(1);
+        List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
         if (infos == null)
         {
             // TODO: Handle empty information case

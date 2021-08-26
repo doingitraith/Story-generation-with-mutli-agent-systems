@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Yarn.Unity;
+using Random = UnityEngine.Random;
 
 public class Agent : WorldObject
 {
-    public InformationManager LongTermMemory;
-    public SpeculativeInformationManager ShortTermMemory;
+    public InformationManager Memory;
     public List<Item> Inventory;
     public Dictionary<Agent, float> Acquaintances;
     [SerializeField]
@@ -16,6 +17,7 @@ public class Agent : WorldObject
     public string YarnNode;
     public bool IsHearing = true;
     public bool IsSeeing = true;
+    public float BelievabilityThreshold;
     public List<Information> CurrentReplies;
     public bool IsOccupied = false;
 
@@ -68,20 +70,20 @@ public class Agent : WorldObject
                 case InformationPropagationType.VISUAL:
                 {
                     if (IsSeeing)
-                        isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, this);
+                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
                 }
                     break;
                 case InformationPropagationType.AUDIO:
                 {
                     if (IsHearing)
-                        isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, this);
+                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
                 }
                     break;
                 case InformationPropagationType.INSTANT:
-                    isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, this);
+                    isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
                     break;
                 case InformationPropagationType.PERSISTANT:
-                    isInformationAdded = LongTermMemory.TryAddNewInformation(infoObject.Information, null);
+                    isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, null);
                     break;
                 case InformationPropagationType.NONE:
                     break;
