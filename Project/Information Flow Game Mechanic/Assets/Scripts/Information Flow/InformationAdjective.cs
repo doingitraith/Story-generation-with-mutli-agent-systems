@@ -13,7 +13,7 @@ public enum Adjectives
 public abstract class InformationAdjective
 {
     public List<InformationAdjective> Contradictions;
-    public Adjectives Characteristic;
+    public readonly Adjectives Characteristic;
     
     public InformationAdjective(Adjectives characteristic, List<InformationAdjective> contradictions)
         => (Characteristic, Contradictions) = (characteristic, contradictions);
@@ -29,9 +29,18 @@ public abstract class InformationAdjective
     }
 
     public override string ToString()
+        => Characteristic.ToString();
+    
+    public override bool Equals(object o)
     {
-        return Characteristic.ToString();
+        if (!(o is InformationAdjective other))
+            return false;
+
+        return Characteristic.Equals(other.Characteristic);
     }
+
+    public override int GetHashCode()
+        => Characteristic.GetHashCode()+1;
 }
 
 public class InformationProperty : InformationAdjective

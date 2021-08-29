@@ -45,7 +45,9 @@ public class NPC : Agent
 
     private void LateUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(GetComponentInChildren<NavMeshAgent>().velocity.normalized);
+        Vector3 dir = GetComponentInChildren<NavMeshAgent>().velocity.normalized;
+        if(dir != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(dir);
     }
 
 }

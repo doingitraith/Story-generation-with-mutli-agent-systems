@@ -12,9 +12,12 @@ public class InformationSubject
 
     public override bool Equals(object o)
     {
-        if (!(o is InformationSubject))
+        if (!(o is InformationSubject other))
             return false;
-        InformationSubject other = o as InformationSubject;
-        return Name.Equals(other.Name);
+
+        return Name.Equals(other.Name) && (Mutation?.Equals(other.Mutation) ?? true);
     }
+
+    public override int GetHashCode()
+        => Name.GetHashCode() * (Mutation != null ? Mutation.GetHashCode() : 1);
 }

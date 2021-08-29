@@ -60,9 +60,12 @@ public class Information : IMutatable
         (Subject, Verb, Object, Adjective, Location) = (information.Subject, information.Verb, information.Object,
             information.Adjective, information.Location);
 
-    public bool Equals(Information other)
+    public override bool Equals(object o)
     {
-        if (other.Verb != Verb && Subject.Equals(other.Subject))
+        if (!(o is Information other))
+            return false;
+        
+        if (other.Verb != Verb || (other.Verb == Verb && !Subject.Equals(other.Subject)))
             return false;
 
         switch (Verb)
@@ -72,6 +75,14 @@ public class Information : IMutatable
             case InformationVerb.HAS: { return Object.Equals(other.Object); }
             default: { return false; }
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return Verb.GetHashCode() * (Subject != null ? Subject.GetHashCode() : 1)
+                                  * (Object != null ? Object.GetHashCode() : 1)
+                                  * (Adjective != null ? Adjective.GetHashCode() : 1)
+                                  * (Location != null ? Location.GetHashCode() : 1);
     }
 
     public override string ToString()
