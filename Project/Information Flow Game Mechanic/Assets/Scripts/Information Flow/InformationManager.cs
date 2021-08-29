@@ -12,16 +12,20 @@ public class InformationManager
     private int NumberOfStableMemories => _stableMemory.Count;
     private int NumberOfSpeculativeMemories => _speculativeMemory.Count;
     
-    private Dictionary<Information, int> _stableMemory;
-    private Dictionary<Information, int> _speculativeMemory;
+    private Dictionary<Information, InformationContext> _stableMemory;
+    private Dictionary<Information, InformationContext> _speculativeMemory;
     private Agent _owner;
 
     public InformationManager(Agent owner)
-        => (_owner, _stableMemory, _speculativeMemory) = (owner, new Dictionary<Information, int>(), new Dictionary<Information, int>());
+        => (_owner, _stableMemory, _speculativeMemory) = 
+            (owner, new Dictionary<Information, InformationContext>(),
+                new Dictionary<Information, InformationContext>());
 
     // Create FixedSizeList
     public InformationManager(Agent owner, int memorySize)
-        => (_owner, _stableMemory, _speculativeMemory) = (owner, new FixedSizeDictionary<Information, int>(memorySize), new Dictionary<Information, int>());
+        => (_owner, _stableMemory, _speculativeMemory) =
+            (owner, new FixedSizeDictionary<Information, InformationContext>(memorySize),
+                new Dictionary<Information, InformationContext>());
 
     public bool ContainsStableInformation(Information information)
         =>_stableMemory.ContainsKey(information);
@@ -38,7 +42,7 @@ public class InformationManager
             return false;
 
         if (ContainsStableInformation(information))
-            _stableMemory[information]++;
+            _stableMemory[information].NumOfTimesRecieved++;
 
         List<Information> filteredInfos = _stableMemory.Keys.ToList().FindAll(i=>i.Verb.Equals(information.Verb));
 
@@ -61,7 +65,7 @@ public class InformationManager
                 foreach (Information i in infosToRemove)
                     _stableMemory.Remove(i);
                 
-                _stableMemory.Add(new Information(information), 1);
+                _stableMemory.Add(new Information(information), new InformationContext(1));
             }
                 break;
             case InformationVerb.HAS:
@@ -69,7 +73,7 @@ public class InformationManager
                 filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
                 switch (filteredInfos.Count)
                 {
-                    case 0: _stableMemory.Add(new Information(information), 1);
+                    case 0: _stableMemory.Add(new Information(information), new InformationContext(1));
                         break;
                     case 1: filteredInfos[0]=new Information(information);
                         break;
@@ -83,7 +87,7 @@ public class InformationManager
                 filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
                 switch (filteredInfos.Count)
                 {
-                    case 0: _stableMemory.Add(new Information(information), 1);
+                    case 0: _stableMemory.Add(new Information(information), new InformationContext(1));
                         break;
                     case 1: filteredInfos[0]=new Information(information);
                         break;
@@ -112,7 +116,7 @@ public class InformationManager
             return false;
 
         if (ContainsSpeculativeInformation(information))
-            _speculativeMemory[information]++;
+            _speculativeMemory[information].NumOfTimesRecieved++;
 
         List<Information> filteredInfos = _speculativeMemory.Keys.ToList().
             FindAll(i=>i.Verb.Equals(information.Verb));
@@ -136,7 +140,7 @@ public class InformationManager
                 foreach (Information i in infosToRemove)
                     _speculativeMemory.Remove(i);
                 
-                _speculativeMemory.Add(new Information(information), 1);
+                _speculativeMemory.Add(new Information(information), new InformationContext(1));
             }
                 break;
             case InformationVerb.HAS:
@@ -144,7 +148,7 @@ public class InformationManager
                 filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
                 switch (filteredInfos.Count)
                 {
-                    case 0: _speculativeMemory.Add(new Information(information), 1);
+                    case 0: _speculativeMemory.Add(new Information(information), new InformationContext(1));
                         break;
                     case 1: filteredInfos[0]=new Information(information);
                         break;
@@ -158,7 +162,7 @@ public class InformationManager
                 filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
                 switch (filteredInfos.Count)
                 {
-                    case 0: _speculativeMemory.Add(new Information(information), 1);
+                    case 0: _speculativeMemory.Add(new Information(information), new InformationContext(1));
                         break;
                     case 1: filteredInfos[0]=new Information(information);
                         break;
@@ -197,10 +201,11 @@ public class InformationManager
         return trust;
     }
 
-    private float GetInformationHeuristic(Information information, int numOfInformationLearned)
+    private float GetInformationHeuristic(Information information, InformationContext context)
     {
-        //TODO: Get Information value based on context
-        //throw new NotImplementedException();
+        //TODO: Get Information value based on context (MapReduce)
+        float h = context.Believability;
+        List<Information> data = _speculativeMemory.Keys.ToList();
         return .0f;
     }
     
