@@ -112,17 +112,17 @@ public  class GameManager : MonoBehaviour
 
         if (parameters[0] == "Player")
         {
-            player.Memory.TryAddNewInformation(player.CurrentReplies[replyIdx]);
-            Debug.Log("Player learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
+            player.Memory.TryAddNewSpeculativeInformation(npc.CurrentReplies[replyIdx], npc);
+            Debug.Log("Player learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
         }
         else
         {
-            npc.Memory.TryAddNewInformation(npc.CurrentReplies[replyIdx]);
-            Debug.Log(parameters[0] + " learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
+            npc.Memory.TryAddNewSpeculativeInformation(player.CurrentReplies[replyIdx], player);
+            Debug.Log(parameters[0] + " learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
         }
     }
 
-    public void CreateInformation(Agent agent, InformationLocation location)
+    public void CreateInformation(Agent agent, Location location)
     {
         InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
             
@@ -130,7 +130,6 @@ public  class GameManager : MonoBehaviour
         informationObject.Location = location;
         informationObject.Verb = InformationVerb.AT;
         informationObject.PropagationType = InformationPropagationType.VISUAL;
-        
         Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity);
     }
 

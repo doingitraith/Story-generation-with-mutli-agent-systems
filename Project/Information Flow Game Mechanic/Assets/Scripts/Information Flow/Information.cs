@@ -48,9 +48,9 @@ public class Information : IMutatable
     /// </summary>
     /// <param name="character">Subject of the information</param>
     /// <param name="informationLocation">Location of the subject</param>
-    public Information(WorldObject subject, InformationLocation informationLocation)
+    public Information(WorldObject subject, Location informationLocation)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject.InformationSubject, InformationVerb.AT, null, null, informationLocation);
+            (subject.InformationSubject, InformationVerb.AT, null, null, informationLocation.InformationLocation);
 
     /// <summary>
     /// Creates a copy of an Information
@@ -99,13 +99,19 @@ public class Information : IMutatable
             {
                 if (Random.value > .5f)
                 {
-                    Subject.Name = Subject.Mutation.Value;
-                    Subject.Mutation.Mutate();
+                    if (Subject.Mutation != null)
+                    {
+                        Subject.Name = Subject.Mutation.Value;
+                        Subject.Mutation.Mutate();
+                    }
                 }
                 else
                 {
-                    Object.Name = Object.Mutation.Value;
-                    Object.Mutation.Mutate();
+                    if (Object.Mutation != null)
+                    {
+                        Object.Name = Object.Mutation.Value;
+                        Object.Mutation.Mutate();
+                    }
                 }
             }
                 break;
@@ -115,8 +121,11 @@ public class Information : IMutatable
                 Subject.Name = Subject.Mutation.Value;
                 Subject.Mutation.Mutate();
                 */
-                Location.Name = Location.Mutation.Value;
-                Location.Mutation.Mutate();
+                if (Location.Mutation != null)
+                {
+                    Location.Name = Location.Mutation.Value;
+                    Location.Mutation.Mutate();
+                }
             }
                 break;
             default:

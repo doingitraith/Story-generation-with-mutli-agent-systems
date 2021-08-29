@@ -23,5 +23,6 @@ public class Quest
         => Goals.TrueForAll(i => IsGoalTrue(i));
 
     public bool IsGoalTrue(Information information)
-        => QuestGiver.Memory.ContainsInformation(information);
+        => QuestGiver.Memory.ContainsStableInformation(information) || 
+           QuestGiver.Memory.ContainsSpeculativeInformation(information);
 }
