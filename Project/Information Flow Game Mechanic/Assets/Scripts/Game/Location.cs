@@ -5,6 +5,7 @@ using UnityEngine;
 public class Location : MonoBehaviour
 {
     public string Name;
+    public int WorldImportance;
     public Mutation Mutation;
     [SerializeField]
     private List<string> Mutations;

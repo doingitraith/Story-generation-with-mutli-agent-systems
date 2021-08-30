@@ -5,10 +5,11 @@ using UnityEngine;
 public class InformationSubject
 {
     public string Name;
+    public bool IsPerson;
     public Mutation Mutation;
 
-    public InformationSubject(string name, Mutation mutation)
-        => (Name, Mutation) = (name, mutation);
+    public InformationSubject(string name, bool isPerson, Mutation mutation)
+        => (Name, IsPerson, Mutation) = (name, isPerson, mutation);
 
     public override bool Equals(object o)
     {

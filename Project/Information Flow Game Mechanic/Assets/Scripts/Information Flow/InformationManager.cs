@@ -44,7 +44,8 @@ public class InformationManager
         if (ContainsStableInformation(information))
             _stableMemory[information].NumOfTimesRecieved++;
 
-        List<Information> filteredInfos = _stableMemory.Keys.ToList().FindAll(i=>i.Verb.Equals(information.Verb));
+        List<Information> filteredInfos = 
+            _stableMemory.Keys.ToList().FindAll(i=>i.Verb.Equals(information.Verb));
 
         switch (information.Verb)
         {
@@ -101,9 +102,9 @@ public class InformationManager
                 throw new ArgumentOutOfRangeException();
         }
         
-        float infoHeuristic = GetInformationHeuristic(information, _stableMemory[information]);
-        EvaluateInformation(information, sender, infoHeuristic);
-
+        float believability = _stableMemory[information].Heuristic;
+        EvaluateInformation(information, sender, believability);
+        
         return true;
     }
     
@@ -176,39 +177,178 @@ public class InformationManager
                 throw new ArgumentOutOfRangeException();
         }
         
-        float infoHeuristic = GetInformationHeuristic(information, _speculativeMemory[information]);
-        EvaluateInformation(information, sender, infoHeuristic);
+        
+        float believability = _speculativeMemory[information].Believability;
+        EvaluateInformation(information, sender, believability);
 
-        if (infoHeuristic >= _owner.BelievabilityThreshold)
+        if (believability >= _owner.BelievabilityThreshold)
         {
             if (TryAddNewInformation(information, sender))
                 _speculativeMemory.Remove(information);
         }
-
+        
         return true;
     }
 
-    private void EvaluateInformation(Information information, Agent sender, float infoHeuristic)
+    
+    private void EvaluateInformation(Information information, Agent sender, float believability)
     {
         float trust = _owner.Acquaintances[sender];
-        _owner.Acquaintances[sender] = CalculateNewTrust(infoHeuristic, trust);
+        _owner.Acquaintances[sender] = CalculateNewTrust(believability, trust);
     }
 
-    private float CalculateNewTrust(float infoValue, float trust)
+    private float CalculateNewTrust(float believability, float trust)
     {
         //TODO: Calculate new trust with infoValue 
         //throw new NotImplementedException();
         return trust;
     }
-
-    private float GetInformationHeuristic(Information information, InformationContext context)
-    {
-        //TODO: Get Information value based on context (MapReduce)
-        float h = context.Believability;
-        List<Information> data = _speculativeMemory.Keys.ToList();
-        return .0f;
-    }
     
+    private void CalcInformationHeuristic(Information information, InformationContext context)
+    {
+        if (information.Subject == null)
+            throw new NullReferenceException(
+                "InformationSubject of " + information.Subject + " should not be empty");
+        
+        float b = context.Believability;
+        int n = context.NumOfTimesRecieved;
+        float h = context.Heuristic;
+        float infosAboutSubject = 
+            (float)(_stableMemory.Keys.Count(i => i.Subject.Name.Equals(information.Subject.Name))+
+            _speculativeMemory.Keys.Count(i => i.Subject.Name.Equals(information.Subject.Name)))
+            /NumberOfMemories;
+        
+        switch (information.Verb)
+        {
+            case InformationVerb.IS:
+            {
+                h = Mathf.Pow(
+                    Convert.ToSingle(information.Adjective.Characteristic)*
+                    (information.Subject.IsPerson ? 
+                        GetRelationDistance(information.Subject) : 
+                        GetItemInfo(information.Subject))+
+                    1.0f, n );
+            }
+                break;
+            case InformationVerb.HAS:
+            {
+                h = Mathf.Pow(GetRelationDistance(information.Subject)*
+                              GetItemInfo(information.Object)+
+                    1.0f, n);
+            }
+                break;
+            case InformationVerb.AT:
+            {
+                Location worldLocation = GameManager.FindObjectsOfType<Location>().
+                        First(i => i.Name.Equals(information.Location.Name));
+                float worldImportance = 1.0f;
+                if (worldLocation != null)
+                    worldImportance = worldLocation.WorldImportance;
+                h = Mathf.Pow(
+                    worldImportance*
+                    (information.Subject.IsPerson ? 
+                        GetRelationDistance(information.Subject) : 
+                        GetItemInfo(information.Subject))+
+                    1.0f,n);
+            }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        h *= b * infosAboutSubject;
+        context.Heuristic = h;
+    }
+
+    private float GetItemInfo(InformationSubject informationSubject)
+    {
+        float h = .0f;
+        if (informationSubject.IsPerson)
+            return h;
+
+        List<Information> owners = new List<Information>(_stableMemory.Keys);
+        owners.AddRange(_speculativeMemory.Keys);
+        owners = owners.
+            Where(i => i.Verb == InformationVerb.HAS && i.Object.Equals(informationSubject)).ToList();
+        if (owners.Count > 1)
+            throw new Exception("Should only be one owner");
+
+        Item worldItem = GameManager.FindObjectsOfType<Item>().First(i => i.Name.Equals(informationSubject.Name));
+        float worldImportance = 1.0f;
+        if (worldItem != null)
+            worldImportance = worldItem.WorldImportance;
+        
+        h += .5f + _owner.Inventory.Count(i => i.Name.Equals(informationSubject.Name))
+                 * worldImportance
+                 * .5f
+                 + owners.Count*.5f;
+
+        return h;
+    }
+
+    private float GetRelationDistance(InformationSubject informationSubject)
+    {
+        float h = .0f;
+        if (!informationSubject.IsPerson)
+            return h;
+        
+        List<Agent> knownAssociates = GameManager.FindObjectsOfType<Agent>().
+            Where(a => a.Name.Equals(informationSubject.Name)).ToList();
+        if (!knownAssociates.Any())
+        {
+            Agent goal = new List<Agent>(knownAssociates).OrderBy(x => Random.value).ElementAt(0);
+            Tuple<int, Agent> NextToTarget = BreadthFirstShortestPath.ShortestPath(_owner, goal);
+            if (NextToTarget != null)
+                h = _owner.Acquaintances[NextToTarget.Item2] / NextToTarget.Item1;
+        }
+        else
+            h = .5f;
+
+        Agent worldAgent = GameManager.FindObjectsOfType<Agent>().
+            First(i => i.Name.Equals(informationSubject.Name));
+        float worldImportance = 1.0f;
+        if (worldAgent != null)
+            worldImportance = worldAgent.WorldImportance;
+        
+        return h*worldImportance;
+    }
+
+    private void MapReduce()
+    {
+        List<Information> data = new List<Information>(_speculativeMemory.Keys.ToList());
+        data.AddRange(_stableMemory.Keys.ToList());
+
+        // Map
+        Dictionary<Information, Dictionary<Information, float>> distances = 
+            new Dictionary<Information, Dictionary<Information, float>>();
+        
+        data.ForEach(d => distances.Add(d, new Dictionary<Information, float>()));
+        
+        data.ForEach(i => data.Where(j => !i.Equals(j)).ToList()
+            .ForEach(k => distances[i].Add(k, GetInformationDistance(i,k))));
+
+        
+        // Sort
+        // TODO sort and reduce
+        
+        // Reduce
+        distances.ToString();
+    }
+
+    private float GetInformationDistance(Information i1, Information i2)
+    {
+        InformationContext c1 = _stableMemory.ContainsKey(i1) ? _stableMemory[i1] : _speculativeMemory[i1];
+        InformationContext c2 = _stableMemory.ContainsKey(i2) ? _stableMemory[i2] : _speculativeMemory[i2];
+        if (c1 == null || c2 == null)
+            throw new NullReferenceException(
+                "Information not found in either memory. This should be impossible");
+
+        CalcInformationHeuristic(i1, c1);
+        CalcInformationHeuristic(i2, c2);
+        
+        return Mathf.Abs(c1.Heuristic-c2.Heuristic);
+    }
+
     public List<Information> GetInformationsToExchange(int numberOfInfos)
     {
         List<Information> allMemories = new List<Information>(_stableMemory.Keys.ToList());
