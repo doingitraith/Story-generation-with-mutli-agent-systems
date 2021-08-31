@@ -13,5 +13,5 @@ public class InformationContext
 
     public InformationContext(int numOfTimesRecieved)
         => (NumOfTimesRecieved, Believability, Heuristic, ReceivedFrom)
-            = (numOfTimesRecieved, .0f, .0f, new List<Agent>());
+            = (numOfTimesRecieved, 1.0f, 1.0f, new List<Agent>());
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Unity;
@@ -10,11 +11,14 @@ public  class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject InformationPrefab;
+    [SerializeField]
+    private float MapReduceWaitSeconds;
     public Dictionary<Adjectives, InformationAdjective> WorldAdjectives;
     public DialogueRunner DialogueRunner;
     public Text NameText;
     private Agent _currentConversationStarter;
     private Agent _currentConversationPartner;
+    private IEnumerator updateBelievability;
 
     private static GameManager instance;
 
@@ -39,6 +43,27 @@ public  class GameManager : MonoBehaviour
     public void Start()
     {
         DialogueRunner.AddCommandHandler("ReceiveReply", ReceiveReply);
+        updateBelievability = UpdateBelievability();
+        StartCoroutine(updateBelievability);
+    }
+    
+    private void OnApplicationQuit()
+    {
+        StopCoroutine(updateBelievability);
+    }
+
+    private IEnumerator UpdateBelievability()
+    {
+        while (true)
+        {
+            List<Agent> agents = FindObjectsOfType<Agent>().ToList();
+            foreach (var agent in agents)
+            {
+                agent.Memory.UpdateBelievability();   
+                
+                yield return new WaitForSeconds(MapReduceWaitSeconds);
+            }
+        }
     }
 
     public void InitAdjectives()
