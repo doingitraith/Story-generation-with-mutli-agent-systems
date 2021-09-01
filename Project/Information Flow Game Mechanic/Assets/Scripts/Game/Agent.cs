@@ -100,4 +100,15 @@ public class Agent : WorldObject
         if(isInformationAdded)
             Debug.Log(this.Name + " learned: \""+infoObject.Information.ToString()+"\"");
     }
+
+    public override bool Equals(object o)
+    {
+        if (!(o is Agent other))
+            return false;
+
+        return gameObject.Equals(other.gameObject);
+    }
+
+    public override int GetHashCode()
+        => gameObject.GetHashCode();
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class WorldObject : MonoBehaviour
 {
     public string Name;
+    public bool IsPerson;
+    public int WorldImportance;
     public Mutation Mutation;
     [SerializeField]
     private List<string> Mutations;
@@ -18,7 +20,7 @@ public abstract class WorldObject : MonoBehaviour
         for (int i = Mutations.Count-1; i >= 0; i--)
             Mutation = new Mutation(Mutations[i], Mutation);
 
-        InformationSubject = new InformationSubject(Name, Mutation);
+        InformationSubject = new InformationSubject(Name, IsPerson, Mutation);
     }
 
     // Start is called before the first frame update
