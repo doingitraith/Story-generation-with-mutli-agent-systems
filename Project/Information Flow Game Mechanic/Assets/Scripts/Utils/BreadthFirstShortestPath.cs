@@ -30,6 +30,7 @@ public static class BreadthFirstShortestPath
                     
                 if (visited[neighbour] == false)
                 {
+                    visited[neighbour] = true;
                     if (!distance.ContainsKey(neighbour))
                         distance.Add(neighbour, distance[node] + 1);
                     else
