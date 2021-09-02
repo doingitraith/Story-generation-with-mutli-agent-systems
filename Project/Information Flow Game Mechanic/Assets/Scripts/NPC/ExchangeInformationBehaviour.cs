@@ -36,7 +36,7 @@ public class ExchangeInformationBehaviour : AgentBehaviour
             // TODO: Handle empty information case
         }
         else
-            GameManager.Instance.CreateInformation(infos[0], Agent.transform.position);
+            GameManager.Instance.CreateConversationInformation(infos[0], Agent.transform.position);
         
         IsFinished = true;
         Agent.IsOccupied = false;

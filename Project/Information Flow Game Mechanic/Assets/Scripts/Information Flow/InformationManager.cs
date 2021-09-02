@@ -19,13 +19,15 @@ public class InformationManager
     public InformationManager(Agent owner)
         => (Owner, _stableMemory, _speculativeMemory, InferenceEngine) = 
             (owner, new Dictionary<Information, InformationContext>(),
-                new Dictionary<Information, InformationContext>(), new InferenceEngine(this));
+                new Dictionary<Information, InformationContext>(),
+                new InferenceEngine(this, GameManager.Instance.WorldRules));
 
     // Create FixedSizeList
     public InformationManager(Agent owner, int memorySize)
         => (Owner, _stableMemory, _speculativeMemory, InferenceEngine) =
             (owner, new FixedSizeDictionary<Information, InformationContext>(memorySize),
-                new Dictionary<Information, InformationContext>(), new InferenceEngine(this));
+                new Dictionary<Information, InformationContext>(),
+                new InferenceEngine(this, GameManager.Instance.WorldRules));
 
     public bool ContainsStableInformation(Information information)
         =>_stableMemory.ContainsKey(information);

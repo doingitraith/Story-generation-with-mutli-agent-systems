@@ -6,33 +6,33 @@ using UnityEngine.ProBuilder;
 public class InferenceRule
 {
     public List<Information> Consequences;
-
     public BoolExpression Expression;
+    public bool AppliesToSelf;
 
-    public InferenceRule(BoolExpression expression, List<Information> consequences)
-        => (Expression, Consequences) = (expression, consequences);
+    public InferenceRule(BoolExpression expression, List<Information> consequences, bool appliesToSelf)
+        => (Expression, Consequences, AppliesToSelf) = (expression, consequences, appliesToSelf);
 
-    public InferenceRule(Information information)
-        => (Expression, Consequences) = (new BoolExpression(information), new List<Information>());
+    public InferenceRule(BoolExpression expression)
+        => (Expression, Consequences) = (expression, new List<Information>());
 
-    public InferenceRule And(Information information)
+    public InferenceRule And(BoolExpression right)
     {
-        Expression = new BoolExpression(Expression, new BoolExpression(information), Operator.AND);
+        Expression = new BoolExpression(Expression, right, Operator.AND);
         return this;
     }
-    public InferenceRule Or(Information information)
+    public InferenceRule Or(BoolExpression right)
     {
-        Expression = new BoolExpression(Expression, new BoolExpression(information), Operator.OR);
+        Expression = new BoolExpression(Expression, right, Operator.OR);
         return this;
     }
-    public InferenceRule XOr(Information information)
+    public InferenceRule XOr(BoolExpression right)
     {
-        Expression = new BoolExpression(Expression, new BoolExpression(information), Operator.XOR);
+        Expression = new BoolExpression(Expression, right, Operator.XOR);
         return this;
     }
-    public InferenceRule Not(Information information)
+    public InferenceRule Not(BoolExpression right)
     {
-        Expression = new BoolExpression(Expression, new BoolExpression(information), Operator.NOT);
+        Expression = new BoolExpression(Expression, right, Operator.NOT);
         return this;
     }
 }

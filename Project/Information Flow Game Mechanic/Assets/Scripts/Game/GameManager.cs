@@ -79,7 +79,7 @@ public  class GameManager : MonoBehaviour
     {
         while (true)
         {
-            List<NPC> agents = FindObjectsOfType<NPC>().ToList();
+            List<Agent> agents = FindObjectsOfType<Agent>().ToList();
             foreach (var agent in agents)
             {
                 agent.Memory.InferenceEngine.Evaluate();
@@ -113,9 +113,10 @@ public  class GameManager : MonoBehaviour
     {
         WorldObject s = FindObjectOfType<Player>().GetComponent<Player>();
         
-        InferenceRule rule = new InferenceRule(new Information(s, WorldAdjectives[Adjectives.alive]))
-            .And(new Information(s, WorldAdjectives[Adjectives.evil]));
+        InferenceRule rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.alive])))
+            .And(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.evil])));
         rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.dead]) };
+        rule.AppliesToSelf = false;
 
         WorldRules.Add(rule);
     }
@@ -127,10 +128,11 @@ public  class GameManager : MonoBehaviour
         NameText.text = 
             _currentConversationStarter is Player ? _currentConversationPartner.Name : _currentConversationStarter.Name;
         DialogueRunner.variableStorage.SetValue("$NPCName", NameText.text);
-
-        _currentConversationPartner.CurrentReplies = 
-            _currentConversationPartner.Memory.GetInformationsToExchange(1);
         
+        _currentConversationPartner.CurrentReplies = 
+            _currentConversationPartner.Memory.GetInformationsToExchange(1).
+                Where(i => !i.Subject.Equals(_currentConversationStarter.InformationSubject)).ToList();
+
         DialogueRunner.variableStorage.SetValue("$HasNPCReplies", 
             _currentConversationPartner.CurrentReplies.Count!=0);
         
@@ -139,12 +141,14 @@ public  class GameManager : MonoBehaviour
                 _currentConversationPartner.CurrentReplies[0].ToString());
 
         int numOfReplies = _currentConversationStarter.Memory.NumberOfMemories;
+        _currentConversationStarter.CurrentReplies =
+            _currentConversationStarter.Memory.
+                GetInformationsToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1).
+                Where(i => !i.Subject.Equals(_currentConversationPartner.InformationSubject)).ToList();
+        numOfReplies = _currentConversationStarter.CurrentReplies.Count;
         DialogueRunner.variableStorage.SetValue("$NumOfReplies", numOfReplies);
         if (numOfReplies > 0)
         {
-            _currentConversationStarter.CurrentReplies =
-                _currentConversationStarter.Memory.
-                    GetInformationsToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1); 
             
             DialogueRunner.variableStorage.SetValue("$ReplyText1", 
                 _currentConversationStarter.CurrentReplies[0].ToString());
@@ -188,7 +192,7 @@ public  class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateInformation(Agent agent, Location location)
+    public void CreateArrivalInformation(Agent agent, Location location)
     {
         InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
             
@@ -199,11 +203,20 @@ public  class GameManager : MonoBehaviour
         Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity);
     }
 
-    public void CreateInformation(Information information, Vector3 position)
+    public void CreateConversationInformation(Information information, Vector3 position)
     {
         InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
         informationObject.Information = information;
         informationObject.PropagationType = InformationPropagationType.AUDIO;
+
+        Instantiate(InformationPrefab, position, Quaternion.identity);
+    }
+    
+    public void CreateVisibleInformation(Information information, Vector3 position)
+    {
+        InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
+        informationObject.Information = information;
+        informationObject.PropagationType = InformationPropagationType.VISUAL;
 
         Instantiate(InformationPrefab, position, Quaternion.identity);
     }

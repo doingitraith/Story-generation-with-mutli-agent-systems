@@ -26,6 +26,12 @@ public class NPC : Agent
         base.Start();
         Memory = new InformationManager(this, MEMORY_SIZE);
         /*
+        Memory.TryAddNewInformation(new Information(FindObjectOfType<Player>().GetComponent<Player>(),
+            GameManager.Instance.WorldAdjectives[Adjectives.alive]),this);
+        Memory.TryAddNewInformation(new Information(FindObjectOfType<Player>().GetComponent<Player>(),
+            GameManager.Instance.WorldAdjectives[Adjectives.evil]),this);
+        */
+        /*
         _currentBehaviour = new WalkBehaviour(this, GameObject.Find("Stable").transform);
         _currentBehaviour.DoBehaviour();
         */

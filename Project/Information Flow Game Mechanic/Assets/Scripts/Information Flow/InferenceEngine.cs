@@ -21,6 +21,10 @@ public class InferenceEngine
         {
             List<InformationSubject> candidates = 
                 SatisfiesKnowledgeBase(rule.Expression, new List<InformationSubject>());
+            
+            if (!rule.AppliesToSelf)
+                candidates.Remove(KnowledgeBase.Owner.InformationSubject);
+            
             if (candidates.Any())
             {
                 candidates.ForEach(c =>
@@ -43,7 +47,7 @@ public class InferenceEngine
                 KnowledgeBase.GetStableMemory().Keys.Where(i => i.Verb.Equals(ex.Information.Verb)).ToList();
 
             foreach (Information i in infos)
-                if (infos.Contains(new Information(i.Subject, ex.Information)))
+                if (i.Equals(new Information(i.Subject, ex.Information)))
                     candidateList.Add(i.Subject);
         }
         else if (ex.Left != null)
@@ -65,27 +69,22 @@ public class InferenceEngine
             switch (ex.Operator)
             {
                 case Operator.AND:
-                {
-                    if (left.Any() && right.Any())
+                    foreach (InformationSubject l in left)
                     {
-                        candidateList.AddRange(left);
-                        candidateList.AddRange(right);
+                        foreach (InformationSubject r in right)
+                        {
+                            if (l.Equals(r))
+                                candidateList.AddRange(left);
+                        }
                     }
-                }
                     break;
                 case Operator.OR:
                     if (left.Any() || right.Any())
-                    {
                         candidateList.AddRange(left);
-                        candidateList.AddRange(right);
-                    }
                     break;
                 case Operator.XOR:
                     if (left.Any() ^ right.Any())
-                    {
                         candidateList.AddRange(left);
-                        candidateList.AddRange(right);
-                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
