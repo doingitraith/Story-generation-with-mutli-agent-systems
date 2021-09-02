@@ -55,7 +55,18 @@ public class Agent : WorldObject
     public void InteractItem(Item interactItem)
     {
         IsOccupied = true;
-        throw new System.NotImplementedException();
+        Inventory.Add(interactItem);
+        interactItem.SetInventory(true);
+        GameManager.Instance.CreateVisibleInformation(new Information(this, interactItem), transform.position);
+        IsOccupied = false;
+    }
+    
+    public void DropItem(Item interactItem)
+    {
+        IsOccupied = true;
+        Inventory.Remove(interactItem);
+        interactItem.SetInventory(false);
+        IsOccupied = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -94,7 +105,7 @@ public class Agent : WorldObject
 
         if (other.gameObject.TryGetComponent<Location>(out infoLocation))
         {
-            GameManager.Instance.CreateInformation(this, infoLocation);
+            GameManager.Instance.CreateArrivalInformation(this, infoLocation);
         }
 
         if(isInformationAdded)

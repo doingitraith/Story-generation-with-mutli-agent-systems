@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : WorldObject
 {
     private bool _isInInventory;
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,4 +22,7 @@ public class Item : WorldObject
     {
         base.Update();
     }
+
+    public void SetInventory(bool isInInventory)
+        => _isInInventory = isInInventory;
 }
