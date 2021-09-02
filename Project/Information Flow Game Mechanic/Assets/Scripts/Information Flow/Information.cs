@@ -60,6 +60,17 @@ public class Information : IMutatable
         (Subject, Verb, Object, Adjective, Location) = (information.Subject, information.Verb, information.Object,
             information.Adjective, information.Location);
 
+    /// <summary>
+    /// Changes the Subject of an Information
+    /// </summary>
+    /// <param name="newSubject">the new Subject of the Information</param>
+    /// <param name="information">rest of the Information</param>
+    public Information(InformationSubject newSubject, Information information)
+    {
+        (Subject, Verb, Object, Adjective, Location) = (newSubject, information.Verb, information.Object,
+            information.Adjective, information.Location);
+    }
+
     public override bool Equals(object o)
     {
         if (!(o is Information other))

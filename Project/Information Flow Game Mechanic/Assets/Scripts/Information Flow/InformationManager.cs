@@ -41,15 +41,7 @@ public class InformationManager
         if (!_owner.Acquaintances.ContainsKey(sender))
             _owner.Acquaintances.Add(sender, _owner.Equals(sender) ? 1.0f : .5f);
 
-        if (ContainsStableInformation(information) && !_stableMemory[information].ReceivedFrom.Contains(sender))
-            _stableMemory[information].NumOfTimesRecieved++;
-
-        _stableMemory[information].ReceivedFrom.Add(sender);
-        float believability = _stableMemory[information].Heuristic;
-        _owner.Acquaintances[sender] = _owner.Equals(sender) ? 
-            1.0f : _owner.Acquaintances[sender] + believability / 10.0f;
-
-            List<Information> filteredInfos = 
+        List<Information> filteredInfos = 
             _stableMemory.Keys.ToList().FindAll(i=>i.Verb.Equals(information.Verb));
 
         switch (information.Verb)
@@ -107,6 +99,16 @@ public class InformationManager
                 throw new ArgumentOutOfRangeException();
         }
 
+        if (ContainsStableInformation(information) && !_stableMemory[information].ReceivedFrom.Contains(sender))
+        {
+            _stableMemory[information].NumOfTimesRecieved++;
+            _stableMemory[information].ReceivedFrom.Add(sender);
+        }
+
+        float believability = _stableMemory[information].Heuristic;
+        _owner.Acquaintances[sender] = _owner.Equals(sender) ? 
+            1.0f : _owner.Acquaintances[sender] + believability / 10.0f;
+
         return true;
     }
     
@@ -119,17 +121,6 @@ public class InformationManager
         // add acquaintance with initial trust
         if (!_owner.Acquaintances.ContainsKey(sender))
             _owner.Acquaintances.Add(sender, _owner.Equals(sender) ? 1.0f : .5f);
-
-        // increase timesReceived if received from new agent
-        if (ContainsSpeculativeInformation(information) 
-            && !_speculativeMemory[information].ReceivedFrom.Contains(sender))
-            _speculativeMemory[information].NumOfTimesRecieved++;
-        
-        // Update information context and trust
-        float believability = _speculativeMemory[information].Believability;
-        _speculativeMemory[information].ReceivedFrom.Add(sender);
-        _owner.Acquaintances[sender] = _owner.Equals(sender) ? 
-            1.0f : _owner.Acquaintances[sender]+believability / 10.0f;
 
         List<Information> filteredInfos = _speculativeMemory.Keys.ToList().
             FindAll(i=>i.Verb.Equals(information.Verb));
@@ -188,6 +179,19 @@ public class InformationManager
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        
+        // increase timesReceived if received from new agent
+        if (ContainsSpeculativeInformation(information)
+            && !_speculativeMemory[information].ReceivedFrom.Contains(sender))
+        {
+            _speculativeMemory[information].NumOfTimesRecieved++;
+            _speculativeMemory[information].ReceivedFrom.Add(sender);
+        }
+
+        // Update information context and trust
+        float believability = _speculativeMemory[information].Believability;
+        _owner.Acquaintances[sender] = _owner.Equals(sender) ? 
+            1.0f : _owner.Acquaintances[sender]+believability / 10.0f;
 
         if (believability >= _owner.BelievabilityThreshold)
         {
