@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class InferenceEngine
 {
-    public Dictionary<Information, InformationContext> KnowledgeBase;
+    public InformationManager KnowledgeBase;
     public List<InferenceRule> Rules;
-
-    public InferenceEngine(Dictionary<Information, InformationContext> knowledgeBase, List<InferenceRule> rules)
+    
+    public InferenceEngine(InformationManager knowledgeBase, List<InferenceRule> rules)
         => (KnowledgeBase, Rules) = (knowledgeBase, rules);
 
-    public InferenceEngine(Dictionary<Information, InformationContext> knowledgeBase)
+    public InferenceEngine(InformationManager knowledgeBase)
         => (KnowledgeBase, Rules) = (knowledgeBase, new List<InferenceRule>());
     
     public void Evaluate()
@@ -28,7 +28,7 @@ public class InferenceEngine
                         rule.Consequences.ForEach(r =>
                         {
                             r = new Information(c, r);
-                            KnowledgeBase.Add(r, new InformationContext(1));
+                            KnowledgeBase.TryAddNewInformation(r, KnowledgeBase.Owner);
                         });
                     });
             }
@@ -40,7 +40,7 @@ public class InferenceEngine
         if (ex.Information != null)
         {
             List<Information> infos =
-                KnowledgeBase.Keys.Where(i => i.Verb.Equals(ex.Information.Verb)).ToList();
+                KnowledgeBase.GetStableMemory().Keys.Where(i => i.Verb.Equals(ex.Information.Verb)).ToList();
 
             foreach (Information i in infos)
                 if (infos.Contains(new Information(i.Subject, ex.Information)))

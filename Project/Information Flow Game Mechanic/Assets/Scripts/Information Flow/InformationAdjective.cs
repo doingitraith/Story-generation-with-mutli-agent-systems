@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum Adjectives
 {
+    // TODO add importance
     alive = 0,
     dead = 1,
     good,

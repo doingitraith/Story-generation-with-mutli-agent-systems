@@ -8,24 +8,24 @@ using Random = UnityEngine.Random;
 
 public class InformationManager
 {
+    public readonly Agent Owner;
+    public InferenceEngine InferenceEngine;
     public int NumberOfMemories => NumberOfStableMemories + NumberOfSpeculativeMemories;
+    private readonly Dictionary<Information, InformationContext> _stableMemory;
+    private readonly Dictionary<Information, InformationContext> _speculativeMemory;
     private int NumberOfStableMemories => _stableMemory.Count;
     private int NumberOfSpeculativeMemories => _speculativeMemory.Count;
-    
-    private Dictionary<Information, InformationContext> _stableMemory;
-    private Dictionary<Information, InformationContext> _speculativeMemory;
-    private Agent _owner;
 
     public InformationManager(Agent owner)
-        => (_owner, _stableMemory, _speculativeMemory) = 
+        => (Owner, _stableMemory, _speculativeMemory, InferenceEngine) = 
             (owner, new Dictionary<Information, InformationContext>(),
-                new Dictionary<Information, InformationContext>());
+                new Dictionary<Information, InformationContext>(), new InferenceEngine(this));
 
     // Create FixedSizeList
     public InformationManager(Agent owner, int memorySize)
-        => (_owner, _stableMemory, _speculativeMemory) =
+        => (Owner, _stableMemory, _speculativeMemory, InferenceEngine) =
             (owner, new FixedSizeDictionary<Information, InformationContext>(memorySize),
-                new Dictionary<Information, InformationContext>());
+                new Dictionary<Information, InformationContext>(), new InferenceEngine(this));
 
     public bool ContainsStableInformation(Information information)
         =>_stableMemory.ContainsKey(information);
@@ -35,11 +35,11 @@ public class InformationManager
 
     public bool TryAddNewInformation(Information information, Agent sender)
     {
-        if (_owner.InformationSubject.Equals(information.Subject))
+        if (Owner.InformationSubject.Equals(information.Subject))
             return false;
         
-        if (!_owner.Acquaintances.ContainsKey(sender))
-            _owner.Acquaintances.Add(sender, _owner.Equals(sender) ? 1.0f : .5f);
+        if (!Owner.Acquaintances.ContainsKey(sender))
+            Owner.Acquaintances.Add(sender, Owner.Equals(sender) ? 1.0f : .5f);
 
         List<Information> filteredInfos = 
             _stableMemory.Keys.ToList().FindAll(i=>i.Verb.Equals(information.Verb));
@@ -106,8 +106,8 @@ public class InformationManager
         }
 
         float believability = _stableMemory[information].Heuristic;
-        _owner.Acquaintances[sender] = _owner.Equals(sender) ? 
-            1.0f : _owner.Acquaintances[sender] + believability / 10.0f;
+        Owner.Acquaintances[sender] = Owner.Equals(sender) ? 
+            1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
 
         return true;
     }
@@ -115,12 +115,12 @@ public class InformationManager
     public bool TryAddNewSpeculativeInformation(Information information, Agent sender)
     {
         // don't add information about self
-        if (_owner.InformationSubject.Equals(information.Subject))
+        if (Owner.InformationSubject.Equals(information.Subject))
             return false;
         
         // add acquaintance with initial trust
-        if (!_owner.Acquaintances.ContainsKey(sender))
-            _owner.Acquaintances.Add(sender, _owner.Equals(sender) ? 1.0f : .5f);
+        if (!Owner.Acquaintances.ContainsKey(sender))
+            Owner.Acquaintances.Add(sender, Owner.Equals(sender) ? 1.0f : .5f);
 
         List<Information> filteredInfos = _speculativeMemory.Keys.ToList().
             FindAll(i=>i.Verb.Equals(information.Verb));
@@ -190,10 +190,10 @@ public class InformationManager
 
         // Update information context and trust
         float believability = _speculativeMemory[information].Believability;
-        _owner.Acquaintances[sender] = _owner.Equals(sender) ? 
-            1.0f : _owner.Acquaintances[sender]+believability / 10.0f;
+        Owner.Acquaintances[sender] = Owner.Equals(sender) ? 
+            1.0f : Owner.Acquaintances[sender]+believability / 10.0f;
 
-        if (believability >= _owner.BelievabilityThreshold)
+        if (believability >= Owner.BelievabilityThreshold)
         {
             if (TryAddNewInformation(information, sender))
                 _speculativeMemory.Remove(information);
@@ -294,8 +294,8 @@ public class InformationManager
         }
 
         h *= b * infosAboutSubject * 
-             (context.ReceivedFrom.Where(r=> _owner.Acquaintances.ContainsKey(r))
-                 .Sum(a => _owner.Acquaintances[a]));
+             (context.ReceivedFrom.Where(r=> Owner.Acquaintances.ContainsKey(r))
+                 .Sum(a => Owner.Acquaintances[a]));
         context.Heuristic = h;
     }
 
@@ -310,9 +310,9 @@ public class InformationManager
         if (knownAssociates.Any())
         {
             Agent goal = new List<Agent>(knownAssociates).OrderBy(x => Random.value).ElementAt(0);
-            Tuple<int, Agent> NextToTarget = BreadthFirstShortestPath.ShortestPath(_owner, goal);
+            Tuple<int, Agent> NextToTarget = BreadthFirstShortestPath.ShortestPath(Owner, goal);
             if (NextToTarget != null)
-                h = _owner.Acquaintances[NextToTarget.Item2] / NextToTarget.Item1;
+                h = Owner.Acquaintances[NextToTarget.Item2] / NextToTarget.Item1;
         }
         else
             h = .5f;
@@ -344,7 +344,7 @@ public class InformationManager
         if (worldItem != null)
             worldImportance = worldItem.WorldImportance;
         
-        h += .5f + _owner.Inventory.Count(i => i.Name.Equals(informationSubject.Name))
+        h += .5f + Owner.Inventory.Count(i => i.Name.Equals(informationSubject.Name))
                  * worldImportance
                  * .5f
                  + owners.Count*.5f;
@@ -378,4 +378,7 @@ public class InformationManager
                 _speculativeMemory.Keys.ToList()[idx-NumberOfStableMemories].Mutate();
         }
     }
+
+    public Dictionary<Information, InformationContext> GetStableMemory()
+        => _stableMemory;
 }

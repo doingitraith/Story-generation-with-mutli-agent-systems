@@ -13,12 +13,16 @@ public  class GameManager : MonoBehaviour
     private GameObject InformationPrefab;
     [SerializeField]
     private float MapReduceWaitSeconds;
+    [SerializeField]
+    private float InferenceWaitSeconds;
     public Dictionary<Adjectives, InformationAdjective> WorldAdjectives;
+    public List<InferenceRule> WorldRules;
     public DialogueRunner DialogueRunner;
     public Text NameText;
     private Agent _currentConversationStarter;
     private Agent _currentConversationPartner;
-    private IEnumerator updateBelievability;
+    private IEnumerator _updateBelievability;
+    private IEnumerator _inference;
 
     private static GameManager instance;
 
@@ -38,18 +42,23 @@ public  class GameManager : MonoBehaviour
         Random.InitState(15102021);
         WorldAdjectives = new Dictionary<Adjectives, InformationAdjective>();
         InitAdjectives();
+        WorldRules = new List<InferenceRule>();
+        InitRules();
     }
 
     public void Start()
     {
         DialogueRunner.AddCommandHandler("ReceiveReply", ReceiveReply);
-        updateBelievability = UpdateBelievability();
-        StartCoroutine(updateBelievability);
+        _updateBelievability = UpdateBelievability();
+        _inference = Inference();
+        StartCoroutine(_updateBelievability);
+        StartCoroutine(_inference);
     }
     
     private void OnApplicationQuit()
     {
-        StopCoroutine(updateBelievability);
+        StopCoroutine(_updateBelievability);
+        StopCoroutine(_inference);
     }
 
     private IEnumerator UpdateBelievability()
@@ -66,7 +75,20 @@ public  class GameManager : MonoBehaviour
         }
     }
 
-    public void InitAdjectives()
+    private IEnumerator Inference()
+    {
+        while (true)
+        {
+            List<NPC> agents = FindObjectsOfType<NPC>().ToList();
+            foreach (var agent in agents)
+            {
+                agent.Memory.InferenceEngine.Evaluate();
+                yield return new WaitForSeconds(InferenceWaitSeconds);
+            }
+        }
+    }
+
+    private void InitAdjectives()
     {
         // Add adjective Properties
         WorldAdjectives.Add(Adjectives.alive, 
@@ -74,9 +96,28 @@ public  class GameManager : MonoBehaviour
         WorldAdjectives.Add(Adjectives.dead, 
             new InformationProperty(Adjectives.dead, new List<InformationAdjective>()));
         
+        // Add adjective Opinions
+        WorldAdjectives.Add(Adjectives.good, 
+            new InformationOpinion(Adjectives.good, new List<InformationAdjective>()));
+        WorldAdjectives.Add(Adjectives.evil, 
+            new InformationOpinion(Adjectives.evil, new List<InformationAdjective>()));
+        
         // Add contradictions
         WorldAdjectives[Adjectives.alive].AddContradiction(WorldAdjectives[Adjectives.dead]);
         WorldAdjectives[Adjectives.dead].AddContradiction(WorldAdjectives[Adjectives.alive]);
+        WorldAdjectives[Adjectives.good].AddContradiction(WorldAdjectives[Adjectives.evil]);
+        WorldAdjectives[Adjectives.evil].AddContradiction(WorldAdjectives[Adjectives.good]);
+    }
+
+    private void InitRules()
+    {
+        WorldObject s = FindObjectOfType<Player>().GetComponent<Player>();
+        
+        InferenceRule rule = new InferenceRule(new Information(s, WorldAdjectives[Adjectives.alive]))
+            .And(new Information(s, WorldAdjectives[Adjectives.evil]));
+        rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.dead]) };
+
+        WorldRules.Add(rule);
     }
 
     public void StartDialogue(Agent conversationStarter, Agent conversationPartner)
