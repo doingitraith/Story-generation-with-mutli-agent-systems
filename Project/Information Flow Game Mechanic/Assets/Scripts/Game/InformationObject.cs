@@ -31,14 +31,14 @@ using UnityEngine;
                 return;
             switch (Verb)
             {
-                case InformationVerb.NULL: { Information = new Information(); }
+                case InformationVerb.Null: { Information = new Information(); }
                     break;
-                case InformationVerb.IS: { Information = 
+                case InformationVerb.Is: { Information = 
                     new Information(Subject, GameManager.Instance.WorldAdjectives[SetAdjective]); }
                     break;
-                case InformationVerb.HAS:{ Information = new Information((Agent)Subject, Object); }
+                case InformationVerb.Has:{ Information = new Information((Agent)Subject, Object); }
                     break;
-                case InformationVerb.AT:{ Information = new Information(Subject, Location); }
+                case InformationVerb.At:{ Information = new Information(Subject, Location); }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

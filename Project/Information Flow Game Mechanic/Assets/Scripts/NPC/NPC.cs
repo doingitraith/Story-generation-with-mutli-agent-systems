@@ -9,11 +9,12 @@ using Random = UnityEngine.Random;
 public class NPC : Agent
 {
     public float MemoryMutationInterval = 30.0f;
-    public Routine Routine;
-
+    [SerializeField]
+    private List<BehaviourEntry> Routine;
     private const int MEMORY_SIZE = 5;
     private AgentBehaviour _currentBehaviour;
     private float _currentMutationTime = .0f;
+    private int _currentBehaviourIdx = 0;
 
     protected override void Awake()
     {
@@ -25,9 +26,12 @@ public class NPC : Agent
     {
         base.Start();
         Memory = new InformationManager(this, MEMORY_SIZE);
+        
+        _currentBehaviour = SelectNextBehaviour();
+        _currentBehaviour.DoBehaviour();
         /*
         Memory.TryAddNewInformation(new Information(FindObjectOfType<Player>().GetComponent<Player>(),
-            GameManager.Instance.WorldAdjectives[Adjectives.alive]),this);
+            GameManager.Instance.WorldAdjectives[Adjectives.ALIVE]),this);
         Memory.TryAddNewInformation(new Information(FindObjectOfType<Player>().GetComponent<Player>(),
             GameManager.Instance.WorldAdjectives[Adjectives.evil]),this);
         */
@@ -47,6 +51,12 @@ public class NPC : Agent
             Memory.MutateMemory();
             _currentMutationTime = .0f;
         }
+
+        if (_currentBehaviour.IsFinished)
+        {
+            _currentBehaviour = SelectNextBehaviour();
+            _currentBehaviour.DoBehaviour();
+        }
     }
 
     private void LateUpdate()
@@ -56,4 +66,30 @@ public class NPC : Agent
             transform.rotation = Quaternion.LookRotation(dir);
     }
 
+    private AgentBehaviour SelectNextBehaviour()
+    {
+        BehaviourEntry behaviour = Routine[++_currentBehaviourIdx % Routine.Count];
+        switch (behaviour.Type)
+            {
+                case BehaviourType.Walk:
+                    return new WalkBehaviour(
+                        this, behaviour.BehaviourObject.GetComponent<Location>().LocationTransform);
+                case BehaviourType.Dialogue:
+                    return new TalkBehaviour(
+                        this, behaviour.BehaviourObject.GetComponent<Agent>());
+                case BehaviourType.Exchange:
+                    return new ExchangeInformationBehaviour(
+                        this, behaviour.BehaviourObject.GetComponent<Agent>());
+                case BehaviourType.Send:
+                    return new SendInformationBehaviour(this);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+    }
+
+    public void InterruptNPC()
+        => _currentBehaviour.InterruptBehaviour();
+    
+    public void ResumeNPC()
+        => _currentBehaviour.ResumeBehaviour();
 }

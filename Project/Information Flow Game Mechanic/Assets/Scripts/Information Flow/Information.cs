@@ -7,10 +7,10 @@ using Random = UnityEngine.Random;
 
 public enum InformationVerb
 {
-    NULL = -1,
-    IS = 0,
-    HAS,
-    AT
+    Null = -1,
+    Is = 0,
+    Has = 1,
+    At = 2
 }
 
 public class Information : IMutatable
@@ -23,7 +23,7 @@ public class Information : IMutatable
 
     public Information()
         => (Subject, Verb, Object, Adjective, Location) =
-            (null, InformationVerb.NULL, null, null, null);
+            (null, InformationVerb.Null, null, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject HAS Object" 
@@ -32,7 +32,7 @@ public class Information : IMutatable
     /// <param name="object">Object of the information</param>
     public Information(Agent agent, Item @object)
         => (Subject, Verb, Object, Adjective, Location) =
-            (agent.InformationSubject, InformationVerb.HAS, @object.InformationSubject, null, null);
+            (agent.InformationSubject, InformationVerb.Has, @object.InformationSubject, null, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject IS Adjective" 
@@ -41,7 +41,7 @@ public class Information : IMutatable
     /// <param name="informationAdjective">Property of the subject</param>
     public Information(WorldObject subject, InformationAdjective informationAdjective)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject.InformationSubject, InformationVerb.IS, null, informationAdjective, null);
+            (subject.InformationSubject, InformationVerb.Is, null, informationAdjective, null);
 
     /// <summary>
     /// Creates an Information of the form "Subject is AT Location" 
@@ -50,7 +50,7 @@ public class Information : IMutatable
     /// <param name="informationLocation">Location of the subject</param>
     public Information(WorldObject subject, Location informationLocation)
         => (Subject, Verb, Object, Adjective, Location) =
-            (subject.InformationSubject, InformationVerb.AT, null, null, informationLocation.InformationLocation);
+            (subject.InformationSubject, InformationVerb.At, null, null, informationLocation.InformationLocation);
 
     /// <summary>
     /// Creates a copy of an Information
@@ -81,9 +81,9 @@ public class Information : IMutatable
 
         switch (Verb)
         {
-            case InformationVerb.AT: { return Location.Equals(other.Location); }
-            case InformationVerb.IS: { return Adjective.Equals(other.Adjective); }
-            case InformationVerb.HAS: { return Object.Equals(other.Object); }
+            case InformationVerb.At: { return Location.Equals(other.Location); }
+            case InformationVerb.Is: { return Adjective.Equals(other.Adjective); }
+            case InformationVerb.Has: { return Object.Equals(other.Object); }
             default: { return false; }
         }
     }
@@ -100,13 +100,13 @@ public class Information : IMutatable
     {
         switch (Verb)
         {
-            case InformationVerb.NULL:
+            case InformationVerb.Null:
                 return "NULL Information";
-            case InformationVerb.IS:
-                return Subject.Name + " is " + Adjective.Characteristic;
-            case InformationVerb.HAS:
+            case InformationVerb.Is:
+                return Subject.Name + " is " + Adjective.Characteristic.ToString().ToLower();
+            case InformationVerb.Has:
                 return Subject.Name + " has " + Object.Name;
-            case InformationVerb.AT:
+            case InformationVerb.At:
                 return Subject.Name + " is at " + Location.Name;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -117,7 +117,7 @@ public class Information : IMutatable
     {
         switch (Verb)
         {
-            case InformationVerb.HAS:
+            case InformationVerb.Has:
             {
                 if (Random.value > .5f)
                 {
@@ -137,7 +137,7 @@ public class Information : IMutatable
                 }
             }
                 break;
-            case InformationVerb.AT:
+            case InformationVerb.At:
             {
                 /*
                 Subject.Name = Subject.Mutation.Value;

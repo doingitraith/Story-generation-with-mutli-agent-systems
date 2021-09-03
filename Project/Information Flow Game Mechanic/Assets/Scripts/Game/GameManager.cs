@@ -91,31 +91,31 @@ public  class GameManager : MonoBehaviour
     private void InitAdjectives()
     {
         // Add adjective Properties
-        WorldAdjectives.Add(Adjectives.alive, 
-            new InformationProperty(Adjectives.alive, new List<InformationAdjective>()));
-        WorldAdjectives.Add(Adjectives.dead, 
-            new InformationProperty(Adjectives.dead, new List<InformationAdjective>()));
+        WorldAdjectives.Add(Adjectives.Alive, 
+            new InformationProperty(Adjectives.Alive, new List<InformationAdjective>()));
+        WorldAdjectives.Add(Adjectives.Dead, 
+            new InformationProperty(Adjectives.Dead, new List<InformationAdjective>()));
         
         // Add adjective Opinions
-        WorldAdjectives.Add(Adjectives.good, 
-            new InformationOpinion(Adjectives.good, new List<InformationAdjective>()));
-        WorldAdjectives.Add(Adjectives.evil, 
-            new InformationOpinion(Adjectives.evil, new List<InformationAdjective>()));
+        WorldAdjectives.Add(Adjectives.Good, 
+            new InformationOpinion(Adjectives.Good, new List<InformationAdjective>()));
+        WorldAdjectives.Add(Adjectives.Evil, 
+            new InformationOpinion(Adjectives.Evil, new List<InformationAdjective>()));
         
         // Add contradictions
-        WorldAdjectives[Adjectives.alive].AddContradiction(WorldAdjectives[Adjectives.dead]);
-        WorldAdjectives[Adjectives.dead].AddContradiction(WorldAdjectives[Adjectives.alive]);
-        WorldAdjectives[Adjectives.good].AddContradiction(WorldAdjectives[Adjectives.evil]);
-        WorldAdjectives[Adjectives.evil].AddContradiction(WorldAdjectives[Adjectives.good]);
+        WorldAdjectives[Adjectives.Alive].AddContradiction(WorldAdjectives[Adjectives.Dead]);
+        WorldAdjectives[Adjectives.Dead].AddContradiction(WorldAdjectives[Adjectives.Alive]);
+        WorldAdjectives[Adjectives.Good].AddContradiction(WorldAdjectives[Adjectives.Evil]);
+        WorldAdjectives[Adjectives.Evil].AddContradiction(WorldAdjectives[Adjectives.Good]);
     }
 
     private void InitRules()
     {
         WorldObject s = FindObjectOfType<Player>().GetComponent<Player>();
         
-        InferenceRule rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.alive])))
-            .And(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.evil])));
-        rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.dead]) };
+        InferenceRule rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Alive])))
+            .And(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Evil])));
+        rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.Dead]) };
         rule.AppliesToSelf = false;
 
         WorldRules.Add(rule);
@@ -125,8 +125,16 @@ public  class GameManager : MonoBehaviour
     {
         _currentConversationStarter = conversationStarter;
         _currentConversationPartner = conversationPartner;
-        NameText.text = 
-            _currentConversationStarter is Player ? _currentConversationPartner.Name : _currentConversationStarter.Name;
+        if (_currentConversationStarter is Player)
+        {
+            NameText.text = _currentConversationPartner.Name;
+            (_currentConversationPartner as NPC)?.InterruptNPC();   
+        }
+        else
+        {
+            NameText.text = _currentConversationStarter.name;
+            (_currentConversationStarter as NPC)?.InterruptNPC();
+        }
         DialogueRunner.variableStorage.SetValue("$NPCName", NameText.text);
         
         _currentConversationPartner.CurrentReplies = 
@@ -161,6 +169,17 @@ public  class GameManager : MonoBehaviour
         }
         
         DialogueRunner.StartDialogue(_currentConversationStarter.YarnNode);
+    }
+
+    public void EndDialogue()
+    {
+        NPC npc = null;
+        if (_currentConversationStarter is Player)
+            npc = _currentConversationPartner as NPC;
+        else
+            npc = _currentConversationStarter as NPC;
+
+        npc.ResumeNPC();
     }
 
     public void ReceiveReply(string[] parameters)
@@ -198,7 +217,7 @@ public  class GameManager : MonoBehaviour
             
         informationObject.Subject = agent;
         informationObject.Location = location;
-        informationObject.Verb = InformationVerb.AT;
+        informationObject.Verb = InformationVerb.At;
         informationObject.PropagationType = InformationPropagationType.VISUAL;
         Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity);
     }

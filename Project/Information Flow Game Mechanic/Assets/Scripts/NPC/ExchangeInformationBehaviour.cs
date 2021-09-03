@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class ExchangeInformationBehaviour : AgentBehaviour
 {
-    private const int EXCHANGE_TIME = 5;
+    protected const int EXCHANGE_TIME = 5;
 
-    private bool _isPaused;
-    private Agent _reciever;
+    protected bool _isPaused;
+    protected Agent _reciever;
     
     public ExchangeInformationBehaviour(Agent agent, Agent reciever) : base(agent)
     {
@@ -31,11 +31,7 @@ public class ExchangeInformationBehaviour : AgentBehaviour
         
         
         List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
-        if (infos == null)
-        {
-            // TODO: Handle empty information case
-        }
-        else
+        if (infos != null)
             GameManager.Instance.CreateConversationInformation(infos[0], Agent.transform.position);
         
         IsFinished = true;
