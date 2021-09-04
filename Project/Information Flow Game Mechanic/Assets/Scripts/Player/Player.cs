@@ -18,7 +18,7 @@ public class Player : Agent
         Memory = new InformationManager(this);
         /*
         Memory.TryAddNewInformation(new Information(FindObjectOfType<NPC>().GetComponent<NPC>(),
-            GameManager.Instance.WorldAdjectives[Adjectives.alive]),this);
+            GameManager.Instance.WorldAdjectives[Adjectives.ALIVE]),this);
         Memory.TryAddNewInformation(new Information(FindObjectOfType<NPC>().GetComponent<NPC>(),
             GameManager.Instance.WorldAdjectives[Adjectives.evil]),this);
         */

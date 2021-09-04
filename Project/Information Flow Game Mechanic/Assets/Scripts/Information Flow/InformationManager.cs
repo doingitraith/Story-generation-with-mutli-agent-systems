@@ -48,7 +48,7 @@ public class InformationManager
 
         switch (information.Verb)
         {
-            case InformationVerb.IS:
+            case InformationVerb.Is:
             {
                 filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
                 InformationAdjective adjective = information.Adjective;
@@ -68,7 +68,7 @@ public class InformationManager
                 _stableMemory.Add(new Information(information), new InformationContext(1));
             }
                 break;
-            case InformationVerb.HAS:
+            case InformationVerb.Has:
             {
                 filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
                 switch (filteredInfos.Count)
@@ -82,7 +82,7 @@ public class InformationManager
                 }
             }
                 break;
-            case InformationVerb.AT:
+            case InformationVerb.At:
             {
                 filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
                 switch (filteredInfos.Count)
@@ -96,7 +96,7 @@ public class InformationManager
                 }
             }
                 break;
-            case InformationVerb.NULL:
+            case InformationVerb.Null:
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -129,7 +129,7 @@ public class InformationManager
 
         switch (information.Verb)
         {
-            case InformationVerb.IS:
+            case InformationVerb.Is:
             {
                 filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
                 InformationAdjective adjective = information.Adjective;
@@ -149,7 +149,7 @@ public class InformationManager
                 _speculativeMemory.Add(new Information(information), new InformationContext(1));
             }
                 break;
-            case InformationVerb.HAS:
+            case InformationVerb.Has:
             {
                 filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
                 switch (filteredInfos.Count)
@@ -163,7 +163,7 @@ public class InformationManager
                 }
             }
                 break;
-            case InformationVerb.AT:
+            case InformationVerb.At:
             {
                 filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
                 switch (filteredInfos.Count)
@@ -177,7 +177,7 @@ public class InformationManager
                 }
             }
                 break;
-            case InformationVerb.NULL:
+            case InformationVerb.Null:
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -259,24 +259,24 @@ public class InformationManager
         
         switch (information.Verb)
         {
-            case InformationVerb.IS:
+            case InformationVerb.Is:
             {
                 h = Mathf.Pow(
-                    Convert.ToSingle(information.Adjective.Characteristic)*
+                    Convert.ToSingle(information.Adjective.Characteristic)/10.0f*
                     (information.Subject.IsPerson ? 
                         CalcRelationDistance(information.Subject) : 
                         CalcItemHeuristic(information.Subject))+
                     1.0f, n );
             }
                 break;
-            case InformationVerb.HAS:
+            case InformationVerb.Has:
             {
                 h = Mathf.Pow(CalcRelationDistance(information.Subject)*
                               CalcItemHeuristic(information.Object)+
                     1.0f, n);
             }
                 break;
-            case InformationVerb.AT:
+            case InformationVerb.At:
             {
                 Location worldLocation = GameManager.FindObjectsOfType<Location>().
                         First(i => i.Name.Equals(information.Location.Name));
@@ -337,7 +337,7 @@ public class InformationManager
         List<Information> owners = new List<Information>(_stableMemory.Keys);
         owners.AddRange(_speculativeMemory.Keys);
         owners = owners.
-            Where(i => i.Verb == InformationVerb.HAS && i.Object.Equals(informationSubject)).ToList();
+            Where(i => i.Verb == InformationVerb.Has && i.Object.Equals(informationSubject)).ToList();
         if (owners.Count > 1)
             throw new Exception("Should only be one owner");
 

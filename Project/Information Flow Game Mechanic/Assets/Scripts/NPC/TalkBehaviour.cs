@@ -16,20 +16,20 @@ public class TalkBehaviour : AgentBehaviour
     {
         Agent.IsOccupied = true;
         GameManager.Instance.StartDialogue(Agent, ConversationPartner);
-        return null;
+        yield return null;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
         Agent.IsOccupied = false;
         GameManager.Instance.DialogueRunner.Stop();
-        return null;
+        yield return null;
     }
 
     public override IEnumerator ResumeBehaviour()
     {
         GameManager.Instance.DialogueRunner.ResetDialogue();
-        return null;
+        yield return null;
     }
 
     public override bool IsBehaviourFinished()

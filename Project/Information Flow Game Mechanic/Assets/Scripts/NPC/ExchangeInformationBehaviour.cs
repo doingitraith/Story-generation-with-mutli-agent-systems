@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class ExchangeInformationBehaviour : AgentBehaviour
 {
-    private const int EXCHANGE_TIME = 5;
+    protected const int EXCHANGE_TIME = 5;
 
-    private bool _isPaused;
-    private Agent _reciever;
+    protected bool _isPaused;
+    protected Agent _reciever;
     
     public ExchangeInformationBehaviour(Agent agent, Agent reciever) : base(agent)
     {
@@ -26,34 +26,31 @@ public class ExchangeInformationBehaviour : AgentBehaviour
         Agent.IsOccupied = true;
         yield return new WaitForSeconds(EXCHANGE_TIME);
         
-        if (_isPaused)
+        while(_isPaused)
             yield return null;
         
         
         List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
-        if (infos == null)
-        {
-            // TODO: Handle empty information case
-        }
-        else
+        if (infos != null)
             GameManager.Instance.CreateConversationInformation(infos[0], Agent.transform.position);
         
         IsFinished = true;
         Agent.IsOccupied = false;
+        yield return null;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
         Agent.IsOccupied = false;
         _isPaused = true;
-        return null;
+        yield return null;
     }
 
     public override IEnumerator ResumeBehaviour()
     {
         Agent.IsOccupied = true;
         _isPaused = false;
-        return null;
+        yield return null;
     }
 
     public override bool IsBehaviourFinished()

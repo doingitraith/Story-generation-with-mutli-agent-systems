@@ -4,11 +4,10 @@ using UnityEngine;
 
 public enum Adjectives
 {
-    // TODO add importance
-    alive = 0,
-    dead = 1,
-    good,
-    evil
+    Alive = 1,
+    Dead = -10,
+    Good = 2,
+    Evil = -9
 }
 
 public abstract class InformationAdjective
