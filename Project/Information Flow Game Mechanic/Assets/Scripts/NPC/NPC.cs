@@ -14,7 +14,7 @@ public class NPC : Agent
     private const int MEMORY_SIZE = 5;
     private AgentBehaviour _currentBehaviour;
     private float _currentMutationTime = .0f;
-    private int _currentBehaviourIdx = 0;
+    private int _currentBehaviourIdx = -1;
 
     protected override void Awake()
     {
@@ -28,7 +28,7 @@ public class NPC : Agent
         Memory = new InformationManager(this, MEMORY_SIZE);
         
         _currentBehaviour = SelectNextBehaviour();
-        _currentBehaviour.DoBehaviour();
+        StartCoroutine(_currentBehaviour.DoBehaviour());
         /*
         Memory.TryAddNewInformation(new Information(FindObjectOfType<Player>().GetComponent<Player>(),
             GameManager.Instance.WorldAdjectives[Adjectives.ALIVE]),this);
@@ -52,10 +52,10 @@ public class NPC : Agent
             _currentMutationTime = .0f;
         }
 
-        if (_currentBehaviour.IsFinished)
+        if (_currentBehaviour.IsBehaviourFinished())
         {
             _currentBehaviour = SelectNextBehaviour();
-            _currentBehaviour.DoBehaviour();
+            StartCoroutine(_currentBehaviour.DoBehaviour());
         }
     }
 
@@ -82,6 +82,8 @@ public class NPC : Agent
                         this, behaviour.BehaviourObject.GetComponent<Agent>());
                 case BehaviourType.Send:
                     return new SendInformationBehaviour(this);
+                case BehaviourType.Wait:
+                    return new WaitBehaviour(this, behaviour.BehaviourTime);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

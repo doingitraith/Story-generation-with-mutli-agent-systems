@@ -17,16 +17,18 @@ public struct BehaviourEntry
 {
     [SerializeField]
     public BehaviourType Type;
-
-    [SerializeField] public GameObject BehaviourObject;
+    [SerializeField]
+    public GameObject BehaviourObject;
+    [SerializeField]
+    public int BehaviourTime;
 }
 
 public abstract class AgentBehaviour
 {
-    public Agent Agent;
-    public bool IsFinished;
+    protected Agent Agent;
+    protected bool IsFinished;
 
-    public AgentBehaviour(Agent agent) => (Agent, IsFinished) = (agent, false);
+    protected AgentBehaviour(Agent agent) => (Agent, IsFinished) = (agent, false);
 
     protected void Init()
     {

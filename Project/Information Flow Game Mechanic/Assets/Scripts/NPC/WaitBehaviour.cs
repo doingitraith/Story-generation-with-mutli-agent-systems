@@ -4,27 +4,49 @@ using UnityEngine;
 
 public class WaitBehaviour : AgentBehaviour
 {
-    public WaitBehaviour(Agent agent) : base(agent)
+    private readonly IEnumerator _waitCoroutine;
+    private bool _isPaused;
+    public WaitBehaviour(Agent agent, int duration) : base(agent)
     {
+        _waitCoroutine = Wait(duration);
+        _isPaused = false;
+        base.Init();
     }
 
     public override IEnumerator DoBehaviour()
     {
-        throw new System.NotImplementedException();
+        Agent.IsOccupied = true;
+        NPC n = GameManager.FindObjectOfType<NPC>();
+        IsFinished = false;
+        yield return Agent.StartCoroutine(_waitCoroutine);
+        IsFinished = true;
+        Agent.IsOccupied = false;
+        yield return null;
+    }
+
+    private IEnumerator Wait(int duration)
+    {
+        yield return new WaitForSeconds(duration);
+        while(_isPaused)
+            yield return null;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
-        throw new System.NotImplementedException();
+        _isPaused = true;
+        Agent.IsOccupied = false;
+        yield return null;
     }
 
     public override IEnumerator ResumeBehaviour()
     {
-        throw new System.NotImplementedException();
+        _isPaused = false;
+        Agent.IsOccupied = true;
+        yield return null;
     }
 
     public override bool IsBehaviourFinished()
     {
-        throw new System.NotImplementedException();
+        return IsFinished;
     }
 }

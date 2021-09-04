@@ -29,16 +29,19 @@ public class WalkBehaviour : AgentBehaviour
     {
         Agent.IsOccupied = true;
         _navMeshAgent.destination = Destination.position;
+        _navMeshAgent.isStopped = false;
         _animator.SetFloat("RunningSpeed", .5f);
-        return null;
+        yield return null;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
         _navMeshAgent.destination = Agent.transform.position;
+        _navMeshAgent.isStopped = true;
+        _animator.SetFloat("RunningSpeed", .0f);
         _animator.SetTrigger("DoStop");
         Agent.IsOccupied = false;
-        return null;
+        yield return null;
     }
 
     public override IEnumerator ResumeBehaviour()
@@ -46,9 +49,13 @@ public class WalkBehaviour : AgentBehaviour
 
     public override bool IsBehaviourFinished()
     {
-        if (Agent.transform.position.Equals(Destination.position))
+        if (Vector3.Distance(Agent.transform.position, Destination.position) <= 1.0f)
         {
+            _navMeshAgent.destination = Agent.transform.position;
+            _navMeshAgent.isStopped = true;
             Agent.IsOccupied = false;
+            _animator.SetFloat("RunningSpeed", .0f);
+            _animator.SetTrigger("DoStop");
             return true;
         }
         else

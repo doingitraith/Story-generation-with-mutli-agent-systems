@@ -25,20 +25,21 @@ public class SendInformationBehaviour : ExchangeInformationBehaviour
         
         IsFinished = true;
         Agent.IsOccupied = false;
+        yield return null;
     }
 
     public override IEnumerator InterruptBehaviour()
     {
         Agent.IsOccupied = false;
         _isPaused = true;
-        return null;
+        yield return null;
     }
 
     public override IEnumerator ResumeBehaviour()
     {
         Agent.IsOccupied = true;
         _isPaused = false;
-        return null;
+        yield return null;
     }
 
     public override bool IsBehaviourFinished()
