@@ -1,28 +1,29 @@
-using System.Buffers;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using Information_Flow;
 
-public class Quest
+namespace Game
 {
-    public List<Information> Goals;
-    public string Description;
-    public Agent Owner;
-    public Agent QuestGiver;
+    public class Quest
+    {
+        public List<Information> Goals;
+        public string Description;
+        public Agent Owner;
+        public Agent QuestGiver;
 
-    public Quest(Agent owner, Agent questGiver)
-        => (Owner, QuestGiver) = (owner, questGiver);
+        public Quest(Agent owner, Agent questGiver)
+            => (Owner, QuestGiver) = (owner, questGiver);
 
-    public Quest(Agent owner, Agent questGiver, List<Information> goals)
-        => (Owner, QuestGiver, Goals) = (owner, questGiver, goals);
+        public Quest(Agent owner, Agent questGiver, List<Information> goals)
+            => (Owner, QuestGiver, Goals) = (owner, questGiver, goals);
 
-    public Quest(Agent owner, Agent questGiver, List<Information> goals, string description)
-        => (Owner, QuestGiver, Goals, Description) = (owner, questGiver, goals, description);
+        public Quest(Agent owner, Agent questGiver, List<Information> goals, string description)
+            => (Owner, QuestGiver, Goals, Description) = (owner, questGiver, goals, description);
 
-    public bool IsQuestFinished()
-        => Goals.TrueForAll(i => IsGoalTrue(i));
+        public bool IsQuestFinished()
+            => Goals.TrueForAll(i => IsGoalTrue(i));
 
-    public bool IsGoalTrue(Information information)
-        => QuestGiver.Memory.ContainsStableInformation(information) || 
-           QuestGiver.Memory.ContainsSpeculativeInformation(information);
+        public bool IsGoalTrue(Information information)
+            => QuestGiver.Memory.ContainsStableInformation(information) || 
+               QuestGiver.Memory.ContainsSpeculativeInformation(information);
+    }
 }

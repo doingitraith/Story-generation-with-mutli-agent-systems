@@ -3157,7 +3157,7 @@ GameObject:
   - component: {fileID: 464540}
   - component: {fileID: 9553506}
   m_Layer: 0
-  m_Name: Character_Female_Gypsy_01
+  m_Name: Character_Female_Peddler_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

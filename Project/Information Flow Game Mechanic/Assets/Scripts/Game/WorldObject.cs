@@ -1,36 +1,38 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using Information_Flow;
 using UnityEngine;
 
-public abstract class WorldObject : MonoBehaviour
+namespace Game
 {
-    public string Name;
-    public bool IsPerson;
-    public int WorldImportance;
-    public Mutation Mutation;
-    [SerializeField]
-    private List<string> Mutations;
-
-    public InformationSubject InformationSubject;
-    public InformationLocation Location;
-
-    protected virtual void Awake()
+    public abstract class WorldObject : MonoBehaviour
     {
-        for (int i = Mutations.Count-1; i >= 0; i--)
-            Mutation = new Mutation(Mutations[i], Mutation);
+        public string Name;
+        public bool IsPerson;
+        public int WorldImportance;
+        public Mutation Mutation;
+        [SerializeField]
+        private List<string> Mutations;
 
-        InformationSubject = new InformationSubject(Name, IsPerson, Mutation);
-    }
+        public InformationSubject InformationSubject;
+        public InformationLocation Location;
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-    }
+        protected virtual void Awake()
+        {
+            for (int i = Mutations.Count-1; i >= 0; i--)
+                Mutation = new Mutation(Mutations[i], Mutation);
 
-    // Update is called once per frame
-    protected virtual void Update()
-    {
+            InformationSubject = new InformationSubject(Name, IsPerson, Mutation);
+        }
+
+        // Start is called before the first frame update
+        protected virtual void Start()
+        {
+        }
+
+        // Update is called once per frame
+        protected virtual void Update()
+        {
         
+        }
     }
 }

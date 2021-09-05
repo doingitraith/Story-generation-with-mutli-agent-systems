@@ -1,125 +1,139 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Information_Flow;
 using UnityEngine;
-using Yarn.Unity;
-using Random = UnityEngine.Random;
 
-public class Agent : WorldObject
+namespace Game
 {
-    public InformationManager Memory;
-    public List<Item> Inventory;
-    public Dictionary<Agent, float> Acquaintances;
-    [SerializeField]
-    private List<Agent> ImportantPeople;
-    public List<Quest> Quests;
-    public YarnProgram YarnScript;
-    public string YarnNode;
-    public bool IsHearing = true;
-    public bool IsSeeing = true;
-    public float BelievabilityThreshold;
-    public List<Information> CurrentReplies;
-    public bool IsOccupied = false;
+    public class Agent : WorldObject
+    {
+        public InformationManager Memory;
+        public List<Item> Inventory;
+        public Dictionary<Agent, float> Acquaintances;
+        [SerializeField]
+        public List<Agent> ImportantPeople;
+        public List<Quest> Quests;
+        public YarnProgram YarnScript;
+        public string YarnNode;
+        public bool IsHearing = true;
+        public bool IsSeeing = true;
+        public float BelievabilityThreshold;
+        public List<Information> CurrentReplies;
+        public bool IsOccupied = false;
+        public List<InformationEntry> StateInfos;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+        protected override void Awake()
+        {
+            base.Awake();
+        }
     
-    protected override void Start()
-    {
-        base.Start();
-        if (YarnScript != null)
-            GameManager.Instance.DialogueRunner.Add(YarnScript);
-        Inventory = new List<Item>();
-        Acquaintances = new Dictionary<Agent, float>();
+        protected override void Start()
+        {
+            base.Start();
+            if (YarnScript != null)
+                GameManager.Instance.DialogueRunner.Add(YarnScript);
+            Acquaintances = new Dictionary<Agent, float>();
         
-        foreach (Agent agent in ImportantPeople)
-            Acquaintances.Add(agent, 1.0f);
+            ImportantPeople.ForEach(p => Acquaintances.Add(p, 1.0f));
 
-        Quests = new List<Quest>();
-        CurrentReplies = new List<Information>();
-    }
+            Quests = new List<Quest>();
+            CurrentReplies = new List<Information>();
 
-    protected override void Update()
-    {
-        base.Update();
-    }
-    
-    public void InteractNPC(Agent interactAgent)
-    {
-        IsOccupied = true;
-        GameManager.Instance.StartDialogue(this, interactAgent);
-    }
+            if (StateInfos == null)
+                StateInfos = new List<InformationEntry>();
+        
+            transform.Find("Inventory").GetComponentsInChildren<Item>().ToList().ForEach(i => Inventory.Add(i));
+        
+            Inventory.Where(i=>i.IsVisible).ToList().ForEach(i=>
+                StateInfos.Add(
+                    new InformationEntry(this, InformationVerb.Has, i, 0, null,false)));
+        }
 
-    public void InteractItem(Item interactItem)
-    {
-        IsOccupied = true;
-        Inventory.Add(interactItem);
-        interactItem.SetInventory(true);
-        GameManager.Instance.CreateVisibleInformation(new Information(this, interactItem), transform.position);
-        IsOccupied = false;
-    }
-    
-    public void DropItem(Item interactItem)
-    {
-        IsOccupied = true;
-        Inventory.Remove(interactItem);
-        interactItem.SetInventory(false);
-        IsOccupied = false;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        InformationObject infoObject = null;
-        Location infoLocation = null;
-        bool isInformationAdded = false;
-        if (other.gameObject.TryGetComponent<InformationObject>(out infoObject))
+        protected override void Update()
         {
-            switch (infoObject.PropagationType)
+            base.Update();
+        }
+    
+        public void InteractNPC(Agent interactAgent)
+        {
+            IsOccupied = true;
+            GameManager.Instance.StartDialogue(this, interactAgent);
+        }
+
+        public void PickUpItem(Item interactItem)
+        {
+            IsOccupied = true;
+            Inventory.Add(interactItem);
+            interactItem.PickUp(this);
+            GameManager.Instance.CreateVisibleInformation(new Information(this, interactItem), transform.position);
+            IsOccupied = false;
+        }
+
+        public void DropItem(Item interactItem)
+        {
+            IsOccupied = true;
+            Inventory.Remove(interactItem);
+            interactItem.Drop();
+            GameManager.Instance.CreateVisibleInformation(
+                new Information(new Information(this, interactItem),true), transform.position);
+            IsOccupied = false;
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            InformationObject infoObject = null;
+            Location infoLocation = null;
+            bool isInformationAdded = false;
+            if (other.gameObject.TryGetComponent<InformationObject>(out infoObject))
             {
-                case InformationPropagationType.VISUAL:
+                switch (infoObject.PropagationType)
                 {
-                    if (IsSeeing)
+                    case InformationPropagationType.Visual:
+                    {
+                        if (IsSeeing)
+                            isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
+                    }
+                        break;
+                    case InformationPropagationType.Audio:
+                    {
+                        if (IsHearing)
+                            isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
+                    }
+                        break;
+                    case InformationPropagationType.Instant:
                         isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
+                        break;
+                    case InformationPropagationType.Persistant:
+                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, null);
+                        break;
+                    case InformationPropagationType.None:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
-                    break;
-                case InformationPropagationType.AUDIO:
-                {
-                    if (IsHearing)
-                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
-                }
-                    break;
-                case InformationPropagationType.INSTANT:
-                    isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
-                    break;
-                case InformationPropagationType.PERSISTANT:
-                    isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, null);
-                    break;
-                case InformationPropagationType.NONE:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
-        }
 
-        if (other.gameObject.TryGetComponent<Location>(out infoLocation))
-        {
-            GameManager.Instance.CreateArrivalInformation(this, infoLocation);
-        }
+            if (other.gameObject.TryGetComponent<Location>(out infoLocation))
+            {
+                GameManager.Instance.CreateArrivalInformation(this, infoLocation);
+            }
 
+            /*
         if(isInformationAdded)
             Debug.Log(this.Name + " learned: \""+infoObject.Information.ToString()+"\"");
+        */
+        }
+
+        public override bool Equals(object o)
+        {
+            if (!(o is Agent other))
+                return false;
+
+            return gameObject.Equals(other.gameObject);
+        }
+
+        public override int GetHashCode()
+            => gameObject.GetHashCode();
     }
-
-    public override bool Equals(object o)
-    {
-        if (!(o is Agent other))
-            return false;
-
-        return gameObject.Equals(other.gameObject);
-    }
-
-    public override int GetHashCode()
-        => gameObject.GetHashCode();
 }

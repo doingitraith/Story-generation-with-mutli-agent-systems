@@ -1,4 +1,7 @@
-public interface IMutatable
+namespace Information_Flow
 {
-    void Mutate();
+    public interface IMutatable
+    {
+        void Mutate();
+    }
 }
