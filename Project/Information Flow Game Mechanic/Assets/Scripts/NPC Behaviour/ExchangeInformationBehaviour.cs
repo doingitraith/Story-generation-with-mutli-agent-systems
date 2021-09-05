@@ -33,7 +33,8 @@ namespace NPC_Behaviour
                 yield return null;
         
         
-            List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
+            List<Information> infos = Agent.Memory.
+                GetInformationToExchange(1, _reciever.InformationSubject);
             if (infos != null)
                 GameManager.Instance.CreateConversationInformation(infos[0], Agent.transform.position);
         

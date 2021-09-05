@@ -41,7 +41,11 @@ namespace Information_Flow
         {
             if (Owner.InformationSubject.Equals(information.Subject))
                 return false;
-        
+            if (information.Not)
+            {
+                if (ContainsSpeculativeInformation(information))
+                    _stableMemory.Remove(information);
+            }
             if (!Owner.Acquaintances.ContainsKey(sender))
                 Owner.Acquaintances.Add(sender, Owner.Equals(sender) ? 1.0f : .5f);
 
@@ -114,14 +118,14 @@ namespace Information_Flow
                 1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
 
             sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
-        
+
             return true;
         }
     
         public bool TryAddNewSpeculativeInformation(Information information, Agent sender)
         {
             // don't add information about self
-            if (Owner.InformationSubject.Equals(information.Subject))
+            if (Owner.InformationSubject.Equals(information.Subject) || ContainsStableInformation(information))
                 return false;
             if (information.Not)
             {
@@ -231,11 +235,19 @@ namespace Information_Flow
             // Map
             Dictionary<Information, Dictionary<Information, float>> distances = 
                 new Dictionary<Information, Dictionary<Information, float>>();
-        
-            data.ForEach(d => distances.Add(d, new Dictionary<Information, float>()));
+
+            data.ForEach(d =>
+            {
+                if(!distances.ContainsKey(d))
+                    distances.Add(d, new Dictionary<Information, float>());
+            });
         
             data.ForEach(i => data.Where(j => !i.Equals(j)).ToList()
-                .ForEach(k => distances[i].Add(k, GetInformationDistance(i,k))));
+                .ForEach(k =>
+                {
+                    if(!distances[i].ContainsKey(k))
+                        distances[i].Add(k, GetInformationDistance(i, k));
+                }));
         
 
             // Reduce
@@ -246,6 +258,12 @@ namespace Information_Flow
                 else if(_speculativeMemory.ContainsKey(distance.Key) && distance.Value.Values.Any())
                     _speculativeMemory[distance.Key].Believability = distance.Value.Values.Average();
             }
+            
+            /*
+            data.Where(i => _stableMemory.ContainsKey(i)).
+                Where(i=> _stableMemory[i].Believability < Owner.BelievabilityThreshold).ToList().
+                ForEach(i=> _stableMemory.Remove(i));
+            */
         }
 
         private float GetInformationDistance(Information i1, Information i2)
@@ -378,17 +396,19 @@ namespace Information_Flow
             return h;
         }
 
-        public List<Information> GetInformationsToExchange(int numberOfInfos)
+        public List<Information> GetInformationToExchange(int numberOfInfos, InformationSubject target)
         {
-            List<Information> allMemories = new List<Information>(_stableMemory.Keys.ToList());
-            allMemories.AddRange(_speculativeMemory.Keys.ToList());
+            var allMemories = new Dictionary<Information, InformationContext>(_stableMemory);
+            foreach (var m in _speculativeMemory)
+                allMemories.Add(m.Key, m.Value);
         
             if (NumberOfMemories < numberOfInfos)
                 return null;
-        
-            List<Information> shuffleList = new List<Information>(allMemories);
+
+            List<Information> shuffleList = new List<Information>(allMemories.Keys);
             //Shuffle List
-            shuffleList = shuffleList.OrderBy(x => Random.value).ToList();
+            shuffleList = shuffleList.Where(i=>!i.Subject.Equals(target)).
+                OrderByDescending(x => allMemories[x].Age).ToList();
 
             return shuffleList.Take(numberOfInfos).ToList();
         }

@@ -10,10 +10,14 @@ namespace Player_Behaviour
         [SerializeField] private float _moveSpeed;
         private Vector2 _currentMove;
         private Animator _animator;
+        private string _attackStateName;
+        private int _attackStateHash;
 
         private void Start()
         {
             _animator = GetComponentInChildren<Animator>();
+            _attackStateName = "Base Layer.Attack.Attack1";
+            _attackStateHash = Animator.StringToHash(_attackStateName);
         }
 
         private void Update()
@@ -36,10 +40,7 @@ namespace Player_Behaviour
     
         public void Move(InputAction.CallbackContext context)
         {
-            if (_animator.GetBool("IsAttacking"))
-                return;
-            
-            _currentMove = context.ReadValue<Vector2>();
+            _currentMove = context.ReadValue<Vector2>().normalized;
 
             _animator.SetFloat("RunningSpeed", _currentMove.magnitude);
             if (context.canceled)
@@ -48,6 +49,9 @@ namespace Player_Behaviour
 
         public void Interact(InputAction.CallbackContext context)
         {
+            if(_animator.GetBool("IsAttacking"))
+                return;
+            
             if (context.started)
             {
                 //Debug.Log("Interaction pressed");
@@ -57,20 +61,33 @@ namespace Player_Behaviour
 
         public void Attack(InputAction.CallbackContext context)
         {
-            _animator.SetTrigger("DoStop");
-            _animator.SetBool("IsAttacking", true);
-            _animator.SetTrigger("DoAttack");
-            StartCoroutine(AttackAnimation());
+            if(_animator.GetBool("IsAttacking") || !gameObject.GetComponent<Player>().HasWeapon())
+                return;
+            
+            if (context.started)
+            {
+                _animator.SetBool("IsAttacking", true);
+                StartCoroutine(AttackAnimation());
+            }
         }
 
         private IEnumerator AttackAnimation()
         {
-            do
-            {
+            //_animator.SetTrigger("DoAttack");
+            _animator.CrossFadeInFixedTime(_attackStateName, .2f);
+            while (_animator.GetCurrentAnimatorStateInfo(0).fullPathHash != _attackStateHash)
                 yield return null;
-
-            } while (_animator.GetCurrentAnimatorStateInfo(0).IsName("Melee Attack Down"));
             
+            float counter = 0;
+            float waitTime = _animator.GetCurrentAnimatorStateInfo(0).length;
+
+            //Now, Wait until the current state is done playing
+            while (counter < (waitTime))
+            {
+                counter += Time.deltaTime;
+                yield return null;
+            }
+
             _animator.SetBool("IsAttacking", false);
         }
         

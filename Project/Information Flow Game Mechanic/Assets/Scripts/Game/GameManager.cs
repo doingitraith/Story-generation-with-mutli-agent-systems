@@ -45,6 +45,9 @@ namespace Game
         private void Awake()
         {
             Random.InitState(15102021);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
             WorldAdjectives = new Dictionary<Adjectives, InformationAdjective>();
             InitAdjectives();
             WorldRules = new List<InferenceRule>();
@@ -142,9 +145,8 @@ namespace Game
             }
             DialogueRunner.variableStorage.SetValue("$NPCName", NameText.text);
         
-            _currentConversationPartner.CurrentReplies = 
-                _currentConversationPartner.Memory.GetInformationsToExchange(1).
-                    Where(i => !i.Subject.Equals(_currentConversationStarter.InformationSubject)).ToList();
+            _currentConversationPartner.CurrentReplies = _currentConversationPartner.Memory.
+                    GetInformationToExchange(1, _currentConversationStarter.InformationSubject).ToList();
 
             DialogueRunner.variableStorage.SetValue("$HasNPCReplies", 
                 _currentConversationPartner.CurrentReplies.Count!=0);
@@ -154,15 +156,14 @@ namespace Game
                     _currentConversationPartner.CurrentReplies[0].ToString());
 
             int numOfReplies = _currentConversationStarter.Memory.NumberOfMemories;
-            _currentConversationStarter.CurrentReplies =
-                _currentConversationStarter.Memory.
-                    GetInformationsToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1).
-                    Where(i => !i.Subject.Equals(_currentConversationPartner.InformationSubject)).ToList();
+            _currentConversationStarter.CurrentReplies = _currentConversationStarter.Memory.
+                    GetInformationToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1,
+                        _currentConversationPartner.InformationSubject).ToList();
+            
             numOfReplies = _currentConversationStarter.CurrentReplies.Count;
             DialogueRunner.variableStorage.SetValue("$NumOfReplies", numOfReplies);
             if (numOfReplies > 0)
             {
-            
                 DialogueRunner.variableStorage.SetValue("$ReplyText1", 
                     _currentConversationStarter.CurrentReplies[0].ToString());
                 if(numOfReplies > 1)
@@ -189,6 +190,11 @@ namespace Game
 
         public void ReceiveReply(string[] parameters)
         {
+            if (parameters.Length > 2)
+            {
+                int i = 3;
+            }
+
             var replyIdx = Int32.Parse(parameters[1]);
 
             Agent player = null;
@@ -207,12 +213,12 @@ namespace Game
             if (parameters[0] == "Player")
             {
                 player.Memory.TryAddNewSpeculativeInformation(npc.CurrentReplies[replyIdx], npc);
-                Debug.Log("Player learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
+                //Debug.Log("Player learns \"" + npc.CurrentReplies[replyIdx].ToString() + "\"");
             }
             else
             {
                 npc.Memory.TryAddNewSpeculativeInformation(player.CurrentReplies[replyIdx], player);
-                Debug.Log(parameters[0] + " learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
+                //Debug.Log(parameters[0] + " learns \"" + player.CurrentReplies[replyIdx].ToString() + "\"");
             }
         }
 

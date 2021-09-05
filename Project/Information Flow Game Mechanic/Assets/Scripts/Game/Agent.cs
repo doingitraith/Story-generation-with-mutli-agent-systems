@@ -22,6 +22,7 @@ namespace Game
         public List<Information> CurrentReplies;
         public bool IsOccupied = false;
         public List<InformationEntry> StateInfos;
+        public Item EquippedItem;
 
         protected override void Awake()
         {

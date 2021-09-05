@@ -28,5 +28,10 @@ namespace Player_Behaviour
         {
             base.Update();
         }
+
+        public bool HasWeapon()
+        {
+            return EquippedItem != null && EquippedItem.gameObject.CompareTag("Weapon");
+        }
     }
 }

@@ -23,7 +23,8 @@ namespace NPC_Behaviour
                 yield return null;
         
         
-            List<Information> infos = Agent.Memory.GetInformationsToExchange(1);
+            List<Information> infos = Agent.Memory.
+                GetInformationToExchange(1, _reciever.InformationSubject);
             if (infos != null)
                 _reciever.Memory.TryAddNewInformation(infos[0], Agent);
         
