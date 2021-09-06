@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738081b698dd3bd44b62f9e54283e12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Potion
+  Name: Sword
   IsPerson: 0
-  WorldImportance: 0
-  Mutations: []
+  WorldImportance: 5
+  Mutations:
+  - Weapon
   IsVisible: 0
 --- !u!1 &776321196104545253
 GameObject:

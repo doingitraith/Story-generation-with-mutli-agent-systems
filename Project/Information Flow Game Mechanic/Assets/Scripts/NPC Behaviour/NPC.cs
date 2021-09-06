@@ -117,7 +117,7 @@ namespace NPC_Behaviour
                 GameManager.Instance.CreateVisibleInformation(
                     new Information(this, GameManager.Instance.WorldAdjectives[Adjectives.Dead]),
                     transform.position);
-                Debug.Log(Name+" is dead");
+                //Debug.Log(Name+" is dead");
             }
             else
             {
@@ -125,7 +125,7 @@ namespace NPC_Behaviour
                 GameManager.Instance.CreateVisibleInformation(
                     new Information(this, GameManager.Instance.WorldAdjectives[Adjectives.Hurt]),
                     transform.position);
-                Debug.Log(Name+" is hurt");
+                //Debug.Log(Name+" is hurt");
             }
         }
     }

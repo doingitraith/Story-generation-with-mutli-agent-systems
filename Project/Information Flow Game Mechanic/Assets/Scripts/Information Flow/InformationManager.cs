@@ -113,7 +113,16 @@ namespace Information_Flow
                 _stableMemory[information].ReceivedFrom.Add(sender);
             }
 
-            float believability = _stableMemory[information].Heuristic;
+            float believability = .0f;
+            try
+            {
+                believability = _stableMemory[information].Heuristic;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             Owner.Acquaintances[sender] = Owner.Equals(sender) ? 
                 1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
 
@@ -407,9 +416,13 @@ namespace Information_Flow
 
             List<Information> shuffleList = new List<Information>(allMemories.Keys);
             //Shuffle List
-            shuffleList = shuffleList.Where(i=>!i.Subject.Equals(target)).
-                OrderByDescending(x => allMemories[x].Age).ToList();
+            shuffleList = shuffleList.Where(i=>!i.Subject.Equals(target) &&
+                                               !i.Verb.Equals(InformationVerb.At)).
+                OrderByDescending(x => allMemories[x].Believability).ToList();
 
+            if (shuffleList.Count == 0)
+                return null;
+            
             return shuffleList.Take(numberOfInfos).ToList();
         }
 

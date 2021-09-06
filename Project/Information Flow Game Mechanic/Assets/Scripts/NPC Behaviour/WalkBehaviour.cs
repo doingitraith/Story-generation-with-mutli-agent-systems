@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace NPC_Behaviour
 {
@@ -11,10 +12,12 @@ namespace NPC_Behaviour
     
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
+        private float _walkingSpeed = .1f;
 
         public WalkBehaviour(NPC agent, Transform destination) : base(agent)
         {
             Destination = destination;
+            Destination.position += Vector3.forward * 2 * Random.value + Vector3.right * 2 * Random.value;
             base.Init();
         
             _navMeshAgent = Agent.GetComponentInChildren<NavMeshAgent>();
@@ -32,7 +35,7 @@ namespace NPC_Behaviour
             Agent.IsOccupied = true;
             _navMeshAgent.destination = Destination.position;
             _navMeshAgent.isStopped = false;
-            _animator.SetFloat("RunningSpeed", .5f);
+            _animator.SetFloat("RunningSpeed", _walkingSpeed);
             yield return null;
         }
 

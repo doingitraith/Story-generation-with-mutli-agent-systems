@@ -15,7 +15,7 @@ namespace Information_Flow
         {
             if (!(o is InformationLocation other))
                 return false;
-
+            
             return Name.Equals(other.Name) && (Mutation?.Equals(other.Mutation) ?? true) && Location.Equals(other.Location);
         }
 

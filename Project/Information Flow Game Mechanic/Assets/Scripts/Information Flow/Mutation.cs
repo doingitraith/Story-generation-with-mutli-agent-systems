@@ -1,3 +1,5 @@
+using System;
+
 namespace Information_Flow
 {
     public class Mutation
@@ -15,7 +17,7 @@ namespace Information_Flow
             if (!(o is Mutation other))
                 return false;
 
-            return Value.Equals(other.Value) && ParentMutation.Equals(other.ParentMutation);
+            return Value.Equals(other.Value) && (ParentMutation?.Equals(other.ParentMutation) ?? true);
         }
 
         public override int GetHashCode()

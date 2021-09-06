@@ -20,6 +20,7 @@ namespace Game
         private float MapReduceWaitSeconds;
         [SerializeField]
         private float InferenceWaitSeconds;
+        [SerializeField] private bool IsMouseLocked;
         public Dictionary<Adjectives, InformationAdjective> WorldAdjectives;
         public List<InferenceRule> WorldRules;
         public DialogueRunner DialogueRunner;
@@ -45,9 +46,13 @@ namespace Game
         private void Awake()
         {
             Random.InitState(15102021);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
             
+            if (IsMouseLocked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+
             WorldAdjectives = new Dictionary<Adjectives, InformationAdjective>();
             InitAdjectives();
             WorldRules = new List<InferenceRule>();
@@ -109,18 +114,14 @@ namespace Game
                 new InformationProperty(Adjectives.Armed, new List<InformationAdjective>()));
         
             // Add adjective Opinions
-            WorldAdjectives.Add(Adjectives.Good, 
-                new InformationOpinion(Adjectives.Good, new List<InformationAdjective>()));
-            WorldAdjectives.Add(Adjectives.Evil, 
-                new InformationOpinion(Adjectives.Evil, new List<InformationAdjective>()));
+            WorldAdjectives.Add(Adjectives.Enemy, 
+                new InformationOpinion(Adjectives.Enemy, new List<InformationAdjective>()));
             WorldAdjectives.Add(Adjectives.Dangerous, 
                 new InformationOpinion(Adjectives.Dangerous, new List<InformationAdjective>()));
         
             // Add contradictions
             WorldAdjectives[Adjectives.Alive].AddContradiction(WorldAdjectives[Adjectives.Dead]);
             WorldAdjectives[Adjectives.Dead].AddContradiction(WorldAdjectives[Adjectives.Alive]);
-            WorldAdjectives[Adjectives.Good].AddContradiction(WorldAdjectives[Adjectives.Evil]);
-            WorldAdjectives[Adjectives.Evil].AddContradiction(WorldAdjectives[Adjectives.Good]);
             WorldAdjectives[Adjectives.Hurt].AddContradiction(WorldAdjectives[Adjectives.Dead]);
         }
 
@@ -128,9 +129,13 @@ namespace Game
         {
             WorldObject s = FindObjectOfType<Player>().GetComponent<Player>();
         
-            InferenceRule rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Alive])))
-                .And(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Evil])));
-            rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.Dead]) };
+            var rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Armed])))
+                .And(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Dangerous])));
+            rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.Enemy]) };
+            rule.AppliesToSelf = false;
+            
+            rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Enemy])));
+            rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.Dangerous]) };
             rule.AppliesToSelf = false;
 
             WorldRules.Add(rule);
@@ -200,12 +205,7 @@ namespace Game
 
         public void ReceiveReply(string[] parameters)
         {
-            if (parameters.Length > 2)
-            {
-                int i = 3;
-            }
-
-            var replyIdx = Int32.Parse(parameters[1]);
+            var replyIdx = Int32.Parse(parameters[parameters.Length-1]);
 
             Agent player = null;
             Agent npc = null;

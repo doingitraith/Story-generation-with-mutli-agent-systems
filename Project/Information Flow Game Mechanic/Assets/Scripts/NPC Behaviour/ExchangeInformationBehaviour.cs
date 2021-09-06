@@ -28,6 +28,9 @@ namespace NPC_Behaviour
         {
             Agent.IsOccupied = true;
             _reciever.IsOccupied = true;
+            
+            (_reciever as NPC)?.InterruptNPC();
+            
             yield return new WaitForSeconds(EXCHANGE_TIME);
         
             while(_isPaused)
@@ -41,6 +44,8 @@ namespace NPC_Behaviour
         
             IsFinished = true;
             Agent.IsOccupied = false;
+            _reciever.IsOccupied = false;
+            (_reciever as NPC)?.ResumeNPC();
             yield return null;
         }
 

@@ -44,14 +44,22 @@ namespace Game
             Quests = new List<Quest>();
             CurrentReplies = new List<Information>();
 
+            if(Inventory == null)
+                Inventory = new List<Item>();
+            
             if (StateInfos == null)
                 StateInfos = new List<InformationEntry>();
         
             transform.Find("Inventory").GetComponentsInChildren<Item>().ToList().ForEach(i => Inventory.Add(i));
         
-            Inventory.Where(i=>i.IsVisible).ToList().ForEach(i=>
-                StateInfos.Add(
-                    new InformationEntry(this, InformationVerb.Has, i, 0, null,false)));
+            Inventory.Where(i=>i.IsVisible).ToList().ForEach(i =>
+            {
+                StateInfos.Add(new InformationEntry(
+                    this, InformationVerb.Has, i, 0, null, false));
+                if(i.gameObject.CompareTag("Weapon"))
+                    StateInfos.Add(new InformationEntry(
+                            this, InformationVerb.Is, i, Adjectives.Armed, null, false));
+            });
         }
 
         protected override void Update()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,10 @@ namespace Information_Flow
     {
         Alive = 1,
         Dead = -10,
-        Good = 2,
-        Evil = -9,
         Hurt = -7,
         Dangerous = -8,
-        Armed = -3
+        Armed = -3,
+        Enemy = -9
     }
 
     public abstract class InformationAdjective
@@ -34,8 +34,22 @@ namespace Information_Flow
         }
 
         public override string ToString()
-            => Characteristic.ToString();
-    
+        {
+            switch (Characteristic)
+            {
+                case Adjectives.Alive:
+                case Adjectives.Dead:
+                case Adjectives.Hurt:
+                case Adjectives.Dangerous:
+                case Adjectives.Armed:
+                    return Characteristic.ToString();
+                case Adjectives.Enemy:
+                    return "an Enemy of mine";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         public override bool Equals(object o)
         {
             if (!(o is InformationAdjective other))
