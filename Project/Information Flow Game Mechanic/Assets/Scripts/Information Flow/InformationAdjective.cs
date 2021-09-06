@@ -10,6 +10,9 @@ namespace Information_Flow
         Dead = -10,
         Good = 2,
         Evil = -9,
+        Hurt = -7,
+        Dangerous = -8,
+        Armed = -3
     }
 
     public abstract class InformationAdjective

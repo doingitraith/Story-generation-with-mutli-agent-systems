@@ -32,6 +32,12 @@ namespace Player_Behaviour
                 gameObject.GetComponent<Agent>().PickUpItem(_interactItem);
         }
 
+        public void Attack()
+        {
+            if (_interactNPC)
+                gameObject.GetComponent<Agent>().AttackNPC(_interactNPC);
+        }
+
         public void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Interactor"))

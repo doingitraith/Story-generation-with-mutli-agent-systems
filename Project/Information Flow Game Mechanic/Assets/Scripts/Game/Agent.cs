@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Information_Flow;
+using NPC_Behaviour;
 using UnityEngine;
 
 namespace Game
@@ -18,6 +19,8 @@ namespace Game
         public string YarnNode;
         public bool IsHearing = true;
         public bool IsSeeing = true;
+        public bool isHurt = false;
+        public bool isDead = false;
         public float BelievabilityThreshold;
         public List<Information> CurrentReplies;
         public bool IsOccupied = false;
@@ -59,7 +62,13 @@ namespace Game
         public void InteractNPC(Agent interactAgent)
         {
             IsOccupied = true;
+            interactAgent.IsOccupied = true;
             GameManager.Instance.StartDialogue(this, interactAgent);
+        }
+        
+        public void AttackNPC(NPC interactNpc)
+        {
+            interactNpc.Hit();
         }
 
         public void PickUpItem(Item interactItem)
@@ -121,9 +130,9 @@ namespace Game
             }
 
             /*
-        if(isInformationAdded)
-            Debug.Log(this.Name + " learned: \""+infoObject.Information.ToString()+"\"");
-        */
+            if(isInformationAdded)
+                Debug.Log(this.Name + " learned: \""+infoObject.Information.ToString()+"\"");
+            */
         }
 
         public override bool Equals(object o)

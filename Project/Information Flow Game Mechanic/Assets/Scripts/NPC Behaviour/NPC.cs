@@ -45,6 +45,9 @@ namespace NPC_Behaviour
         // Update is called once per frame
         protected override void Update()
         {
+            if (isDead)
+                return;
+            
             base.Update();
             _currentMutationTime += Time.deltaTime;
             if (_currentMutationTime > MemoryMutationInterval)
@@ -99,5 +102,31 @@ namespace NPC_Behaviour
     
         public void ResumeNPC()
             => _currentBehaviour.ResumeBehaviour();
+
+        private void Die()
+        {
+            isDead = true;
+            GetComponentInChildren<Animator>().SetTrigger("DoDie");
+        }
+
+        public void Hit()
+        {
+            if (isHurt)
+            {
+                Die();
+                GameManager.Instance.CreateVisibleInformation(
+                    new Information(this, GameManager.Instance.WorldAdjectives[Adjectives.Dead]),
+                    transform.position);
+                Debug.Log(Name+" is dead");
+            }
+            else
+            {
+                isHurt = true;
+                GameManager.Instance.CreateVisibleInformation(
+                    new Information(this, GameManager.Instance.WorldAdjectives[Adjectives.Hurt]),
+                    transform.position);
+                Debug.Log(Name+" is hurt");
+            }
+        }
     }
 }

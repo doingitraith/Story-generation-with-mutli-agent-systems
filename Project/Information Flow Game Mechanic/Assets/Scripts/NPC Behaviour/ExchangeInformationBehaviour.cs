@@ -27,6 +27,7 @@ namespace NPC_Behaviour
         public override IEnumerator DoBehaviour()
         {
             Agent.IsOccupied = true;
+            _reciever.IsOccupied = true;
             yield return new WaitForSeconds(EXCHANGE_TIME);
         
             while(_isPaused)

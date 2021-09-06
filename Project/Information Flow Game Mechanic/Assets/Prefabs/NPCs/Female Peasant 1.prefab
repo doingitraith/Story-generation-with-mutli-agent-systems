@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 6909794135598521567}
   - component: {fileID: 6909794135598521504}
   - component: {fileID: 6909794135598521506}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female Peasant 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,9 +242,12 @@ MonoBehaviour:
   YarnNode: Start
   IsHearing: 1
   IsSeeing: 1
+  isHurt: 0
+  isDead: 0
   BelievabilityThreshold: 3
   IsOccupied: 0
   StateInfos: []
+  EquippedItem: {fileID: 0}
   MemoryMutationInterval: 30
   Routine:
   - Type: 4

@@ -67,6 +67,7 @@ namespace Player_Behaviour
             if (context.started)
             {
                 _animator.SetBool("IsAttacking", true);
+                gameObject.GetComponent<Interactor>().Attack();
                 StartCoroutine(AttackAnimation());
             }
         }

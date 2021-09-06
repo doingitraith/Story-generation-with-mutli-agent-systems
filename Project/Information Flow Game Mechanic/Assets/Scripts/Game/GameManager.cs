@@ -103,18 +103,25 @@ namespace Game
                 new InformationProperty(Adjectives.Alive, new List<InformationAdjective>()));
             WorldAdjectives.Add(Adjectives.Dead, 
                 new InformationProperty(Adjectives.Dead, new List<InformationAdjective>()));
+            WorldAdjectives.Add(Adjectives.Hurt, 
+                new InformationProperty(Adjectives.Hurt, new List<InformationAdjective>()));
+            WorldAdjectives.Add(Adjectives.Armed, 
+                new InformationProperty(Adjectives.Armed, new List<InformationAdjective>()));
         
             // Add adjective Opinions
             WorldAdjectives.Add(Adjectives.Good, 
                 new InformationOpinion(Adjectives.Good, new List<InformationAdjective>()));
             WorldAdjectives.Add(Adjectives.Evil, 
                 new InformationOpinion(Adjectives.Evil, new List<InformationAdjective>()));
+            WorldAdjectives.Add(Adjectives.Dangerous, 
+                new InformationOpinion(Adjectives.Dangerous, new List<InformationAdjective>()));
         
             // Add contradictions
             WorldAdjectives[Adjectives.Alive].AddContradiction(WorldAdjectives[Adjectives.Dead]);
             WorldAdjectives[Adjectives.Dead].AddContradiction(WorldAdjectives[Adjectives.Alive]);
             WorldAdjectives[Adjectives.Good].AddContradiction(WorldAdjectives[Adjectives.Evil]);
             WorldAdjectives[Adjectives.Evil].AddContradiction(WorldAdjectives[Adjectives.Good]);
+            WorldAdjectives[Adjectives.Hurt].AddContradiction(WorldAdjectives[Adjectives.Dead]);
         }
 
         private void InitRules()
@@ -184,6 +191,9 @@ namespace Game
                 npc = _currentConversationPartner as NPC;
             else
                 npc = _currentConversationStarter as NPC;
+            
+            _currentConversationStarter.IsOccupied = false;
+            _currentConversationPartner.IsOccupied = false;
 
             npc.ResumeNPC();
         }
