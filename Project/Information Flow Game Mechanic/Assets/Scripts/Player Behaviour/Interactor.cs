@@ -9,6 +9,7 @@ namespace Player_Behaviour
         private bool _isInteractNPC, _isInteractItem;
         private NPC _interactNPC;
         private Item _interactItem;
+        private Agent _interactor;
     
         // Start is called before the first frame update
         void Start()
@@ -16,6 +17,7 @@ namespace Player_Behaviour
             _isInteractNPC = _isInteractItem = false;
             _interactNPC = null; 
             _interactItem = null;
+            _interactor = gameObject.GetComponent<Agent>();
         }
 
         // Update is called once per frame
@@ -27,15 +29,15 @@ namespace Player_Behaviour
         public void Interact()
         {
             if (_isInteractNPC)
-                gameObject.GetComponent<Agent>().InteractNPC(_interactNPC);
+                _interactor.InteractNPC(_interactNPC);
             else if(_isInteractItem)
-                gameObject.GetComponent<Agent>().PickUpItem(_interactItem);
+                _interactor.PickUpItem(_interactItem);
         }
 
         public void Attack()
         {
             if (_interactNPC)
-                gameObject.GetComponent<Agent>().AttackNPC(_interactNPC);
+                _interactor.AttackNPC(_interactNPC);
         }
 
         public void OnTriggerEnter(Collider other)

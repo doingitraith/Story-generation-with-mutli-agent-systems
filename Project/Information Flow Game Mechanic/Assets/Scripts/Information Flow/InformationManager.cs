@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Game;
 using UnityEngine;
 using Utils;
@@ -43,7 +44,7 @@ namespace Information_Flow
                 return false;
             if (information.Not)
             {
-                if (ContainsSpeculativeInformation(information))
+                if (ContainsStableInformation(information))
                     _stableMemory.Remove(information);
             }
             if (!Owner.Acquaintances.ContainsKey(sender))
@@ -52,82 +53,85 @@ namespace Information_Flow
             List<Information> filteredInfos = 
                 _stableMemory.Keys.ToList().FindAll(i=>i.Verb.Equals(information.Verb));
 
-            switch (information.Verb)
+            if (!ContainsStableInformation(information))
             {
-                case InformationVerb.Is:
+                switch (information.Verb)
                 {
-                    filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
-                    InformationAdjective adjective = information.Adjective;
-                
-                    List<Information> infosToRemove = new List<Information>();
-
-                    foreach (Information adjInfo in filteredInfos)
+                    case InformationVerb.Is:
                     {
-                        List<InformationAdjective> cons = adjInfo.Adjective.Contradictions;
-                        if (cons.Contains(adjective))
-                            infosToRemove.Add(adjInfo);
+                        filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
+                        InformationAdjective adjective = information.Adjective;
+
+                        List<Information> infosToRemove = new List<Information>();
+
+                        foreach (Information adjInfo in filteredInfos)
+                        {
+                            List<InformationAdjective> cons = adjInfo.Adjective.Contradictions;
+                            if (cons.Contains(adjective))
+                                infosToRemove.Add(adjInfo);
+                        }
+
+                        foreach (Information i in infosToRemove)
+                            _stableMemory.Remove(i);
+
+                        _stableMemory.Add(new Information(information), new InformationContext(1));
                     }
-                
-                    foreach (Information i in infosToRemove)
-                        _stableMemory.Remove(i);
-                
-                    _stableMemory.Add(new Information(information), new InformationContext(1));
+                        break;
+                    case InformationVerb.Has:
+                    {
+                        filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
+                        switch (filteredInfos.Count)
+                        {
+                            case 0:
+                                _stableMemory.Add(new Information(information), new InformationContext(1));
+                                break;
+                            case 1:
+                                filteredInfos[0] = new Information(information);
+                                break;
+                            default:
+                                throw new Exception("An Item cannot have more than one Owner: "
+                                                    + information.Object.ToString());
+                        }
+                    }
+                        break;
+                    case InformationVerb.At:
+                    {
+                        filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
+                        switch (filteredInfos.Count)
+                        {
+                            case 0:
+                                _stableMemory.Add(new Information(information), new InformationContext(1));
+                                break;
+                            case 1:
+                                filteredInfos[0] = new Information(information);
+                                break;
+                            default:
+                                throw new Exception("An Agent cannot be in more than one places: "
+                                                    + information.Subject.ToString());
+                        }
+                    }
+                        break;
+                    case InformationVerb.Null:
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
-                    break;
-                case InformationVerb.Has:
+            }
+
+            if (ContainsStableInformation(information))
+            {
+                if (!_stableMemory[information].ReceivedFrom.Contains(sender))
                 {
-                    filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
-                    switch (filteredInfos.Count)
-                    {
-                        case 0: _stableMemory.Add(new Information(information), new InformationContext(1));
-                            break;
-                        case 1: filteredInfos[0]=new Information(information);
-                            break;
-                        default: throw new Exception("An Item cannot have more than one Owner: "
-                                                     +information.Object.ToString());
-                    }
+                    _stableMemory[information].NumOfTimesRecieved++;
+                    _stableMemory[information].ReceivedFrom.Add(sender);
                 }
-                    break;
-                case InformationVerb.At:
-                {
-                    filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
-                    switch (filteredInfos.Count)
-                    {
-                        case 0: _stableMemory.Add(new Information(information), new InformationContext(1));
-                            break;
-                        case 1: filteredInfos[0]=new Information(information);
-                            break;
-                        default: throw new Exception("An Agent cannot be in more than one places: "
-                                                     +information.Subject.ToString());
-                    }
-                }
-                    break;
-                case InformationVerb.Null:
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
 
-            if (ContainsStableInformation(information) && !_stableMemory[information].ReceivedFrom.Contains(sender))
-            {
-                _stableMemory[information].NumOfTimesRecieved++;
-                _stableMemory[information].ReceivedFrom.Add(sender);
+                float believability = _stableMemory[information].Heuristic;
+                Owner.Acquaintances[sender] = Owner.Equals(sender) ? 
+                    1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
             }
-
-            float believability = .0f;
-            try
-            {
-                believability = _stableMemory[information].Heuristic;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            Owner.Acquaintances[sender] = Owner.Equals(sender) ? 
-                1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
 
             sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
-
+            
             return true;
         }
     
@@ -150,84 +154,95 @@ namespace Information_Flow
                 List<Information> filteredInfos =
                     _speculativeMemory.Keys.ToList().FindAll(i => i.Verb.Equals(information.Verb));
 
-                switch (information.Verb)
+                if (!ContainsSpeculativeInformation(information))
                 {
-                    case InformationVerb.Is:
+                    switch (information.Verb)
                     {
-                        filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
-                        InformationAdjective adjective = information.Adjective;
-
-                        List<Information> infosToRemove = new List<Information>();
-
-                        foreach (Information adjInfo in filteredInfos)
+                        case InformationVerb.Is:
                         {
-                            List<InformationAdjective> cons = adjInfo.Adjective.Contradictions;
-                            if (cons.Contains(adjective))
-                                infosToRemove.Add(adjInfo);
-                        }
+                            filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
+                            InformationAdjective adjective = information.Adjective;
 
-                        foreach (Information i in infosToRemove)
-                            _speculativeMemory.Remove(i);
+                            List<Information> infosToRemove = new List<Information>();
 
-                        _speculativeMemory.Add(new Information(information), new InformationContext(1));
-                    }
-                        break;
-                    case InformationVerb.Has:
-                    {
-                        filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
-                        switch (filteredInfos.Count)
-                        {
-                            case 0:
-                                _speculativeMemory.Add(new Information(information), new InformationContext(1));
-                                break;
-                            case 1:
-                                filteredInfos[0] = new Information(information);
-                                break;
-                            default:
-                                throw new Exception("An Item cannot have more than one Owner: "
-                                                    + information.Object.ToString());
+                            foreach (Information adjInfo in filteredInfos)
+                            {
+                                List<InformationAdjective> cons = adjInfo.Adjective.Contradictions;
+                                if (cons.Contains(adjective))
+                                    infosToRemove.Add(adjInfo);
+                            }
+
+                            foreach (Information i in infosToRemove)
+                                _speculativeMemory.Remove(i);
+
+                            _speculativeMemory.Add(new Information(information), new InformationContext(1));
                         }
-                    }
-                        break;
-                    case InformationVerb.At:
-                    {
-                        filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
-                        switch (filteredInfos.Count)
+                            break;
+                        case InformationVerb.Has:
                         {
-                            case 0:
-                                _speculativeMemory.Add(new Information(information), new InformationContext(1));
-                                break;
-                            case 1:
-                                filteredInfos[0] = new Information(information);
-                                break;
-                            default:
-                                throw new Exception("An Agent cannot be in more than one places: "
-                                                    + information.Subject.ToString());
+                            filteredInfos = filteredInfos.FindAll(i => i.Object.Equals(information.Object));
+                            switch (filteredInfos.Count)
+                            {
+                                case 0:
+                                    _speculativeMemory.Add(new Information(information), new InformationContext(1));
+                                    break;
+                                case 1:
+                                    filteredInfos[0] = new Information(information);
+                                    break;
+                                default:
+                                    throw new Exception("An Item cannot have more than one Owner: "
+                                                        + information.Object.ToString());
+                            }
                         }
+                            break;
+                        case InformationVerb.At:
+                        {
+                            filteredInfos = filteredInfos.FindAll(i => i.Subject.Equals(information.Subject));
+                            switch (filteredInfos.Count)
+                            {
+                                case 0:
+                                {
+                                    _speculativeMemory.Add(new Information(information), new InformationContext(1));
+
+                                    Owner.Acquaintances.Keys
+                                        .Where(n => n.InformationSubject.Equals(information.Subject)).ToList()
+                                        .ForEach(a =>
+                                            a.StateInfos.ForEach(i => TryAddNewInformation(i.GetInformation(), Owner)));
+                                }
+                                    break;
+                                case 1:
+                                    filteredInfos[0] = new Information(information);
+                                    break;
+                                default:
+                                    throw new Exception("An Agent cannot be in more than one places: "
+                                                        + information.Subject.ToString());
+                            }
+                        }
+                            break;
+                        case InformationVerb.Null:
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
-                        break;
-                    case InformationVerb.Null:
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
 
                 // increase timesReceived if received from new agent
-                if (ContainsSpeculativeInformation(information)
-                    && !_speculativeMemory[information].ReceivedFrom.Contains(sender))
+                if (ContainsSpeculativeInformation(information))
                 {
-                    _speculativeMemory[information].NumOfTimesRecieved++;
-                    _speculativeMemory[information].ReceivedFrom.Add(sender);
-                }
+                    if (!_speculativeMemory[information].ReceivedFrom.Contains(sender))
+                    {
+                        _speculativeMemory[information].NumOfTimesRecieved++;
+                        _speculativeMemory[information].ReceivedFrom.Add(sender);
+                    }
+                    // Update information context and trust
+                    float believability = _speculativeMemory[information].Believability;
+                    Owner.Acquaintances[sender] =
+                        Owner.Equals(sender) ? 1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
 
-                // Update information context and trust
-                float believability = _speculativeMemory[information].Believability;
-                Owner.Acquaintances[sender] =
-                    Owner.Equals(sender) ? 1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
-
-                if (believability >= Owner.BelievabilityThreshold)
-                {
-                    if (TryAddNewInformation(information, sender))
-                        _speculativeMemory.Remove(information);
+                    if (believability >= Owner.BelievabilityThreshold)
+                    {
+                        if (TryAddNewInformation(information, sender))
+                            _speculativeMemory.Remove(information);
+                    }
                 }
             }
         
@@ -354,7 +369,7 @@ namespace Information_Flow
                 return h;
         
             List<Agent> knownAssociates = GameManager.FindObjectsOfType<Agent>().
-                Where(a => a.Name.Equals(informationSubject.Name)).ToList();
+                Where(a => a.InformationSubject.Equals(informationSubject)).ToList();
         
             if (knownAssociates.Count > 1)
                 throw new Exception("There should only be one Agent with the name " + knownAssociates[0].Name);

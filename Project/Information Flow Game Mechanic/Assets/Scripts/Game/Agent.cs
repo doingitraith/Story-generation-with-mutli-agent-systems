@@ -49,7 +49,7 @@ namespace Game
             
             if (StateInfos == null)
                 StateInfos = new List<InformationEntry>();
-        
+            
             transform.Find("Inventory").GetComponentsInChildren<Item>().ToList().ForEach(i => Inventory.Add(i));
         
             Inventory.Where(i=>i.IsVisible).ToList().ForEach(i =>

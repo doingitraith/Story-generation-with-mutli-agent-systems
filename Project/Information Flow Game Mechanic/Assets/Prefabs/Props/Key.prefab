@@ -49,7 +49,7 @@ MonoBehaviour:
   IsPerson: 0
   WorldImportance: 0
   Mutations: []
-  IsVisible: 0
+  IsVisible: 1
 --- !u!1 &776321196104545253
 GameObject:
   m_ObjectHideFlags: 0

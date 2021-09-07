@@ -65,7 +65,10 @@ namespace NPC_Behaviour
 
         private void LateUpdate()
         {
-            Vector3 dir = GetComponentInChildren<NavMeshAgent>().velocity.normalized;
+            NavMeshAgent navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+            if (navMeshAgent == null)
+                return;
+            Vector3 dir = navMeshAgent.velocity.normalized;
             if(dir != Vector3.zero)
                 transform.rotation = Quaternion.LookRotation(dir);
         }
@@ -117,7 +120,7 @@ namespace NPC_Behaviour
                 GameManager.Instance.CreateVisibleInformation(
                     new Information(this, GameManager.Instance.WorldAdjectives[Adjectives.Dead]),
                     transform.position);
-                //Debug.Log(Name+" is dead");
+                Debug.Log(Name+" is dead");
             }
             else
             {
@@ -125,7 +128,7 @@ namespace NPC_Behaviour
                 GameManager.Instance.CreateVisibleInformation(
                     new Information(this, GameManager.Instance.WorldAdjectives[Adjectives.Hurt]),
                     transform.position);
-                //Debug.Log(Name+" is hurt");
+                Debug.Log(Name+" is hurt");
             }
         }
     }

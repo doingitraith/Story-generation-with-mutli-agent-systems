@@ -26,7 +26,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2188205089124442172}
   m_Father: {fileID: 6909794135598521507}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -232,13 +233,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8079320b12d991443a820a2a0eb2d581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Knight
+  Name: Jim, the Enemy Knight
   IsPerson: 1
-  WorldImportance: 0
+  WorldImportance: -5
   Mutations:
-  - ', the Knight'
-  - a Knight of the King
-  - someone in the royal military
+  - An Enemy Soldier
+  - An Enemy
   Inventory: []
   ImportantPeople: []
   YarnScript: {fileID: 0}
@@ -249,7 +249,13 @@ MonoBehaviour:
   isDead: 0
   BelievabilityThreshold: 3
   IsOccupied: 0
-  StateInfos: []
+  StateInfos:
+  - _subject: {fileID: 6909794135598521506}
+    _verb: 0
+    _object: {fileID: 0}
+    _adjective: -9
+    _location: {fileID: 0}
+    _not: 0
   EquippedItem: {fileID: 0}
   MemoryMutationInterval: 30
   Routine:
@@ -391,6 +397,68 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1483967881215589073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8536735223683889257}
+    m_Modifications:
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 776321195628255983, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+      propertyPath: m_Name
+      value: Sword
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+--- !u!4 &2188205089124442172 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 776321195628255981, guid: 65c36a2458e9a5c42887ae50a5a6c531, type: 3}
+  m_PrefabInstance: {fileID: 1483967881215589073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4377122507724850498
 PrefabInstance:
   m_ObjectHideFlags: 0
