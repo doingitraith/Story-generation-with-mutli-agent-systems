@@ -22,7 +22,7 @@ namespace NPC_Behaviour
             Agent.IsOccupied = true;
             yield return new WaitForSeconds(EXCHANGE_TIME);
         
-            if (_isPaused)
+            if (IsPaused)
                 yield return null;
         
         
@@ -39,14 +39,14 @@ namespace NPC_Behaviour
         public override IEnumerator InterruptBehaviour()
         {
             Agent.IsOccupied = false;
-            _isPaused = true;
+            IsPaused = true;
             yield return null;
         }
 
         public override IEnumerator ResumeBehaviour()
         {
             Agent.IsOccupied = true;
-            _isPaused = false;
+            IsPaused = false;
             yield return null;
         }
 

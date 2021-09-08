@@ -11,6 +11,7 @@ namespace Game
         Visual = 0,
         Audio,
         Instant,
+        Conversation,
         Persistant,
         None
     }
@@ -58,6 +59,8 @@ namespace Game
 
         public InformationEntry InformationEntry;
         public Information Information { get; set; }
+
+        public Agent Sender;
         public void Start()
         {
             Information ??= InformationEntry.GetInformation();

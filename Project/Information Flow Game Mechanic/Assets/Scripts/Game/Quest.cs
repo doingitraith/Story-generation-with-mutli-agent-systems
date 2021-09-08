@@ -1,29 +1,37 @@
 using System.Collections.Generic;
+using System.Linq;
 using Information_Flow;
 
 namespace Game
 {
     public class Quest
     {
-        public List<Information> Goals;
+        public List<InferenceRule> GoalRules;
+        public List<Information> GoalInfos;
         public string Description;
-        public Agent Owner;
         public Agent QuestGiver;
 
-        public Quest(Agent owner, Agent questGiver)
-            => (Owner, QuestGiver) = (owner, questGiver);
+        public Quest(Agent questGiver)
+            => (QuestGiver, GoalRules, GoalInfos) =
+                (questGiver, new List<InferenceRule>(), new List<Information>());
 
-        public Quest(Agent owner, Agent questGiver, List<Information> goals)
-            => (Owner, QuestGiver, Goals) = (owner, questGiver, goals);
+        public Quest(Agent questGiver, List<InferenceRule> goalRules, List<Information> goalInfos)
+            => (QuestGiver, GoalRules, GoalInfos) = (questGiver, goalRules, goalInfos);
 
-        public Quest(Agent owner, Agent questGiver, List<Information> goals, string description)
-            => (Owner, QuestGiver, Goals, Description) = (owner, questGiver, goals, description);
+        public Quest(Agent questGiver, List<InferenceRule> goalRules, List<Information> goalInfos,
+            string description)
+            => (QuestGiver, GoalRules, GoalInfos, Description) = (questGiver, goalRules, goalInfos, description);
 
         public bool IsQuestFinished()
-            => Goals.TrueForAll(i => IsGoalTrue(i));
+            => GoalRules.TrueForAll(IsGoalRuleTrue)
+                || GoalInfos.TrueForAll(IsGoalInfoTrue);
 
-        public bool IsGoalTrue(Information information)
-            => QuestGiver.Memory.ContainsStableInformation(information) || 
-               QuestGiver.Memory.ContainsSpeculativeInformation(information);
+        private bool IsGoalRuleTrue(InferenceRule r)
+            => QuestGiver.Memory.InferenceEngine.SatisfiesKnowledgeBase(r.Expression, new List<InformationSubject>())
+                .Any();
+        //QuestGiver.Memory.ContainsSpeculativeInformation(information);
+
+        private bool IsGoalInfoTrue(Information i)
+            => QuestGiver.Memory.ContainsStableInformation(i);
     }
 }

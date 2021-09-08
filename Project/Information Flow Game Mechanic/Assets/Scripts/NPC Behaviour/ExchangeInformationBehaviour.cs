@@ -10,14 +10,13 @@ namespace NPC_Behaviour
     public class ExchangeInformationBehaviour : AgentBehaviour
     {
         protected const int EXCHANGE_TIME = 5;
-
-        protected bool _isPaused;
+        
         protected Agent _reciever;
     
         public ExchangeInformationBehaviour(Agent agent, Agent reciever) : base(agent)
         {
             _reciever = reciever;
-            _isPaused = false;
+            IsPaused = false;
             base.Init();
         
             if(_reciever == null)
@@ -33,19 +32,26 @@ namespace NPC_Behaviour
             
             yield return new WaitForSeconds(EXCHANGE_TIME);
         
-            while(_isPaused)
+            while(IsPaused)
                 yield return null;
         
+            Agent.Memory.TryAddNewInformation(
+                new Information(_reciever, _reciever.Location),
+                Agent);
+            
+            _reciever.Memory.TryAddNewInformation(
+                new Information(Agent, Agent.Location),
+                _reciever);
         
             List<Information> infos = Agent.Memory.
                 GetInformationToExchange(1, _reciever.InformationSubject);
             if (infos != null)
-                GameManager.Instance.CreateConversationInformation(infos[0], Agent.transform.position);
+                GameManager.Instance.CreateConversationInformation(infos[0], Agent.transform.position, _reciever);
             
             infos = _reciever.Memory.
                 GetInformationToExchange(1, Agent.InformationSubject);
             if (infos != null)
-                GameManager.Instance.CreateConversationInformation(infos[0], _reciever.transform.position);
+                GameManager.Instance.CreateConversationInformation(infos[0], _reciever.transform.position, Agent);
         
             IsFinished = true;
             Agent.IsOccupied = false;
@@ -57,14 +63,14 @@ namespace NPC_Behaviour
         public override IEnumerator InterruptBehaviour()
         {
             Agent.IsOccupied = false;
-            _isPaused = true;
+            IsPaused = true;
             yield return null;
         }
 
         public override IEnumerator ResumeBehaviour()
         {
             Agent.IsOccupied = true;
-            _isPaused = false;
+            IsPaused = false;
             yield return null;
         }
 

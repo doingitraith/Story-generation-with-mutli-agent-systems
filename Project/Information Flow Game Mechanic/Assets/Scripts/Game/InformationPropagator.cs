@@ -50,6 +50,13 @@ namespace Game
                     _maxRadius = 2.0f;
                 }
                     break;
+                case InformationPropagationType.Conversation:
+                {
+                    _propagationSpeed = 50.0f;
+                    _timeToLife = .5f;
+                    _maxRadius = 1.0f;
+                }
+                    break;
                 case InformationPropagationType.None:
                 default:
                     throw new ArgumentOutOfRangeException();

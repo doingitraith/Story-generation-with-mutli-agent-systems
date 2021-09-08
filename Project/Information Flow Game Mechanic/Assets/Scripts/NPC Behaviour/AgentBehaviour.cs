@@ -32,6 +32,7 @@ namespace NPC_Behaviour
     {
         protected Agent Agent;
         protected bool IsFinished;
+        public bool IsPaused;
 
         protected AgentBehaviour(Agent agent) => (Agent, IsFinished) = (agent, false);
 
