@@ -103,17 +103,17 @@ namespace Information_Flow
             }
         }
 
+        /*
         public override int GetHashCode()
         {
-            return ToString().GetHashCode();
-            /*
+            //return ToString().GetHashCode();
+            
             return Verb.GetHashCode() * (Subject != null ? Subject.GetHashCode() : 1)
                                       * (Object != null ? Object.GetHashCode() : 1)
                                       * (Adjective != null ? Adjective.GetHashCode() : 1)
                                       * (Location != null ? Location.GetHashCode() : 1);
-             */
         }
-
+        */
         public override string ToString()
         {
             switch (Verb)
@@ -167,6 +167,8 @@ namespace Information_Flow
                         Location.Mutation.Mutate();
                     }
                 }
+                    break;
+                case InformationVerb.Is:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

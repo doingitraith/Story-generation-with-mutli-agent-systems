@@ -26,7 +26,7 @@ namespace NPC_Behaviour
         protected override void Start()
         {
             base.Start();
-            Memory = new InformationManager(this, MEMORY_SIZE);
+            Memory = new InformationManager(this);
         
             _currentBehaviour = SelectNextBehaviour();
             StartCoroutine(_currentBehaviour.DoBehaviour());
@@ -61,6 +61,8 @@ namespace NPC_Behaviour
                 _currentBehaviour = SelectNextBehaviour();
                 StartCoroutine(_currentBehaviour.DoBehaviour());
             }
+            else if(_currentBehaviour is WalkBehaviour)
+                ((WalkBehaviour)_currentBehaviour).UpdateTarget();
         }
 
         private void LateUpdate()

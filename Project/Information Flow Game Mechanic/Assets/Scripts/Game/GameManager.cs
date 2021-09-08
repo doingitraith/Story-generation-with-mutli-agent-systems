@@ -112,6 +112,8 @@ namespace Game
                 new InformationProperty(Adjectives.Hurt, new List<InformationAdjective>()));
             WorldAdjectives.Add(Adjectives.Armed, 
                 new InformationProperty(Adjectives.Armed, new List<InformationAdjective>()));
+            WorldAdjectives.Add(Adjectives.King, 
+                new InformationProperty(Adjectives.King, new List<InformationAdjective>()));
         
             // Add adjective Opinions
             WorldAdjectives.Add(Adjectives.Enemy, 
@@ -143,6 +145,9 @@ namespace Game
 
         public void StartDialogue(Agent conversationStarter, Agent conversationPartner)
         {
+            _currentConversationPartner.IsOccupied = true;
+            _currentConversationStarter.IsOccupied = true;
+            
             _currentConversationStarter = conversationStarter;
             _currentConversationPartner = conversationPartner;
             if (_currentConversationStarter is Player)
@@ -234,30 +239,29 @@ namespace Game
 
         public void CreateArrivalInformation(Agent agent, Location location)
         {
-            InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
+            InformationObject informationObject = 
+                Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity).
+                    GetComponent<InformationObject>();
             
             informationObject.InformationEntry = new InformationEntry(
                 agent, InformationVerb.At, null, 0, location, false);
             informationObject.PropagationType = InformationPropagationType.Visual;
-            Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity);
         }
 
         public void CreateConversationInformation(Information information, Vector3 position)
         {
-            InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
+            InformationObject informationObject = Instantiate(InformationPrefab, position, Quaternion.identity).
+                GetComponent<InformationObject>();
             informationObject.Information = information;
             informationObject.PropagationType = InformationPropagationType.Audio;
-
-            Instantiate(InformationPrefab, position, Quaternion.identity);
         }
     
         public void CreateVisibleInformation(Information information, Vector3 position)
         {
-            InformationObject informationObject = InformationPrefab.GetComponent<InformationObject>();
+            InformationObject informationObject = Instantiate(InformationPrefab, position, Quaternion.identity).
+                GetComponent<InformationObject>();
             informationObject.Information = information;
             informationObject.PropagationType = InformationPropagationType.Visual;
-
-            Instantiate(InformationPrefab, position, Quaternion.identity);
         }
     }
 }

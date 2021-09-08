@@ -41,6 +41,11 @@ namespace NPC_Behaviour
                 GetInformationToExchange(1, _reciever.InformationSubject);
             if (infos != null)
                 GameManager.Instance.CreateConversationInformation(infos[0], Agent.transform.position);
+            
+            infos = _reciever.Memory.
+                GetInformationToExchange(1, Agent.InformationSubject);
+            if (infos != null)
+                GameManager.Instance.CreateConversationInformation(infos[0], _reciever.transform.position);
         
             IsFinished = true;
             Agent.IsOccupied = false;

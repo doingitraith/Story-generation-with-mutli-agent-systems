@@ -5,6 +5,7 @@ using System.Net;
 using Game;
 using UnityEngine;
 using Utils;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Information_Flow
@@ -21,16 +22,18 @@ namespace Information_Flow
 
         public InformationManager(Agent owner)
             => (Owner, _stableMemory, _speculativeMemory, InferenceEngine) = 
-                (owner, new Dictionary<Information, InformationContext>(),
+                (owner, new Dictionary<Information, InformationContext>(new InformationComparer()),
                     new Dictionary<Information, InformationContext>(),
                     new InferenceEngine(this, GameManager.Instance.WorldRules));
 
         // Create FixedSizeList
+        /*
         public InformationManager(Agent owner, int memorySize)
             => (Owner, _stableMemory, _speculativeMemory, InferenceEngine) =
-                (owner, new FixedSizeDictionary<Information, InformationContext>(memorySize),
+                (owner, new FixedSizeDictionary<Information, InformationContext>(memorySize, new InformationComparer()),
                     new Dictionary<Information, InformationContext>(),
                     new InferenceEngine(this, GameManager.Instance.WorldRules));
+                    */
 
         public bool ContainsStableInformation(Information information)
             =>_stableMemory.ContainsKey(information);
@@ -292,8 +295,27 @@ namespace Information_Flow
 
         private float GetInformationDistance(Information i1, Information i2)
         {
-            InformationContext c1 = _stableMemory.ContainsKey(i1) ? _stableMemory[i1] : _speculativeMemory[i1];
-            InformationContext c2 = _stableMemory.ContainsKey(i2) ? _stableMemory[i2] : _speculativeMemory[i2];
+            InformationContext c1 = null;
+            InformationContext c2 = null;
+            try
+            {
+                if (_stableMemory.ContainsKey(i1))
+                    c1 = _stableMemory[i1];
+                else
+                {
+                    bool test = _stableMemory.ContainsKey(i1);
+                    c1 = _speculativeMemory[i1];
+                }
+
+                //c1 = _stableMemory.ContainsKey(i1) ? _stableMemory[i1] : _speculativeMemory[i1];
+                c2 = _stableMemory.ContainsKey(i2) ? _stableMemory[i2] : _speculativeMemory[i2];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
             if (c1 == null || c2 == null)
                 throw new NullReferenceException(
                     "Information not found in either memory. This should be impossible");
@@ -339,7 +361,7 @@ namespace Information_Flow
                     break;
                 case InformationVerb.At:
                 {
-                    Location worldLocation = GameManager.FindObjectsOfType<Location>().
+                    Location worldLocation = GameObject.FindObjectsOfType<Location>().
                         First(i => i.Name.Equals(information.Location.Name));
                     float worldImportance = 1.0f;
                     if (worldLocation != null)
@@ -368,7 +390,7 @@ namespace Information_Flow
             if (!informationSubject.IsPerson)
                 return h;
         
-            List<Agent> knownAssociates = GameManager.FindObjectsOfType<Agent>().
+            List<Agent> knownAssociates = GameObject.FindObjectsOfType<Agent>().
                 Where(a => a.InformationSubject.Equals(informationSubject)).ToList();
         
             if (knownAssociates.Count > 1)
@@ -407,7 +429,8 @@ namespace Information_Flow
             if (owners.Count > 1)
                 throw new Exception("Should only be one owner");
 
-            Item worldItem = GameManager.FindObjectsOfType<Item>().First(i => i.Name.Equals(informationSubject.Name));
+            Item[] worldItems = GameObject.FindObjectsOfType<Item>();
+            Item worldItem = worldItems.First(i => i.Name.Equals(informationSubject.Name));
             float worldImportance = 1.0f;
             if (worldItem != null)
                 worldImportance = worldItem.WorldImportance;
@@ -433,7 +456,7 @@ namespace Information_Flow
             //Shuffle List
             shuffleList = shuffleList.Where(i=>!i.Subject.Equals(target) &&
                                                !i.Verb.Equals(InformationVerb.At)).
-                OrderByDescending(x => allMemories[x].Believability).ToList();
+                OrderByDescending(x => Mathf.Abs(allMemories[x].Believability)).ToList();
 
             if (shuffleList.Count == 0)
                 return null;

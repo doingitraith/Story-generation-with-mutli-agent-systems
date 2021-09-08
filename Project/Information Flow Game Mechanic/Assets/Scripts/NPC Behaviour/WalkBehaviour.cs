@@ -39,6 +39,9 @@ namespace NPC_Behaviour
             yield return null;
         }
 
+        public void UpdateTarget()
+            => _navMeshAgent.destination = Destination.position;
+
         public override IEnumerator InterruptBehaviour()
         {
             _navMeshAgent.destination = Agent.transform.position;

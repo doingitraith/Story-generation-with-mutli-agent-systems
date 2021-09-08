@@ -60,12 +60,11 @@ namespace Game
         public Information Information { get; set; }
         public void Start()
         {
+            Information ??= InformationEntry.GetInformation();
         }
 
         public void Update()
         {
-            if (Information == null)
-                Information = InformationEntry.GetInformation();   
         }
     }
 }

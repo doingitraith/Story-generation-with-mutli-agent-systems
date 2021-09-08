@@ -30,6 +30,7 @@ namespace Game
         public void PickUp(Agent agent)
         {
             SetInventory(true);
+            gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
             transform.parent = agent.transform.Find("Inventory");
             transform.position = agent.transform.position;
             GetComponentInChildren<SphereCollider>().enabled = false;
@@ -39,6 +40,7 @@ namespace Game
         public void Drop()
         {
             SetInventory(false);
+            gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
             transform.parent = GameObject.Find("Items").transform;
             transform.Translate(Vector3.right);
             GetComponentInChildren<SphereCollider>().enabled = true;

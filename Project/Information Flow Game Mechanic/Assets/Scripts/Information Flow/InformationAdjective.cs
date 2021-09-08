@@ -12,7 +12,8 @@ namespace Information_Flow
         Hurt = -7,
         Dangerous = -8,
         Armed = -3,
-        Enemy = -9
+        Enemy = -9,
+        King = 10
     }
 
     public abstract class InformationAdjective
@@ -45,6 +46,8 @@ namespace Information_Flow
                     return Characteristic.ToString();
                 case Adjectives.Enemy:
                     return "an Enemy of mine";
+                case Adjectives.King:
+                    return "the King";
                 default:
                     throw new ArgumentOutOfRangeException();
             }

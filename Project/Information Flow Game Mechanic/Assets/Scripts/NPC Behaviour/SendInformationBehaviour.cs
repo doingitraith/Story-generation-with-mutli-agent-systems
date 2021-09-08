@@ -9,8 +9,11 @@ namespace NPC_Behaviour
 {
     public class SendInformationBehaviour : ExchangeInformationBehaviour
     {
-        public SendInformationBehaviour(Agent agent) 
-            : base(agent, agent.Acquaintances.Keys.OrderBy(x=>Random.value).First())
+        public SendInformationBehaviour(Agent agent)
+            : base(agent, agent.Acquaintances.Keys.Where(a => a is NPC).
+                OrderBy(x => Random.value).First())
+                //OrderByDescending(x=>Vector3.Distance(
+                   // x.gameObject.transform.position,agent.gameObject.transform.position)).First())
         {
         }
     
