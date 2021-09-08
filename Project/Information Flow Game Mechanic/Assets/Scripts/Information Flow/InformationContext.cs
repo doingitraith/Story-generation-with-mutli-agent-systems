@@ -1,17 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
+using Game;
 using UnityEngine;
 
-public class InformationContext
+namespace Information_Flow
 {
-    public int NumOfTimesRecieved { get; set; }
-    public float Believability { get; set; }
-    public float Heuristic { get; set; }
+    public class InformationContext
+    {
+        public int NumOfTimesRecieved { get; set; }
+        public float Believability { get; set; }
+        public float Heuristic { get; set; }
 
-    public List<Agent> ReceivedFrom { get; set; }
+        public List<Agent> ReceivedFrom { get; }
 
-    public InformationContext(int numOfTimesRecieved)
-        => (NumOfTimesRecieved, Believability, Heuristic, ReceivedFrom)
-            = (numOfTimesRecieved, 1.0f, 1.0f, new List<Agent>());
+        public double Age { get; set; }
+        
+        public InformationContext(int numOfTimesRecieved)
+            => (NumOfTimesRecieved, Believability, Heuristic, ReceivedFrom, Age)
+                = (numOfTimesRecieved, 1.0f, 1.0f, new List<Agent>(), Time.realtimeSinceStartupAsDouble);
+    }
 }

@@ -1,33 +1,33 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-public class InferenceEngine
+namespace Information_Flow
 {
-    public InformationManager KnowledgeBase;
-    public List<InferenceRule> Rules;
-    
-    public InferenceEngine(InformationManager knowledgeBase, List<InferenceRule> rules)
-        => (KnowledgeBase, Rules) = (knowledgeBase, rules);
-
-    public InferenceEngine(InformationManager knowledgeBase)
-        => (KnowledgeBase, Rules) = (knowledgeBase, new List<InferenceRule>());
-    
-    public void Evaluate()
+    public class InferenceEngine
     {
-        foreach (InferenceRule rule in Rules)
+        public InformationManager KnowledgeBase;
+        public List<InferenceRule> Rules;
+    
+        public InferenceEngine(InformationManager knowledgeBase, List<InferenceRule> rules)
+            => (KnowledgeBase, Rules) = (knowledgeBase, rules);
+
+        public InferenceEngine(InformationManager knowledgeBase)
+            => (KnowledgeBase, Rules) = (knowledgeBase, new List<InferenceRule>());
+    
+        public void Evaluate()
         {
-            List<InformationSubject> candidates = 
-                SatisfiesKnowledgeBase(rule.Expression, new List<InformationSubject>());
-            
-            if (!rule.AppliesToSelf)
-                candidates.Remove(KnowledgeBase.Owner.InformationSubject);
-            
-            if (candidates.Any())
+            foreach (InferenceRule rule in Rules)
             {
-                candidates.ForEach(c =>
+                List<InformationSubject> candidates = 
+                    SatisfiesKnowledgeBase(rule.Expression, new List<InformationSubject>());
+            
+                if (!rule.AppliesToSelf)
+                    candidates.Remove(KnowledgeBase.Owner.InformationSubject);
+            
+                if (candidates.Any())
+                {
+                    candidates.ForEach(c =>
                     {
                         rule.Consequences.ForEach(r =>
                         {
@@ -35,62 +35,63 @@ public class InferenceEngine
                             KnowledgeBase.TryAddNewInformation(r, KnowledgeBase.Owner);
                         });
                     });
+                }
             }
         }
-    }
 
-    private List<InformationSubject> SatisfiesKnowledgeBase(BoolExpression ex, List<InformationSubject> candidateList)
-    {
-        if (ex.Information != null)
+        private List<InformationSubject> SatisfiesKnowledgeBase(BoolExpression ex, List<InformationSubject> candidateList)
         {
-            List<Information> infos =
-                KnowledgeBase.GetStableMemory().Keys.Where(i => i.Verb.Equals(ex.Information.Verb)).ToList();
-
-            foreach (Information i in infos)
-                if (i.Equals(new Information(i.Subject, ex.Information)))
-                    candidateList.Add(i.Subject);
-        }
-        else if (ex.Left != null)
-        {
-
-            List<InformationSubject> left = SatisfiesKnowledgeBase(ex.Left, new List<InformationSubject>());
-            
-            // should only be the NOT case
-            if (ex.Right == null)
+            if (ex.Information != null)
             {
-                if (ex.Operator != Operator.NOT)
-                    throw new Exception("Right Expression should only be null if Operator is NOT.");
-                if(!left.Any())
-                    candidateList.AddRange(left);
+                List<Information> infos =
+                    KnowledgeBase.GetStableMemory().Keys.Where(i => i.Verb.Equals(ex.Information.Verb)).ToList();
+
+                foreach (Information i in infos)
+                    if (i.Equals(new Information(i.Subject, ex.Information)))
+                        candidateList.Add(i.Subject);
             }
-            
-            List<InformationSubject> right = SatisfiesKnowledgeBase(ex.Right, new List<InformationSubject>());
-            
-            switch (ex.Operator)
+            else if (ex.Left != null)
             {
-                case Operator.AND:
-                    foreach (InformationSubject l in left)
-                    {
-                        foreach (InformationSubject r in right)
+
+                List<InformationSubject> left = SatisfiesKnowledgeBase(ex.Left, new List<InformationSubject>());
+            
+                // should only be the NOT case
+                if (ex.Right == null)
+                {
+                    if (ex.Operator != Operator.NOT)
+                        throw new Exception("Right Expression should only be null if Operator is NOT.");
+                    if(!left.Any())
+                        candidateList.AddRange(left);
+                }
+            
+                List<InformationSubject> right = SatisfiesKnowledgeBase(ex.Right, new List<InformationSubject>());
+            
+                switch (ex.Operator)
+                {
+                    case Operator.AND:
+                        foreach (InformationSubject l in left)
                         {
-                            if (l.Equals(r))
-                                candidateList.AddRange(left);
+                            foreach (InformationSubject r in right)
+                            {
+                                if (l.Equals(r))
+                                    candidateList.AddRange(left);
+                            }
                         }
-                    }
-                    break;
-                case Operator.OR:
-                    if (left.Any() || right.Any())
-                        candidateList.AddRange(left);
-                    break;
-                case Operator.XOR:
-                    if (left.Any() ^ right.Any())
-                        candidateList.AddRange(left);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                        break;
+                    case Operator.OR:
+                        if (left.Any() || right.Any())
+                            candidateList.AddRange(left);
+                        break;
+                    case Operator.XOR:
+                        if (left.Any() ^ right.Any())
+                            candidateList.AddRange(left);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
-        }
 
-        return candidateList;
+            return candidateList;
+        }
     }
 }

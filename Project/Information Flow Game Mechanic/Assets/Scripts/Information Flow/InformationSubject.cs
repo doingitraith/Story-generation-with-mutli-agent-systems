@@ -1,24 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class InformationSubject
+namespace Information_Flow
 {
-    public string Name;
-    public bool IsPerson;
-    public Mutation Mutation;
-
-    public InformationSubject(string name, bool isPerson, Mutation mutation)
-        => (Name, IsPerson, Mutation) = (name, isPerson, mutation);
-
-    public override bool Equals(object o)
+    public class InformationSubject
     {
-        if (!(o is InformationSubject other))
-            return false;
+        public string Name;
+        public bool IsPerson;
+        public Mutation Mutation;
 
-        return Name.Equals(other.Name) && (Mutation?.Equals(other.Mutation) ?? true);
+        public InformationSubject(string name, bool isPerson, Mutation mutation)
+            => (Name, IsPerson, Mutation) = (name, isPerson, mutation);
+
+        public override bool Equals(object o)
+        {
+            if (!(o is InformationSubject other))
+                return false;
+
+            return Name.Equals(other.Name) && (Mutation?.Equals(other.Mutation) ?? true);
+        }
+
+        public override int GetHashCode()
+            => Name.GetHashCode() * (Mutation != null ? Mutation.GetHashCode() : 1);
     }
-
-    public override int GetHashCode()
-        => Name.GetHashCode() * (Mutation != null ? Mutation.GetHashCode() : 1);
 }
