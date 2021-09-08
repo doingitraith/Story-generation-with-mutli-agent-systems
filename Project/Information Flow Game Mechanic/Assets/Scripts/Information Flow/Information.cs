@@ -23,8 +23,8 @@ namespace Information_Flow
         public InformationSubject Object { get; }
         public InformationAdjective Adjective { get; }
         public InformationLocation Location { get; }
-
-        public bool Not = false;
+        
+        public readonly bool Not = false;
 
         public Information()
             => (Subject, Verb, Object, Adjective, Location, Not) =
@@ -42,7 +42,7 @@ namespace Information_Flow
         /// <summary>
         /// Creates an Information of the form "Subject IS Adjective" 
         /// </summary>
-        /// <param name="character">Subject of the information</param>
+        /// <param name="subject">Subject of the information</param>
         /// <param name="informationAdjective">Property of the subject</param>
         public Information(WorldObject subject, InformationAdjective informationAdjective)
             => (Subject, Verb, Object, Adjective, Location, Not) =
@@ -51,11 +51,20 @@ namespace Information_Flow
         /// <summary>
         /// Creates an Information of the form "Subject is AT Location" 
         /// </summary>
-        /// <param name="character">Subject of the information</param>
+        /// <param name="subject">Subject of the information</param>
         /// <param name="informationLocation">Location of the subject</param>
         public Information(WorldObject subject, Location informationLocation)
             => (Subject, Verb, Object, Adjective, Location, Not) =
                 (subject.InformationSubject, InformationVerb.At, null, null, informationLocation.InformationLocation, false);
+        
+        /// <summary>
+        /// Creates an Information of the form "Subject is AT Location"
+        /// </summary>
+        /// <param name="subject">Subject of the information</param>
+        /// <param name="informationLocation">InformationLocation of the subject</param>
+        public Information(WorldObject subject, InformationLocation informationLocation)
+            => (Subject, Verb, Object, Adjective, Location, Not) =
+                (subject.InformationSubject, InformationVerb.At, null, null, informationLocation, false);
 
         /// <summary>
         /// Creates a copy of an Information
@@ -103,7 +112,21 @@ namespace Information_Flow
             }
         }
 
-        /*
+        public bool EqualsExceptForSubject(Information other)
+        {
+            if (other.Verb != Verb || other.Not != Not)
+                return false;
+
+            switch (Verb)
+            {
+                case InformationVerb.At: { return Location.Equals(other.Location); }
+                case InformationVerb.Is: { return Adjective.Equals(other.Adjective); }
+                case InformationVerb.Has: { return Object.Equals(other.Object); }
+                default: { return false; }
+            }
+        }
+
+        
         public override int GetHashCode()
         {
             //return ToString().GetHashCode();
@@ -111,9 +134,10 @@ namespace Information_Flow
             return Verb.GetHashCode() * (Subject != null ? Subject.GetHashCode() : 1)
                                       * (Object != null ? Object.GetHashCode() : 1)
                                       * (Adjective != null ? Adjective.GetHashCode() : 1)
-                                      * (Location != null ? Location.GetHashCode() : 1);
+                                      * (Location != null ? Location.GetHashCode() : 1)
+                                      * (Not.GetHashCode());
         }
-        */
+        
         public override string ToString()
         {
             switch (Verb)

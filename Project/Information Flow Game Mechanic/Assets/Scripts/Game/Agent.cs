@@ -119,6 +119,13 @@ namespace Game
                             isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
                     }
                         break;
+                    case InformationPropagationType.Conversation:
+                    {
+                        // TODO change to speculative
+                        if (IsHearing)
+                            isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, infoObject.Sender);
+                    }
+                        break;
                     case InformationPropagationType.Instant:
                         isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
                         break;
@@ -135,6 +142,7 @@ namespace Game
             if (other.gameObject.TryGetComponent<Location>(out infoLocation))
             {
                 GameManager.Instance.CreateArrivalInformation(this, infoLocation);
+                this.Location = infoLocation.InformationLocation;
             }
 
             /*

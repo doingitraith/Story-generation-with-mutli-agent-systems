@@ -15,6 +15,7 @@ namespace Player_Behaviour
         {
             base.Start();
             Memory = new InformationManager(this);
+            Quests.Add(GameManager.Instance.Quest);
             /*
         Memory.TryAddNewInformation(new Information(FindObjectOfType<NPC>().GetComponent<NPC>(),
             GameManager.Instance.WorldAdjectives[Adjectives.ALIVE]),this);

@@ -7,11 +7,10 @@ namespace NPC_Behaviour
     public class WaitBehaviour : AgentBehaviour
     {
         private readonly IEnumerator _waitCoroutine;
-        private bool _isPaused;
         public WaitBehaviour(Agent agent, int duration) : base(agent)
         {
             _waitCoroutine = Wait(duration);
-            _isPaused = false;
+            IsPaused = false;
             base.Init();
         }
 
@@ -29,20 +28,20 @@ namespace NPC_Behaviour
         private IEnumerator Wait(int duration)
         {
             yield return new WaitForSeconds(duration);
-            while(_isPaused)
+            while(IsPaused)
                 yield return null;
         }
 
         public override IEnumerator InterruptBehaviour()
         {
-            _isPaused = true;
+            IsPaused = true;
             Agent.IsOccupied = false;
             yield return null;
         }
 
         public override IEnumerator ResumeBehaviour()
         {
-            _isPaused = false;
+            IsPaused = false;
             Agent.IsOccupied = true;
             yield return null;
         }

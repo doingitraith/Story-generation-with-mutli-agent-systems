@@ -61,7 +61,7 @@ namespace NPC_Behaviour
                 _currentBehaviour = SelectNextBehaviour();
                 StartCoroutine(_currentBehaviour.DoBehaviour());
             }
-            else if(_currentBehaviour is WalkBehaviour)
+            else if(_currentBehaviour is WalkBehaviour && !_currentBehaviour.IsPaused)
                 ((WalkBehaviour)_currentBehaviour).UpdateTarget();
         }
 
@@ -103,10 +103,10 @@ namespace NPC_Behaviour
         }
 
         public void InterruptNPC()
-            => _currentBehaviour.InterruptBehaviour();
+            => StartCoroutine(_currentBehaviour.InterruptBehaviour());
     
         public void ResumeNPC()
-            => _currentBehaviour.ResumeBehaviour();
+            => StartCoroutine(_currentBehaviour.ResumeBehaviour());
 
         private void Die()
         {

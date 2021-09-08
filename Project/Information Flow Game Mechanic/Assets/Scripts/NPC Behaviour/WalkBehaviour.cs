@@ -32,6 +32,9 @@ namespace NPC_Behaviour
 
         public override IEnumerator DoBehaviour()
         {
+            while (IsPaused)
+                yield return null;
+            
             Agent.IsOccupied = true;
             _navMeshAgent.destination = Destination.position;
             _navMeshAgent.isStopped = false;
@@ -49,11 +52,15 @@ namespace NPC_Behaviour
             _animator.SetFloat("RunningSpeed", .0f);
             _animator.SetTrigger("DoStop");
             Agent.IsOccupied = false;
+            IsPaused = true;
             yield return null;
         }
 
         public override IEnumerator ResumeBehaviour()
-            => DoBehaviour();
+        {
+            IsPaused = false;
+            yield return DoBehaviour();
+        }
 
         public override bool IsBehaviourFinished()
         {

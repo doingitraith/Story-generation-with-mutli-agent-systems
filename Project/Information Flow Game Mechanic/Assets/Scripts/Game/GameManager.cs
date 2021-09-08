@@ -23,12 +23,14 @@ namespace Game
         [SerializeField] private bool IsMouseLocked;
         public Dictionary<Adjectives, InformationAdjective> WorldAdjectives;
         public List<InferenceRule> WorldRules;
+        public Quest Quest;
         public DialogueRunner DialogueRunner;
         public Text NameText;
         private Agent _currentConversationStarter;
         private Agent _currentConversationPartner;
         private IEnumerator _updateBelievability;
         private IEnumerator _inference;
+        private Player _player;
 
         private static GameManager instance;
 
@@ -53,10 +55,12 @@ namespace Game
                 Cursor.visible = false;
             }
 
+            _player = FindObjectOfType<Player>();
             WorldAdjectives = new Dictionary<Adjectives, InformationAdjective>();
             InitAdjectives();
             WorldRules = new List<InferenceRule>();
             InitRules();
+            InitQuest();
         }
 
         public void Start()
@@ -67,7 +71,13 @@ namespace Game
             StartCoroutine(_updateBelievability);
             StartCoroutine(_inference);
         }
-    
+
+        public void Update()
+        {
+            if(_player.Quests.Any(q=>q.IsQuestFinished()))
+                Debug.Log("Quest finished");
+        }
+
         private void OnApplicationQuit()
         {
             StopCoroutine(_updateBelievability);
@@ -129,37 +139,60 @@ namespace Game
 
         private void InitRules()
         {
-            WorldObject s = FindObjectOfType<Player>().GetComponent<Player>();
-        
-            var rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Armed])))
-                .And(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Dangerous])));
-            rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.Enemy]) };
+            var rule = new InferenceRule(new BoolExpression(new Information(_player, WorldAdjectives[Adjectives.Armed])))
+                .And(new BoolExpression(new Information(_player, WorldAdjectives[Adjectives.Dangerous])));
+            rule.Consequences = new List<Information> { new Information(_player, WorldAdjectives[Adjectives.Enemy]) };
             rule.AppliesToSelf = false;
             
-            rule = new InferenceRule(new BoolExpression(new Information(s, WorldAdjectives[Adjectives.Enemy])));
-            rule.Consequences = new List<Information> { new Information(s, WorldAdjectives[Adjectives.Dangerous]) };
+            rule = new InferenceRule(new BoolExpression(new Information(_player, WorldAdjectives[Adjectives.Enemy])));
+            rule.Consequences = new List<Information> { new Information(_player, WorldAdjectives[Adjectives.Dangerous]) };
             rule.AppliesToSelf = false;
 
             WorldRules.Add(rule);
         }
 
+        private void InitQuest()
+        {
+            var rule = new InferenceRule(new BoolExpression(new Information(_player, WorldAdjectives[Adjectives.King])))
+                .And(new BoolExpression(new Information(_player, GameObject.Find("Castle").GetComponent<Location>())));
+            rule.AppliesToSelf = true;
+            var info = new Information(GameObject.Find("Dragon").GetComponent<NPC>(), WorldAdjectives[Adjectives.Dead]);
+
+            Quest q = new Quest(GameObject.Find("Queen").GetComponent<NPC>());
+            q.GoalRules.Add(rule);
+            q.GoalInfos.Add(info);
+
+            Quest = q;
+        }
+
         public void StartDialogue(Agent conversationStarter, Agent conversationPartner)
         {
-            _currentConversationPartner.IsOccupied = true;
-            _currentConversationStarter.IsOccupied = true;
-            
             _currentConversationStarter = conversationStarter;
             _currentConversationPartner = conversationPartner;
+            
+            _currentConversationStarter.Memory.TryAddNewInformation(
+                new Information(_currentConversationPartner, _currentConversationPartner.Location),
+                _currentConversationStarter);
+            
+            _currentConversationPartner.Memory.TryAddNewInformation(
+                new Information(_currentConversationStarter, _currentConversationStarter.Location),
+                _currentConversationPartner);
+            
+            
             if (_currentConversationStarter is Player)
             {
                 NameText.text = _currentConversationPartner.Name;
-                (_currentConversationPartner as NPC)?.InterruptNPC();   
+                (_currentConversationPartner as NPC)?.InterruptNPC();
             }
             else
             {
                 NameText.text = _currentConversationStarter.name;
                 (_currentConversationStarter as NPC)?.InterruptNPC();
             }
+            
+            _currentConversationPartner.IsOccupied = true;
+            _currentConversationStarter.IsOccupied = true;
+            
             DialogueRunner.variableStorage.SetValue("$NPCName", NameText.text);
         
             _currentConversationPartner.CurrentReplies = _currentConversationPartner.Memory.
@@ -248,12 +281,13 @@ namespace Game
             informationObject.PropagationType = InformationPropagationType.Visual;
         }
 
-        public void CreateConversationInformation(Information information, Vector3 position)
+        public void CreateConversationInformation(Information information, Vector3 position, Agent sender)
         {
             InformationObject informationObject = Instantiate(InformationPrefab, position, Quaternion.identity).
                 GetComponent<InformationObject>();
             informationObject.Information = information;
-            informationObject.PropagationType = InformationPropagationType.Audio;
+            informationObject.PropagationType = InformationPropagationType.Conversation;
+            informationObject.Sender = sender;
         }
     
         public void CreateVisibleInformation(Information information, Vector3 position)

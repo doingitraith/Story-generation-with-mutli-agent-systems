@@ -39,12 +39,14 @@ namespace Information_Flow
             }
         }
 
-        private List<InformationSubject> SatisfiesKnowledgeBase(BoolExpression ex, List<InformationSubject> candidateList)
+        public List<InformationSubject> SatisfiesKnowledgeBase(BoolExpression ex, List<InformationSubject> candidateList)
         {
             if (ex.Information != null)
             {
                 List<Information> infos =
-                    KnowledgeBase.GetStableMemory().Keys.Where(i => i.Verb.Equals(ex.Information.Verb)).ToList();
+                    KnowledgeBase.GetStableMemory().
+                        Where(c => c.Information.EqualsExceptForSubject(ex.Information)).
+                        Select(c=>c.Information).ToList();
 
                 foreach (Information i in infos)
                     if (i.Equals(new Information(i.Subject, ex.Information)))
@@ -52,7 +54,6 @@ namespace Information_Flow
             }
             else if (ex.Left != null)
             {
-
                 List<InformationSubject> left = SatisfiesKnowledgeBase(ex.Left, new List<InformationSubject>());
             
                 // should only be the NOT case

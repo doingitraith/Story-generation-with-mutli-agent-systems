@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Information_Flow;
@@ -12,7 +13,8 @@ public class Location : MonoBehaviour
     public InformationLocation InformationLocation;
     [SerializeField]
     private List<string> _mutations;
-    void Start()
+
+    void Awake()
     {
         for (int i = _mutations.Count-1; i >= 0; i--)
             _mutation = new Mutation(_mutations[i], _mutation);
@@ -20,5 +22,9 @@ public class Location : MonoBehaviour
         LocationTransform = transform;
 
         InformationLocation = new InformationLocation(Name, LocationTransform, _mutation);
+    }
+
+    void Start()
+    {
     }
 }
