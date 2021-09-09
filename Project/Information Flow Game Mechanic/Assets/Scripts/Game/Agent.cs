@@ -36,7 +36,7 @@ namespace Game
         {
             base.Start();
             if (YarnScript != null)
-                GameManager.Instance.DialogueRunner.Add(YarnScript);
+                GameManager.Instance.DialogueManager.AddYarnFile(YarnScript);
             Acquaintances = new Dictionary<Agent, float>();
         
             ImportantPeople.ForEach(p => Acquaintances.Add(p, 1.0f));
@@ -71,7 +71,7 @@ namespace Game
         {
             IsOccupied = true;
             interactAgent.IsOccupied = true;
-            GameManager.Instance.StartDialogue(this, interactAgent);
+            GameManager.Instance.DialogueManager.StartDialogue(this, interactAgent);
         }
         
         public void AttackNPC(NPC interactNpc)

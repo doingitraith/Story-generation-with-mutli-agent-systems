@@ -1,0 +1,152 @@
+title: Chat
+tags: 
+colorID: 0
+position: 855,1128
+---
+Player: Hey, is there anything you can tell me?
+<<if $HasNPCReplies is false>>
+    {$NPCName}: Sadly not. 
+    [[Okay, no problem.|PlayerReply]]
+<<else>>
+    {$NPCName}: Here is what I can tell you. 
+    [[NPCReply]]
+<<endif>>
+===
+title: End
+tags: 
+colorID: 0
+position: 1158,304
+---
+Player: Goodbye then.
+{$NPCName}: Goodbye.
+===
+title: NPCReply
+tags: 
+colorID: 0
+position: 1138,1135
+---
+<<ReceiveReply Player 0>>
+{$NPCName}: {$NPCReplyText}.
+[[PlayerReply]]
+===
+title: PlayerReply
+tags: 
+colorID: 0
+position: 1141,875
+---
+{$NPCName}: So is there something you can tell me?
+
+<<if $NumOfReplies > 0>>
+    [[{$ReplyText1}|Reply1]]
+    <<if $NumOfReplies > 1>>
+        [[{$ReplyText2}|Reply2]]
+        <<if $NumOfReplies > 2>>
+            [[{$ReplyText3}|Reply3]]
+        <<endif>>
+    <<endif>>
+<<endif>>
+[[No, nothing.|End]]
+===
+title: Reply1
+tags: 
+colorID: 0
+position: 964,608
+---
+<<ReceiveReply {$NPCName} 0>>
+{$NPCName}: Thank you.
+[[End]]
+===
+title: Reply2
+tags: 
+colorID: 0
+position: 1311,598
+---
+<<ReceiveReply {$NPCName} 1>>
+{$NPCName}: Thank you.
+[[End]]
+===
+title: Reply3
+tags: 
+colorID: 0
+position: 1584,601
+---
+<<ReceiveReply {$NPCName} 2>>
+{$NPCName}: Thank you.
+[[End]]
+===
+title: Start
+tags: 
+colorID: 0
+position: 231,1284
+---
+{$NPCName}: Good day, what can I do for you?
+[[What's the news?|Chat]]
+[[I want to ask you a question.|Question]]
+[[I want to tell you something|Statement]]
+===
+title: Question
+tags: 
+colorID: 0
+position: 33,846
+---
+<<SetupQuestion>>
+[[This is my question.|AskQuestion]]
+===
+title: Statement
+tags: 
+colorID: 0
+position: 408,847
+---
+<<SetupStatement>>
+[[This is what I want to tell you.|MakeStatement]]
+===
+title: ShowQuestion
+tags: 
+colorID: 0
+position: 329,253
+---
+<<if $IsQuestionValid is false>>
+    {$NPCName}: I don't understand your question.
+    [[Let me try again.|Question]]
+<<else>>
+    Player: {$QuestionQuestion}
+    <<if $HasAnswer is true>>
+        {$NPCName}: {$QuestionAnswer}.
+    <<else>>
+        {$NPCName}: This I don't know.
+    <<endif>>
+    [[I have another question.|Question]]
+    [[Thank you.|End]]
+<<endif>>
+===
+title: ShowStatement
+tags: 
+colorID: 0
+position: 423,546
+---
+<<if $IsStatementValid is false>>
+    {$NPCName}: I don't understand what you are saying.
+    [[Let me try again.|Statement]]
+<<else>>
+    Player: {$StatementStatement}
+    {$NPCName}: I'll keep that in mind.
+    [[I want to tell you more.|Statement]]
+    [[That's all for now.|End]]
+<<endif>>
+===
+title: AskQuestion
+tags: 
+colorID: 0
+position: -26,267
+---
+<<AskQuestion>>
+[[ShowQuestion]]
+===
+title: MakeStatement
+tags: 
+colorID: 0
+position: 721,613
+---
+<<MakeStatement>>
+[[ShowStatement]]
+===
