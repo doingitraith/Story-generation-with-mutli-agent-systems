@@ -295,9 +295,7 @@ namespace Information_Flow
                     }
                 }
             }
-        
-            sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
-        
+
             return true;
         }
 
