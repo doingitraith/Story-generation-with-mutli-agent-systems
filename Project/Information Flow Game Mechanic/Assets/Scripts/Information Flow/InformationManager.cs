@@ -420,9 +420,8 @@ namespace Information_Flow
                 Where(a => a.InformationSubject.Equals(informationSubject)).ToList();
         
             if (knownAssociates.Count > 1)
-                throw new Exception("There should only be one Agent with the name " + knownAssociates[0].Name);
+                throw new Exception("There should only be one Agent with the name " + knownAssociates[0].name);
         
-            Agent worldAgent = knownAssociates[0];
             if(knownAssociates.Count == 0)
                 h = .5f;
             else if (Owner.ImportantPeople.Contains(knownAssociates[0]))
@@ -435,6 +434,7 @@ namespace Information_Flow
                     h = Owner.Acquaintances[NextToTarget.Item2] / NextToTarget.Item1;
             }
 
+            Agent worldAgent = knownAssociates[0];
             float worldImportance = 1.0f;
             if (worldAgent != null)
                 worldImportance = worldAgent.WorldImportance;

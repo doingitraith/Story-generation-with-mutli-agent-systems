@@ -25,18 +25,26 @@ namespace Game
                 Mutation = new Mutation(Mutations[i], Mutation);
 
             InformationSubject = new InformationSubject(Name, IsPerson, IsUniqe, Mutation);
-            Location = GameObject.Find("Locations").GetComponent<Location>().InformationLocation;
         }
 
         // Start is called before the first frame update
         protected virtual void Start()
         {
+            Location = GameObject.Find("Locations").GetComponent<Location>().InformationLocation;
         }
 
         // Update is called once per frame
         protected virtual void Update()
         {
-        
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.TryGetComponent<Location>(out var infoLocation))
+            {
+                GameManager.Instance.CreateArrivalInformation(this, infoLocation);
+                this.Location = infoLocation.InformationLocation;
+            }
         }
     }
 }

@@ -70,9 +70,32 @@ namespace Information_Flow
         /// Creates a copy of an Information
         /// </summary>
         /// <param name="information">Information to copy</param>
-        public Information(Information information) =>
-            (Subject, Verb, Object, Adjective, Location, Not) = (information.Subject, information.Verb, information.Object,
-                information.Adjective, information.Location, information.Not);
+        public Information(Information information)
+        {
+
+            Subject = new InformationSubject(information.Subject.Name, information.Subject.IsPerson,
+                information.Subject.IsUnique, information.Subject.Mutation);
+            Verb = information.Verb;
+            if (information.Object != null)
+            {
+                Object = new InformationSubject(information.Object.Name, information.Object.IsPerson,
+                    information.Object.IsUnique, information.Object.Mutation);
+            }
+            if (information.Adjective != null)
+            {
+                if (information.Adjective is InformationProperty)
+                    Adjective = new InformationProperty(information.Adjective.Characteristic,
+                        information.Adjective.Contradictions);
+                else
+                    Adjective = new InformationOpinion(information.Adjective.Characteristic,
+                        information.Adjective.Contradictions);
+            }
+            if (information.Location != null)
+            {
+                Location = new InformationLocation(information.Location.Name, information.Location.Location,
+                    information.Location.Mutation);
+            }
+        }
 
         /// <summary>
         /// Creates the negation of an Information
@@ -99,16 +122,27 @@ namespace Information_Flow
         {
             if (!(o is Information other))
                 return false;
-        
-            if (other.Verb != Verb || other.Not != Not||(other.Verb == Verb && !Subject.Equals(other.Subject)))
-                return false;
 
+            if (other.Verb != Verb || other.Not != Not || (other.Verb == Verb && !Subject.Equals(other.Subject)))
+                return false;
             switch (Verb)
             {
-                case InformationVerb.At: { return Location.Equals(other.Location); }
-                case InformationVerb.Is: { return Adjective.Equals(other.Adjective); }
-                case InformationVerb.Has: { return Object.Equals(other.Object); }
-                default: { return false; }
+                case InformationVerb.At:
+                {
+                    return Location.Equals(other.Location);
+                }
+                case InformationVerb.Is:
+                {
+                    return Adjective.Equals(other.Adjective);
+                }
+                case InformationVerb.Has:
+                {
+                    return Object.Equals(other.Object);
+                }
+                default:
+                {
+                    return false;
+                }
             }
         }
 

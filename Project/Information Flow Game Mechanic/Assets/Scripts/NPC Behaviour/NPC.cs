@@ -111,6 +111,9 @@ namespace NPC_Behaviour
         private void Die()
         {
             isDead = true;
+            if(Name.Equals("Dragon"))
+                GameManager.Instance.DialogueManager.SetVariable("$IsDragonDead", true);
+            
             GetComponentInChildren<Animator>().SetTrigger("DoDie");
         }
 
@@ -133,5 +136,8 @@ namespace NPC_Behaviour
                 Debug.Log(Name+" is hurt");
             }
         }
+
+        public void AddBehaviour(BehaviourEntry behaviour)
+        => Routine.Add(behaviour);
     }
 }

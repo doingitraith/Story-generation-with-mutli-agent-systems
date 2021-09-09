@@ -1,0 +1,30 @@
+title: StartQuest
+tags: 
+colorID: 0
+position: 839,259
+---
+{$NPCName}: My dear Knight Robin, you need to help me.
+Player: How may I serve you my Queen.
+{$NPCName}: The king has been kidnapped by the cruel dragon.
+{$NPCName}: Make sure that the KING is back at the castle and I will reward you.
+{$NPCName}: Talk to the people of the land to find out what you need.
+===
+title: StartQueen
+tags: 
+colorID: 0
+position: 350,607
+---
+<<if $IsQuestFinished is true>>
+    [[FinishQuest]]
+<<else>>
+    [[StartQuest]]
+<<endif>>
+===
+title: FinishQuest
+tags: 
+colorID: 0
+position: 327,187
+---
+{$NPCName}: Oh thank you for saving the KING and bringing him back to the castle!
+Player: I do exactly as commanded my Queen.
+===

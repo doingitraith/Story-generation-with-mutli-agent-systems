@@ -35,6 +35,9 @@ namespace Game
             transform.position = agent.transform.position;
             GetComponentInChildren<SphereCollider>().enabled = false;
             GetComponentInChildren<Renderer>().enabled = false;
+            
+            if (tag.Equals("Weapon"))
+                agent.EquipItem(this);
         }
 
         public void Drop()

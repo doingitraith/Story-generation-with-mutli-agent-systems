@@ -6,6 +6,7 @@ using NPC_Behaviour;
 using Player_Behaviour;
 using UnityEngine;
 using UnityEngine.UI;
+using Yarn;
 using Yarn.Unity;
 using Random = UnityEngine.Random;
 
@@ -59,18 +60,9 @@ namespace Game
 
         public void StartDialogue(Agent conversationStarter, Agent conversationPartner)
         {
+
             _currentConversationStarter = conversationStarter;
             _currentConversationPartner = conversationPartner;
-            
-            _currentConversationStarter.Memory.TryAddNewInformation(
-                new Information(_currentConversationPartner, _currentConversationPartner.Location),
-                _currentConversationStarter);
-            
-            _currentConversationPartner.Memory.TryAddNewInformation(
-                new Information(_currentConversationStarter, _currentConversationStarter.Location),
-                _currentConversationPartner);
-            
-            
             if (_currentConversationStarter is Player)
             {
                 NameText.text = _currentConversationPartner.Name;
@@ -81,42 +73,53 @@ namespace Game
                 NameText.text = _currentConversationStarter.name;
                 (_currentConversationStarter as NPC)?.InterruptNPC();
             }
-            
+
             _currentConversationPartner.IsOccupied = true;
             _currentConversationStarter.IsOccupied = true;
-            
+
             DialogueRunner.variableStorage.SetValue("$NPCName", NameText.text);
-        
-            _currentConversationPartner.CurrentReplies = _currentConversationPartner.Memory.
-                    GetInformationToExchange(1, _currentConversationStarter.InformationSubject).ToList();
-
-            DialogueRunner.variableStorage.SetValue("$HasNPCReplies", 
-                _currentConversationPartner.CurrentReplies.Count!=0);
-        
-            if(_currentConversationPartner.CurrentReplies.Count!=0)
-                DialogueRunner.variableStorage.SetValue("$NPCReplyText",
-                    _currentConversationPartner.CurrentReplies[0].ToString());
-
-            int numOfReplies = _currentConversationStarter.Memory.NumberOfMemories;
-            _currentConversationStarter.CurrentReplies = _currentConversationStarter.Memory.
-                    GetInformationToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1,
-                        _currentConversationPartner.InformationSubject).ToList();
             
-            numOfReplies = _currentConversationStarter.CurrentReplies.Count;
-            DialogueRunner.variableStorage.SetValue("$NumOfReplies", numOfReplies);
-            if (numOfReplies > 0)
+            if (_currentConversationPartner.YarnNode.Equals("Start"))
             {
-                DialogueRunner.variableStorage.SetValue("$ReplyText1", 
-                    _currentConversationStarter.CurrentReplies[0].ToString());
-                if(numOfReplies > 1)
-                    DialogueRunner.variableStorage.SetValue("$ReplyText2", 
-                        _currentConversationStarter.CurrentReplies[1].ToString());
-                if(numOfReplies > 2)
-                    DialogueRunner.variableStorage.SetValue("$ReplyText3", 
-                        _currentConversationStarter.CurrentReplies[2].ToString());
+                _currentConversationStarter.Memory.TryAddNewInformation(
+                    new Information(_currentConversationPartner, _currentConversationPartner.Location),
+                    _currentConversationStarter);
+
+                _currentConversationPartner.Memory.TryAddNewInformation(
+                    new Information(_currentConversationStarter, _currentConversationStarter.Location),
+                    _currentConversationPartner);
+
+                _currentConversationPartner.CurrentReplies = _currentConversationPartner.Memory
+                    .GetInformationToExchange(1, _currentConversationStarter.InformationSubject).ToList();
+
+                DialogueRunner.variableStorage.SetValue("$HasNPCReplies",
+                    _currentConversationPartner.CurrentReplies.Count != 0);
+
+                if (_currentConversationPartner.CurrentReplies.Count != 0)
+                    DialogueRunner.variableStorage.SetValue("$NPCReplyText",
+                        _currentConversationPartner.CurrentReplies[0].ToString());
+
+                int numOfReplies = _currentConversationStarter.Memory.NumberOfMemories;
+                _currentConversationStarter.CurrentReplies = _currentConversationStarter.Memory
+                    .GetInformationToExchange(numOfReplies > 2 ? 3 : numOfReplies > 1 ? 2 : 1,
+                        _currentConversationPartner.InformationSubject).ToList();
+
+                numOfReplies = _currentConversationStarter.CurrentReplies.Count;
+                DialogueRunner.variableStorage.SetValue("$NumOfReplies", numOfReplies);
+                if (numOfReplies > 0)
+                {
+                    DialogueRunner.variableStorage.SetValue("$ReplyText1",
+                        _currentConversationStarter.CurrentReplies[0].ToString());
+                    if (numOfReplies > 1)
+                        DialogueRunner.variableStorage.SetValue("$ReplyText2",
+                            _currentConversationStarter.CurrentReplies[1].ToString());
+                    if (numOfReplies > 2)
+                        DialogueRunner.variableStorage.SetValue("$ReplyText3",
+                            _currentConversationStarter.CurrentReplies[2].ToString());
+                }
             }
-        
-            DialogueRunner.StartDialogue(_currentConversationStarter.YarnNode);
+
+            DialogueRunner.StartDialogue(_currentConversationPartner.YarnNode);
         }
 
         public void EndDialogue()
@@ -359,7 +362,7 @@ namespace Game
 
         public void AddYarnFile(YarnProgram yarnScript)
             => DialogueRunner.Add(yarnScript);
-        
+
         private void SetupQuestion(string[] parameters)
         {
             // Show Question UI
@@ -589,7 +592,12 @@ namespace Game
         
         public void OnStatementObjectValueChanged(Dropdown change)
         {
-            
         }
+
+        public void SetVariable(string name, bool value)
+            => DialogueRunner.variableStorage.SetValue(name, value);
+
+        public Value GetVariable(string name)
+            => DialogueRunner.variableStorage.GetValue(name);
     }
 }

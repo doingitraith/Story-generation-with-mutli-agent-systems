@@ -64,7 +64,7 @@ namespace NPC_Behaviour
 
         public override bool IsBehaviourFinished()
         {
-            if (Vector3.Distance(Agent.transform.position, Destination.position) <= 1.0f)
+            if (Vector3.Distance(Agent.transform.position, Destination.position) <= 2.0f)
             {
                 _navMeshAgent.destination = Agent.transform.position;
                 _navMeshAgent.isStopped = true;
