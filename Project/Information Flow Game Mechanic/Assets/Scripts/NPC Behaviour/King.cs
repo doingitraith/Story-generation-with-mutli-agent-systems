@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
@@ -20,8 +21,11 @@ namespace NPC_Behaviour
             {
                 _isDone = true;
                 NPC npc = GetComponent<NPC>();
-                npc.AddBehaviour(new BehaviourEntry{BehaviourObject = Queen, Type = BehaviourType.Walk});
-                npc.AddBehaviour(new BehaviourEntry{BehaviourObject = Queen, Type = BehaviourType.Exchange});
+                npc.ChangeRoutine(new List<BehaviourEntry>
+                {
+                    new BehaviourEntry{BehaviourObject = Queen, Type = BehaviourType.Walk},
+                    new BehaviourEntry{BehaviourObject = Queen, Type = BehaviourType.Exchange}
+                });
             }
         }
     }

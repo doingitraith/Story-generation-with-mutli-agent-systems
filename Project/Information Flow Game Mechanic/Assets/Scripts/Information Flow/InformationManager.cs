@@ -419,20 +419,22 @@ namespace Information_Flow
         
             if (knownAssociates.Count > 1)
                 throw new Exception("There should only be one Agent with the name " + knownAssociates[0].name);
-        
+
+            Agent worldAgent = null;
             if(knownAssociates.Count == 0)
                 h = .5f;
+            /*
             else if (Owner.ImportantPeople.Contains(knownAssociates[0]))
                 h = 1.0f;
+                */
             else
             {
-                Agent goal = new List<Agent>(knownAssociates).OrderBy(x => Random.value).ElementAt(0);
-                Tuple<int, Agent> NextToTarget = BreadthFirstShortestPath.ShortestPath(Owner, goal);
+                worldAgent = knownAssociates[0];
+                Tuple<int, Agent> NextToTarget = BreadthFirstShortestPath.ShortestPath(Owner, worldAgent);
                 if (NextToTarget != null)
                     h = Owner.Acquaintances[NextToTarget.Item2] / NextToTarget.Item1;
             }
-
-            Agent worldAgent = knownAssociates[0];
+            
             float worldImportance = 1.0f;
             if (worldAgent != null)
                 worldImportance = worldAgent.WorldImportance;
