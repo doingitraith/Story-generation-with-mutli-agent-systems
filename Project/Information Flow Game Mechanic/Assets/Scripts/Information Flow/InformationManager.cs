@@ -528,6 +528,7 @@ namespace Information_Flow
             var allSubjects = new List<InformationContext>(_stableMemory)
                 .Select(c => c.Information.Subject).ToList();
             allSubjects.AddRange(_speculativeMemory.Select(c=>c.Information.Subject));
+            allSubjects.Add(Owner.InformationSubject);
 
             return allSubjects.Where(s => s.IsPerson)
                 .Select(s=>s.Name).Distinct().ToList(); 
@@ -548,16 +549,6 @@ namespace Information_Flow
 
             return allLocations.Where(l => l != null)
                 .Select(l=>l.Name).Distinct().ToList(); 
-        }
-        
-        public List<string> GetKnownAdjectives()
-        {
-            var allAdjectives = new List<InformationContext>(_stableMemory)
-                .Select(c => c.Information.Adjective).ToList();
-            allAdjectives.AddRange(_speculativeMemory.Select(c=>c.Information.Adjective));
-
-            return allAdjectives.Where(a => a != null)
-                .Select(a=>a.Characteristic.ToString()).Distinct().ToList(); 
         }
     }
 }

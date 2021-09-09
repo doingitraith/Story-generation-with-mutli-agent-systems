@@ -289,9 +289,65 @@ namespace Game
         private void MakeStatement(string[] parameters)
         {
             // Hide statement UI
-            // form statement
+            StatementPanel.SetActive(false);
+
             // check for validity
-            throw new NotImplementedException();
+            try
+            {
+                string sSubject = statementSubject.options[statementSubject.value].text;
+                string sVerb = statementVerb.options[statementVerb.value].text;
+                string sObject = statementObject.options[statementObject.value].text;
+
+                switch (sVerb)
+                {
+                    case "Has":
+                    {
+                        var subject = FindObjectsOfType<Agent>()
+                            .First(a => a.InformationSubject.Name.Equals(sSubject));
+                        var item = FindObjectsOfType<Item>().First(i => i.InformationSubject.Name.Equals(sObject));
+                        var info = new Information(subject, item);
+                        
+                        DialogueRunner.variableStorage.SetValue("$StatementStatement", info.ToString());
+                        _currentConversationPartner.Memory.TryAddNewSpeculativeInformation(info,
+                            _currentConversationStarter);
+                    }
+                        break;
+                    case "Is":
+                    {
+                        var subject = FindObjectsOfType<Agent>()
+                            .First(a => a.InformationSubject.Name.Equals(sSubject));
+                        var adj = 
+                            GameManager.Instance.WorldAdjectives[((Adjectives)Enum.Parse(typeof(Adjectives), sObject))];
+                        var info = new Information(subject, adj);
+                        
+                        DialogueRunner.variableStorage.SetValue("$StatementStatement", info.ToString());
+                        _currentConversationPartner.Memory.TryAddNewSpeculativeInformation(info,
+                            _currentConversationStarter);
+                    }
+                        break;
+                    case "At":
+                    {
+                        var subject = FindObjectsOfType<Agent>()
+                            .First(a => a.InformationSubject.Name.Equals(sSubject));
+                        var location = FindObjectsOfType<Location>()
+                            .First(i => i.InformationLocation.Name.Equals(sObject));
+                        var info = new Information(subject, location);
+                        
+                        DialogueRunner.variableStorage.SetValue("$StatementStatement", info.ToString());
+                        _currentConversationPartner.Memory.TryAddNewSpeculativeInformation(info,
+                            _currentConversationStarter);
+                    }
+                        break;
+                    default:
+                        throw new Exception("Invalid verb in MakeStatement");
+                }
+                
+                DialogueRunner.variableStorage.SetValue("$IsStatementValid", true);
+            }
+            catch (Exception e)
+            {
+                DialogueRunner.variableStorage.SetValue("$IsStatementValid", false);
+            }
         }
 
 
@@ -332,14 +388,23 @@ namespace Game
         {
             // Show Statement UI
             StatementPanel.SetActive(true);
+            Reply1.SetActive(true);
             Reply2.SetActive(false);
             Reply3.SetActive(false);
             Reply4.SetActive(false);
+            statementSubject.ClearOptions();
             statementVerb.ClearOptions();
             statementObject.ClearOptions();
 
             // Fill UI elements
-            
+            var verbOptions = new List<Dropdown.OptionData>
+            {
+                new Dropdown.OptionData("Has"),
+                new Dropdown.OptionData("Is"),
+                new Dropdown.OptionData("At")
+            };
+            statementVerb.AddOptions(verbOptions);
+            OnStatementVerbValueChanged(statementVerb);
         }
 
         public void OnQuestionTermValueChanged(Dropdown change)
@@ -440,7 +505,8 @@ namespace Game
                     }
                     else if(questionTerm.options[questionTerm.value].text.Equals("Who"))
                     {
-                        var adjectives = _currentConversationStarter.Memory.GetKnownAdjectives();
+                        var adjectives = GameManager.Instance.WorldAdjectives
+                            .Select(a=>a.Value.Characteristic.ToString()).ToList();
                         var adjectiveOptions = new List<Dropdown.OptionData>();
                         adjectives.ForEach(i=> adjectiveOptions.Add(new Dropdown.OptionData(i)));
                         
@@ -465,7 +531,60 @@ namespace Game
         
         public void OnStatementVerbValueChanged(Dropdown change)
         {
+            statementSubject.ClearOptions();
+            statementObject.ClearOptions();
             
+            switch (change.options[change.value].text)
+            {
+                case "Has":
+                {
+                    var subjects = _currentConversationStarter.Memory.GetKnownSubjects();
+                    var subjectOptions = new List<Dropdown.OptionData>();
+                    subjects.ForEach(i=> subjectOptions.Add(new Dropdown.OptionData(i)));
+                    
+                    statementSubject.AddOptions(subjectOptions);
+                    
+                    var items = _currentConversationStarter.Memory.GetKnownItems();
+                    var itemOptions = new List<Dropdown.OptionData>();
+                    items.ForEach(i=> subjectOptions.Add(new Dropdown.OptionData(i)));
+                    
+                    statementObject.AddOptions(itemOptions);
+                }
+                    break;
+                case "At":
+                {
+                    var subjects = _currentConversationStarter.Memory.GetAllKnownSubjects();
+                    var subjectOptions = new List<Dropdown.OptionData>();
+                    subjects.ForEach(i=> subjectOptions.Add(new Dropdown.OptionData(i)));
+                    
+                    statementSubject.AddOptions(subjectOptions);
+                    
+                    var locations = _currentConversationStarter.Memory.GetKnownLocations();
+                    var locationOptions = new List<Dropdown.OptionData>();
+                    locations.ForEach(i=> locationOptions.Add(new Dropdown.OptionData(i)));
+                    
+                    statementObject.AddOptions(locationOptions);
+                }
+                    break;
+                case "Is":
+                {
+                    var subjects = _currentConversationStarter.Memory.GetKnownSubjects();
+                    var subjectOptions = new List<Dropdown.OptionData>();
+                    subjects.ForEach(i=> subjectOptions.Add(new Dropdown.OptionData(i)));
+                    
+                    statementSubject.AddOptions(subjectOptions);
+                    
+                    var adjectives = GameManager.Instance.WorldAdjectives
+                        .Select(a=>a.Value.Characteristic.ToString()).ToList();
+                    var adjectiveOptions = new List<Dropdown.OptionData>();
+                    adjectives.ForEach(i=> adjectiveOptions.Add(new Dropdown.OptionData(i)));
+                    
+                    statementObject.AddOptions(adjectiveOptions);
+                }
+                    break;
+                default:
+                    throw new Exception("Invalid statement verb selected");
+            }
         }
         
         public void OnStatementObjectValueChanged(Dropdown change)
