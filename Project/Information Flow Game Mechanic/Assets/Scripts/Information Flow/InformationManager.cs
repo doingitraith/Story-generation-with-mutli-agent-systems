@@ -303,8 +303,7 @@ namespace Information_Flow
 
         public void UpdateBelievability()
         {
-            List<InformationContext> data = new List<InformationContext>(_speculativeMemory);
-            data.AddRange(_stableMemory);
+            List<InformationContext> data = GetAllMemories();
 
             // Map
             var distances = new List<List<float>>();
@@ -449,8 +448,7 @@ namespace Information_Flow
             if (informationSubject.IsPerson)
                 return h;
 
-            List<InformationContext> owners = new List<InformationContext>(_stableMemory);
-            owners.AddRange(_speculativeMemory);
+            List<InformationContext> owners = GetAllMemories();
             owners = owners.Where(c => c.Information.Verb == InformationVerb.Has && 
                                        c.Information.Object.Equals(informationSubject)).ToList();
             
@@ -473,8 +471,7 @@ namespace Information_Flow
 
         public List<Information> GetInformationToExchange(int numberOfInfos, InformationSubject target)
         {
-            var allMemories = new List<InformationContext>(_stableMemory);
-                allMemories.AddRange(_speculativeMemory);
+            var allMemories = GetAllMemories();
 
                 if (NumberOfMemories < numberOfInfos)
                     return null;
@@ -506,5 +503,61 @@ namespace Information_Flow
 
         public List<InformationContext> GetStableMemory()
             => _stableMemory;
+
+        public List<InformationContext> GetAllMemories()
+        {
+            var allMemories = new List<InformationContext>(_stableMemory);
+            allMemories.AddRange(_speculativeMemory);
+            return allMemories;
+        }
+
+        public List<string> GetKnownItems()
+        {
+            var allSubjects = new List<InformationContext>(_stableMemory)
+                .Select(c => c.Information.Subject).ToList();
+            allSubjects.AddRange(_speculativeMemory.Select(c=>c.Information.Subject));
+            allSubjects.AddRange(_stableMemory.Select(c=>c.Information.Object));
+            allSubjects.AddRange(_speculativeMemory.Select(c=>c.Information.Object));
+
+            return allSubjects.Where(s => s is { IsPerson: false })
+                .Select(s=>s.Name).Distinct().ToList();
+        }
+
+        public List<string> GetKnownSubjects()
+        {
+            var allSubjects = new List<InformationContext>(_stableMemory)
+                .Select(c => c.Information.Subject).ToList();
+            allSubjects.AddRange(_speculativeMemory.Select(c=>c.Information.Subject));
+
+            return allSubjects.Where(s => s.IsPerson)
+                .Select(s=>s.Name).Distinct().ToList(); 
+        }
+
+        public List<string> GetAllKnownSubjects()
+        {
+            var allSubjectsItems = new List<string>(GetKnownSubjects());
+            allSubjectsItems.AddRange(GetKnownItems());
+            return allSubjectsItems;
+        }
+
+        public List<string> GetKnownLocations()
+        {
+            var allLocations = new List<InformationContext>(_stableMemory)
+                .Select(c => c.Information.Location).ToList();
+            allLocations.AddRange(_speculativeMemory.Select(c=>c.Information.Location));
+
+            return allLocations.Where(l => l != null)
+                .Select(l=>l.Name).Distinct().ToList(); 
+        }
+        
+        public List<string> GetKnownAdjectives()
+        {
+            var allAdjectives = new List<InformationContext>(_stableMemory)
+                .Select(c => c.Information.Adjective).ToList();
+            allAdjectives.AddRange(_speculativeMemory.Select(c=>c.Information.Adjective));
+
+            return allAdjectives.Where(a => a != null)
+                .Select(a=>a.Characteristic.ToString()).Distinct().ToList(); 
+        }
     }
 }

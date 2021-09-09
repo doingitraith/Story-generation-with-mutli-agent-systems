@@ -16,27 +16,27 @@ namespace NPC_Behaviour
         public override IEnumerator DoBehaviour()
         {
             Agent.IsOccupied = true;
-            GameManager.Instance.StartDialogue(Agent, _conversationPartner);
+            GameManager.Instance.DialogueManager.StartDialogue(Agent, _conversationPartner);
             yield return null;
         }
 
         public override IEnumerator InterruptBehaviour()
         {
             Agent.IsOccupied = false;
-            GameManager.Instance.DialogueRunner.Stop();
+            GameManager.Instance.DialogueManager.Stop();
             yield return null;
         }
 
         public override IEnumerator ResumeBehaviour()
         {
-            GameManager.Instance.DialogueRunner.ResetDialogue();
+            GameManager.Instance.DialogueManager.ResetDialogue();
             yield return null;
         }
 
         public override bool IsBehaviourFinished()
         {
-            Agent.IsOccupied = GameManager.Instance.DialogueRunner.IsDialogueRunning;
-            return !GameManager.Instance.DialogueRunner.IsDialogueRunning;
+            Agent.IsOccupied = GameManager.Instance.DialogueManager.IsDialogueRunning;
+            return !GameManager.Instance.DialogueManager.IsDialogueRunning;
         }
     }
 }

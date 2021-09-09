@@ -1,0 +1,49 @@
+fileFormatVersion: 2
+guid: 4baab33eb48b3194eb1792f532a9ce62
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: 
+  stringIDs:
+  - NPC_v2-Chat-0
+  - NPC_v2-Chat-1
+  - NPC_v2-Chat-2
+  - NPC_v2-Chat-3
+  - NPC_v2-End-4
+  - NPC_v2-End-5
+  - NPC_v2-NPCReply-6
+  - NPC_v2-PlayerReply-7
+  - NPC_v2-PlayerReply-8
+  - NPC_v2-PlayerReply-9
+  - NPC_v2-PlayerReply-10
+  - NPC_v2-PlayerReply-11
+  - NPC_v2-Reply1-12
+  - NPC_v2-Reply2-13
+  - NPC_v2-Reply3-14
+  - NPC_v2-Start-15
+  - NPC_v2-Start-16
+  - NPC_v2-Start-17
+  - NPC_v2-Start-18
+  - NPC_v2-Question-19
+  - NPC_v2-Statement-20
+  - NPC_v2-AskQuestion-21
+  - NPC_v2-AskQuestion-22
+  - NPC_v2-AskQuestion-23
+  - NPC_v2-AskQuestion-24
+  - NPC_v2-AskQuestion-25
+  - NPC_v2-AskQuestion-26
+  - NPC_v2-MakeStatement-27
+  - NPC_v2-MakeStatement-28
+  - NPC_v2-MakeStatement-29
+  - NPC_v2-MakeStatement-30
+  - NPC_v2-MakeStatement-31
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 
+  baseLanguage: {instanceID: 0}
+  localizations: []
