@@ -24,7 +24,6 @@ namespace Game
         public float BelievabilityThreshold;
         public List<Information> CurrentReplies;
         public bool IsOccupied = false;
-        public List<InformationEntry> StateInfos;
         public Item EquippedItem;
         public Transform EquipPosition;
 

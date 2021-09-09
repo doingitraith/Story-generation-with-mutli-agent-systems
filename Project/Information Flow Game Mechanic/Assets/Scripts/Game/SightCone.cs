@@ -21,9 +21,13 @@ namespace Game
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!Owner.IsSeeing)
+                return;
+            
             if (other.gameObject.TryGetComponent<WorldObject>(out var worldObject))
             {
-                //worldObject.StateInfos.ForEach(s=>Owner.Memory.TryAddNewInformation(new Information(s.GetInformation()), Owner));
+                worldObject.StateInfos.ForEach(s=>Owner.Memory.TryAddNewInformation(
+                    new Information(s.GetInformation()), Owner));
             }
         }
     }

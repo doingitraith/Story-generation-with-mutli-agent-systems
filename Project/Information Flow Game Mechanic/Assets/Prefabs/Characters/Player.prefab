@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &122299452007887713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2636719345562948832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d91a3af4a04323941a497b476ee34a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7496320894190917477
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +229,7 @@ MonoBehaviour:
   IsPerson: 0
   IsUniqe: 0
   WorldImportance: 0
+  StateInfos: []
   Mutations: []
   Inventory: []
   ImportantPeople: []
@@ -252,7 +241,6 @@ MonoBehaviour:
   isDead: 0
   BelievabilityThreshold: 0
   IsOccupied: 0
-  StateInfos: []
   EquippedItem: {fileID: 0}
   EquipPosition: {fileID: 1642998186001166327}
 --- !u!1001 &1642998186000976451
@@ -413,13 +401,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: SightCone
       objectReference: {fileID: 0}
+    - target: {fileID: 7117637926446032773, guid: c00e8a89487d8644ea4fe2824006c949, type: 3}
+      propertyPath: Owner
+      value: 
+      objectReference: {fileID: 2395769646115143576}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c00e8a89487d8644ea4fe2824006c949, type: 3}
---- !u!1 &2636719345562948832 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4106807217613176560, guid: c00e8a89487d8644ea4fe2824006c949, type: 3}
-  m_PrefabInstance: {fileID: 2047393049557461520}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &84447741211275877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2109313983638050933, guid: c00e8a89487d8644ea4fe2824006c949, type: 3}

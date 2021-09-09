@@ -166,7 +166,7 @@ namespace Information_Flow
                     1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
             }
 
-            sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
+            //sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
             
             return true;
         }
@@ -477,8 +477,8 @@ namespace Information_Flow
                 var shuffleList = new List<InformationContext>(allMemories);
                 
                 //Shuffle List
-                shuffleList = shuffleList.Where(c => !c.Information.Subject.Equals(target) && 
-                                                     !c.Information.Verb.Equals(InformationVerb.At))
+                shuffleList = shuffleList.Where(c => !c.Information.Subject.Equals(target)
+                                                     && !c.Information.Verb.Equals(InformationVerb.At))
                     .OrderByDescending(c => Mathf.Abs(c.Believability)).ToList();
 
                 if (shuffleList.Count == 0)
