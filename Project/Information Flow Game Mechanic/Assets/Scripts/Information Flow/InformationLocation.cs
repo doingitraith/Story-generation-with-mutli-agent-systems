@@ -6,11 +6,11 @@ namespace Information_Flow
     {
         public string Name;
         public readonly Mutation Mutation;
-        private readonly Transform _location;
+        public readonly Transform Location;
         private readonly string _originalName;
 
         public InformationLocation(string name, Transform location, Mutation mutation)
-            => (Name, _originalName, Mutation, _location) = (name, name, mutation, location);
+            => (Name, _originalName, Mutation, Location) = (name, name, mutation, location);
     
         public override bool Equals(object o)
         {
@@ -19,10 +19,10 @@ namespace Information_Flow
             
             return _originalName.Equals(other._originalName)
                    && (Mutation?.Equals(other.Mutation) ?? true)
-                   && _location.Equals(other._location);
+                   && Location.Equals(other.Location);
         }
 
         public override int GetHashCode()
-            => _originalName.GetHashCode() * (Mutation != null ? Mutation.GetHashCode() : 1) * _location.GetHashCode();
+            => _originalName.GetHashCode() * (Mutation != null ? Mutation.GetHashCode() : 1) * Location.GetHashCode();
     }
 }

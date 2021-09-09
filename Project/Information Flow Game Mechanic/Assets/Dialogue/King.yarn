@@ -1,0 +1,28 @@
+title: StartKing
+tags: 
+colorID: 0
+position: 411,216
+---
+<<if $IsDragonDead is true>>
+    [[KingSaved]]
+<<else>>
+    [[KingUnsafe]]
+<<endif>>
+===
+title: KingSaved
+tags: 
+colorID: 0
+position: 235,-101
+---
+{$NPCName}: Thank you my Knight, I will tell my Queen of your deeds.
+===
+title: KingUnsafe
+tags: 
+colorID: 0
+position: 710,-48
+---
+{$NPCName}: Oh it is good that you are here honorable Knight.
+Player: Your Queen misses you dearly.
+{$NPCName}: So do I.
+{$NPCName}: Take up a sword and slay this beast so that I may return home.
+===

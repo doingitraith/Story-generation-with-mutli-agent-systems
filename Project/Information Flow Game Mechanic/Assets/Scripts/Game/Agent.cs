@@ -24,8 +24,8 @@ namespace Game
         public float BelievabilityThreshold;
         public List<Information> CurrentReplies;
         public bool IsOccupied = false;
-        public List<InformationEntry> StateInfos;
         public Item EquippedItem;
+        public Transform EquipPosition;
 
         protected override void Awake()
         {
@@ -100,49 +100,41 @@ namespace Game
 
         void OnTriggerEnter(Collider other)
         {
-            InformationObject infoObject = null;
-            Location infoLocation = null;
-            bool isInformationAdded = false;
-            if (other.gameObject.TryGetComponent<InformationObject>(out infoObject))
+            base.OnTriggerEnter(other);
+            if (other.gameObject.TryGetComponent<InformationObject>(out var infoObject))
             {
                 switch (infoObject.PropagationType)
                 {
                     case InformationPropagationType.Visual:
                     {
                         if (IsSeeing)
-                            isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
+                            Memory.TryAddNewInformation(infoObject.Information, this);
                     }
                         break;
                     case InformationPropagationType.Audio:
                     {
                         if (IsHearing)
-                            isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
+                            Memory.TryAddNewInformation(infoObject.Information, this);
                     }
                         break;
                     case InformationPropagationType.Conversation:
                     {
                         // TODO change to speculative
                         if (IsHearing)
-                            isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, infoObject.Sender);
+                            Memory.TryAddNewInformation(infoObject.Information, infoObject.Sender);
                     }
                         break;
                     case InformationPropagationType.Instant:
-                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, this);
+                        Memory.TryAddNewInformation(infoObject.Information, this);
                         break;
                     case InformationPropagationType.Persistant:
-                        isInformationAdded = Memory.TryAddNewInformation(infoObject.Information, null);
+                        Memory.TryAddNewInformation(infoObject.Information, null);
                         break;
                     case InformationPropagationType.None:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-            }
-
-            if (other.gameObject.TryGetComponent<Location>(out infoLocation))
-            {
-                GameManager.Instance.CreateArrivalInformation(this, infoLocation);
-                this.Location = infoLocation.InformationLocation;
             }
 
             /*
@@ -161,5 +153,19 @@ namespace Game
 
         public override int GetHashCode()
             => gameObject.GetHashCode();
+
+        public void EquipItem(Item item)
+        {
+            if (EquipPosition != null)
+            {
+                EquippedItem = item;
+                item.GetComponentInChildren<MeshRenderer>().enabled = true;
+                item.transform.position = EquipPosition.position;
+                item.transform.rotation = Quaternion.identity;
+                item.transform.parent = EquipPosition;
+                GetComponentInChildren<SphereCollider>().enabled = false;
+                item.GetComponentInChildren<Renderer>().enabled = true;
+            }
+        }
     }
 }

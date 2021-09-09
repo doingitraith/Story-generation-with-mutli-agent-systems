@@ -70,8 +70,11 @@ namespace Game
 
         public void Update()
         {
-            if(_player.Quests.Any(q=>q.IsQuestFinished()))
+            if (_player.Quests.Any(q => q.IsQuestFinished()))
+            {
                 Debug.Log("Quest finished");
+                DialogueManager.SetVariable("$IsQuestFinished", true);
+            }
         }
 
         private void OnApplicationQuit()
@@ -161,7 +164,7 @@ namespace Game
             Quest = q;
         }
 
-        public void CreateArrivalInformation(Agent agent, Location location)
+        public void CreateArrivalInformation(WorldObject agent, Location location)
         {
             InformationObject informationObject = 
                 Instantiate(InformationPrefab, agent.transform.position, Quaternion.identity).

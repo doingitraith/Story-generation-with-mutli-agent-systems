@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Information_Flow;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Game
         public bool IsUniqe;
         public int WorldImportance;
         public Mutation Mutation;
+        public List<InformationEntry> StateInfos;
         [SerializeField]
         private List<string> Mutations;
 
@@ -25,18 +27,34 @@ namespace Game
                 Mutation = new Mutation(Mutations[i], Mutation);
 
             InformationSubject = new InformationSubject(Name, IsPerson, IsUniqe, Mutation);
-            Location = GameObject.Find("Locations").GetComponent<Location>().InformationLocation;
         }
 
         // Start is called before the first frame update
         protected virtual void Start()
         {
+            Location location = GameObject.Find("Locations").GetComponent<Location>();
+            Location = location.InformationLocation;
+            StateInfos.Add(new InformationEntry(
+                this, InformationVerb.At, null,0,location,false));
         }
 
         // Update is called once per frame
         protected virtual void Update()
         {
-        
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.TryGetComponent<Location>(out var infoLocation))
+            {
+                GameManager.Instance.CreateArrivalInformation(this, infoLocation);
+                Location = infoLocation.InformationLocation;
+                InformationEntry atInfo = StateInfos.First(i 
+                    => i.GetInformation().Verb.Equals(InformationVerb.At));
+                atInfo = new InformationEntry(this, InformationVerb.At, null,
+                    0, infoLocation, false);
+
+            }
         }
     }
 }

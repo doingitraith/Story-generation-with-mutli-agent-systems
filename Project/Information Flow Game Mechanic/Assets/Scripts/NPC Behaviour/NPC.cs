@@ -16,6 +16,7 @@ namespace NPC_Behaviour
         private AgentBehaviour _currentBehaviour;
         private float _currentMutationTime = .0f;
         private int _currentBehaviourIdx = -1;
+        private bool _isPaused;
 
         protected override void Awake()
         {
@@ -45,7 +46,7 @@ namespace NPC_Behaviour
         // Update is called once per frame
         protected override void Update()
         {
-            if (isDead)
+            if (isDead || _isPaused)
                 return;
             
             base.Update();
@@ -62,7 +63,8 @@ namespace NPC_Behaviour
                 StartCoroutine(_currentBehaviour.DoBehaviour());
             }
             else if(_currentBehaviour is WalkBehaviour && !_currentBehaviour.IsPaused)
-                ((WalkBehaviour)_currentBehaviour).UpdateTarget();
+                if(((WalkBehaviour)_currentBehaviour).isMovingTarget)
+                    ((WalkBehaviour)_currentBehaviour).UpdateTarget();
         }
 
         private void LateUpdate()
@@ -111,6 +113,9 @@ namespace NPC_Behaviour
         private void Die()
         {
             isDead = true;
+            if(Name.Equals("Dragon"))
+                GameManager.Instance.DialogueManager.SetVariable("$IsDragonDead", true);
+            
             GetComponentInChildren<Animator>().SetTrigger("DoDie");
         }
 
@@ -132,6 +137,17 @@ namespace NPC_Behaviour
                     transform.position);
                 Debug.Log(Name+" is hurt");
             }
+        }
+
+        public void ChangeRoutine(List<BehaviourEntry> behaviourEntries)
+        {
+            InterruptNPC();
+            _isPaused = true;
+            Routine = behaviourEntries;
+            _currentBehaviourIdx = -1;
+            _currentBehaviour = SelectNextBehaviour();
+            _isPaused = false;
+            ResumeNPC();
         }
     }
 }

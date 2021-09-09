@@ -166,7 +166,7 @@ namespace Information_Flow
                     1.0f : Owner.Acquaintances[sender] + believability / 10.0f;
             }
 
-            sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
+            //sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
             
             return true;
         }
@@ -295,9 +295,7 @@ namespace Information_Flow
                     }
                 }
             }
-        
-            sender.StateInfos.ForEach(s=>TryAddNewInformation(new Information(s.GetInformation()), Owner));
-        
+
             return true;
         }
 
@@ -420,21 +418,23 @@ namespace Information_Flow
                 Where(a => a.InformationSubject.Equals(informationSubject)).ToList();
         
             if (knownAssociates.Count > 1)
-                throw new Exception("There should only be one Agent with the name " + knownAssociates[0].Name);
-        
-            Agent worldAgent = knownAssociates[0];
+                throw new Exception("There should only be one Agent with the name " + knownAssociates[0].name);
+
+            Agent worldAgent = null;
             if(knownAssociates.Count == 0)
                 h = .5f;
+            /*
             else if (Owner.ImportantPeople.Contains(knownAssociates[0]))
                 h = 1.0f;
+                */
             else
             {
-                Agent goal = new List<Agent>(knownAssociates).OrderBy(x => Random.value).ElementAt(0);
-                Tuple<int, Agent> NextToTarget = BreadthFirstShortestPath.ShortestPath(Owner, goal);
+                worldAgent = knownAssociates[0];
+                Tuple<int, Agent> NextToTarget = BreadthFirstShortestPath.ShortestPath(Owner, worldAgent);
                 if (NextToTarget != null)
                     h = Owner.Acquaintances[NextToTarget.Item2] / NextToTarget.Item1;
             }
-
+            
             float worldImportance = 1.0f;
             if (worldAgent != null)
                 worldImportance = worldAgent.WorldImportance;
@@ -479,8 +479,8 @@ namespace Information_Flow
                 var shuffleList = new List<InformationContext>(allMemories);
                 
                 //Shuffle List
-                shuffleList = shuffleList.Where(c => !c.Information.Subject.Equals(target) && 
-                                                     !c.Information.Verb.Equals(InformationVerb.At))
+                shuffleList = shuffleList.Where(c => !c.Information.Subject.Equals(target)
+                                                     && !c.Information.Verb.Equals(InformationVerb.At))
                     .OrderByDescending(c => Mathf.Abs(c.Believability)).ToList();
 
                 if (shuffleList.Count == 0)

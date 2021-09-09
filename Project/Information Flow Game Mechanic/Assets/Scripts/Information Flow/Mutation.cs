@@ -5,22 +5,22 @@ namespace Information_Flow
     public class Mutation
     {
         public string Value;
-        private readonly Mutation _parentMutation;
+        public readonly Mutation ParentMutation;
 
-        public Mutation(string value, Mutation parent) => (Value, _parentMutation) = (value, parent);
+        public Mutation(string value, Mutation parent) => (Value, ParentMutation) = (value, parent);
     
         public void Mutate()
-            => this.Value = _parentMutation != null ? _parentMutation.Value : Value;
+            => this.Value = ParentMutation != null ? ParentMutation.Value : Value;
 
         public override bool Equals(object o)
         {
             if (!(o is Mutation other))
                 return false;
 
-            return Value.Equals(other.Value) && (_parentMutation?.Equals(other._parentMutation) ?? true);
+            return Value.Equals(other.Value) && (ParentMutation?.Equals(other.ParentMutation) ?? true);
         }
 
         public override int GetHashCode()
-            => Value.GetHashCode() * (_parentMutation != null ? _parentMutation.GetHashCode() : 1);
+            => Value.GetHashCode() * (ParentMutation != null ? ParentMutation.GetHashCode() : 1);
     }
 }
