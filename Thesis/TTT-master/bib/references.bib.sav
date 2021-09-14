@@ -1,0 +1,250 @@
+% Encoding: UTF-8
+
+@Conference{Luu2018,
+  author    = {Trieuvy Luu and Martijn van den Broeck and Marie Louise Juul Søndergaard},
+  booktitle = {Proceedings of the 10th Nordic Conference on Human-Computer Interaction},
+  title     = {Data economy: interweaving storytelling and world building in design fiction},
+  year      = {2018},
+  address   = {New York, NY, USA},
+  month     = {9},
+  pages     = {771–786},
+  publisher = {Association for Computing Machinery},
+  series    = {NordiCHI '18},
+  abstract  = {In this paper we explore the design of a design fiction as an iterative process of
+interweaving storytelling and world building. With the design fiction Data Economy,
+we present how we have imagined and externalized a data obsessed future through a
+protagonist, narratives, plots and diegetic prototypes; this includes the short stories
+Memoirs of Jesse, the short film Data Economy and a number of designed objects. Data
+Economy explores how far people are willing to go to satisfy their individualistic
+hunger to consume by creating a tension between consumerism and data collection. By
+analyzing the design fiction, we discuss social and ethical issues of data privacy.
+With a focus on narratives, plots, protagonists and diegetic prototypes, we argue
+that the designerly potential of design fiction lies in its ability to interweave
+the literary methods of storytelling with the designerly methods of world building.},
+  day       = {29},
+  doi       = {10.1145/3240167.3240270},
+  isbn      = {9781450364379},
+  keywords  = {data economy, data privacy, design fiction, diegetic prototypes, future scenarios, storytelling, world building},
+  location  = {Oslo, Norway},
+  pagetotal = {16},
+  url       = {https://doi.org/10.1145/3240167.3240270},
+}
+
+@InProceedings{Juul2002,
+  author    = {Jesper Juul},
+  booktitle = {Computer Games and Digital Cultures Conference Proceedings},
+  title     = {The Open and the Closed: Game of emergence and games of progression},
+  year      = {2002},
+  editor    = {Frans Mäyrä},
+  pages     = {323-329},
+  publisher = {Tampere University Press},
+  abstract  = {This paper proposes a conceptual framework for examining computer game structure and applies it to the massive multiplayer game EverQuest.},
+  keywords  = {Gameplay, emergence, game history, game variation, EverQuest},
+}
+
+@Article{MarinLora2020,
+  author    = {Carlos Mar{\'{\i}}n-Lora and Miguel Chover and Jos{\'{e}} M. Sotoca and Luis A. Garc{\'{\i}}a},
+  journal   = {Advances in Engineering Software},
+  title     = {A game engine to make games as multi-agent systems},
+  year      = {2020},
+  month     = {feb},
+  pages     = {102732},
+  volume    = {140},
+  doi       = {10.1016/j.advengsoft.2019.102732},
+  publisher = {Elsevier {BV}},
+}
+
+@Article{Dignum2009,
+  author    = {F. Dignum and J. Westra and W. A. van Doesburg and M. Harbers},
+  journal   = {International Journal of Computer Games Technology},
+  title     = {Games and Agents: Designing Intelligent Gameplay},
+  year      = {2009},
+  pages     = {1--18},
+  volume    = {2009},
+  doi       = {10.1155/2009/837095},
+  publisher = {Hindawi Limited},
+}
+
+@InBook{Barriales2009,
+  author    = {Barriales, Ocio and Sergio, & and Brugos, José},
+  year      = {2009},
+  booktitle = {Multi-agent Systems and Sandbox Games},
+  date      = {2009},
+}
+
+@InProceedings{Palmas2020,
+  author    = {Fabrizio Palmas and Jakob Raith and Gudrun Klinker},
+  booktitle = {2020 {IEEE} 20th International Conference on Advanced Learning Technologies ({ICALT})},
+  title     = {A Novel Approach to Interactive Dialogue Generation Based on Natural Language Creation with Context-Free Grammars and Sentiment Analysis},
+  year      = {2020},
+  month     = {jul},
+  publisher = {{IEEE}},
+  doi       = {10.1109/icalt49669.2020.00031},
+}
+
+@Article{Harel1987,
+  author    = {David Harel},
+  journal   = {Science of Computer Programming},
+  title     = {Statecharts: a visual formalism for complex systems},
+  year      = {1987},
+  month     = {jun},
+  number    = {3},
+  pages     = {231--274},
+  volume    = {8},
+  doi       = {10.1016/0167-6423(87)90035-9},
+  publisher = {Elsevier {BV}},
+}
+
+@Article{McBurney2001,
+  author    = {Peter McBurney and Simon Parsons},
+  journal   = {Informal Logic},
+  title     = {Dialogue Games in Multi-Agent Systems},
+  year      = {2001},
+  month     = {jan},
+  number    = {3},
+  volume    = {22},
+  doi       = {10.22329/il.v22i3.2592},
+  publisher = {University of Windsor Leddy Library},
+}
+
+@Article{Popescu2014,
+  author    = {Alexandru Popescu and Joost Broekens and Maarten van Someren},
+  journal   = {{IEEE} Transactions on Affective Computing},
+  title     = {{GAMYGDALA}: An Emotion Engine for Games},
+  year      = {2014},
+  month     = {jan},
+  number    = {1},
+  pages     = {32--44},
+  volume    = {5},
+  doi       = {10.1109/t-affc.2013.24},
+  publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+}
+
+@MastersThesis{Mizra2021,
+  author = {Ibrahim Asif Mirza},
+  school = {Technical University of Munich},
+  title  = {Development of an Emotion Engine for Games},
+  year   = {2021},
+  month  = apr,
+  type   = {mathesis},
+}
+
+@InBook{Ford2019,
+  author    = {Ford, Dom},
+  title     = {They act as quest hubs, goals, centres for action and places of safety. Much of the loop of the game revolves around leaving the city to complete quests, then returning to the city again, and repeat. In this paper, I take a closer look at the boundaries of the city. I begin by proposing a model to help define what a city's boundary is and how it is expressed to the player. Then, I look at how and why players cross those borders back and forth. Through this, I hope to facilitate a better understanding of how the city functions in roleplaying games},
+  year      = {2019},
+  booktitle = {Beyond the Wall: The Boundaries of the Neomedieval Town in Singleplayer Roleplaying Games},
+  date      = {2019},
+}
+
+@InBook{Aarseth2004,
+  author    = {Aarseth, {Espen J.}},
+  editor    = {Marie-Laure Ryan},
+  pages     = {361--376},
+  publisher = {University of Nebraska Press},
+  title     = {Quest Games as Post-Narrative Discourse},
+  year      = {2004},
+  address   = {United States},
+  isbn      = {978-0-8032-8993-2},
+  series    = {Frontiers of Narrative},
+  booktitle = {Narrative across Media},
+  language  = {English},
+}
+
+@InCollection{Aarseth2005,
+  author    = {Espen Aarseth},
+  booktitle = {Entertainment Computing - {ICEC} 2005},
+  publisher = {Springer Berlin Heidelberg},
+  title     = {From Hunt the Wumpus to {EverQuest}: Introduction to Quest Theory},
+  year      = {2005},
+  pages     = {496--506},
+  doi       = {10.1007/11558651_48},
+}
+
+@Book{Howard2008,
+  author    = {Jeff Howard},
+  publisher = {A K Peters/{CRC} Press},
+  title     = {Quests: Design, theory, and history in games and narratives},
+  year      = {2008},
+  month     = {jan},
+  doi       = {10.1201/b10929},
+}
+
+@Article{Spearing1994PublicAP,
+  author  = {A. Spearing},
+  journal = {Arthuriana},
+  title   = {Public and Private Spaces in Sir Gawain and the Green Knight},
+  year    = {1994},
+  pages   = {138 - 145},
+  volume  = {4},
+}
+
+@Misc{WePC2021,
+  author       = {WePC.com},
+  howpublished = {\url{https://www.wepc.com/news/video-game-statistics/}},
+  note         = {Accessed: 2021-09-13},
+  title        = {Video Game Industry Statistics, Trends and Data In 2021},
+}
+
+@Misc{Sony2021,
+  author       = {Sony Interactive Entertainment LLC},
+  howpublished = {\url{https://www.playstation.com/en-us/corporate/playstation-studios/}},
+  note         = {Accessed: 2021-09-13},
+  title        = {PlayStation Studios},
+}
+
+@Misc{Dealessandri2021,
+  author       = {Marie Dealessandri},
+  howpublished = {\url{https://www.gamesindustry.biz/articles/2021-03-11-console-market-reaches-record-high-of-usd53-9bn}},
+  month        = mar,
+  note         = {Accessed: 2021-09-13},
+  title        = {Global console market reached record high of \$53.9bn in 2020},
+  year         = {2021},
+}
+
+@Misc{Klepek2020,
+  author       = {Patrick Klepek},
+  howpublished = {\url{https://www.vice.com/en/article/5dp34k/internal-sony-docs-explain-how-activities-became-a-cornerstone-for-ps5}},
+  month        = nov,
+  note         = {Accessed: 2021-09-13},
+  title        = {Internal Sony Docs Explain How "Activities" Became a Cornerstone for PS5},
+  year         = {2020},
+}
+
+@Misc{Shuman2021,
+  author       = {Sid Shuman},
+  howpublished = {\url{https://blog.playstation.com/2020/03/10/hermen-hulst-qa-interview-with-head-of-playstations-worldwide-studios/}},
+  note         = {Accessed: 2021-09-13},
+  title        = {Hermen Hulst Q\&A: Interview with Head of PlayStation’s Worldwide Studios},
+}
+
+@Misc{Dring2018,
+  author       = {Christopher Dring},
+  howpublished = {\url{https://www.gamesindustry.biz/articles/2018-05-11-eidos-montreal-we-have-to-try-new-models-for-single-player-games}},
+  note         = {Accessed: 2021-09-13},
+  title        = {Eidos Montreal: “We have to try new models for single-player games”},
+}
+
+@Misc{Carless2012,
+  author       = {Simon Carless},
+  howpublished = {\url{https://www.gamedeveloper.com/design/gdc-2012-sid-meier-on-how-to-see-games-as-sets-of-interesting-decisions}},
+  month        = mar,
+  note         = {Accessed: 2021-09-13},
+  title        = {GDC 2012: Sid Meier on how to see games as sets of interesting decisions},
+  year         = {2012},
+}
+
+@Article{Cooney2017,
+  author    = {Gus Cooney and Daniel T. Gilbert and Timothy D. Wilson},
+  journal   = {Psychological Science},
+  title     = {The Novelty Penalty},
+  year      = {2017},
+  month     = {jan},
+  number    = {3},
+  pages     = {380--394},
+  volume    = {28},
+  doi       = {10.1177/0956797616685870},
+  publisher = {{SAGE} Publications},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
