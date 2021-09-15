@@ -198,7 +198,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   howpublished = {\url{https://www.gamesindustry.biz/articles/2021-03-11-console-market-reaches-record-high-of-usd53-9bn}},
   month        = mar,
   note         = {Accessed: 2021-09-13},
-  title        = {Global console market reached record high of $53.9bn in 2020},
+  title        = {Global console market reached record high of \$53.9bn in 2020},
   year         = {2021},
 }
 
@@ -215,7 +215,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   author       = {Sid Shuman},
   howpublished = {\url{https://blog.playstation.com/2020/03/10/hermen-hulst-qa-interview-with-head-of-playstations-worldwide-studios/}},
   note         = {Accessed: 2021-09-13},
-  title        = {Hermen Hulst Q&A: Interview with Head of PlayStation’s Worldwide Studios},
+  title        = {Hermen Hulst Q\&A: Interview with Head of PlayStation’s Worldwide Studios},
 }
 
 @Misc{Dring2018,
@@ -245,6 +245,26 @@ the literary methods of storytelling with the designerly methods of world buildi
   volume    = {28},
   doi       = {10.1177/0956797616685870},
   publisher = {{SAGE} Publications},
+}
+
+@Article{Rayfield1972,
+  author    = {J. R. Rayfield},
+  journal   = {American Anthropologist},
+  title     = {What Is a Story?},
+  year      = {1972},
+  month     = {oct},
+  number    = {5},
+  pages     = {1085--1106},
+  volume    = {74},
+  doi       = {10.1525/aa.1972.74.5.02a00040},
+  publisher = {Wiley},
+}
+
+@Book{Scheub1998,
+  author    = {Scheub, Harold},
+  publisher = {Univ of Wisconsin Press},
+  title     = {Story},
+  year      = {1998},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

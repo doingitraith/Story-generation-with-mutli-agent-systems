@@ -247,4 +247,22 @@ the literary methods of storytelling with the designerly methods of world buildi
   publisher = {{SAGE} Publications},
 }
 
+@Article{Rayfield1972,
+  author    = {J. R. Rayfield},
+  journal   = {American Anthropologist},
+  title     = {What Is a Story?},
+  year      = {1972},
+  month     = {oct},
+  number    = {5},
+  pages     = {1085--1106},
+  volume    = {74},
+  doi       = {10.1525/aa.1972.74.5.02a00040},
+  publisher = {Wiley},
+}
+@book{scheub1998story,
+  title={Story},
+  author={Scheub, Harold},
+  year={1998},
+  publisher={Univ of Wisconsin Press}
+}
 @Comment{jabref-meta: databaseType:bibtex;}
