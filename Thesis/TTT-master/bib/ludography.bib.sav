@@ -1,0 +1,10 @@
+% Encoding: UTF-8
+
+@Software{tombraider,
+  author = {{Irrational Games}},
+  date   = {2018-09-12},
+  owner  = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
+  title  = {Shadow of the Tomb Raider},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

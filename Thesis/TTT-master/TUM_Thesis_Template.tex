@@ -37,7 +37,9 @@
 % complete settings & packages: see settings.text
 \input{settings} 
 
-
+% add bib files
+\addbibresource{bib/references.bib}% Syntax for version >= 1.2
+\addbibresource{bib/ludography.bib}
 
 %%%%%%%%%%%%%%%%%%%
 %  main document
@@ -67,8 +69,8 @@
 \include{content/Results}
 \include{content/Discussion}
 \include{content/Conclusion}
-\include{content/ExampleChapterOne}
-\include{content/ExampleChapterTwo}
+%\include{content/ExampleChapterOne}
+%\include{content/ExampleChapterTwo}
 
 
 \backmatter
@@ -80,12 +82,16 @@
 \lstlistoflistings
 
 % your BibTex file
-\bibliography{bib/references}
+\printbibliography[title={Bibliography},nottype=software]
+%\nocite{*}
+\printbibliography[title={Ludography}, type=software]
+% add resetnumbers=true
+%\bibliography{bib/references}
 
 
-\appendix
+%\appendix
 % include appendix chapters here
 
-\include{content/AppendixExample}
+%\include{content/AppendixExample}
 
 \end{document}
