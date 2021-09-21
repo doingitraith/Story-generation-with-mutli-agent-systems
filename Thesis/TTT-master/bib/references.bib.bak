@@ -295,7 +295,7 @@ the literary methods of storytelling with the designerly methods of world buildi
 }
 
 @Book{Wyer2014,
-  author    = {Wyer Jr, Robert S},
+  author    = {Wyer Jr and Robert S},
   publisher = {Psychology Press},
   title     = {Knowledge and Memory: The Real Story: Advances in Social Cognition, Volume VIII},
   year      = {2014},
@@ -385,6 +385,28 @@ the literary methods of storytelling with the designerly methods of world buildi
   volume    = {17},
   doi       = {10.1016/j.cub.2007.05.068},
   publisher = {Elsevier {BV}},
+}
+
+@Book{Hoffmann2000,
+  author    = {Hoffmann, Stefan},
+  publisher = {Felix Meiner Verlag},
+  title     = {Geschichte des Medienbegriffs},
+  year      = {2000},
+  volume    = {3},
+}
+
+@Misc{PwC2021,
+  author       = {PriceWaterhouseCooper},
+  howpublished = {\url{https://www.pwc.com/gx/en/industries/tmt/media/outlook/segment-findings.html}},
+  note         = {Accessed: 2021-09-21},
+  title        = {Global Entertainment $ Media Outlook 2021-2025},
+}
+
+@Book{ryan2004narrative,
+  author    = {Ryan, Marie-Laure and Ruppert, James and Bernet, John W},
+  publisher = {U of Nebraska Press},
+  title     = {Narrative across media: The languages of storytelling},
+  year      = {2004},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

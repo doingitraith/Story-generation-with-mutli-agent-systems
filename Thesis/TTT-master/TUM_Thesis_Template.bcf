@@ -2155,6 +2155,9 @@
     <bcf:citekey order="23">Gottschall2012</bcf:citekey>
     <bcf:citekey order="24">Frith2007</bcf:citekey>
     <bcf:citekey order="25">Stephens2010</bcf:citekey>
+    <bcf:citekey order="26">Hoffmann2000</bcf:citekey>
+    <bcf:citekey order="27">PwC2021</bcf:citekey>
+    <bcf:citekey order="28">Ryan2004</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
