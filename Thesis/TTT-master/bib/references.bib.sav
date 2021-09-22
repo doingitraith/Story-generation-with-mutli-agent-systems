@@ -43,7 +43,7 @@ the literary methods of storytelling with the designerly methods of world buildi
 }
 
 @Article{MarinLora2020,
-  author    = {Carlos Mar{\'{\i}}n-Lora and Miguel Chover and Jos{\'{e}} M. Sotoca and Luis A. Garc{\'{\i}}a},
+  author    = {Carlos Mar{\'{i}}n-Lora and Miguel Chover and Jos{\'{e}} M. Sotoca and Luis A. Garc{\'{i}}a},
   journal   = {Advances in Engineering Software},
   title     = {A game engine to make games as multi-agent systems},
   year      = {2020},
@@ -66,7 +66,7 @@ the literary methods of storytelling with the designerly methods of world buildi
 }
 
 @InBook{Barriales2009,
-  author    = {Barriales, Ocio and Sergio, & and Brugos, José},
+  author    = {Barriales, Ocio and Sergio, \& and Brugos, Jos\'{e}},
   year      = {2009},
   booktitle = {Multi-agent Systems and Sandbox Games},
   date      = {2009},
@@ -158,7 +158,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   title     = {From Hunt the Wumpus to {EverQuest}: Introduction to Quest Theory},
   year      = {2005},
   pages     = {496--506},
-  doi       = {10.1007/11558651_48},
+  doi       = {10.1007/11558651\_48},
 }
 
 @Book{Howard2008,
@@ -170,7 +170,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   doi       = {10.1201/b10929},
 }
 
-@Article{Spearing1994PublicAP,
+@Article{Spearing1994,
   author  = {A. Spearing},
   journal = {Arthuriana},
   title   = {Public and Private Spaces in Sir Gawain and the Green Knight},
@@ -399,7 +399,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   author       = {PriceWaterhouseCooper},
   howpublished = {\url{https://www.pwc.com/gx/en/industries/tmt/media/outlook/segment-findings.html}},
   note         = {Accessed: 2021-09-21},
-  title        = {Global Entertainment $ Media Outlook 2021-2025},
+  title        = {Global Entertainment \& Media Outlook 2021-2025},
 }
 
 @Book{Ryan2004,
@@ -407,6 +407,102 @@ the literary methods of storytelling with the designerly methods of world buildi
   publisher = {U of Nebraska Press},
   title     = {Narrative across media: The languages of storytelling},
   year      = {2004},
+}
+
+@Article{Callele2008,
+  author    = {David Callele and Eric Neufeld and Kevin Schneider},
+  journal   = {{IEEE} Software},
+  title     = {Emotional Requirements},
+  year      = {2008},
+  month     = jan,
+  number    = {1},
+  pages     = {43--45},
+  volume    = {25},
+  doi       = {10.1109/ms.2008.5},
+  publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+}
+
+@Book{Abbott2020,
+  author    = {Abbott, H Porter},
+  publisher = {Cambridge University Press},
+  title     = {The Cambridge introduction to narrative},
+  year      = {2020},
+}
+
+@Book{Aristotle2006,
+  author    = {Aristotle},
+  publisher = {ReadHowYouWant. com},
+  title     = {Poetics},
+  year      = {2006},
+}
+
+@InCollection{Klevjer2012,
+  author    = {Rune Klevjer},
+  booktitle = {The Philosophy of Computer Games},
+  publisher = {Springer Netherlands},
+  title     = {Enter the Avatar: The Phenomenology of Prosthetic Telepresence in Computer Games},
+  year      = {2012},
+  pages     = {17--38},
+  doi       = {10.1007/978-94-007-4249-9\_3},
+}
+
+@InProceedings{Rohtua2009,
+  author    = {Wardrip-Fruin Noah and Mateas Michael and Dow Steven and Sali Serdar},
+  booktitle = {DiGRA \&\#3909 - Proceedings of the 2009 DiGRA International Conference: Breaking New Ground: Innovation in Games, Play, Practice and Theory},
+  title     = {Agency Reconsidered},
+  year      = {2009},
+  month     = {9},
+  publisher = {Brunel University},
+  isbn      = {ISSN 2342-9666},
+  url       = {\url{http://www.digra.org/wp-content/uploads/digital-library/09287.41281.pdf}},
+}
+
+@InProceedings{Lankoski2002,
+  author    = {Lankoski, Petri and Heli{\"o}, Satu},
+  booktitle = {CGDC Confrence Proceedings},
+  title     = {Approaches to Computer Game Design--Characters and Conflict},
+  year      = {2002},
+  pages     = {6--8},
+}
+
+@Book{Csikszentmihalyi1990,
+  author    = {Csikszentmihalyi, Mihaly and Csikzentmihaly, Mihaly},
+  publisher = {Harper \& Row New York},
+  title     = {Flow: The psychology of optimal experience},
+  year      = {1990},
+  volume    = {1990},
+}
+
+@Book{Campbell2008,
+  author    = {Campbell, Joseph},
+  publisher = {New World Library},
+  title     = {The hero with a thousand faces},
+  year      = {2008},
+  volume    = {17},
+}
+
+@InProceedings{Ford2019,
+  author    = {Ford, Dom},
+  booktitle = {DiGRA Conference},
+  title     = {Beyond the Wall: The Boundaries of the Neomedieval Town in Singleplayer Roleplaying Games.},
+  year      = {2019},
+}
+
+@Article{Sicart2008,
+  author  = {Sicart, Miguel},
+  journal = {Game Studies},
+  title   = {Defining game mechanics},
+  year    = {2008},
+  number  = {2},
+  pages   = {1--14},
+  volume  = {8},
+}
+
+@Book{Weisfeld2008,
+  author    = {Weisfeld, Matt},
+  publisher = {Pearson Education},
+  title     = {The object-oriented thought process},
+  year      = {2008},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

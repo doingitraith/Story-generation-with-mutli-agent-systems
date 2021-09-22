@@ -1,10 +1,27 @@
 % Encoding: UTF-8
 
 @Software{tombraider,
-  author = {{Irrational Games}},
-  date   = {2018-09-12},
-  owner  = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
-  title  = {Shadow of the Tomb Raider},
+  author    = {Eidos Montr\'{e}al},
+  date      = {2019-09-14},
+  owner     = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
+  publisher = {Square Enix},
+  title     = {Shadow of the Tomb Raider},
+}
+
+@Software{skyrim,
+  author    = {Bethesda Game Studios},
+  date      = {2011-11-11},
+  owner     = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
+  publisher = {Bethesda Softworks},
+  title     = {The Elder Scrolls V: Skyrim},
+}
+
+@Software{mario64,
+  author    = {Nintendo EAD},
+  month     = {1996-06-23},
+  owner     = {Nintendo 64},
+  publisher = {Nintendo},
+  title     = {Super Mario 64},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
