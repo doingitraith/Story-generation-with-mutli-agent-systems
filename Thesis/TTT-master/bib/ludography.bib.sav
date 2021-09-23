@@ -3,7 +3,7 @@
 @Software{tombraider,
   author    = {Eidos Montr\'{e}al},
   date      = {2019-09-14},
-  owner     = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
+  note      = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
   publisher = {Square Enix},
   title     = {Shadow of the Tomb Raider},
 }
@@ -11,15 +11,31 @@
 @Software{skyrim,
   author    = {Bethesda Game Studios},
   date      = {2011-11-11},
-  owner     = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
+  note      = {Microsoft Windows, PlayStation 4, Xbox One, MacOS, Linux, Stadia, PlayStation 5, Xbox Series X/S},
   publisher = {Bethesda Softworks},
   title     = {The Elder Scrolls V: Skyrim},
 }
 
+@Software{zeldabotw,
+  author    = {Nintendo EPD},
+  date      = {2017-03-03},
+  note      = {Wii U, Nintendo Switch},
+  publisher = {Nintendo},
+  title     = {The Legend of Zelda: Breath of the Wild},
+}
+
+@Software{spelunky,
+  author    = {Mossmouth, LLC},
+  date      = {2012-12-21},
+  note      = {Microsoft Windows, Xbox 360, PlayStation 3, PlayStation 4, PlayStation Vita, Chrome OS, Nintendo Switch},
+  publisher = {Mossmouth, LLC},
+  title     = {Spelunky},
+}
+
 @Software{mario64,
   author    = {Nintendo EAD},
-  month     = {1996-06-23},
-  owner     = {Nintendo 64},
+  date      = {1996-06-23},
+  note      = {Nintendo 64},
   publisher = {Nintendo},
   title     = {Super Mario 64},
 }

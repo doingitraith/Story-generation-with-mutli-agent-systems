@@ -498,4 +498,100 @@ the literary methods of storytelling with the designerly methods of world buildi
   volume  = {8},
 }
 
+@Book{Weisfeld2008,
+  author    = {Weisfeld, Matt},
+  publisher = {Pearson Education},
+  title     = {The object-oriented thought process},
+  year      = {2008},
+}
+
+@Misc{Cook2006,
+  author       = {Daniel Cook},
+  howpublished = {\url{https://lostgarden.home.blog/2006/10/24/what-are-game-mechanics/}},
+  month        = oct,
+  note         = {Accessed on: 2021-09-23},
+  title        = {What are game mechanics?},
+  year         = {2006},
+}
+
+@Book{Holland2000,
+  author    = {Holland, John H},
+  publisher = {OUP Oxford},
+  title     = {Emergence: From chaos to order},
+  year      = {2000},
+}
+
+@InProceedings{fujibayashi2017,
+  author    = {Fujibayashi, Hidemaro and Dohta, Takuhiro and Takizawa, Satoru},
+  booktitle = {Game Developers Conference, March},
+  title     = {Breaking Conventions with The Legend of Zelda: Breath of the Wild},
+  year      = {2017},
+  volume    = {10},
+}
+
+@Article{Buckland1991,
+  author    = {Michael K. Buckland},
+  journal   = {Journal of the American Society for Information Science},
+  title     = {Information as thing},
+  year      = {1991},
+  month     = {jun},
+  number    = {5},
+  pages     = {351--360},
+  volume    = {42},
+  doi       = {10.1002/(sici)1097-4571(199106)42:5<351::aid-asi5>3.0.co;2-3},
+  publisher = {Wiley},
+}
+
+@Article{Shannon1948,
+  author    = {Shannon, Claude Elwood},
+  journal   = {The Bell system technical journal},
+  title     = {A mathematical theory of communication},
+  year      = {1948},
+  number    = {3},
+  pages     = {379--423},
+  volume    = {27},
+  publisher = {Nokia Bell Labs},
+}
+
+@Article{Shannon1949,
+  author    = {Shannon, Claude Elwood},
+  journal   = {Proceedings of the IRE},
+  title     = {Communication in the presence of noise},
+  year      = {1949},
+  number    = {1},
+  pages     = {10--21},
+  volume    = {37},
+  publisher = {IEEE},
+}
+
+@InCollection{Floridi2009,
+  author    = {Luciano Floridi},
+  booktitle = {Formal Theories of Information},
+  publisher = {Springer Berlin Heidelberg},
+  title     = {Philosophical Conceptions of Information},
+  year      = {2009},
+  pages     = {13--53},
+  doi       = {10.1007/978-3-642-00659-3_2},
+}
+
+@Book{Floridi2010,
+  author    = {Floridi, Luciano},
+  publisher = {OUP Oxford},
+  title     = {Information: A very short introduction},
+  year      = {2010},
+}
+
+@Article{FLORIDI2005,
+  author    = {Luciano Floridi},
+  journal   = {Philosophy and Phenomenological Research},
+  title     = {Is Semantic Information Meaningful Data?},
+  year      = {2005},
+  month     = {mar},
+  number    = {2},
+  pages     = {351--370},
+  volume    = {70},
+  doi       = {10.1111/j.1933-1592.2005.tb00531.x},
+  publisher = {Wiley},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

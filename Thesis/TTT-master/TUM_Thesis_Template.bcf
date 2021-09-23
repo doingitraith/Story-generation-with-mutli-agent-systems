@@ -2171,11 +2171,25 @@
     <bcf:citekey order="39">skyrim</bcf:citekey>
     <bcf:citekey order="40">Spearing1994</bcf:citekey>
     <bcf:citekey order="41">Aarseth2005</bcf:citekey>
-    <bcf:citekey order="42">Sicart2008</bcf:citekey>
-    <bcf:citekey order="43">Weisfeld2008</bcf:citekey>
-    <bcf:citekey order="44">mario64</bcf:citekey>
-    <bcf:citekey order="45">Sicart2008</bcf:citekey>
+    <bcf:citekey order="42">Cook2006</bcf:citekey>
+    <bcf:citekey order="43">Sicart2008</bcf:citekey>
+    <bcf:citekey order="44">Weisfeld2008</bcf:citekey>
+    <bcf:citekey order="45">mario64</bcf:citekey>
     <bcf:citekey order="46">Sicart2008</bcf:citekey>
+    <bcf:citekey order="47">Sicart2008</bcf:citekey>
+    <bcf:citekey order="48">Holland2000</bcf:citekey>
+    <bcf:citekey order="49">Juul2002</bcf:citekey>
+    <bcf:citekey order="50">zeldabotw</bcf:citekey>
+    <bcf:citekey order="51">spelunky</bcf:citekey>
+    <bcf:citekey order="52">Juul2002</bcf:citekey>
+    <bcf:citekey order="53">zeldabotw</bcf:citekey>
+    <bcf:citekey order="54">Juul2002</bcf:citekey>
+    <bcf:citekey order="55">fujibayashi2017</bcf:citekey>
+    <bcf:citekey order="56">Buckland1991</bcf:citekey>
+    <bcf:citekey order="57">Floridi2010</bcf:citekey>
+    <bcf:citekey order="58">Floridi2009</bcf:citekey>
+    <bcf:citekey order="59">Shannon1948</bcf:citekey>
+    <bcf:citekey order="60">Shannon1949</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
