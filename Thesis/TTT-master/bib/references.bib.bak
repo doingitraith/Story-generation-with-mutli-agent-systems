@@ -129,14 +129,6 @@ the literary methods of storytelling with the designerly methods of world buildi
   type   = {mathesis},
 }
 
-@InBook{Ford2019,
-  author    = {Ford, Dom},
-  title     = {They act as quest hubs, goals, centres for action and places of safety. Much of the loop of the game revolves around leaving the city to complete quests, then returning to the city again, and repeat. In this paper, I take a closer look at the boundaries of the city. I begin by proposing a model to help define what a city's boundary is and how it is expressed to the player. Then, I look at how and why players cross those borders back and forth. Through this, I hope to facilitate a better understanding of how the city functions in roleplaying games},
-  year      = {2019},
-  booktitle = {Beyond the Wall: The Boundaries of the Neomedieval Town in Singleplayer Roleplaying Games},
-  date      = {2019},
-}
-
 @InBook{Aarseth2004,
   author    = {Aarseth, {Espen J.}},
   editor    = {Marie-Laure Ryan},
@@ -581,7 +573,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   year      = {2010},
 }
 
-@Article{FLORIDI2005,
+@Article{Floridi2005,
   author    = {Luciano Floridi},
   journal   = {Philosophy and Phenomenological Research},
   title     = {Is Semantic Information Meaningful Data?},
@@ -592,6 +584,126 @@ the literary methods of storytelling with the designerly methods of world buildi
   volume    = {70},
   doi       = {10.1111/j.1933-1592.2005.tb00531.x},
   publisher = {Wiley},
+}
+
+@Book{Munsaka2014,
+  author    = {Munsaka, Temba},
+  publisher = {GRIN Verlag},
+  title     = {Communication is Complex. Definitions, Types and Problems},
+  year      = {2014},
+}
+
+@Book{Adler2016,
+  author    = {Adler, R.B. and Rodman, G.R. and DuPr{\'e}, A.},
+  publisher = {Oxford University Press},
+  title     = {Understanding Human Communication},
+  year      = {2016},
+  isbn      = {9780190297084},
+  lccn      = {2016033665},
+  url       = {https://books.google.de/books?id=YF1fvgAACAAJ},
+}
+
+@Book{Ruben1985,
+  author    = {Ruben, B.D.},
+  publisher = {Transaction Publishers},
+  title     = {Information and Behavior},
+  year      = {1985},
+  isbn      = {9781412826259},
+  series    = {Information and Behavior},
+  lccn      = {88029598},
+  url       = {https://books.google.de/books?id=yVGOBI1qZRcC},
+}
+
+@Article{Chapanis1975,
+  author    = {Chapanis, Alphonse},
+  journal   = {Scientific American},
+  title     = {Interactive human communication},
+  year      = {1975},
+  number    = {3},
+  pages     = {36--46},
+  volume    = {232},
+  publisher = {JSTOR},
+}
+
+@Book{Littlejohn2010,
+  author    = {Littlejohn, Stephen W and Foss, Karen A},
+  publisher = {Waveland press},
+  title     = {Theories of human communication},
+  year      = {2010},
+}
+
+@Article{Levinson2006,
+  author    = {Levinson, Stephen C},
+  title     = {On the human ‘interactional engine’},
+  year      = {2006},
+  publisher = {Oxford: Berg Publishers},
+}
+
+@Article{Berman2009,
+  author    = {Marc G. Berman and John Jonides and Richard L. Lewis},
+  journal   = {Journal of Experimental Psychology: Learning, Memory, and Cognition},
+  title     = {In search of decay in verbal short-term memory.},
+  year      = {2009},
+  month     = {mar},
+  number    = {2},
+  pages     = {317--333},
+  volume    = {35},
+  doi       = {10.1037/a0014873},
+  publisher = {American Psychological Association ({APA})},
+}
+
+@Book{Sherwood2015,
+  author    = {Sherwood, Lauralee},
+  publisher = {Cengage learning},
+  title     = {Human physiology: from cells to systems},
+  year      = {2015},
+}
+
+@Book{Eysenck2012,
+  author    = {Eysenck, Michael},
+  publisher = {Springer Science \& Business Media},
+  title     = {Attention and arousal: Cognition and performance},
+  year      = {2012},
+}
+
+@Book{Weiten2021,
+  author    = {Weiten, Wayne},
+  publisher = {Cengage Learning},
+  title     = {Psychology: Themes and variations},
+  year      = {2021},
+}
+
+@Article{Keppel1962,
+  author    = {Geoffrey Keppel and Benton J. Underwood},
+  journal   = {Journal of Verbal Learning and Verbal Behavior},
+  title     = {Proactive inhibition in short-term retention of single items},
+  year      = {1962},
+  month     = {oct},
+  number    = {3},
+  pages     = {153--161},
+  volume    = {1},
+  doi       = {10.1016/s0022-5371(62)80023-1},
+  publisher = {Elsevier {BV}},
+}
+
+@Article{Melton1941,
+  author    = {Arthur W. Melton and W. J. von Lackum},
+  journal   = {The American Journal of Psychology},
+  title     = {Retroactive and Proactive Inhibition in Retention: Evidence for a Two-Factor Theory of Retroactive Inhibition},
+  year      = {1941},
+  month     = {apr},
+  number    = {2},
+  pages     = {157},
+  volume    = {54},
+  doi       = {10.2307/1416789},
+  publisher = {{JSTOR}},
+}
+
+@Book{Edwards2010,
+  author    = {Edwards, William H},
+  publisher = {Cengage Learning},
+  title     = {Motor learning and control: From theory to practice},
+  year      = {2010},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

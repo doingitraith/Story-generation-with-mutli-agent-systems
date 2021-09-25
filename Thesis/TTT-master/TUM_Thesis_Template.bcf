@@ -2190,6 +2190,22 @@
     <bcf:citekey order="58">Floridi2009</bcf:citekey>
     <bcf:citekey order="59">Shannon1948</bcf:citekey>
     <bcf:citekey order="60">Shannon1949</bcf:citekey>
+    <bcf:citekey order="61">Levinson2006</bcf:citekey>
+    <bcf:citekey order="62">Littlejohn2010</bcf:citekey>
+    <bcf:citekey order="63">Ruben1985</bcf:citekey>
+    <bcf:citekey order="64">Adler2016</bcf:citekey>
+    <bcf:citekey order="65">Adler2016</bcf:citekey>
+    <bcf:citekey order="66">Munsaka2014</bcf:citekey>
+    <bcf:citekey order="67">Chapanis1975</bcf:citekey>
+    <bcf:citekey order="68">Sherwood2015</bcf:citekey>
+    <bcf:citekey order="69">Eysenck2012</bcf:citekey>
+    <bcf:citekey order="70">Weiten2021</bcf:citekey>
+    <bcf:citekey order="71">Oberauer2008</bcf:citekey>
+    <bcf:citekey order="72">Berman2009</bcf:citekey>
+    <bcf:citekey order="73">Edwards2010</bcf:citekey>
+    <bcf:citekey order="74">Keppel1962</bcf:citekey>
+    <bcf:citekey order="75">Melton1941</bcf:citekey>
+    <bcf:citekey order="76">Edwards2010</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
