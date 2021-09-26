@@ -66,7 +66,8 @@ the literary methods of storytelling with the designerly methods of world buildi
 }
 
 @InBook{Barriales2009,
-  author    = {Barriales, Ocio and Sergio, \& and Brugos, Jos\'{e}},
+  author    = {Ocio, Sergio and Brugos, Jos\'{e}},
+  title     = {Multi-agent Systems and Sandbox Games},
   year      = {2009},
   booktitle = {Multi-agent Systems and Sandbox Games},
   date      = {2009},
@@ -526,7 +527,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal   = {Journal of the American Society for Information Science},
   title     = {Information as thing},
   year      = {1991},
-  month     = {jun},
+  month     = jun,
   number    = {5},
   pages     = {351--360},
   volume    = {42},
@@ -644,7 +645,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal   = {Journal of Experimental Psychology: Learning, Memory, and Cognition},
   title     = {In search of decay in verbal short-term memory.},
   year      = {2009},
-  month     = {mar},
+  month     = mar,
   number    = {2},
   pages     = {317--333},
   volume    = {35},
@@ -678,7 +679,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal   = {Journal of Verbal Learning and Verbal Behavior},
   title     = {Proactive inhibition in short-term retention of single items},
   year      = {1962},
-  month     = {oct},
+  month     = oct,
   number    = {3},
   pages     = {153--161},
   volume    = {1},
@@ -691,7 +692,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal   = {The American Journal of Psychology},
   title     = {Retroactive and Proactive Inhibition in Retention: Evidence for a Two-Factor Theory of Retroactive Inhibition},
   year      = {1941},
-  month     = {apr},
+  month     = apr,
   number    = {2},
   pages     = {157},
   volume    = {54},
@@ -723,7 +724,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   booktitle = {Proceedings of the 2009 Winter Simulation Conference ({WSC})},
   title     = {Agent-based modeling and simulation},
   year      = {2009},
-  month     = {dec},
+  month     = dec,
   publisher = {{IEEE}},
   doi       = {10.1109/wsc.2009.5429318},
 }
@@ -750,7 +751,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal   = {Scientometrics},
   title     = {Agent-based computing from multi-agent systems to agent-based models: a visual survey},
   year      = {2011},
-  month     = {aug},
+  month     = aug,
   number    = {2},
   pages     = {479--499},
   volume    = {89},
@@ -763,7 +764,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal   = {The Knowledge Engineering Review},
   title     = {Intelligent agents: theory and practice},
   year      = {1995},
-  month     = {jun},
+  month     = jun,
   number    = {2},
   pages     = {115--152},
   volume    = {10},
@@ -796,7 +797,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal   = {Artificial Intelligence},
   title     = {Negotiation and cooperation in multi-agent environments},
   year      = {1997},
-  month     = {jul},
+  month     = jul,
   number    = {1-2},
   pages     = {79--97},
   volume    = {94},
@@ -827,7 +828,7 @@ the literary methods of storytelling with the designerly methods of world buildi
   journal  = {ACM Transactions on Programming Languages and Systems},
   title    = {The Byzantine Generals Problem},
   year     = {1982},
-  month    = {July},
+  month    = jul,
   pages    = {382-401},
   abstract = {I have long felt that, because it was posed as a cute problem about philosophers seated around a table, Dijkstra's dining philosopher's problem received much more attention than it deserves. (For example, it has probably received more attention in the theory community than the readers/writers problem, which illustrates the same principles and has much more practical importance.) I believed that the problem introduced in [41] was very important and deserved the attention of computer scientists. The popularity of the dining philosophers problem taught me that the best way to attract attention to a problem is to present it in terms of a story.
 
@@ -851,6 +852,91 @@ The main reason for writing this paper was to assign the new name to the problem
   title     = {Principles of distributed database systems},
   year      = {1999},
   volume    = {2},
+}
+
+@InProceedings{Borge2017,
+  author    = {Maria Borge and Eleftherios Kokoris-Kogias and Philipp Jovanovic and Linus Gasser and Nicolas Gailly and Bryan Ford},
+  booktitle = {2017 {IEEE} European Symposium on Security and Privacy Workshops ({EuroS}{\&}{PW})},
+  title     = {Proof-of-Personhood: Redemocratizing Permissionless Cryptocurrencies},
+  year      = {2017},
+  month     = apr,
+  publisher = {{IEEE}},
+  doi       = {10.1109/eurospw.2017.46},
+}
+
+@Article{Siddarth2020,
+  author   = {Siddarth, Divya and Ivliev, Sergey and Siri, Santiago and Berman, Paula},
+  journal  = {Frontiers in Blockchain},
+  title    = {Who Watches the Watchmen? A Review of Subjective Approaches for Sybil-Resistance in Proof of Personhood Protocols},
+  year     = {2020},
+  issn     = {2624-7852},
+  pages    = {46},
+  volume   = {3},
+  abstract = {Most self-sovereign identity systems consist of strictly objective claims, cryptographically signed by trusted third-party attestors. Lacking protocols in place to account for subjectivity, these systems do not form new sources of legitimacy that can address the central question concerning identity authentication: “Who verifies the verifier?” The legitimacy of claims is instead derived from traditional centralized institutions such as national ID issuers and KYC providers. This architecture has been employed, in part, to safeguard protocols from a vulnerability previously thought to be impossible to address in peer-to-peer identity systems: the Sybil attack, which refers to the abuse of a digital network by creating many illegitimate virtual personas. Inspired by the progress in cryptocurrencies and blockchain technology, there has recently been a surge in networked protocols that make use of subjective inputs such as voting, vouching, and interpreting to arrive at a decentralized and Sybil-resistant consensus for identity. In doing so, these projects illustrate that the best technologies do not abstract away subjectivity but instead embrace it as a necessity and strength. In this review, we will outline the approaches of these new and natively digital sources of authentication—their attributes, methodologies, strengths, and weaknesses—and sketch out possible directions for future developments.},
+  doi      = {10.3389/fbloc.2020.590171},
+  url      = {https://www.frontiersin.org/article/10.3389/fbloc.2020.590171},
+}
+
+@InCollection{Douceur2002,
+  author    = {John R. Douceur},
+  booktitle = {Peer-to-Peer Systems},
+  publisher = {Springer Berlin Heidelberg},
+  title     = {The Sybil Attack},
+  year      = {2002},
+  pages     = {251--260},
+  doi       = {10.1007/3-540-45748-8_24},
+}
+
+@Article{Pearl1984,
+  author    = {Pearl, Judea},
+  title     = {Heuristics: intelligent search strategies for computer problem solving},
+  year      = {1984},
+  publisher = {Addison-Wesley Pub. Co., Inc., Reading, MA},
+}
+
+@Book{Ippoliti2015,
+  editor    = {Emiliano Ippoliti},
+  publisher = {Springer},
+  title     = {Heuristic Reasoning},
+  year      = {2015},
+  isbn      = {978-3-319-36222-9},
+  series    = {Studies in Applied Philosophy, Epistemology and Rational Ethics},
+}
+
+@Article{Dean2008,
+  author    = {Jeffrey Dean and Sanjay Ghemawat},
+  journal   = {Communications of the {ACM}},
+  title     = {{MapReduce}},
+  year      = {2008},
+  month     = jan,
+  number    = {1},
+  pages     = {107--113},
+  volume    = {51},
+  doi       = {10.1145/1327452.1327492},
+  publisher = {Association for Computing Machinery ({ACM})},
+}
+
+@Misc{Czajkowski2011,
+  author       = {Czajkowski, Grzegorz and Dvorský, Marián and Zhao, Jerry and Conley, Michael},
+  howpublished = {\url{https://ai.googleblog.com/2011/09/sorting-petabytes-with-mapreduce-next.html}},
+  month        = sep,
+  note         = {Accessed on: 2021-09-26},
+  title        = {Sorting Petabytes with MapReduce - The Next Episode},
+  year         = {2011},
+}
+
+@Book{Hayes1983,
+  author    = {Hayes-Roth, Frederick and Waterman, Donald A and Lenat, Douglas B},
+  publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+  title     = {Building expert systems},
+  year      = {1983},
+}
+
+@Article{Feigenbaum1981,
+  author    = {Feigenbaum, Edward A and Barr, Avron and Cohen, Paul R},
+  title     = {The handbook of artificial intelligence},
+  year      = {1981},
+  publisher = {Addison-Wesley},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
