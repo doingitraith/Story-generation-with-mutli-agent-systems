@@ -706,4 +706,151 @@ the literary methods of storytelling with the designerly methods of world buildi
   year      = {2010},
 }
 
+@Article{Oberauer2008,
+  author    = {Klaus Oberauer and Stephan Lewandowsky},
+  journal   = {Psychological Review},
+  title     = {Forgetting in immediate serial recall: Decay, temporal distinctiveness, or interference?},
+  year      = {2008},
+  number    = {3},
+  pages     = {544--576},
+  volume    = {115},
+  doi       = {10.1037/0033-295x.115.3.544},
+  publisher = {American Psychological Association ({APA})},
+}
+
+@InProceedings{Macal2009,
+  author    = {Charles M. Macal and Michael J. North},
+  booktitle = {Proceedings of the 2009 Winter Simulation Conference ({WSC})},
+  title     = {Agent-based modeling and simulation},
+  year      = {2009},
+  month     = {dec},
+  publisher = {{IEEE}},
+  doi       = {10.1109/wsc.2009.5429318},
+}
+
+@InCollection{Helbing2012,
+  author    = {Dirk Helbing},
+  booktitle = {Understanding Complex Systems},
+  publisher = {Springer Berlin Heidelberg},
+  title     = {Agent-Based Modeling},
+  year      = {2012},
+  pages     = {25--70},
+  doi       = {10.1007/978-3-642-24004-1_2},
+}
+
+@Book{Wooldridge2009,
+  author    = {Wooldridge, Michael},
+  publisher = {John wiley \& sons},
+  title     = {An introduction to multiagent systems},
+  year      = {2009},
+}
+
+@Article{Niazi2011,
+  author    = {Muaz Niazi and Amir Hussain},
+  journal   = {Scientometrics},
+  title     = {Agent-based computing from multi-agent systems to agent-based models: a visual survey},
+  year      = {2011},
+  month     = {aug},
+  number    = {2},
+  pages     = {479--499},
+  volume    = {89},
+  doi       = {10.1007/s11192-011-0468-9},
+  publisher = {Springer Science and Business Media {LLC}},
+}
+
+@Article{Wooldridge1995,
+  author    = {Michael Wooldridge and Nicholas R. Jennings},
+  journal   = {The Knowledge Engineering Review},
+  title     = {Intelligent agents: theory and practice},
+  year      = {1995},
+  month     = {jun},
+  number    = {2},
+  pages     = {115--152},
+  volume    = {10},
+  doi       = {10.1017/s0269888900008122},
+  publisher = {Cambridge University Press ({CUP})},
+}
+
+@InCollection{Harel1985,
+  author    = {Harel, David and Pnueli, Amir},
+  booktitle = {Logics and models of concurrent systems},
+  publisher = {Springer},
+  title     = {On the development of reactive systems},
+  year      = {1985},
+  pages     = {477--498},
+}
+
+@Article{Hopcroft2001,
+  author    = {Hopcroft, John E and Motwani, Rajeev and Ullman, Jeffrey D},
+  journal   = {Acm Sigact News},
+  title     = {Introduction to automata theory, languages, and computation},
+  year      = {2001},
+  number    = {1},
+  pages     = {60--65},
+  volume    = {32},
+  publisher = {ACM New York, NY, USA},
+}
+
+@Article{Kraus1997,
+  author    = {Sarit Kraus},
+  journal   = {Artificial Intelligence},
+  title     = {Negotiation and cooperation in multi-agent environments},
+  year      = {1997},
+  month     = {jul},
+  number    = {1-2},
+  pages     = {79--97},
+  volume    = {94},
+  doi       = {10.1016/s0004-3702(97)00025-8},
+  publisher = {Elsevier {BV}},
+}
+
+@Book{Coulouris2001,
+  author    = {Coulouris, George},
+  publisher = {Addison-Wesley},
+  title     = {Distributed systems : concepts and design},
+  year      = {2001},
+  address   = {Harlow, England New York},
+  isbn      = {9780201619188},
+}
+
+@Article{Van2002,
+  author  = {Van Steen, Maarten and Tanenbaum, A},
+  journal = {Network},
+  title   = {Distributed systems principles and paradigms},
+  year    = {2002},
+  pages   = {28},
+  volume  = {2},
+}
+
+@Article{Lamport1982,
+  author   = {Lamport, Leslie and Shostak, Robert and Pease, Marshall},
+  journal  = {ACM Transactions on Programming Languages and Systems},
+  title    = {The Byzantine Generals Problem},
+  year     = {1982},
+  month    = {July},
+  pages    = {382-401},
+  abstract = {I have long felt that, because it was posed as a cute problem about philosophers seated around a table, Dijkstra's dining philosopher's problem received much more attention than it deserves. (For example, it has probably received more attention in the theory community than the readers/writers problem, which illustrates the same principles and has much more practical importance.) I believed that the problem introduced in [41] was very important and deserved the attention of computer scientists. The popularity of the dining philosophers problem taught me that the best way to attract attention to a problem is to present it in terms of a story.
+
+There is a problem in distributed computing that is sometimes called the Chinese Generals Problem, in which two generals have to come to a common agreement on whether to attack or retreat, but can communicate only by sending messengers who might never arrive. I stole the idea of the generals and posed the problem in terms of a group of generals, some of whom may be traitors, who have to reach a common decision. I wanted to assign the generals a nationality that would not offend any readers. At the time, Albania was a completely closed society, and I felt it unlikely that there would be any Albanians around to object, so the original title of this paper was The Albanian Generals Problem. Jack Goldberg was smart enough to realize that there were Albanians in the world outside Albania, and Albania might not always be a black hole, so he suggested that I find another name. The obviously more appropriate Byzantine generals then occurred to me.
+
+The main reason for writing this paper was to assign the new name to the problem. But a new paper needed new results as well. I came up with a simpler way to describe the general 3n+1-processor algorithm. (Shostak's 4-processor algorithm was subtle but easy to understand; Pease's generalization was a remarkable tour de force.) We also added a generalization to networks that were not completely connected. (I don't remember whose work that was.) I also added some discussion of practical implementation details.},
+  url      = {https://www.microsoft.com/en-us/research/publication/byzantine-generals-problem/},
+}
+
+@InProceedings{Gervais2016,
+  author    = {Gervais, Arthur and Karame, Ghassan O and W{\"u}st, Karl and Glykantzis, Vasileios and Ritzdorf, Hubert and Capkun, Srdjan},
+  booktitle = {Proceedings of the 2016 ACM SIGSAC conference on computer and communications security},
+  title     = {On the security and performance of proof of work blockchains},
+  year      = {2016},
+  pages     = {3--16},
+}
+
+@Book{Ozsu1999,
+  author    = {{\"O}zsu, M Tamer and Valduriez, Patrick},
+  publisher = {Springer},
+  title     = {Principles of distributed database systems},
+  year      = {1999},
+  volume    = {2},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
