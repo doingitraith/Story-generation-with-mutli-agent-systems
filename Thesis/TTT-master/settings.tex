@@ -122,16 +122,16 @@
 \newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{max}}\;}
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
 
-
+\usepackage{mathtools}
 
 %%%%%%%%%%%%%%%%%%%
 % code listings
 %%%%%%%%%%%%%%%%%%%
 
 \usepackage{listings}
-\lstloadlanguages{TeX, C++, XML, Matlab, Java, Python, C} % add languages if needed 
+\lstloadlanguages{TeX, C++, XML, Matlab, Java, Python, C, [Sharp]C} % add languages if needed 
 \lstset{%
-	language=[LaTeX]TeX,     %
+	%language=[LaTeX]TeX,     %
 	numbers=left,            % line numbers left
 	stepnumber=1,            % number every line
 	numbersep=5pt,           % distance of line numbers to the code
@@ -145,16 +145,23 @@
 	columns=fullflexible,
 	showstringspaces=false,  % ...also not in 'strings' / "strings"
 	extendedchars=true,      % show all Latin1 chars
-	backgroundcolor=\color{ListingBackground} % background color of the listing
+	backgroundcolor=\color{ListingBackground}, % background color of the listing
+	belowcaptionskip=1\baselineskip,
+	%frame=L,
+	xleftmargin=\parindent,
+	language=[Sharp]C,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+	captionpos=b
 }
 
 % captions for listings
 \usepackage{caption}
 \DeclareCaptionFont{white}{\color{white}}
-\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
-\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={footnotesize}}
-
-
+%\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{justification=justified, labelsep=period, skip=10pt}
 
 %%%%%%%%%%%%%%%%%%%
 % header & footer

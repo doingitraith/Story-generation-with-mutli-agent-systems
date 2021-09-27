@@ -1,7 +1,86 @@
 \chapter{Implementation} % 25 pages
+The following chapter describes the prototype game I created as part of this thesis. I explain how I applied the concepts and research introduced in the previous chapter. First I will introduce the \textit{Information Model}, that I created to define information in the game. Then I will go into detail about the \textit{agents}, that inhabit and exist in the game world. After that, I will describe the \textit{game world} itself followed by a \textit{gameplay} description. Then I will focus on the \textit{dialogue feature} and how information can be retrieved and introduced into the system. Following that I will give an explanation of how narrative is introduced using \textit{quests}. Additionally, I will provide the concrete implementations of both the information \textit{heuristic} and the \textit{consensus protocol}. The chapter will be closed off, by discussing the \textit{narrative implications} of the described gameplay.
 
 \section{Information Model}
-% Information model 4
+At the center of the game mechanic created for this thesis, is the \textit{Information Model}. I propose a conceptional model for information objects that encapsulate statements about semantic and factual game world data (see \ref{section:info}). The statements encapsulated in an \verb|Information| object is primarily characterized by its \textit{Verb}. The verb is the main indicator of the assertion of the information content. Every information object also contains a \textit{Subject} which denotes who or what the information statement is concerned with. The third part of the information is dependent on the verb and can either be an \textit{Object}, an \textit{Adjective} or a \textit{Location}.
+Thus every information object $I$ consists of a triple of information elements:
+\begin{center}
+	$I \coloneqq \{s, v, x\}$ 
+\end{center}
+Where $s$ is the subject, $v$ is the verb and $x \in \{\textit{Object, Adjective, Location}\}$ depending on the verb. Figure~\ref{fig:informationCD} shows the class diagram for the \verb|Information| class. Although the elements of an \verb|Information| object refer to actual game objects in the game world, this link is purposely severed when an \verb|Information| object is created. This is done, so that the information statement is actually just that and has no exploitable connection to other objects anymore. Thus the \textit{Information Model} and the programming interface remain decoupled which allows for a more accurate simulation.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\textwidth]{InformationCD}
+	\caption{Inheritance diagram of the Information class}
+	\label{fig:informationCD}
+\end{figure}
+\subsection{Verbs}
+Verbs in the \textit{Information Model} come in three types:
+\begin{itemize}
+	\item \textbf{IS}: Creates information statements about the \textit{state} of a subject of the form "\textit{Subject} \verb|IS| \textit{Adjective}".
+	\item \textbf{HAS}: Creates information statements about a possessive relationship between subject and object of the form "\textit{Subject} \verb|HAS| \textit{Object}".
+	\item \textbf{AT}: Creates information statements indicating the location of a subject of the form "\textit{Subject} \verb|AT| \textit{Location}". The \verb|AT| type presents a special form of the \verb|IS| type, but in the context of a traversable 3D world, locations represents such an important piece of state, that its own information type is justified.
+\end{itemize}
+\textit{Verbs} are instances of the \verb|Verb| enumeration. The constructors in the \verb|Information| class are designed in such a way, that the verb is set by the constructor and there exist multiple overloads to create the different types of information objects (Listing \ref{listing:information}).
+\begin{lstlisting}[
+	caption={Information class constructors},
+	label={listing:information}
+	]
+	public Information(Agent agent, Item object)
+		=> (Subject, Verb, Object, Adjective, Location, Not) =
+		(agent.InformationSubject, InformationVerb.Has, object.InformationSubject, null, null, false);
+	
+	public Information(WorldObject subject, InformationAdjective informationAdjective)
+		=> (Subject, Verb, Object, Adjective, Location, Not) =
+		(subject.InformationSubject, InformationVerb.Is, null, informationAdjective, null, false);
+	
+	public Information(WorldObject subject, InformationLocation informationLocation)
+		=> (Subject, Verb, Object, Adjective, Location, Not) =
+		(subject.InformationSubject, InformationVerb.At, null, null, informationLocation, false);
+\end{lstlisting}
+This way \verb|Information| objects can be created with only the content in mind, and the constructor sets up the object correctly for usage.
+\subsection{Subjects}
+As mentioned, every piece of information contains a \textit{subject}. They represent the concerning entity of an information statement. A \textit{subject} is an instance of the \verb|InformationSubject| class that conceptually either represents an \verb|Agent| or an \verb|Item|, both of which inherit from the \verb|WorldObject| class.\\
+What exact type of object a \textit{subject} is in a given \verb|Information| object, is again dependent on the \textit{verb}. For example there can be no information of the form "\textit{Item} \verb|HAS| \textit{Agent}" because an item cannot own an agent. The constructors for \verb|Information| objects make sure that no erroneous object can be created.\\
+\textit{Subjects} consist  of a textual name that denotes the \textit{subject} and two boolean values that state whether the \textit{subject} is an agent or not and whether it is a unique object, which is important for items (Figure~\ref{fig:subjectCD}).
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{SubjectCD}
+	\caption{Inheritance diagram of the InformationSubject class}
+	\label{fig:subjectCD}
+\end{figure}
+\textit{Subjects} also have a \verb|Mutation| object attached that is responsible for decaying the accuracy of the \textit{subject}. I give a detailed explanation of mutations in Section~\ref{section:mutation}.
+\subsection{Adjectives}
+An \textit{adjective} represents a detail or characteristic of a \textit{subject's} state. The can be arbitrarily defined by a developer. They represent the properties of a \textit{subject}. \textit{Adjectives} are instances of the \verb|InformationAdjective| class (Figure~\ref{fig:adjectiveCD}). In the \textit{Information Model} there are two differentiable types of \verb|InformationAdjective| objects:
+\begin{itemize}
+	\item \verb|InformationProperty|: Represents factual information about a \textit{subject}. For example "\textit{Agent} \verb|IS| \textit{alive}." is a factual piece of information that can be either true or false.
+	\item \verb|InformationOpinion|: Represents statements about a \textit{subject's} state that are influenced by information holder's relationship to the \textit{subject}. For example the statement "\textit{Agent} \verb|IS| \textit{dangerous}." can be true for one agent but false for another.
+\end{itemize}
+This distinction is introduced so that conceptually there can be a difference between facts and opinions that someone has about any \textit{subject}.\\•
+An \verb|InformationAdjective| consists of the textual \textit{Characteristic} and a list of \textit{contradictions}. The contradictions are other \textit{adjectives} that are conflicting with the \textit{adjective} they are attached to. A simple example would be the two information statements  "\textit{Agent} \verb|IS| \textit{alive}." and  "\textit{Agent} \verb|IS| \textit{dead}.". Both cannot be true at the same time. Therefore, each \textit{adjective's} contradictions list contains the respective other. When an agent learns a new information that contains an \textit{adjective}, they check the \textit{adjective's} contradictions and resolve any conflicts.\\
+At the start of the game, an initial list of \textit{adjectives} that exist in the world is created. After that, the contradictions lists are created and attached to each \textit{adjective}.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{AdjectiveCD}
+	\caption{Inheritance diagram of the InformationAdjective class}
+	\label{fig:adjectiveCD}
+\end{figure}
+\subsection{Locations}
+As mentioned before, a \textit{location} is a special kind of \textit{object} for the \verb|AT| information type. In a 3D game world that is driven by a multi-agent system, agents need to move around. For that the \verb|InformationLocation| class attaches a position in the world to the information so that agents can retrieve an actual location from the information statement.\\
+A \textit{location} also has a \verb|Mutation| object attached to it, so its accuracy can be reduced. Other than that, the \verb|InformationLocation| has only a textual name and the 3D position as a public interface.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{LocationCD}
+	\caption{Inheritance diagram of the InformationLocation class}
+	\label{fig:locationCD}
+\end{figure}
+\subsection{Mutation}
+\label{section:mutation}
+To simulate the decay of information and agents forgetting details, the \textit{Information Model} implements a \textit{Mutation} functionality. \verb|InformationSubject| and \verb|InformationLocation| objects have an object of the \verb|Mutation| class. These represent a hierarchy of less precise information values. Every \verb|Mutation| object has a reference \verb|ParentMutation| that points to a \verb|Mutation| object that holds the next less precise information value.\\
+As an example, we assume the \verb|InformationLocation| $l$ with the name value "\textit{Village Square}". The \verb|Mutation| object can point to a less precise information value "\textit{Village}" which in turn points to an information value "\textit{Somewher in the South}". This way when $l$ is mutated once, its name value will be "\textit{Village}" and if mutated again will decay to "\textit{Somewhere in the South}" where it will remain.\\
+This mechanic allows for agents to slowly forget about details in their information statements which makes the collection of memories more chaotic over time.\\
+The values for the mutation hierarchy are set by the developer before the game starts.
+% Information model 5
 \section{Agents}
 % Agents 3
 \section{Game World}
