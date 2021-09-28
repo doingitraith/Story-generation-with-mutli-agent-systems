@@ -80,9 +80,45 @@ To simulate the decay of information and agents forgetting details, the \textit{
 As an example, we assume the \verb|InformationLocation| $l$ with the name value "\textit{Village Square}". The \verb|Mutation| object can point to a less precise information value "\textit{Village}" which in turn points to an information value "\textit{Somewher in the South}". This way when $l$ is mutated once, its name value will be "\textit{Village}" and if mutated again will decay to "\textit{Somewhere in the South}" where it will remain.\\
 This mechanic allows for agents to slowly forget about details in their information statements which makes the collection of memories more chaotic over time.\\
 The values for the mutation hierarchy are set by the developer before the game starts.
-% Information model 5
 \section{Agents}
-% Agents 3
+In any multi-agent system, the central component are of course the agents. In the prototype game, those agents represent the NPCs who live in the game world or the player (Figure~\ref{fig:agentCD}). The only difference is that the player agent is controlled by the player instead of the game. But for the NPCs, there is no difference between the player agent or any other NPC. In the following I will generally talk about NPCs as agents for better understanding of the conceptual implications in a multi-agent system. Agents move around in the world to perform actions, exchange information and change their state depending on what they learn.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{AgentCD}
+	\caption{Inheritance diagram of the Agent class}
+	\label{fig:agentCD}
+\end{figure}
+The \verb|WorldObject| class is the parent class for both \verb|Agent| and \verb|Item| classes. I represents physical entities that exist as part of the multi-agent system. \verb|WorldObject| itself is a child class of Unity's \verb|MonoBehaviour| class which is the base class of all game objects managed by the Unity engine.\\
+All \verb|Agent| instances inherit the members of their parent classes and thus have a textual identifier \textit{Name}, a \textit{Location} to denote the object's current location, exposed properties to set up the \textit{InformationSubject} and an integer value \textit{WorldImportance}. This value is important for the information heuristic for believability which is described in section %TODO add ref to heuristic.
+\textit{WorldImportance} indicates the initial interest a piece of information gets through the involved object. This interest can be positive or negative. A piece of information about the castle might have high positive value, since the castle is an important place in the kingdom. Information about an enemy bandit however, will have a negative number, as people are afraid of the bandits. These values should be an objective measure of an object's interest value. Subjective views from the agents are taken into account when the heuristic is calculated.\\
+The important properties of the \verb|Agent| class are the \textit{Inventory} which stores items in the agent's possession, \textit{Acquaintances} contains other agents that have interacted with the object, \textit{ImportantPeople} are agents that have a close relationship with the object like friends or loved ones and \textit{Quests} which is a list of objectives the agent has. Through the \textit{ImportantPeople} property, certain agents can be treated differently and more favorably than others. This allows the introduction of a social network component into the multi-agent system.\\
+The boolean values \textit{IsSeeing} and \textit{IsHearing} allow to determine what kind of information the agent is able to "sense" respectively.\\
+The heart of the game mechanic is the \textit{Memory} property. It is an \verb|InformationManager| object. As the name implies, it stores, processes and manages all the incoming pieces of information.\\
+The different actions an agent can execute are also defined here. This includes interacting with other agents, picking up and dropping items or attacking agents.
+\subsection{NPC}
+The \verb|NPC| class is a child class of the \verb|Agent| class and defines additional properties and functions that are unique only for NPCs.\\
+This includes a \textit{Routine} property which is a list of behaviors the agent will execute one after another to simulate a daily life of a human. When they reached the end of their routine, they will start again from the beginning.
+\subsection{Player}
+In the scope of this thesis the \verb|Player| class behaves very similar to other agents. It has components attached that enable input to control the player agent. It needs its own class, so that developers can differentiate between NPCs and the player. This is necessary as the agents don't might want to behave differently when interacting with the player agent to expose more information to the actual player in front of the screen. For example when a dialogue is started, an NPC will not simply send information and continue with its routine, but it will pause and the dialogue interface will be opened where the information exchanged is controlled by the player.
+\subsection{Behavior}
+In order for the intelligent agents to move, interact and follow their objectives, I defined multiple behaviors that allow them to perform actions (Figure~\ref{fig:behaviorCD}). The following behavior classes exist:
+\begin{itemize}
+	\item \verb|ExchangeInformationBehavior|:
+	\item \verb|SendInformationBehavior|:
+	\item \verb|WalkBehavior|:
+	\item \verb|TalkBehavor|:
+	\item \verb|WaitBehavior|:
+	\item \verb|PickUpBehavior|:
+	\item \verb|DropBehavior|:
+\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=1.2\textwidth]{BehaviorCD}
+	\caption{Inheritance diagram of the AgentBehavior class}
+	\label{fig:behaviorCD}
+\end{figure}
+\subsection{Information Manager}
+% Agents 4
 \section{Game World}
 % Game World 2
 	% Technology
@@ -95,6 +131,8 @@ The values for the mutation hierarchy are set by the developer before the game s
 % Statements 2
 \section{Quests}
 % Quests 2
+\section{Inference}
+% Inference 2
 \section{Heuristic}
 % Heuristic 2
 \section{Consensus}
