@@ -1,13 +1,16 @@
 \chapter{Implementation} % 25 pages
-The following chapter describes the prototype game I created as part of this thesis. I explain how I applied the concepts and research introduced in the previous chapter. First I will introduce the \textit{Information Model}, that I created to define information in the game. Then I will go into detail about the \textit{agents}, that inhabit and exist in the game world. After that, I will describe the \textit{game world} itself followed by a \textit{gameplay} description. Then I will focus on the \textit{dialogue feature} and how information can be retrieved and introduced into the system. Following that I will give an explanation of how narrative is introduced using \textit{quests}. Additionally, I will provide the concrete implementations of both the information \textit{heuristic} and the \textit{consensus protocol}. The chapter will be closed off, by discussing the \textit{narrative implications} of the described gameplay.
-
+The following chapter describes the prototype game I created as part of this thesis. I explain how I applied the concepts and research introduced in the previous chapter.\\
+The game simulates a small medieval kingdom and its inhabitants. The player controls a knight who is sent on a quest by the queen. The king is missing and the player shall return the king to the castle. The player can move around and interact with non-player characters (NPCs) and some key items. First I will introduce the \textit{Information Model}, that I created to define information in the game. Then I will go into detail about the \textit{agents}, that inhabit and exist in the game world. After that, I will describe the \textit{game world} itself followed by a \textit{gameplay} description. Then I will focus on the \textit{dialogue feature} and how information can be retrieved and introduced into the system. Following that I will give an explanation of how narrative is introduced using \textit{quests}. Additionally, I will provide the concrete implementations of both the information \textit{heuristic} and the \textit{consensus protocol}. The chapter will be closed off, by discussing the \textit{narrative implications} of the described gameplay.
+\section{Technology}
+Before I go into detail about the game logic, I want to explain my choice of development environment. For the prototype game I chose the Unity engine developed by Unity Technologies~\cite{Unity2021}. This choice was made because I have multiple years of experience with the Unity engine and it allows for fast prototyping that is easy to iterate upon. Unity is widely used across the video game industry, has an active developer community and is well documented. The programming language for Unity is Microsoft C\# with the .NET framework, which I have also many years of experience with. All assets that are used in the prototype game are either purchased or free to use. All asset creators are properly credited in the prototype.
 \section{Information Model}
 At the center of the game mechanic created for this thesis, is the \textit{Information Model}. I propose a conceptional model for information objects that encapsulate statements about semantic and factual game world data (see \ref{section:info}). The statements encapsulated in an \verb|Information| object is primarily characterized by its \textit{Verb}. The verb is the main indicator of the assertion of the information content. Every information object also contains a \textit{Subject} which denotes who or what the information statement is concerned with. The third part of the information is dependent on the verb and can either be an \textit{Object}, an \textit{Adjective} or a \textit{Location}.
 Thus every information object $I$ consists of a triple of information elements:
 \begin{center}
 	$I \coloneqq \{s, v, x\}$ 
 \end{center}
-Where $s$ is the subject, $v$ is the verb and $x \in \{\textit{Object, Adjective, Location}\}$ depending on the verb. Figure~\ref{fig:informationCD} shows the class diagram for the \verb|Information| class. Although the elements of an \verb|Information| object refer to actual game objects in the game world, this link is purposely severed when an \verb|Information| object is created. This is done, so that the information statement is actually just that and has no exploitable connection to other objects anymore. Thus the \textit{Information Model} and the programming interface remain decoupled which allows for a more accurate simulation.
+Where $s$ is the subject, $v$ is the verb and $x \in \{\textit{Object, Adjective, Location}\}$ depending on the verb. Figure~\ref{fig:informationCD} shows the class diagram for the \verb|Information| class. Although the elements of an \verb|Information| object refer to actual game objects in the game world, this link is purposely severed when an \verb|Information| object is created. This is done, so that the information statement is actually just that and has no exploitable connection to other objects anymore. Thus the \textit{Information Model} and the programming interface remain decoupled which allows for a more accurate simulation.\\
+The \verb|Information| class also implements the \verb|IMutatable| interface which only declares the function \verb|Mutate|. This function should reduce the accuracy in the statement by reducing the accuracy in any of the statement components every time it is called.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.3\textwidth]{InformationCD}
@@ -79,7 +82,8 @@ A \textit{location} also has a \verb|Mutation| object attached to it, so its acc
 To simulate the decay of information and agents forgetting details, the \textit{Information Model} implements a \textit{Mutation} functionality. \verb|InformationSubject| and \verb|InformationLocation| objects have an object of the \verb|Mutation| class. These represent a hierarchy of less precise information values. Every \verb|Mutation| object has a reference \verb|ParentMutation| that points to a \verb|Mutation| object that holds the next less precise information value.\\
 As an example, we assume the \verb|InformationLocation| $l$ with the name value "\textit{Village Square}". The \verb|Mutation| object can point to a less precise information value "\textit{Village}" which in turn points to an information value "\textit{Somewher in the South}". This way when $l$ is mutated once, its name value will be "\textit{Village}" and if mutated again will decay to "\textit{Somewhere in the South}" where it will remain.\\
 This mechanic allows for agents to slowly forget about details in their information statements which makes the collection of memories more chaotic over time.\\
-The values for the mutation hierarchy are set by the developer before the game starts.
+The values for the mutation hierarchy are set by the developer before the game starts.\\
+The \verb|Mutate| function in the \verb|Information| class that is provided by the \verb|IMutatable| interface triggers the mutation of any of its statements' components.
 \section{Agents}
 In any multi-agent system, the central component are of course the agents. In the prototype game, those agents represent the NPCs who live in the game world or the player (Figure~\ref{fig:agentCD}). The only difference is that the player agent is controlled by the player instead of the game. But for the NPCs, there is no difference between the player agent or any other NPC. In the following I will generally talk about NPCs as agents for better understanding of the conceptual implications in a multi-agent system. Agents move around in the world to perform actions, exchange information and change their state depending on what they learn.
 \begin{figure}
@@ -103,13 +107,12 @@ In the scope of this thesis the \verb|Player| class behaves very similar to othe
 \subsection{Behavior}
 In order for the intelligent agents to move, interact and follow their objectives, I defined multiple behaviors that allow them to perform actions (Figure~\ref{fig:behaviorCD}). The following behavior classes exist:
 \begin{itemize}
-	\item \verb|ExchangeInformationBehavior|:
-	\item \verb|SendInformationBehavior|:
-	\item \verb|WalkBehavior|:
-	\item \verb|TalkBehavor|:
-	\item \verb|WaitBehavior|:
-	\item \verb|PickUpBehavior|:
-	\item \verb|DropBehavior|:
+	\item \verb|ExchangeInformationBehavior|: This behavior allows two agents to engage in an exchange a piece of information. They choose which information to send each other based on the information heuristic.
+	\item \verb|SendInformationBehavior|: As a child class of \verb|ExchangeInformationBehavior|, this behavior selects a random agents from the list oof \textit{ImprotantPeople} and sends them a piece of information also based on the information heuristic. This behavior can be interpreted as "sending a message" to a distant friend. I implemented this so that information would also reach farther parts of the world eventually.
+	\item \verb|WalkBehavior|: This simply allows the agent to move to a specified location in the world.
+	\item \verb|TalkBehavor|: This would allow NPCs to stop the player and engage in a conversation with them. In the prototype game this behavior is never used and it is only the player who can initiate a  conversation.
+	\item \verb|WaitBehavior|: To simulate NPCs that are waiting or "doing nothing" for a specified time, I implemented this behavior. It is mostly to make the simulated behavior look more realistic and have NPCs stand in a place for a while.
+	\item \verb|PickUpBehavior| and \verb|DropBehavior|: These two are implemented to let NPCs pick up a specified item in the vicinity or drop it in font of them respectively.
 \end{itemize}
 \begin{figure}
 	\centering
@@ -117,18 +120,69 @@ In order for the intelligent agents to move, interact and follow their objective
 	\caption{Inheritance diagram of the AgentBehavior class}
 	\label{fig:behaviorCD}
 \end{figure}
+The parent \verb|AgentBehavior| class is an abstract class and declares functions for starting, interrupting and resuming a behavior. Additionally it declares the function \verb|IsBehaviorFinished| to check if the behavior is completed. This simple setup of behavior allows for easy extension of the capabilities of agents.
 \subsection{Information Manager}
-% Agents 4
+At the heart of the agents' logic is the \verb|InformationManager| class. It provides all the necessary functions to add, manage and process incoming \verb|Information| objects for an agent. Its main task are adding new pieces of information to the memory and evaluating them on a regular basis to update the information heuristic values.\\
+It manages the different pieces of information with lists of \verb|InformationContext| objects. Those are objects that pack an \verb|Information| object with contextual data about how the information was received. The context object stores how many times the information was received already by distinct agents, who it was last received from, the time since it was last received and current values for believability and information heuristic.\\
+The \textit{Information Manager} provides two lists of \verb|InformationContext| objects to manage its memories:
+\begin{itemize}
+	\item \textit{Speculative Memory}: the speculative memory stores every piece of information that an agent receives. It is a list of unconfirmed information that needs to be evaluated before it can be trusted. Only information that the agent did not perceive itself but was given to it by others, is considered speculative.
+	\item \textit{Stable Memory}: confirmed or trusted information is stored in the stable memory. Everything an agent learns by its own senses like seeing, hearing or otherwise witnessing goes directly to the stable memory. If information is received via another agent, it needs to be verified through believability before it is transferred from the speculative memory to the stable memory. When an agent evaluates the information stored in its memory, it also updates believability values for every piece of information. This value is closely tied to the information heuristic. If the believability of an information is above a certain threshold, it is transferred to the stable memory and if it falls under the threshold, it is sent back to the speculative memory.
+\end{itemize}
+This structure, of speculative and stable memory is taken from high availability backup systems. A process called chain replication uses a similar technique, where any change to the system is put into a speculative history until all nodes in the backup change have confirmed it. After that it is transferred through all nodes again, but in a stable history. When all nodes have confirmed the change in the stable history, the update was successful.~\cite{Van2004}\\
+Although agents are only a single node, I tried to replicate this confirmation methodology with the speculative and stable memories.
 \section{Game World}
-% Game World 2
-	% Technology
+The agents in the prototype game live in an environment. The environment in the prototype game is \textit{inaccessible}, \textit{deterministic}, \textit{static} and \textit{discrete}. It is inaccessible because agents learn of changes in the environment state only when they perceive or receive information about them, not as they happen. It is deterministic because every change an agents performs on the environment's state is known beforehand. The environment is static because the topology and and structure does not change in this prototype and it is discrete because the space agents can move in is limited.\\
+In the prototype game, the environment for the multi-agent system is the game world. I created a 3D world that contains interesting and memorable locations that agents can move around in. I recreated a small kingdom with several settlements where different agents live and go about their day. The key locations are \textit{the village}, \textit{the castle}, \textit{the sawmill}, \textit{the forest}, \textit{the lake}, \textit{the farm} and \textit{the enemy camp}~\ref{fig:gameWorld}.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{GameWorld}
+	\caption{An overview of the game world.}
+	\label{fig:gameWorld}
+\end{figure}
+The landscape is filled with paths and landmarks to make orientation easier and guide the player between the locations.\\
+I chose a medieval kingdom for my environment since it is a well understood and established context for video game worlds. Ford in his work about medieval towns in single player games describes how the boundaries between village and nature are also boundaries between the home and the frontier, the old and the new, the familiar and the unknown. This does not only relate to classic narratives about heroes venturing out into the wild, but also says interesting things about this dichotomy in game worlds. Video games often contextualize towns and nature through their mechanics. There are games for examples where you cannot use your weapons while inside a town or city. They also very often serve as quest hubs or quest destinations. This means that the borders define on a mechanical level what the player is allowed to do. Much like with real-world definitions of borders, this might say more about the player and their position in the game world than it does about the city ot town itself.~\cite{Ford2019}
 \section{Gameplay}
-% Gameplay 2
+I have touched previously upon what the player interactions are that form the gameplay of the prototype game. Players control a knight in the kingdom who sets out to go on quests and adventures in the kingdom (Figure~\ref{fig:gameplay}). The player controls the movement of the knight and can talk to NPCs and interact with key items. If the player picks up a weapon, the character is able to attack other agents.\\
+The novel game mechanic this prototype now presents and that is the topic of this thesis is more about the \textit{How} than the \textit{What}. Initially the player character is given a quest to return the king back to the castle. That is all the information the player is given who is now free to roam the game world to try and reach this goal.\\
+Though talking to NPCs and learning new information about the world, the player can find clues that help them reach their goal. Where exactly is the king? Is he guarded by a monster? How can I defeat the monster? NPCs can give pieces of information that let the player step by step deduce an answer to this question.\\
+Or the player can go a completely different route. By talking to NPCs they can introduce new or even wrong pieces of information into the world. Could I convince enough people that I am the king? And if someone would tell the queen, would she believe I am the king? And would that allow me to go back to the castle and thus achieve the goal?\\
+The systems that I have created for this prototype allow for varied and interesting solutions to quests even for the little amount of content that is in the prototype.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{Gameplay}
+	\caption{A sample gameplay scene.}
+	\label{fig:gameplay}
+\end{figure}
 \section{Dialogue}
+The main way to purposely learn and give out information in the game is to talk to NPCs. For that I have created a dialogue system that let's you either receive a random information from a NPC, ask a specific question or make a  statement on your own.\\
+I used Yarn Spinner from Secret Lab to create the dialogue~\cite{Secret2021}. It is a lightweight tool that comes with a Unity plug in and allows for branching node-based dialogue and supports variables and simple logic in its dialogue files.\\
+Yarn Spinner comes with an editor that easily allows developers to set up and write complex and branching dialogue files.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{Yarn}
+	\caption{The NPC Yarn dialogue file}
+	\label{fig:yarn}
+\end{figure}
 \subsection{Questions}
-% Questions 2
+Allowing the player to ask questions about specific game objects is much more goal oriented that randomly hoping for useful information to happen upon the player. The dialogue interface allows the player to create questions from a question verb, an information verb and an object(Figure~\ref{fig:question}). The question verbs \textit{Who}, \textit{What}, \textit{Where} and \textit{How} indicate whether the expected answer will be a NPC name, an item, a location or an adjective. The question object contains options depending on the selection of question verb and information verb. If the NPC has an information that matches the question requirements, it will tell it to the player.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{Question}
+	\caption{Posing a statement to an NPC.}
+	\label{fig:question}
+\end{figure}
 \subsection{Statements}
+This allows the player to create new information based on object they have encountered while playing. In the dialogue interface, the player can create information statements like they are defined in the \textit{Information Model}(Figure~\ref{fig:statement}). The selected verb will define what options are available for information subject and information object. The available subjects and objects depend on the NPCs, items and locations, the player has encountered so far. Only adjectives are universally known by all agents as they do not represent things in the world but rather concepts.\\
+If the information statement is well-formed according to the \textit{Information Model}, the newly created information will be transmitted to the NPC as if any other agent would have told to it.\\
+The functionality to create any information from known components creates the ability to lie for the player which creates interesting gameplay implications.
 % Statements 2
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{Statement}
+	\caption{Asking a question to a NPC.}
+	\label{fig:statement}
+\end{figure}
 \section{Quests}
 % Quests 2
 \section{Inference}
