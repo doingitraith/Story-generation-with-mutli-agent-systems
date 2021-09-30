@@ -123,7 +123,7 @@ In order for the intelligent agents to move, interact and follow their objective
 The parent \verb|AgentBehavior| class is an abstract class and declares functions for starting, interrupting and resuming a behavior. Additionally it declares the function \verb|IsBehaviorFinished| to check if the behavior is completed. This simple setup of behavior allows for easy extension of the capabilities of agents.
 \subsection{Information Manager}
 At the heart of the agents' logic is the \verb|InformationManager| class. It provides all the necessary functions to add, manage and process incoming \verb|Information| objects for an agent. Its main task are adding new pieces of information to the memory and evaluating them on a regular basis to update the information heuristic values.\\
-It manages the different pieces of information with lists of \verb|InformationContext| objects. Those are objects that pack an \verb|Information| object with contextual data about how the information was received. The context object stores how many times the information was received already by distinct agents, who it was last received from, the time since it was last received and current values for believability and information heuristic.\\
+It manages the different pieces of information with lists of \verb|InformationContext| objects. Those are objects that pack an \verb|Information| object with contextual data about how the information was received. The context object stores how many times the information was received already by distinct agents, who it was received from, the time since it was last received and current values for believability and information heuristic.\\
 The \textit{Information Manager} provides two lists of \verb|InformationContext| objects to manage its memories:
 \begin{itemize}
 	\item \textit{Speculative Memory}: the speculative memory stores every piece of information that an agent receives. It is a list of unconfirmed information that needs to be evaluated before it can be trusted. Only information that the agent did not perceive itself but was given to it by others, is considered speculative.
@@ -176,20 +176,138 @@ Allowing the player to ask questions about specific game objects is much more go
 This allows the player to create new information based on object they have encountered while playing. In the dialogue interface, the player can create information statements like they are defined in the \textit{Information Model}(Figure~\ref{fig:statement}). The selected verb will define what options are available for information subject and information object. The available subjects and objects depend on the NPCs, items and locations, the player has encountered so far. Only adjectives are universally known by all agents as they do not represent things in the world but rather concepts.\\
 If the information statement is well-formed according to the \textit{Information Model}, the newly created information will be transmitted to the NPC as if any other agent would have told to it.\\
 The functionality to create any information from known components creates the ability to lie for the player which creates interesting gameplay implications.
-% Statements 2
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{Statement}
 	\caption{Asking a question to a NPC.}
 	\label{fig:statement}
 \end{figure}
-\section{Quests}
-% Quests 2
 \section{Inference}
-% Inference 2
+To simulate the flow and creation of information more realistically in the NPCs, they can also deduce new Information from the ones they have. These deductions are based on rules that are globally defined and represent a form of cohesive causal understanding of the game world. To define such rules, there is the \verb|InferenceRule| class. It consists of a \verb|BoolExpression| object that defines the rule and a list of \verb|Information| objects that define the consequences or outcomes if the rule applies.\\
+The \verb|BoolExpression| object holds \verb|Information| objects and is chained together with other \verb|BoolExpression| objects by logical operators to create the rule. Listing~\ref{listing:rule} defines the following rule for any agent $X$:
+\begin{center}
+	\textit{isArmed}$(X) \wedge $ \textit{isEnemy}$(X) \Rightarrow $ \textit{isDangerous}$(X)$ 
+\end{center}
+\begin{lstlisting}[
+	caption={Creating an inference rule with consequences},
+	label={listing:rule}
+	]
+	var rule = new InferenceRule(new BoolExpression(new Information(_player, WorldAdjectives[Adjectives.Armed]))).And(new BoolExpression(new Information(_player, WorldAdjectives[Adjectives.Enemy])));
+
+	rule.Consequences = new List<Information> { new Information(_player, WorldAdjectives[Adjectives.Dangerous]) };
+\end{lstlisting}
+The variable \verb|_player| in the statement is just a placeholder and is replaced with different subjects during evaluation of the rule. For the scope of this thesis it made only sense to substitute for information subjects, since the \textit{Information Model} is structured in such a way, that the information statements say something about an information subject.\\
+In order to evaluate such a rule, every agent has an \textit{Inference Engine} that allows them to to so. The \textit{Inference Engine} sees the agent's stable memories as its knowledge base. It goes through the rules and checks if the knowledge base of the agent satisfies the rule. If so, all the pieces of information that are defined in a rules's list of consequences is added to the stable memory of the agent(Listing~\ref{listing:evaluate}). This is repeated until no new information is added, since any new information could trigger another rule.\\
+The \verb|SatisfiesKnowledgeBase| function recursively checks if a rule's \textit{Boolean Expression} applies to the agent's memories. A information's subject is selected as a candidate if the information matches the information in the \textit{Boolean Expression} in all components except for the subject.
+\begin{lstlisting}[
+	caption={Evaluating inference rules},
+	label={listing:evaluate}
+	]
+	public void Evaluate(){
+		foreach (InferenceRule rule in Rules){
+			List<InformationSubject> candidates = SatisfiesKnowledgeBase(rule.Expression, new List<InformationSubject>());
+			
+			if (!rule.AppliesToSelf)
+				candidates.Remove(KnowledgeBase.Owner.InformationSubject);
+			
+			if (candidates.Any()){
+				candidates.ForEach(c =>{
+					rule.Consequences.ForEach(r =>{
+						r = new Information(c, r);
+						KnowledgeBase.TryAddNewInformation(r, KnowledgeBase.Owner);
+					});
+				});
+				Evaluate();
+			}
+		}
+	}
+\end{lstlisting}
+This way agents can "reflect" on what they know and deduce new information.
 \section{Heuristic}
 % Heuristic 2
+Each agent is able to subjectively evaluate the believability of pieces of information it has stored in its memory. A metric is needed to measure the believability of information. I approached this via the "interest" of an information. This means how special is a piece of information or how probable is it that a give information could be true. This depends on the "interest" of the involved information components. The information "\textit{Farmer} \verb|HAS| \textit{milk}" is much more probable or uninteresting" than the information "\textit{The king} \verb|HAS| \textit{the magical sword}". So by evaluating the components of the information and their relation to one another, a value for the "interestingness" of an information is calculated. I call this value \textit{Information Heuristic}.\\
+The calculations for the \textit{Information Heuristic} are of course slightly different depending on types of the involved information components. The general idea is that the more "interesting" an information is, the higher its \textit{Information Heuristic} is. To make this value subjective to the agent, values that depend on the agent's experience or relation to involved agents is are taken into consideration.\\
+The basic formula is as follows:
+\begin{equation}
+	h = h\ h'\ b\ n_i\sum_{a \in K}trust(a)
+\end{equation}
+with $K \coloneqq \{A \cap I\}$, where $A$ is the set of known associates of the agent and $I$ is the set of agents this information was previously received from.\\
+The value $h'$ is the part of the heuristic that is dependent on the verb and the information components, $b$ is the previous believability of the information and $n_i$ is the number of times this information has already been received.\\
+In other words, an information's heuristic is the product of itself with the component-dependent heuristic, the believability, the number of times it has been received and the sum of the trust values of known agents this information has been received from. \\
+Now the component-dependent heuristic is another calculation heavy function. It differentiates between the verb and then in each case calculates the value differently depending on the components. If another agent is involved for example, the distance or degrees of separation between the bespoke agent and the receiver of the information is taken into account. The calculation is done using breadth-first search. This should reflect cases where information is received like "I heard from a friend of a friend...". The longer the distance, the less trustworthy the information. If the subject is a known associate, then the trust the agent has towards the subject is also considered. The number of other pieces of information the receiver has, concerning the subject is also used. This should reflect a familiarity with the subject.\\
+If the subject of the information is an item, then not only is the uniqueness of the item in world relevant but also how unique the item is for the agent. This takes into account, whether the agent owns an item of the same type and how many other pieces of information it has that refer to an item of the same type. This again is to simulate how familiar the agent is with the bespoke item.\\
+So now there is a value for every information an agent has, that says how "interesting" or "probable" that information is. To calculate the believability of an information, this heuristic is now put into context with every other information an agent has. I define the \textit{distance} between two pieces of information as the absolute difference between their heuristic values.\\
+For the believability $b$ of a piece of information this results in:
+\begin{equation}
+	b = \frac{\sum_{i,j \in M, i \neq j} h(i)-h(j)}{n}
+\end{equation}
+In this formula, $n$ is the size of the stable memory and $M$ is the stable memory itself. The function $h$ is the heuristic function. This means the believability of an information is the average distance to every other information in the stable memory.\\
+Since this is calculated for every information in the stable memory of every agent, this operation needs a lot of processing power. I implemented the MapReduce programming model to enable the distribution of these calculations. The prototype does not leverage the distribution itself since this was too big a task for the scope of the thesis, but the implementation is prepared to be used with little additional work (Listing~\ref{listing:map}). The \textit{Map} and \textit{Reduce} steps are marked with comments in the listing.
+\begin{lstlisting}[
+	caption={The MapReduce implementation for calculating believability},
+	label={listing:map}
+	]
+public void UpdateBelievability(){
+	List<InformationContext> data = GetAllMemories();
+	
+	// Map
+	var distances = new List<List<float>>();
+	
+	for (int i = 0; i < data.Count; i++){
+		distances.Add(new List<float>());
+		for (int k = 0; k < data.Count; k++){
+			Information i1 = data[i].Information;
+			Information i2 = data[k].Information;
+			if (!i1.Equals(i2))
+				distances[i].Add(GetInformationDistance(i1, i2));
+		}
+	}
+	
+	// Reduce
+	for (int i = 0; i < distances.Count; i++){
+		if (ContainsStableInformation(data[i].Information) && distances[i].Any())
+			GetStableMemory(data[i].Information).Believability = distances[i].Average();
+		else if (ContainsSpeculativeInformation(data[i].Information) && distances[i].Any())
+			GetSpeculativeMemory(data[i].Information).Believability = distances[i].Average();
+	}
+}
+\end{lstlisting}
+Just how expensive the call to the \verb|UpdateBelievability| function is can be measured with Unity's \textit{Profiler}. It is a tool, that allows detailed time measurements of the different function calls in the Unity engine (Figure~\ref{fig:profiler}). The blue spikes in Figure~\ref{fig:frame} show spikes in the calculation times when the function is called.\\
+The frame is data was captured about two minutes after game start. By this time all the agents have moved around for a while and learned new information. The function call takes 92ms. Almost a second of calculation time is an immense performance issue.\\
+The function call is also perceivable in the game as there is a noticeable frame drop when the believability is calculated. This shows that distributing the call by truly applying the MapReduce model and using multiple nodes to calculate the believability would be a worthwhile adaption of the prototype. The amount of time this takes is not so important if it does not halt the game as a simulation of the human process of "reflecting on one's thoughts" is something that could actually profit from a little waiting time.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{Profiler}
+	\caption{Frame data of the UpdateBelievability function call.}
+	\label{fig:profiler}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{Frame}
+	\caption{UpdateBelievability function call time.}
+	\label{fig:frame}
+\end{figure}
 \section{Consensus}
 % Consensus 2
+\section{Quests}
+To give the player an objective and an incentive to take action in this game, quests can be created. They have associated lists of information pieces and inference rules. For a quest to be completed either the quest giver has to know about the required quest information or the required inference rules have to satisfy the knowledge base of the quest giver.\\
+That makes the quest state completely subjective to the quest giver. Rather than being managed globally by a \textit{Game Manager}, the quest is solely dependent on the \textit{Information Manager} of the quest giver.\\
+In the scope of the prototype game, I have created one quest that is available to complete. At the start of the game, when talking to the queen in the castle, she will task the player with returning the king to the castle (Figure~\ref{fig:quest}). This requirement can be created with one inference rule (Listing~\ref{listing:quest}).
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{Quest}
+	\caption{A quest is presented to the player.}
+	\label{fig:quest}
+\end{figure}
+\begin{lstlisting}[
+	caption={Creating an inference rule for a quest},
+	label={listing:quest}
+	]
+	var rule = new InferenceRule(new BoolExpression(new Information(_player, WorldAdjectives[Adjectives.King]))).And(new BoolExpression(new Information(_player, GameObject.Find("Castle").GetComponent<Location>())));
+	
+	Quest q = new Quest(GameObject.Find("Queen").GetComponent<NPC>());
+	q.GoalRules.Add(rule);
+\end{lstlisting}
+The rules simply defines two requirements: Any character who \textit{is} the king and who is \textit{at} the castle at the castle at the same time, will satisfy this rule. This creates \textit{objective-oriented} quests following Aarseth's classification~\cite{Aarseth2005}. There are only goal requirements that define the quest, all the steps to achieve this goal are up to the player. Combined with the dialogue system, this systems allows however, to create also more controlled quests. Dialogue can play out differently based on variables that can be set depending on what the player does in the world. Additional inference rules could be added that cover different outcomes for the quest. Quest giver characters could then react differently to those outcomes. The quest system is flexible to allow varied gameplay approaches through defining only goal requirements, but allowing developers to take a more narrated approach by providing additional narration for specific combinations of outcomes.
 \section{Narrative}
 % Narrative
