@@ -272,23 +272,49 @@ public void UpdateBelievability(){
 	}
 }
 \end{lstlisting}
-Just how expensive the call to the \verb|UpdateBelievability| function is can be measured with Unity's \textit{Profiler}. It is a tool, that allows detailed time measurements of the different function calls in the Unity engine (Figure~\ref{fig:profiler}). The blue spikes in Figure~\ref{fig:frame} show spikes in the calculation times when the function is called.\\
-The frame is data was captured about two minutes after game start. By this time all the agents have moved around for a while and learned new information. The function call takes 92ms. Almost a second of calculation time is an immense performance issue.\\
-The function call is also perceivable in the game as there is a noticeable frame drop when the believability is calculated. This shows that distributing the call by truly applying the MapReduce model and using multiple nodes to calculate the believability would be a worthwhile adaption of the prototype. The amount of time this takes is not so important if it does not halt the game as a simulation of the human process of "reflecting on one's thoughts" is something that could actually profit from a little waiting time.
+Just how expensive the call to the \verb|UpdateBelievability| function is can be measured with Unity's \textit{Profiler}. It is a tool, that allows detailed time measurements of the different function calls in the Unity engine (Figure~\ref{fig:profiler}). The blue spikes in Figure~\ref{fig:frame} show spikes in the calculation times when the function is called.
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{Profiler}
 	\caption{Frame data of the UpdateBelievability function call.}
 	\label{fig:profiler}
 \end{figure}
+The frame is data was captured about two minutes after game start. By this time all the agents have moved around for a while and learned new information. The function call takes 92ms. Almost a second of calculation time is an immense performance issue.
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{Frame}
 	\caption{UpdateBelievability function call time.}
 	\label{fig:frame}
 \end{figure}
+The function call is also perceivable in the game as there is a noticeable frame drop when the believability is calculated. This shows that distributing the call by truly applying the MapReduce model and using multiple nodes to calculate the believability would be a worthwhile adaption of the prototype. The amount of time this takes is not that important if it does not halt the game. For a simulation of the human process of "reflecting on one's thoughts" is something that could actually profit from a little waiting time.
 \section{Consensus}
-% Consensus 2
+The prototype game differs from traditional multi-agent or even distributed systems in some significant ways. There are different requirements for it and to a degree it is even expected to behave differently.\\
+For one, the system described in this thesis is not required to be concurrent from a conceptual point of view. It is not necessary that the system responds as instantaneous as possible. As mentioned before, in fact,  it might serve the simulation if certain processes take some time because they should simulate human thought processes. The concurrency is important none the less to prevent performance issues when calling CPU intensive functions.\\
+Availability is a different issue than for conventional distributed systems, since the game is not accessed remotely. Of course if parts of the system were to be distributed, accessibility for those would need to be as high as possible.\\
+Fault tolerance is of course important for any software system. In the specific case of this game mechanic, it is again desired behavior to allow for some loopholes that can be exploited by the agents. The game mechanic enables the player to do so by letting them introduce arbitrary and potentially factual wrong information into the system.\\
+Sending messages in the game takes a relatively long amount of time. This is deliberate to simulate human "word of mouth" behavior. Humans cannot instantly transfer thoughts. This is why reaching actual consensus is such a problem for this system an not even the end goal.\\
+To consider the consensus problem for the game is still a worthwhile examination of how communication works between intelligent agents. It is true that the system should be exploitable by the player, but at the same time the goal of the simulation is to mimic human communication which means some form of authentication should be present as humans will not accept anything they hear.\\
+The game mechanics achieves this by applying the \textit{proof of personhood} method for permissionless consensus. Although the applications for actual consensus reliant systems should be designed to allow \textit{only} humans to validate their system changes, the principal idea is very useful even for the simulation of human behavior.\\
+In the prototype game, agents are verified by their peers based on their \textit{trust} value. The trust value is dependent on the believability of the pieces of information an agent sends out(Listing~\ref{listing:trust}). If an information is not very believable, trust decreases and vice versa.
+\begin{lstlisting}[
+caption={Calculating trust for proof of personhood},
+label={listing:trust}
+]
+float believability = _stableMemory[idx].Believability;
+if(Owner.Equals(sender))
+	Owner.Acquaintances[sender] = 1.0f;
+else
+	Owner.Acquaintances[sender] += believability / 10.0f;
+\end{lstlisting}
+For a received information at position \verb|idx| of the list \verb|_stableMemory|, the trust value is defined as:
+\begin{equation}
+t' = t + \frac{believability}{10}
+\end{equation}
+A small fraction of the believability is added to the former trust value $t$. Since believability can be negative and positive, trust can likewise decrease or increase. The fraction enforces smaller changes and not too drastic fluctuations in the trust values. If the sender of the information is the receiver, then the trust value is set to $1$ because every agent trusts itself completely.\\
+The trust value of an agent then also influences the believability of the information. Of course a more complex function for trust could be defined that takes strong relationships into account. For example it could be harder for very trustworthy agents to loose trust and harder for untrustworthy ones to gain it. For the scope of this thesis the present calculation is sufficient.\\
+By influencing the result when receiving information, the trust value creates a metric for authenticating an agent when interacting with another agent. The authentication present in the prototype is only on a "one on one" basis that takes place at every information exchange. Agents don't authenticate themselves globally in the system, which is another big difference to conventional applications of consensus methods.\\
+Back to the matter of consensus itself, I mentioned earlier that due to the time it takes for information to spread, it is unlikely that actual consensus among the agents is reached. That behavior, however, is beneficial to the simulation.\\
+Another metric that is considered for the believability of an information is how often it was received and how trustworthy those that it was received from are. This is actually a measurement that takes more than one agent into account and creates a weaker form of consensus while not communicating with many other agents. If an information is received more often, agents assume that the probability of it being true is higher. Again this is an anchor to exploit the system to scatter wrong information and create lies that are advantageous to their playstyle. The quests in the prototype are designed to allow for different kinds of such playstyles.
 \section{Quests}
 To give the player an objective and an incentive to take action in this game, quests can be created. They have associated lists of information pieces and inference rules. For a quest to be completed either the quest giver has to know about the required quest information or the required inference rules have to satisfy the knowledge base of the quest giver.\\
 That makes the quest state completely subjective to the quest giver. Rather than being managed globally by a \textit{Game Manager}, the quest is solely dependent on the \textit{Information Manager} of the quest giver.\\
