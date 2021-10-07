@@ -2476,6 +2476,11 @@
     <bcf:citekey order="129">Secret2021</bcf:citekey>
     <bcf:citekey order="130">Aarseth2005</bcf:citekey>
     <bcf:citekey order="131">Campbell2008</bcf:citekey>
+    <bcf:citekey order="132">road</bcf:citekey>
+    <bcf:citekey order="133">crusader</bcf:citekey>
+    <bcf:citekey order="134">divinity</bcf:citekey>
+    <bcf:citekey order="135">dungeon</bcf:citekey>
+    <bcf:citekey order="136">unexplored</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
