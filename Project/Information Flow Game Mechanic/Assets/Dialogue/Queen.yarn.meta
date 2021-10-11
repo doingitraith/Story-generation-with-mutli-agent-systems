@@ -8,16 +8,17 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
-  baseLanguageID: 
+  baseLanguageID: en-US
   stringIDs:
   - Queen-StartQuest-0
   - Queen-StartQuest-1
   - Queen-StartQuest-2
   - Queen-StartQuest-3
-  - Queen-FinishQuest-4
+  - Queen-StartQuest-4
   - Queen-FinishQuest-5
+  - Queen-FinishQuest-6
   compilationStatus: 1
   isSuccesfullyCompiled: 1
   compilationErrorMessage: 
-  baseLanguage: {instanceID: 0}
+  baseLanguage: {fileID: 7128917941130120860, guid: 58b5172d0ecba0e4fba75a069ae2026b, type: 3}
   localizations: []

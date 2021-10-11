@@ -191,5 +191,8 @@ namespace Game
             informationObject.Information = information;
             informationObject.PropagationType = InformationPropagationType.Visual;
         }
+
+        public void ExitGame()
+            => Application.Quit();
     }
 }

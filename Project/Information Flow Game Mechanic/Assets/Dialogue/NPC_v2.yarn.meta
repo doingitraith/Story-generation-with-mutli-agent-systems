@@ -8,7 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
-  baseLanguageID: 
+  baseLanguageID: en-US
   stringIDs:
   - NPC_v2-Chat-0
   - NPC_v2-Chat-1
@@ -31,19 +31,21 @@ ScriptedImporter:
   - NPC_v2-Start-18
   - NPC_v2-Question-19
   - NPC_v2-Statement-20
-  - NPC_v2-AskQuestion-21
-  - NPC_v2-AskQuestion-22
-  - NPC_v2-AskQuestion-23
-  - NPC_v2-AskQuestion-24
-  - NPC_v2-AskQuestion-25
-  - NPC_v2-AskQuestion-26
-  - NPC_v2-MakeStatement-27
-  - NPC_v2-MakeStatement-28
-  - NPC_v2-MakeStatement-29
-  - NPC_v2-MakeStatement-30
-  - NPC_v2-MakeStatement-31
+  - NPC_v2-ShowQuestion-21
+  - NPC_v2-ShowQuestion-22
+  - NPC_v2-ShowQuestion-23
+  - NPC_v2-ShowQuestion-24
+  - NPC_v2-ShowQuestion-25
+  - NPC_v2-ShowQuestion-26
+  - NPC_v2-ShowQuestion-27
+  - NPC_v2-ShowStatement-28
+  - NPC_v2-ShowStatement-29
+  - NPC_v2-ShowStatement-30
+  - NPC_v2-ShowStatement-31
+  - NPC_v2-ShowStatement-32
+  - NPC_v2-ShowStatement-33
   compilationStatus: 1
   isSuccesfullyCompiled: 1
   compilationErrorMessage: 
-  baseLanguage: {instanceID: 0}
+  baseLanguage: {fileID: 7128917941130120860, guid: 4baab33eb48b3194eb1792f532a9ce62, type: 3}
   localizations: []
