@@ -1,40 +1,43 @@
 \begin{titlepage}
+	% HACK for two-sided documents: ignore binding correction for cover page.
+	% Adapted from Markus Kohm's KOMA-Script titlepage=firstiscover handling.
+	% See http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrkernel-title.dtx,
+	% \maketitle macro.
+	\oddsidemargin=\evensidemargin\relax
+	\textwidth=\dimexpr\paperwidth-2\evensidemargin-2in\relax
+	\hsize=\textwidth\relax
+	
+	\centering
+	
+	\ifx \monochromeCover \undefined
+		\includegraphics[height=20mm]{images/TUM_Logos/TUM_blau.pdf}%
+	\else
+		\includegraphics[height=20mm]{images/TUM_Logos/TUM_schwarz.pdf}%
+	\fi
+	
+	\vspace*{20mm}
+	
+	\vspace{5mm}
+	{\huge\MakeUppercase{\faculty}}\\
+	
+	\vspace{5mm}
+	{\large\MakeUppercase{\uni}}\\
+	
+	\vspace{20mm}
+	{\Large \worktype}
+	
+	\vspace{15mm}
+	{\huge\bfseries \titleFirstLanguage}
+	
+	\vspace{15mm}
+	{\LARGE \authorname}
 
-% Dreizeiler:
-\begin{textblock*}{\textwidth}(\coverborderleft, 2cm)%        	
-    	\setlength{\baselineskip}{11pt}%
-    	\ifx \monochromeCover \undefined
-        	\textcolor{UniversitaetFarbe} { %
-        	\fontsize{9}{11}\selectfont%
-        	\sffamily \chair\\%
-        	\sffamily \faculty\\%
-        	\sffamily \uni }
-    \else
-        	\textcolor{black} { %
-        	\fontsize{9}{11}\selectfont%
-        	\sffamily \chair\\%
-        	\sffamily \faculty\\%
-        	\sffamily \uni }
-    \fi
-\end{textblock*}%
+	\vspace*{20mm}
 
-% TUM logo
-\begin{textblock*}{\UniversitaetLogoBreite}[1,0](\paperwidth - 2cm, 2cm)%
-		\ifx \monochromeCover \undefined
-        	\includegraphics{images/TUM_Logos/TUM_blau.pdf}%
-        \else
-        	\includegraphics{images/TUM_Logos/TUM_schwarz.pdf}%
-        \fi
-\end{textblock*}%
-
-% title text
-\begin{textblock*}{\paperwidth - \coverborderleft - 2cm}(\coverborderleft , 8cm)% 
-\raggedright %no hyphenation here
-{\sffamily \Large \worktype}\\
-{\sffamily \huge \titleFirstLanguage \par} %~\\[2mm]
-\vspace{1cm}
-\sffamily \Large \textbf{\authorname}\\
-\end{textblock*}
-
-~\\ % do not remove
+	\ifx \monochromeCover \undefined
+		\includegraphics[height=20mm]{images/TUM_Logos/IN_blau.pdf}%
+	\else
+		\includegraphics[height=20mm]{images/TUM_Logos/IN_schwarz.pdf}%
+	\fi
+	{}
 \end{titlepage}
