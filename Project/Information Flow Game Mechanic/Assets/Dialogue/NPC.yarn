@@ -1,0 +1,76 @@
+title: Start
+tags: 
+colorID: 0
+position: 855,1128
+---
+Player: Hey, is there anything you can tell me?
+<<if $HasNPCReplies is false>>
+    {$NPCName}: Sadly not. 
+    [[Okay, no problem.|PlayerReply]]
+<<else>>
+    {$NPCName}: Here is what I can tell you. 
+    [[NPCReply]]
+<<endif>>
+===
+title: End
+tags: 
+colorID: 0
+position: 1158,304
+---
+Player: Goodbye then.
+{$NPCName}: Goodbye.
+===
+title: NPCReply
+tags: 
+colorID: 0
+position: 1138,1135
+---
+<<ReceiveReply Player 0>>
+{$NPCName}: {$NPCReplyText}.
+[[PlayerReply]]
+===
+title: PlayerReply
+tags: 
+colorID: 0
+position: 1142,875
+---
+{$NPCName}: So is there something you can tell me?
+
+<<if $NumOfReplies > 0>>
+    [[{$ReplyText1}|Reply1]]
+    <<if $NumOfReplies > 1>>
+        [[{$ReplyText2}|Reply2]]
+        <<if $NumOfReplies > 2>>
+            [[{$ReplyText3}|Reply3]]
+        <<endif>>
+    <<endif>>
+<<endif>>
+[[No, nothing.|End]]
+===
+title: Reply1
+tags: 
+colorID: 0
+position: 965,608
+---
+<<ReceiveReply {$NPCName} 0>>
+{$NPCName}: Thank you.
+[[End]]
+===
+title: Reply2
+tags: 
+colorID: 0
+position: 1311,598
+---
+<<ReceiveReply {$NPCName} 1>>
+{$NPCName}: Thank you.
+[[End]]
+===
+title: Reply3
+tags: 
+colorID: 0
+position: 1584,601
+---
+<<ReceiveReply {$NPCName} 2>>
+{$NPCName}: Thank you.
+[[End]]
+===

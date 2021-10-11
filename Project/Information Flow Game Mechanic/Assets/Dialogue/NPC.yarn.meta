@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8cb3f1a40e69e8346be74d9c1994fd04
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-US
+  stringIDs: []
+  compilationStatus: 0
+  isSuccesfullyCompiled: 0
+  compilationErrorMessage: "Error on line 30 at position 9:\nmismatched input '}'
+    expecting '('\r\n{NPCName}: {$NPCReplyText}.\r\n        ^"
+  baseLanguage: {instanceID: 0}
+  localizations: []
