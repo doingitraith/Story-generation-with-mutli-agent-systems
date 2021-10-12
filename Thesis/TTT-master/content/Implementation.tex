@@ -4,7 +4,7 @@ The game simulates a small medieval kingdom and its inhabitants. The player cont
 \section{Technology}
 Before I go into detail about the game logic, I want to explain my choice of the development environment. For the prototype game, I chose the Unity engine developed by Unity Technologies~\cite{Unity2021}. This choice was made because I have multiple years of experience with the Unity engine, and it allows for fast prototyping that is easy to iterate. Unity is widely used across the video game industry, has an active developer community, and is well documented. The programming language for Unity is Microsoft C\# with the .NET framework, which I also have many years of experience with. All assets that are used in the prototype game are either purchased or free to use. All asset creators are credited adequately in the prototype. The project is available under the MIT license at \url{https://github.com/doingitraith/Story-generation-with-mutli-agent-systems}~\cite{prototype}.
 \section{Information Model}
-At the center of the game mechanic created for this thesis is the \textit{Information Model}. I propose a conceptional model for information objects that encapsulate statements about semantic and factual game world data (see \ref{section:info}). The statements encapsulated in an \verb|Information| object are primarily characterized by its \textit{Verb}. The verb is the primary indicator of the assertion of the information content. Every information object also contains a \textit{Subject} that denotes who or what the information statement is concerned with. The third part of the information is dependent on the verb and can either be an \textit{Object}, an \textit{Adjective}, or a \textit{Location}.
+At the center of the game mechanic created for this thesis is the \textit{Information Model}. I propose a conceptional model for information objects that encapsulate statements about semantic and factual game world data (see \ref{section:info}). Each statement encapsulated in an \verb|Information| object contains a single piece of information about the game world state. An \verb|Information| object is primarily characterized by its \textit{Verb}. The verb is the primary indicator of the assertion of the information content. Every information object also contains a \textit{Subject} that denotes who or what the information statement is concerned with. The third part of the information is dependent on the verb and can either be an \textit{Object}, an \textit{Adjective}, or a \textit{Location}.\\
 Thus every information object $I$ consists of a triple of information elements:
 \begin{center}
 	$I \coloneqq \{s, v, x\}$ 
@@ -54,7 +54,9 @@ What exact type of object a \textit{subject} is in a given \verb|Information| ob
 \end{figure}
 \textit{Subjects} also have a \verb|Mutation| object attached that is responsible for decaying the accuracy of the \textit{subject}. I give a detailed explanation of mutations in Section~\ref{section:mutation}.
 \subsection{Adjectives}
-An \textit{adjective} represents a detail or characteristic of a \textit{subject's} state. They can be arbitrarily defined by a developer. They represent the properties of a \textit{subject}. \textit{Adjectives} are instances of the \verb|InformationAdjective| class (Figure~\ref{fig:adjectiveCD}). In the \textit{Information Model}, there are two differentiable types of \verb|InformationAdjective| objects:
+An \textit{adjective} represents a detail or characteristic of a \textit{subject's}. It describes a part of the \textit{subject's} state as perceived by the agent holding the encapsulating piece of information. They can be arbitrarily defined by a developer. They represent the properties of a \textit{subject}. \textit{Adjectives} are instances of the \verb|InformationAdjective| class (Figure~\ref{fig:adjectiveCD}).\\
+\\\\
+In the \textit{Information Model}, there are two differentiable types of \verb|InformationAdjective| objects:
 \begin{itemize}
 	\item \verb|InformationProperty|: Represents factual information about a \textit{subject}. For example, "\textit{Agent} \verb|IS| \textit{alive}." is a factual piece of information that can either be true or false.
 	\item \verb|InformationOpinion|: Represents statements about a \textit{subject's} state that are influenced by an information holder's relationship to the \textit{subject}. For example, the statement "\textit{Agent} \verb|IS| \textit{dangerous}." can be true for one agent but false for another.
@@ -116,7 +118,7 @@ In order for the intelligent agents to move, interact and follow their objective
 \end{itemize}
 \begin{figure}
 	\centering
-	\includegraphics[width=1.2\textwidth]{BehaviorCD}
+	\includegraphics[width=1\textwidth]{BehaviorCD}
 	\caption{Inheritance diagram of the AgentBehavior class}
 	\label{fig:behaviorCD}
 \end{figure}
@@ -134,7 +136,7 @@ This structure of speculative and stable memory is taken from high availability 
 Although agents are only a single node, I tried to replicate this confirmation methodology with speculative and stable memories.
 \section{Game World}
 The agents in the prototype game live in an environment. The environment in the prototype game is \textit{inaccessible}, \textit{deterministic}, \textit{static}, and \textit{discrete}. It is inaccessible because agent learn of changes in the environment state only when they perceive or receive information about them, not as they happen. It is deterministic because every change an agent performs on the environment's state is known beforehand. The environment is static because the topology and structure do not change in this prototype, and it is discrete because the space agents can move in is limited.\\
-In the prototype game, the environment for the multi-agent system is the game world. I created a 3D world that contains interesting and memorable locations that agents can move around in. I recreated a small kingdom with several settlements where different agents live and go about their day. The key locations are \textit{the village}, \textit{the castle}, \textit{the sawmill}, \textit{the forest}, \textit{the lake}, \textit{the farm}, and \textit{the enemy camp}~\ref{fig:gameWorld}.
+In the prototype game, the environment for the multi-agent system is the game world. I created a 3D world that contains interesting and memorable locations that agents can move around in. I recreated a small kingdom with several settlements where different agents live and go about their day. The key locations are \textit{the village}, \textit{the castle}, \textit{the sawmill}, \textit{the forest}, \textit{the lake}, \textit{the farm}, and \textit{the enemy camp} (Figure~\ref{fig:gameWorld}).
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{GameWorld}
@@ -158,7 +160,7 @@ The systems that I have created for this prototype allow for varied and interest
 \section{Dialogue}
 The primary way to purposely learn and give out information in the game is to talk to NPCs. For that, I have created a dialogue system that lets you either receive a piece of random information from an NPC, ask a specific question, or make a  statement on your own.\\
 I used Yarn Spinner from Secret Lab to create the dialogue~\cite{Secret2021}. It is a lightweight tool that comes with a Unity plug-in and allows for branching node-based dialogue, and supports variables and simple logic in its dialogue files.\\
-Yarn Spinner comes with an editor that easily allows developers to set up and write complex and branching dialogue files.
+Yarn Spinner comes with an editor that easily allows developers to set up and write complex and branching dialogue files (Figure~\ref{fig:yarn}).
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{Yarn}
@@ -166,7 +168,7 @@ Yarn Spinner comes with an editor that easily allows developers to set up and wr
 	\label{fig:yarn}
 \end{figure}
 \subsection{Questions}
-Allowing the player to ask questions about specific game objects is much more goal-oriented than randomly hoping for helpful information to reach the player. The dialogue interface allows the player to create questions from a question verb, an information verb, and an object(Figure~\ref{fig:question}). The question verbs \textit{Who}, \textit{What}, \textit{Where}, and \textit{How} indicate whether the expected answer will be an NPC name, an item, a location, or an adjective. The question object contains options depending on the selection of the question verb and information verb. If the NPC has a piece of information that matches the question requirements, it will tell it to the player.
+Allowing the player to ask questions about specific game objects is much more goal-oriented than randomly hoping for helpful information to reach the player. The dialogue interface allows the player to create questions from a question verb, an information verb, and an object (Figure~\ref{fig:question}). The question verbs \textit{Who}, \textit{What}, \textit{Where}, and \textit{How} indicate whether the expected answer will be an NPC name, an item, a location, or an adjective. The question object contains options depending on the selection of the question verb and information verb. If the NPC has a piece of information that matches the question requirements, it will tell it to the player.
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{Question}
@@ -174,7 +176,7 @@ Allowing the player to ask questions about specific game objects is much more go
 	\label{fig:question}
 \end{figure}
 \subsection{Statements}
-This allows the player to create new information based on objects they have encountered while playing. In the dialogue interface, the player can create information statements like they are defined in the \textit{Information Model}(Figure~\ref{fig:statement}). The selected verb will define what options are available for the information subject and information object. The available subjects and objects depend on the NPCs, items, and locations the player has encountered so far. Only adjectives are universally known by all agents as they do not represent things in the world but rather concepts.\\
+This allows the player to create new information based on objects they have encountered while playing. In the dialogue interface, the player can create information statements like they are defined in the \textit{Information Model} (Figure~\ref{fig:statement}). The selected verb will define what options are available for the information subject and information object. The available subjects and objects depend on the NPCs, items, and locations the player has encountered so far. Only adjectives are universally known by all agents as they do not represent things in the world but rather concepts.\\
 If the information statement is well-formed according to the \textit{Information Model}, the newly created information will be transmitted to the NPC as if any other agent would have told to it.\\
 The functionality to create any information from known components creates the ability to lie for the player, which creates exciting gameplay implications.
 \begin{figure}
@@ -198,7 +200,7 @@ The \verb|BoolExpression| object holds \verb|Information| objects and is chained
 	rule.Consequences = new List<Information> { new Information(_player, WorldAdjectives[Adjectives.Dangerous]) };
 \end{lstlisting}
 The variable \verb|_player| in the statement is just a placeholder and is replaced with different subjects during the evaluation of the rule. For the scope of this thesis, it made only sense to substitute for information subjects since the \textit{Information Model} is structured in such a way that the information statements say something about an information subject.\\
-In order to evaluate such a rule, every agent has an \textit{Inference Engine} that allows them to do so. The \textit{Inference Engine} sees the agent's stable memories as its knowledge base. It goes through the rules and checks if the knowledge base of the agent satisfies the rule. If so, all the pieces of information that are defined in a rules' list of consequences are added to the stable memory of the agent(Listing~\ref{listing:evaluate}). This is repeated until no new information is added since any new information could trigger another rule.\\
+In order to evaluate such a rule, every agent has an \textit{Inference Engine} that allows them to do so. The \textit{Inference Engine} sees the agent's stable memories as its knowledge base. It goes through the rules and checks if the knowledge base of the agent satisfies the rule. If so, all the pieces of information that are defined in a rules' list of consequences are added to the stable memory of the agent (Listing~\ref{listing:evaluate}). This is repeated until no new information is added since any new information could trigger another rule.\\
 The \verb|SatisfiesKnowledgeBase| function recursively checks if a rule's \textit{Boolean Expression} applies to the agent's memories. An information's subject is selected as a candidate if the information matches the information in the \textit{Boolean Expression} in all components except for the subject.
 \begin{lstlisting}[
 	caption={Evaluating inference rules},
@@ -229,9 +231,9 @@ This way, agents can "reflect" on what they know and deduce new information.
 Each agent is able to subjectively evaluate the believability of pieces of information it has stored in its memory. A metric is needed to measure the believability of information. I approached this via the "interest" of information. This means how unique a piece of information is or how probable is it that a piece of given information could be authentic. This depends on the "interest" of the involved information components. The information "\textit{Farmer} \verb|HAS| \textit{milk}" is much more probable or uninteresting" than the information "\textit{The king} \verb|HAS| \textit{the magical sword}". So by evaluating the components of the information and their relation to one another, a value for the "interestingness" of information is calculated. I call this value \textit{Information Heuristic}.\\
 The calculations for the \textit{Information Heuristic} are, of course, slightly different depending on the types of the involved information components. The general idea is that the more "interesting" a piece of information is, the higher its \textit{Information Heuristic} is. To make this value subjective to the agent, values that depend on the agent's experience or relation to involved agents are taken into consideration.\\
 The basic formula is as follows:
-\begin{equation}
+\begin{equation*}
 	h' = h\ h^{v}\ b\ n_i\sum_{a \in K}trust(a)
-\end{equation}
+\end{equation*}
 with $K \coloneqq \{A \cap I\}$, where $A$ is the set of known associates of the agent, and $I$ is the set of agents this information was previously received from.\\
 The value $h^{v}$ is the part of the heuristic that is dependent on the verb and the information components, $b$ is the previous believability of the information, and $n_i$ is the number of times this information has already been received.\\
 In other words, an information's heuristic is the product of itself with the component-dependent heuristic, the believability, the number of times it has been received, and the sum of the trust values of known agents this information has been received from. \\
@@ -240,9 +242,9 @@ Now the component-dependent heuristic is another heavy calculation function. It 
 If the subject of the information is an item, then not only is the uniqueness of the item in the world relevant, but also how unique the item is for the agent. This takes into account whether the agent owns an item of the same type and how many other pieces of information it has that refer to an item of the same type. This again is to simulate how familiar the agent is with the bespoke item.\\
 So now there is a value for every information an agent has that says how "interesting" or "probable" that information is. To calculate the believability of information, this heuristic is now put into context with every other information an agent has. I define the \textit{distance} between two pieces of information as the absolute difference between their heuristic values.\\
 For the believability $b$ of a piece of information this results in:
-\begin{equation}
+\begin{equation*}
 	b = \frac{\sum_{i,j \in M, i \neq j} h(i)-h(j)}{n}
-\end{equation}
+\end{equation*}
 In this formula, $n$ is the size of the stable memory, and $M$ is the stable memory itself. The function $h$ is the heuristic function. This means the believability of information is the average distance to every other information in the stable memory.\\
 Since this is calculated for every information in the stable memory of every agent, this operation needs a lot of processing power. I implemented the MapReduce programming model to enable the distribution of these calculations. The prototype does not leverage the distribution itself since this was too big a task for the scope of the thesis, but the implementation is prepared to be used with little additional work (Listing~\ref{listing:map}). The \textit{Map} and \textit{Reduce} steps are marked with comments in the listing.
 \begin{lstlisting}[
@@ -309,9 +311,9 @@ else
 	Owner.Acquaintances[sender] += believability / 10.0f;
 \end{lstlisting}
 For a received information at position \verb|idx| of the list \verb|_stableMemory|, the trust value is defined as:
-\begin{equation}
+\begin{equation*}
 t' = t + \frac{believability}{10}
-\end{equation}
+\end{equation*}
 A small fraction of the believability is added to the former trust value $t$. Since believability can be negative and positive, and trust can likewise decrease or increase. The fraction enforces more minor changes and not too drastic fluctuations in the trust values. If the sender of the information is the receiver, then the trust value is set to $1$ because every agent trusts itself completely.\\
 The trust value of an agent then also influences the believability of the information. Of course, a more complex function for trust could be defined that takes strong relationships into account. For example, it could be more challenging for very trustworthy agents to lose trust and harder for untrustworthy ones to gain it. For the scope of this thesis, the present calculation is sufficient.\\
 By influencing the result when receiving information, the trust value creates a metric for authenticating an agent when interacting with another agent. The authentication present in the prototype is only on a "one on one" basis that takes place at every information exchange. Agents do not authenticate themselves globally in the system, which is another big difference from conventional applications of consensus methods.\\
